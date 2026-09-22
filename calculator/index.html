@@ -497,6 +497,10 @@
   .seg-btn:hover:not(.active) {
     background: rgba(0,0,0,0.04);
   }
+  @media (max-width: 640px) {
+    #cg_holdSeg { flex-wrap: wrap; }
+    #cg_holdSeg .seg-btn { flex: 1 1 30%; }
+  }
 
   /* Tab pane spacing */
   .tab-pane + .tab-pane { margin-top: 0; }
@@ -891,10 +895,14 @@
   <!-- 手動稅費 + 貸款 -->
   <div class="section">
     <h3 class="section-title">手動輸入項目 <span class="tag gray">查單後填入</span></h3>
-    <div class="grid-2">
+    <div class="grid-3">
       <div class="field">
         <label>土增稅 <span class="hint">萬 · 依稅單</span></label>
         <input type="number" id="landTax" step="0.01" placeholder="例如: 1.6" oninput="recalc()" />
+      </div>
+      <div class="field">
+        <label>土地漲價總數額 <span class="hint">萬 · 土增稅單上有，可抵房地合一稅</span></label>
+        <input type="number" id="landGain" step="0.01" placeholder="例如: 8" oninput="recalc()" />
       </div>
       <div class="field">
         <label>剩餘貸款餘額 <span class="hint">萬 · 要還銀行的</span></label>
@@ -1001,7 +1009,7 @@
           （賣出 <span class="fv" id="f_sell">—</span> 萬
           &minus; 取得成本 <span class="fv" id="f_buy">—</span> 萬
           &minus; 取得費用 <span class="fv" id="f_buyCost">—</span> 萬
-          &minus; 移轉費用 <span class="fv" id="f_move">—</span> 萬<span id="f_selfPart"></span>）
+          &minus; 移轉費用 <span class="fv" id="f_move">—</span> 萬<span id="f_landPart"></span><span id="f_selfPart"></span>）
           &times; 稅率 <span class="fv" id="f_rate">—</span>%
           ＝ <span class="fv result" id="f_taxResult">—</span> 萬
         </div>
@@ -1080,16 +1088,17 @@
 
     <div style="margin-top:18px;">
       <label style="font-size:12.5px; font-weight:600; color:var(--ink-soft); display:block; margin-bottom:6px;">持有期間</label>
-      <div class="seg">
+      <div class="seg" id="cg_holdSeg">
         <button class="seg-btn active" onclick="setCgHold('h0')">2 年內</button>
         <button class="seg-btn" onclick="setCgHold('h1')">2-5 年</button>
-        <button class="seg-btn" onclick="setCgHold('h2')">5-10 年</button>
+        <button class="seg-btn" onclick="setCgHold('h2a')">5-6 年</button>
+        <button class="seg-btn" onclick="setCgHold('h2b')">6-10 年</button>
         <button class="seg-btn" onclick="setCgHold('h3')">10 年以上</button>
       </div>
     </div>
 
     <div class="toggle-row" style="margin-top:14px;">
-      <label>自用住宅滿 6 年優惠<span class="desc">400 萬免稅 + 超過部分 10%</span></label>
+      <label>自用住宅滿 6 年優惠<span class="desc">本人、配偶或未成年子女設籍並持有滿 6 年：400 萬免稅 + 超過部分 10%</span></label>
       <div class="switch" id="cg_selfSwitch" onclick="toggleCgSelf()"></div>
     </div>
   </div>
@@ -1191,7 +1200,7 @@
       <div class="value">$<span id="ln_monthly">—</span></div>
     </div>
     <div class="detail" style="margin-top:14px;" id="ln_detail">
-      <div class="detail-row"><span class="name">寬限期內每月（只繳利息）</span><span class="num">$<span id="ln_grace_monthly">—</span></span></div>
+      <div class="detail-row"><span class="name">寬限期內每月（只繳利息）</span><span class="num"><span id="ln_grace_monthly">—</span></span></div>
       <div class="detail-row"><span class="name">總利息支出</span><span class="num">$<span id="ln_totalInt">—</span></span></div>
       <div class="detail-row sum"><span class="name">總還款金額</span><span class="num">$<span id="ln_totalAll">—</span></span></div>
     </div>
@@ -1496,7 +1505,7 @@
       <div class="fl">房地合一稅</div>
       <div class="fx">
         （賣出 <b id="pf_sell">—</b> 萬 − 取得成本 <b id="pf_buy">—</b> 萬
-        − 取得費用 <b id="pf_buyCost">—</b> 萬 − 移轉費用 <b id="pf_move">—</b> 萬<span id="pf_self"></span>）
+        − 取得費用 <b id="pf_buyCost">—</b> 萬 − 移轉費用 <b id="pf_move">—</b> 萬<span id="pf_land"></span><span id="pf_self"></span>）
         × 稅率 <b id="pf_rate">—</b>% ＝ <b class="res" id="pf_tax">—</b> 萬
       </div>
     </div>
@@ -1758,9 +1767,10 @@ function recalc() {
   // 房地合一稅
   const buyPrice = v('buyPrice');
   const buyCost = v('buyCost');
+  const landGain = v('landGain'); // 土地漲價總數額（依土增稅單）
   let houseTax = 0;
   if (hold && !hold.error && buyPrice > 0) {
-    let base = total - buyPrice - buyCost - moveFee; // 稅基（萬）：扣可認列移轉費用(B)
+    let base = total - buyPrice - buyCost - moveFee - landGain; // 稅基（萬）：扣可認列移轉費用(B)與土地漲價總數額
     if (selfUse && hold.years >= 6) {
       base = Math.max(0, base - 400); // 免稅額 400 萬
     }
@@ -1782,7 +1792,7 @@ function recalc() {
   setResult({
     unitR, houseTax, net,
     escrow, service, landTax, houseTaxVal: houseTax, loan, sumDeduct,
-    total, buyPrice, buyCost, moveFee,
+    total, buyPrice, buyCost, moveFee, landGain,
     selfDeduct: (selfUse && hold && hold.years >= 6) ? 400 : 0,
     holdRate: hold ? hold.rate : null,
     hasHoldData: !!(hold && !hold.error && buyPrice > 0)
@@ -1824,6 +1834,7 @@ function setResult(r) {
     document.getElementById('f_buy').textContent = fmt(r.buyPrice);
     document.getElementById('f_buyCost').textContent = fmt(r.buyCost);
     document.getElementById('f_move').textContent = fmt(r.moveFee);
+    document.getElementById('f_landPart').innerHTML = r.landGain > 0 ? ` &minus; 土地漲價總數額 <span class="fv">${fmt(r.landGain)}</span> 萬` : '';
     document.getElementById('f_selfPart').textContent = r.selfDeduct > 0 ? ' − 自用扣抵 400 萬' : '';
     document.getElementById('f_rate').textContent = (r.holdRate * 100).toFixed(0);
     document.getElementById('f_taxResult').textContent = fmt(r.houseTaxVal);
@@ -1845,7 +1856,7 @@ function setResult(r) {
 //
 // 整理係數：
 // 主式：X*(1 − e − s) − run − reg − clr − landTax − loan − [X(1−s)*r − Cr] = net
-// 其中 Cr = (buyPrice + buyCost + 自用扣抵)*r
+// 其中 Cr = (buyPrice + buyCost + 移轉費用固定額 + 自用扣抵 + 土地漲價總數額)*r
 // → X*(1 − e − s) − X*(1−s)*r = net + run + reg + clr + landTax + loan − Cr
 // → X * [(1 − e − s) − (1−s)*r] = RHS
 // → X = RHS / [(1 − e − s) − (1−s)*r]
@@ -1892,9 +1903,10 @@ function reverseCalc() {
   const loan = v('loan');
   const run = FIXED.run, reg = FIXED.reg, clr = FIXED.clr;
   const selfDeduct = (selfUse && hold.years >= 6) ? 400 : 0;
+  const landGain = v('landGain');
 
   // 假設稅基為正
-  const Cr = (buyPrice + buyCost + moveFixed + selfDeduct) * r;
+  const Cr = (buyPrice + buyCost + moveFixed + selfDeduct + landGain) * r;
   const RHS = target + run + reg + clr + landTax + loan + svcFixed - Cr;
   const denom = (1 - e - sA) - (1 - sB) * r;
 
@@ -1908,7 +1920,7 @@ function reverseCalc() {
   let X = RHS / denom;
 
   // 驗算稅基（用 B 的移轉費用），若 <= 0 則房地合一稅 = 0，用簡化式重算
-  let base = X - buyPrice - buyCost - (X * sB + moveFixed) - selfDeduct;
+  let base = X - buyPrice - buyCost - (X * sB + moveFixed) - selfDeduct - landGain;
   let note = '';
   if (base <= 0) {
     // 房地合一稅 = 0，重算（實拿只扣 A 服務費）
@@ -1929,7 +1941,7 @@ function reverseCalc() {
 // ------- 全部清除 -------
 function resetAll() {
   if (!confirm('清空所有輸入？')) return;
-  ['totalArea','parkArea','parkPrice','sellTotal','sellUnit','buyPrice','buyCost','landTax','loan','targetNet'].forEach(id => {
+  ['totalArea','parkArea','parkPrice','sellTotal','sellUnit','buyPrice','buyCost','landTax','landGain','loan','targetNet'].forEach(id => {
     document.getElementById(id).value = '';
   });
   ['prevY','prevM','prevD','currY','currM','currD'].forEach(id => {
@@ -2043,18 +2055,14 @@ function switchTab(name) {
 }
 
 // ============ 房地合一 ============
-let cgHold = 'h0'; // h0: <2y, h1: 2-5y, h2: 5-10y, h3: 10y+
+let cgHold = 'h0'; // h0: <2y, h1: 2-5y, h2a: 5-6y, h2b: 6-10y, h3: 10y+
 let cgSelf = false;
 let cgFeeMode = 'default';
 
 function setCgHold(key) {
   cgHold = key;
-  document.querySelectorAll('[data-pane="capgain"] .seg').forEach((seg, idx) => {
-    if (idx === 1) {
-      seg.querySelectorAll('.seg-btn').forEach((b, i) => {
-        b.classList.toggle('active', ['h0','h1','h2','h3'][i] === key);
-      });
-    }
+  document.getElementById('cg_holdSeg').querySelectorAll('.seg-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['h0','h1','h2a','h2b','h3'][i] === key);
   });
   calcCapGain();
 }
@@ -2091,17 +2099,19 @@ function calcCapGain() {
   }
 
   // 稅率
-  const rates = { h0: 0.45, h1: 0.35, h2: 0.20, h3: 0.15 };
-  const labels = { h0: '45%', h1: '35%', h2: '20%', h3: '15%' };
+  const rates = { h0: 0.45, h1: 0.35, h2a: 0.20, h2b: 0.20, h3: 0.15 };
+  const labels = { h0: '45%', h1: '35%', h2a: '20%', h2b: '20%', h3: '15%' };
   let rate = rates[cgHold];
   let rateLabel = labels[cgHold];
 
-  // 自用滿 6 年：必須持有 6 年以上才適用（h2、h3）
+  // 自用滿 6 年：必須持有 6 年以上才適用（h2b、h3）
   let selfDeduct = 0;
-  if (cgSelf && (cgHold === 'h2' || cgHold === 'h3')) {
+  if (cgSelf && (cgHold === 'h2b' || cgHold === 'h3')) {
     rate = 0.10;
     rateLabel = '10% (自用滿6年)';
     selfDeduct = 400;
+  } else if (cgSelf) {
+    rateLabel += '（未滿 6 年，不適用自用優惠）';
   }
 
   let base = sell - cost - buyfee - fee - land;
@@ -2168,6 +2178,12 @@ function calcLoan() {
     return;
   }
 
+  if (grace < 0 || grace >= years) {
+    ['ln_monthly', 'ln_totalInt', 'ln_totalAll'].forEach(id => document.getElementById(id).textContent = '—');
+    document.getElementById('ln_grace_monthly').innerHTML = '<span style="color:var(--danger)">⚠ 寬限期要比貸款年限短</span>';
+    return;
+  }
+
   const r = rate / 12;
   const totalMonths = years * 12;
   const graceMonths = grace * 12;
@@ -2186,7 +2202,7 @@ function calcLoan() {
   const totalInt = totalAll - amt;
 
   document.getElementById('ln_monthly').textContent = fmt(amortMonthly, 0);
-  document.getElementById('ln_grace_monthly').textContent = graceMonths > 0 ? fmt(graceMonthly, 0) : '無寬限期';
+  document.getElementById('ln_grace_monthly').textContent = graceMonths > 0 ? '$' + fmt(graceMonthly, 0) : '無寬限期';
   document.getElementById('ln_totalInt').textContent = fmt(totalInt, 0);
   document.getElementById('ln_totalAll').textContent = fmt(totalAll, 0);
 }
@@ -2493,6 +2509,8 @@ function printForClient() {
     document.getElementById('pf_buy').textContent     = txt('f_buy');
     document.getElementById('pf_buyCost').textContent = txt('f_buyCost');
     document.getElementById('pf_move').textContent    = txt('f_move');
+    const landTxt = txt('f_landPart');
+    document.getElementById('pf_land').textContent = landTxt && landTxt !== '—' ? ' ' + landTxt : '';
     const selfTxt = txt('f_selfPart');
     document.getElementById('pf_self').textContent = selfTxt && selfTxt !== '—' ? ' ' + selfTxt : '';
     document.getElementById('pf_rate').textContent    = txt('f_rate');
