@@ -175,10 +175,16 @@ section.tight{padding-block:44px 88px}
 .btn-white{background:#fff;color:var(--olive-deep)}
 .pay{margin-top:40px;background:var(--mist-soft);border-radius:var(--radius);padding:26px 28px}
 .pay h2,.desc h2,.similar h2{font-size:22px;color:var(--teal);margin-bottom:14px}
-.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .pay-grid div{background:#fff;border-radius:10px;padding:14px 16px}
 .pay-grid span{display:block;font-size:13px;color:var(--muted)}
 .pay-grid b{font-size:22px;color:var(--olive-deep);font-variant-numeric:tabular-nums}
+.bank{margin-top:12px;background:#fff;border-radius:10px;padding:14px 18px}
+.bank h3{font-size:16px;color:var(--teal);margin-bottom:6px}
+.bank p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.bank ul{margin:0;padding-left:1.2em}
+.bank li{font-variant-numeric:tabular-nums}
+.bank li::marker{color:var(--olive)}
 .pay .hint{margin-top:12px}
 .pay .hint a{color:var(--olive-deep);font-weight:700}
 .desc{margin-top:40px;max-width:46em}
