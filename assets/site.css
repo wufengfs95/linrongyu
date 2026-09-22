@@ -578,6 +578,7 @@ section.sm{padding-block:8px 48px}
   .nav-cta{display:none}
 }
 @media (max-width:600px){
+  .v2-eyebrow{font-size:18px;padding:6px 14px;border-width:2px}
   .v2-why-grid,.v2-toolgrid{grid-template-columns:1fr}
   .v2-stats b{font-size:26px}
   .v2-bar .btn{font-size:14px;padding:11px 6px}
