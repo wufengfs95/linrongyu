@@ -2545,6 +2545,22 @@ function printForClient() {
   }catch(e){}
 })();
 
+// === 從網站其他頁面連過來：?tab=KEY 打開指定分頁（不鎖定），?amt=數字 帶入該分頁的主要金額（萬）===
+(function(){
+  try{
+    var q = new URLSearchParams(location.search);
+    var tab = q.get('tab'), amt = parseFloat(q.get('amt'));
+    if (!tab || q.get('only') || !document.querySelector('.tab[data-tab="' + tab + '"]')) return;
+    switchTab(tab);
+    var mainField = { seller:'sellTotal', capgain:'cg_sell', loan:'ln_amt', fees:'fe_total', park:'pk_total', luxury:'lx_price' };
+    if (mainField[tab] && amt > 0){
+      var el = document.getElementById(mainField[tab]);
+      el.value = amt;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }catch(e){}
+})();
+
 </script>
 <div style="max-width:720px;margin:44px auto 30px;padding:22px 24px;background:#FAF3EA;border:1px solid #E8CAA4;border-left:5px solid #5B6E3A;border-radius:13px;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;line-height:1.75;color:#1F2E2F">
   <p style="margin:0 0 10px;font-size:17px;font-weight:800">算完還有卡住的地方？</p>
