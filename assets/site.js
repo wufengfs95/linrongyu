@@ -43,6 +43,8 @@
     document.querySelectorAll('.thumbs button').forEach(function(b){
       b.addEventListener('click',function(){
         main.src=b.getAttribute('data-src');
+        main.classList.toggle('contain',b.getAttribute('data-fit')==='contain');
+        var link=document.getElementById('galleryLink'); if(link) link.href=main.getAttribute('src');
         main.alt=b.querySelector('img').alt;
         document.querySelectorAll('.thumbs button').forEach(function(x){x.setAttribute('aria-current',x===b?'true':'false')});
       });
