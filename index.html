@@ -143,6 +143,14 @@ section{padding-block:88px}
 .svc ul{margin:0;padding-left:1.1em;font-size:15px}
 .svc li::marker{color:var(--olive)}
 
+/* 房產試算入口 */
+section.calc-band{padding-block:0 88px}
+.calc-card{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;background:var(--mist-soft);border:1px solid var(--mist);border-left:6px solid var(--olive-deep);border-radius:var(--radius);padding:32px 36px}
+.calc-card .en{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--cashmere-deep);text-transform:uppercase}
+.calc-card h2{font-family:var(--serif);font-size:clamp(24px,3.2vw,30px);color:var(--teal);margin:4px 0 8px;letter-spacing:.06em}
+.calc-card p{color:var(--muted);margin:0 0 14px}
+.calc-card .tags li{background:#fff}
+
 /* 預約 */
 .booking{background:linear-gradient(135deg,var(--mist) 0%,var(--cashmere-soft) 100%)}
 .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
@@ -188,12 +196,15 @@ footer b{color:#fff}
   .stats{grid-template-columns:repeat(2,1fr)}
   .services,.voices{grid-template-columns:1fr}
   .book-grid,.areas{grid-template-columns:1fr}
+  .calc-card{grid-template-columns:1fr}
+  .calc-card .btn{justify-self:start}
   .fab{display:inline-flex}
 }
 @media (max-width:480px){
   section{padding-block:64px}
   .row2{grid-template-columns:1fr}
-  .area,.svc,.book-info,form.book{padding:24px}
+  .area,.svc,.book-info,form.book,.calc-card{padding:24px}
+  section.calc-band{padding-block:0 64px}
   .topbar .btn-sm{display:none}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
@@ -208,6 +219,7 @@ footer b{color:#fff}
       <a href="#area">服務區域</a>
       <a href="#record">我的戰績</a>
       <a href="#service">服務項目</a>
+      <a href="calculator/">房產試算</a>
       <a href="#booking">預約諮詢</a>
     </nav>
     <a class="btn btn-main btn-sm" href="#booking">預約諮詢</a>
@@ -324,6 +336,23 @@ footer b{color:#fff}
             <li>配合師傅媒合與估價</li>
           </ul>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 房產試算入口 -->
+  <section class="calc-band" aria-label="免費房產計算機">
+    <div class="wrap">
+      <div class="calc-card">
+        <div>
+          <div class="en">Free Tools</div>
+          <h2>免費房產計算機</h2>
+          <p>自備款能買多少、房貸每月繳多少、賣房扣完稅費實拿多少，八種試算一頁算完。</p>
+          <ul class="tags">
+            <li>購屋能力</li><li>房貸試算</li><li>賣方實拿</li><li>房地合一稅</li><li>買賣雜費</li><li>坪數換算</li><li>車位拆算</li><li>豪宅稅</li>
+          </ul>
+        </div>
+        <a class="btn btn-main" href="calculator/">開始試算</a>
       </div>
     </div>
   </section>
