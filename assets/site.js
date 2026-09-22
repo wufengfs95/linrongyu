@@ -83,6 +83,18 @@
     });
   });
 
+  // 改版首頁：工具依「買房、賣房、學區」篩選
+  var tabs=[].slice.call(document.querySelectorAll('.v2-tabs button'));
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(){
+      var tag=b.getAttribute('data-tag');
+      tabs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      document.querySelectorAll('.v2-tool').forEach(function(card){
+        card.hidden=!!tag && (card.getAttribute('data-tags')||'').split(' ').indexOf(tag)<0;
+      });
+    });
+  });
+
   // 物件列表篩選
   var grid=document.getElementById('listingGrid');
   if(grid){
