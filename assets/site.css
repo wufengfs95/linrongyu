@@ -295,6 +295,71 @@ footer b{color:#fff}
 /* 手機浮動 LINE */
 .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;background:#06C755;color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none}
 
+/* 學區地圖入口卡 */
+.map-feature{display:grid;gap:6px;margin-bottom:18px;padding:24px 26px;border-radius:var(--radius);text-decoration:none;color:#fff;background:linear-gradient(120deg,var(--olive-deep) 0%,var(--teal) 100%);transition:transform .2s}
+.map-feature:hover{transform:translateY(-2px)}
+.map-feature .tk{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--straw)}
+.map-feature h3{font-family:var(--serif);font-size:24px;color:#fff}
+.map-feature p{margin:0;color:#E4EEE9}
+.map-feature .go{font-weight:700;color:var(--straw)}
+.nearby a.nearby-school{background:var(--olive-deep);border-color:var(--olive-deep);color:#fff}
+
+/* 學區地圖頁 */
+section.sm-top{padding-block:22px 10px}
+.sm-top h1{font-family:var(--serif);font-size:clamp(26px,3.6vw,34px);color:var(--teal);letter-spacing:.04em;margin:4px 0}
+.sm-sub{margin:0;color:var(--muted)}
+section.sm{padding-block:8px 48px}
+.sm-grid{display:grid;grid-template-columns:380px minmax(0,1fr);max-width:1440px;margin:0 auto;padding-inline:20px;height:calc(100vh - 150px);min-height:600px}
+.sm-panel{overflow-y:auto;padding:4px 18px 16px 0;display:grid;gap:12px;align-content:start}
+.sm-map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:420px;background:var(--mist-soft)}
+.sm-tabs{display:flex;background:var(--mist-soft);border-radius:999px;padding:4px}
+.sm-tabs button{flex:1;font:inherit;font-weight:700;border:0;background:none;padding:8px;border-radius:999px;cursor:pointer;color:var(--teal)}
+.sm-tabs button[aria-pressed="true"]{background:var(--olive-deep);color:#fff}
+.sm-search{display:flex;gap:8px}
+.sm-search input{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.sm-search input:focus{outline:none;border-color:var(--olive)}
+.sm-search .btn{padding:10px 18px}
+.sm-locate{font:inherit;font-weight:700;color:var(--olive-deep);background:#fff;border:1.5px dashed var(--olive);border-radius:999px;padding:9px;cursor:pointer}
+.sm-locate:hover{background:var(--mist-soft)}
+.sm-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sm-pick select{font:inherit;padding:9px 10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.sm-status{margin:0;font-size:14px;color:var(--cashmere-deep);min-height:1.2em}
+.sm-status:empty{display:none}
+.sm-result{border:1px solid var(--line);border-radius:var(--radius);padding:16px;background:#fff}
+.sm-r-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:4px}
+.sm-r-head b{font-size:20px;color:var(--teal)}
+.sm-r-head span{font-size:13px;color:var(--muted)}
+.sm-result h3{font-size:15px;color:var(--olive-deep);margin:12px 0 6px}
+.sm-schools{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sm-schools li{display:flex;gap:10px}
+.sm-schools i{flex:none;width:12px;height:12px;border-radius:50%;margin-top:7px}
+.sm-schools b{color:var(--ink)}
+.sm-tel{margin-left:8px;font-size:14px;font-weight:700;color:var(--olive-deep);text-decoration:none}
+.sm-lin{display:grid;gap:2px;font-size:14px;color:var(--muted)}
+.sm-lin .free{color:var(--cashmere-deep)}
+.sm-fly{font:inherit;font-size:13px;color:var(--olive-deep);background:none;border:0;padding:0;margin-top:2px;cursor:pointer;text-decoration:underline}
+.sm-empty{margin:0;font-size:14px;color:var(--muted)}
+.sm-tip{font-size:13px;background:var(--cashmere-soft);border-radius:8px;padding:8px 10px;margin:12px 0 0;color:var(--cashmere-deep)}
+.sm-remarks{margin-top:10px;font-size:13px;color:var(--muted)}
+.sm-remarks p{margin:4px 0 0}
+.sm-line{width:100%;margin-top:14px}
+.sm-legend{font-size:14px;background:var(--mist-soft);border-radius:var(--radius);padding:12px 14px}
+.sm-legend summary{font-weight:700;color:var(--teal);cursor:pointer}
+.sm-legend ul{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}
+.sm-legend p{margin:0}
+.lg{display:inline-block;width:18px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+.lg.basic{background:hsla(95,58%,52%,.7)}
+.lg.split{border:1.5px dashed var(--teal);background:hsla(95,58%,52%,.28)}
+.sm-toggles{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px}
+.sm-note{font-size:12.5px;color:var(--muted);margin:0}
+.sm-note a{color:var(--olive-deep)}
+.sm-label{font-family:var(--sans);font-size:12px}
+@media (max-width:900px){
+  .sm-grid{grid-template-columns:1fr;height:auto;min-height:0;padding-inline:16px}
+  .sm-map{order:-1;height:62vh}
+  .sm-panel{overflow:visible;padding:14px 0 0}
+}
+
 @media (max-width:900px){
   html{scroll-padding-top:112px}
   .topbar .wrap{flex-wrap:wrap;min-height:56px;row-gap:0}

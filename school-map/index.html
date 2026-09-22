@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>桃園市國中小學區地圖｜輸入地址查你家讀哪間國小、國中（115學年度）｜林容瑜</title>
+<meta name="description" content="桃園市 13 區國小、國中學區地圖：輸入地址、用目前位置或點地圖，就知道讀哪間學校，依里、鄰與自由學區標示清楚。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/school-map/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="桃園市國中小學區地圖｜輸入地址查你家讀哪間國小、國中（115學年度）｜林容瑜">
+<meta property="og:description" content="桃園市 13 區國小、國中學區地圖：輸入地址、用目前位置或點地圖，就知道讀哪間學校，依里、鄰與自由學區標示清楚。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/school-map/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/profile.jpg">
+<meta name="theme-color" content="#5B6E3A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=c6b0241d">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "桃園市國中小學區地圖", "url": "https://wufengfs95.github.io/linrongyu/school-map/", "applicationCategory": "ReferenceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入地址或點地圖，查桃園市各里的國小、國中學區（115 學年度）。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/"}}</script>
+</head>
+<body class="sm-page">
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><b>林容瑜</b><span>有巢氏房屋</span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../listings/">我接的案子</a>
+      <a href="../tools/" aria-current="page">小工具</a>
+      <a href="../#about">關於我</a>
+      <a href="../#record">戰績</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+    <a class="btn btn-main btn-sm" href="../#booking">預約諮詢</a>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">小工具</a> › 學區地圖</p>
+  <h1>桃園市國中小學區地圖</h1>
+  <p class="sm-sub">輸入地址、用目前位置或直接點地圖，查你家讀哪間國小、國中（115 學年度）。</p>
+</div>
+</section>
+<section class="sm">
+<div class="sm-grid">
+  <aside class="sm-panel">
+    <div class="sm-tabs" role="group" aria-label="學制"><button type="button" data-lv="es" aria-pressed="true">國小</button><button type="button" data-lv="jh" aria-pressed="false">國中</button></div>
+    <form id="smForm" class="sm-search"><input id="smQ" type="search" placeholder="地址、路名或里名，例如 中壢區林森里" autocomplete="street-address"><button class="btn btn-main" type="submit">查學區</button></form>
+    <button id="smLocate" type="button" class="sm-locate">用我目前的位置查</button>
+    <div class="sm-pick"><select id="smTown" aria-label="行政區"></select><select id="smVill" aria-label="里"><option value="">選擇里</option></select></div>
+    <p id="smStatus" class="sm-status" role="status"></p>
+    <div id="smResult" class="sm-result" hidden></div>
+    <details class="sm-legend" open><summary>地圖怎麼看</summary>
+      <ul>
+        <li><i class="lg basic"></i>實心色塊：整個里讀同一所學校（基本學區）</li>
+        <li><i class="lg split"></i>虛線框：里內依「鄰」分校，或有自由學區</li>
+        <li><b>◎ 自由學區</b>：可以在兩所以上的學校之間選擇</li>
+      </ul>
+      <p>目前顯示 <b id="smCount">—</b> 所<span id="smLevel">國小</span>，點色塊看詳細資料，放大地圖會顯示學校位置。</p>
+    </details>
+    <div class="sm-toggles"><label><input type="checkbox" id="smSchools" checked> 顯示學校位置</label><label><input type="checkbox" id="smLabels"> 顯示校名</label></div>
+    <p class="sm-note">學區僅供參考，以桃園市政府教育局公告為準（115 學年度）。地圖以「里」上色，部分里依「鄰」或門牌分校，交界處請再查官方資料。<br>
+      資料來源：<a href="https://www.tyc.edu.tw/News.aspx?n=5208&amp;sms=11286" target="_blank" rel="noopener">桃園市政府教育局學區資訊</a>、內政部國土測繪中心村里界圖（115 年 8 月）、OpenStreetMap。</p>
+  </aside>
+  <div id="smMap" class="sm-map" role="application" aria-label="桃園市國中小學區地圖"></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>林容瑜</b>｜有巢氏房屋 中壢環中加盟店<br>不動產經紀營業員 證號：（請填入）</div>
+    <div>電話／LINE：<a href="tel:+886973263569">0973-263-569</a><br>服務區域：桃園市中壢區、平鎮區</div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=6b4e6505" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js?v=1b3d1b44" data-v="3dd134b8" defer></script>
+</body>
+</html>
