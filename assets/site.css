@@ -35,7 +35,9 @@ h1,h2,h3{text-wrap:balance;margin:0}
 /* 頁首 */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
-.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-sign{height:46px;width:auto;flex:none}
+.brand-name{display:flex;align-items:baseline;gap:8px}
 .brand b{font-family:var(--serif);font-size:22px;color:var(--navy);letter-spacing:.06em}
 .brand span{font-size:12px;color:var(--brick);font-weight:700;letter-spacing:.08em}
 .nav{display:flex;gap:26px;font-size:15px;font-weight:500}
@@ -43,8 +45,8 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .nav a:hover{color:var(--brick)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:background .2s,color .2s,transform .2s}
 .btn:hover{transform:translateY(-1px)}
-.btn-main{background:var(--line-green);color:#fff}
-.btn-main:hover{background:var(--line-green-deep)}
+.btn-main{background:var(--brick);color:#fff}
+.btn-main:hover{background:var(--brick-deep)}
 .btn-ghost{border-color:var(--navy);color:var(--navy);background:transparent}
 .btn-ghost:hover{background:var(--navy);color:#fff}
 .btn-sm{padding:8px 16px;font-size:14px}
@@ -277,7 +279,7 @@ section.lp{padding-block:12px 72px}
 .contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.25);text-decoration:none}
 .contact-row .k{font-size:13px;color:#BCC8D8;width:46px;flex:none}
 .contact-row .v{font-size:22px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-.book-info .btn{margin-top:18px;width:100%;background:var(--line-green);color:#fff}
+.book-info .btn{margin-top:18px;width:100%;background:#fff;color:var(--navy)}
 .book-info .btn.line{background:var(--line-green);color:#fff}
 form.book{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:32px;display:grid;gap:18px}
 .booking .field label,.booking .field legend,.booking .chips label{color:#fff}
@@ -403,7 +405,13 @@ section.sm{padding-block:8px 48px}
 @media (max-width:900px){
   html{scroll-padding-top:112px}
   .topbar .wrap{flex-wrap:wrap;min-height:56px;row-gap:0}
-  .nav{order:3;width:100%;gap:22px;overflow-x:auto;white-space:nowrap;padding-bottom:10px;font-size:14px}
+  .nav{order:3;width:100%;gap:18px;overflow-x:auto;white-space:nowrap;padding-bottom:10px}
+  .topbar .nav{font-size:17px}
+  .brand-sign{height:34px}
+  .topinfo{font-size:15px}
+  .topinfo .wrap{min-height:40px}
+  .ti-ic{font-size:16px;margin-right:5px}
+  .topinfo-line{font-size:14px;padding:3px 12px}
   .hero .wrap{grid-template-columns:1fr;padding-top:36px}
   .hero-text{padding-bottom:0;text-align:center}
   .hero-text .hero-cta{justify-content:center}
@@ -438,18 +446,20 @@ section.sm{padding-block:8px 48px}
   .row2{grid-template-columns:1fr}
   .area,.svc,.book-info,form.book{padding:24px}
   .topbar .btn-sm{display:none}
+  .ti-sub{display:none}
+  .topinfo{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}.btn:hover{transform:none}}
 
 /* 改版首頁（版面參考 cathome.tw，配色沿用 CIS） */
-.topinfo{background:var(--navy);color:#EAF0F8;font-size:13px;font-weight:700}
-.topinfo .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:34px}
+.topinfo{background:var(--navy);color:#EAF0F8;font-size:24px;font-weight:700;letter-spacing:.02em}
+.topinfo .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding-block:6px}
 .topinfo a{color:#fff;text-decoration:none;font-weight:700}
-.ti-ic{margin-right:6px;font-size:15px;vertical-align:-1px}
-.topinfo-line{background:var(--line-green);border-radius:999px;padding:2px 12px}
-.topbar .nav{gap:22px}
-.nav-cta{background:var(--line-green)}
-.nav-cta:hover{background:var(--line-green-deep)}
+.ti-ic{margin-right:8px;font-size:24px;vertical-align:-2px}
+.topinfo-line{background:var(--line-green);border-radius:999px;padding:5px 18px;font-size:18px}
+.topbar .nav{gap:20px;font-size:22px;font-weight:700}
+.nav-cta{background:var(--brick)}
+.nav-cta:hover{background:var(--brick-deep)}
 .btn-straw{background:var(--gold);color:var(--ink)}
 .btn-straw:hover{background:#EBC28C}
 
@@ -546,10 +556,12 @@ section.sm{padding-block:8px 48px}
 .side-fab a:hover{transform:scale(1.08)}
 .sf-book{background:var(--brick)}
 .sf-line{background:#06C755}
-.sf-tel{background:var(--line-green)}
+.sf-tel{background:var(--navy)}
 
 @media (max-width:1100px){
-  .topbar .nav{gap:14px;font-size:14px}
+  .topbar .nav{gap:14px;font-size:18px}
+  .brand-sign{height:40px}
+  .topinfo{font-size:19px}
 }
 @media (max-width:900px){
   .v2-hero{padding-block:36px 96px}
