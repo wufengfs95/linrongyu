@@ -13,11 +13,11 @@
 <meta property="og:description" content="桃園市 13 區國小、國中學區地圖：輸入地址、用目前位置或點地圖，就知道讀哪間學校，依里、鄰與自由學區標示清楚。">
 <meta property="og:url" content="https://wufengfs95.github.io/linrongyu/school-map/">
 <meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/profile.jpg">
-<meta name="theme-color" content="#5B6E3A">
+<meta name="theme-color" content="#1F3A5F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=eff76122">
+<link rel="stylesheet" href="../assets/site.css?v=b67c3b05">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "桃園市國中小學區地圖", "url": "https://wufengfs95.github.io/linrongyu/school-map/", "applicationCategory": "ReferenceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入地址或點地圖，查桃園市各里的國小、國中學區（115 學年度）。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/"}}</script>
 </head>
@@ -48,7 +48,7 @@
 <div class="wrap">
   <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">小工具</a> › 學區地圖</p>
   <h1>桃園市國中小學區地圖</h1>
-  <p class="sm-sub">輸入地址、用目前位置或直接點地圖，查你家讀哪間國小、國中（115 學年度）。</p>
+  <p class="sm-sub">輸入地址、用目前位置或直接點地圖，查你家讀哪間國小、國中（115 學年度），順便看附近的學校、車站、超市、醫院和公園。</p>
 </div>
 </section>
 <section class="sm">
@@ -65,11 +65,13 @@
         <li><i class="lg basic"></i>實心色塊：整個里讀同一所學校（基本學區）</li>
         <li><i class="lg split"></i>虛線框：里內依「鄰」分校，或有自由學區</li>
         <li><b>◎ 自由學區</b>：可以在兩所以上的學校之間選擇</li>
+        <li><span class="lg-ico" data-lg="es"></span>國小<span class="lg-ico" data-lg="jh"></span>國中：學校位置，圖釘顏色就是它的學區顏色</li>
+        <li><span class="lg-ico" data-lg="tra"></span>台鐵<span class="lg-ico" data-lg="a"></span>機場捷運<span class="lg-ico" data-lg="g"></span>捷運綠線<span class="lg-ico" data-lg="air"></span>機場<br>白底虛線框的車站還在興建中</li>
       </ul>
-      <p>目前顯示 <b id="smCount">—</b> 所<span id="smLevel">國小</span>，點色塊看詳細資料，放大地圖會顯示學校位置。</p>
+      <p>目前顯示 <b id="smCount">—</b> 所<span id="smLevel">國小</span>，點色塊、學校或車站看詳細資料和附近生活機能，放大地圖會顯示學校位置。</p>
     </details>
-    <div class="sm-toggles"><label><input type="checkbox" id="smSchools" checked> 顯示學校位置</label><label><input type="checkbox" id="smLabels"> 顯示校名</label></div>
-    <p class="sm-note">學區僅供參考，以桃園市政府教育局公告為準（115 學年度）。地圖以「里」上色，部分里依「鄰」或門牌分校，交界處請再查官方資料。<br>
+    <div class="sm-toggles"><span>地圖顯示：</span><label><input type="checkbox" id="smSchools" checked> 學校</label><label><input type="checkbox" id="smLabels"> 校名</label><label><input type="checkbox" id="smTra" checked> 台鐵</label><label><input type="checkbox" id="smMrt" checked> 捷運</label><label><input type="checkbox" id="smAir" checked> 機場</label></div>
+    <p class="sm-note">學區僅供參考，以桃園市政府教育局公告為準（115 學年度）。地圖以「里」上色，部分里依「鄰」或門牌分校，交界處請再查官方資料。生活機能、車站位置來自 OpenStreetMap，可能有缺漏或已歇業，實際請以現場為準；捷運綠線、機捷 A14／A23 為興建中車站。<br>
       資料來源：<a href="https://www.tyc.edu.tw/News.aspx?n=5208&amp;sms=11286" target="_blank" rel="noopener">桃園市政府教育局學區資訊</a>、內政部國土測繪中心村里界圖（115 年 8 月）、OpenStreetMap。</p>
   </aside>
   <div id="smMap" class="sm-map" role="application" aria-label="桃園市國中小學區地圖"></div>
@@ -79,8 +81,11 @@
 
 <footer>
   <div class="wrap">
-    <div><b>林容瑜</b>｜有巢氏房屋 中壢環中加盟店<br>不動產經紀營業員 證號：（請填入）</div>
-    <div>電話／LINE：<a href="tel:+886973263569">0973-263-569</a><br>服務區域：桃園市（中壢、平鎮為主）</div>
+    <div><b>林容瑜</b>｜有巢氏房屋 中壢環中加盟店（智信房屋仲介有限公司）<br>
+      證號：(110)登字第396419號　統一編號：16197325</div>
+    <div>手機／LINE：<a href="tel:+886973263569">0973-263-569</a>　店話：<a href="tel:+88634687890">(03)468-7890</a>　傳真：(03)468-6946<br>
+      地址：桃園市中壢區環中東路二段648號　服務區域：桃園市（中壢、平鎮為主）</div>
+    <p class="foot-note">每一家加盟店皆為獨立經營之經紀業。</p>
   </div>
 </footer>
 
@@ -88,6 +93,6 @@
 
 <script src="../assets/site.js?v=e6cd7043" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="app.js?v=1b3d1b44" data-v="3dd134b8" defer></script>
+<script src="app.js?v=e7bb2b86" data-v="1d8e3855" defer></script>
 </body>
 </html>
