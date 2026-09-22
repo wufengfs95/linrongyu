@@ -466,7 +466,7 @@ section.sm{padding-block:8px 48px}
 /* 形象區 */
 .v2-hero{background:linear-gradient(180deg,#fff 0%,var(--paper) 55%,var(--cream) 100%);color:var(--ink);overflow:hidden;padding-block:56px 110px}
 .v2-hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.v2-eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brick);background:#fff;border:1px solid var(--cream-line);border-radius:999px;padding:4px 14px}
+.v2-eyebrow{display:inline-block;font-size:clamp(20px,2.4vw,30px);font-weight:900;letter-spacing:.06em;color:var(--brick-deep);background:#fff;border:2.5px solid var(--brick);border-radius:999px;padding:8px 24px;box-shadow:0 4px 14px rgba(150,70,42,.12)}
 .v2-hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.3vw,50px);line-height:1.25;letter-spacing:.04em;margin:18px 0 16px;color:var(--navy)}
 .v2-hero h1 em{font-style:normal;color:var(--brick)}
 .v2-lead{font-size:17px;color:var(--ink);max-width:32em;margin:0 0 20px}
