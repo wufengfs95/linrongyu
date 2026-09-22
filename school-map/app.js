@@ -132,7 +132,7 @@
     data.schools.forEach(function(s){
       if(s.lv!==lv||!s.lat) return;
       var m=L.marker([s.lat,s.lng],{keyboard:false,icon:L.divIcon({className:'sm-pin',iconSize:[size,h],iconAnchor:[size/2,h],tooltipAnchor:[0,-h],html:pin(s.lv,deep(s.id),size)})});
-      m.bindTooltip(esc(s.n)+(s.ap?'（位置為概略）':''),{permanent:$('smLabels').checked,direction:'top',offset:[0,-2],className:'sm-label'});
+      m.bindTooltip(esc(s.n)+(s.ap?'（位置為概略）':''),{permanent:true,direction:'top',offset:[0,-2],className:'sm-label'});
       m.on('click',function(){ var v=villageAt(s.lat,s.lng); if(v) select(v,{fit:false,label:s.n,pt:[s.lat,s.lng]}); });
       schoolLayer.addLayer(m);
     });
@@ -143,12 +143,12 @@
   function drawStations(){
     if(stationLayer) stationLayer.remove();
     stationLayer=L.layerGroup();
-    var z=map.getZoom(), size=z>=14?24:z>=12?20:10, show={tra:$('smTra').checked,a:$('smMrt').checked,g:$('smMrt').checked};
+    var z=map.getZoom(), size=z>=14?50:z>=12?40:26, show={tra:$('smTra').checked,a:$('smMrt').checked,g:$('smMrt').checked};
     (data.stations||[]).forEach(function(h){
       var ls=h.l.filter(function(l){return show[l[0]]}); if(!ls.length) return;
       var w=ls.length*size+(ls.length-1)*2, build=ls.every(function(l){return l[2]});
       var m=L.marker([h.lat,h.lng],{zIndexOffset:1000,keyboard:false,icon:L.divIcon({className:'sm-hub',iconSize:[w,size],iconAnchor:[w/2,size/2],tooltipAnchor:[w/2,0],
-        html:ls.map(function(l){return badge(l[0],l[2],size,z<12)}).join('')})});
+        html:ls.map(function(l){return badge(l[0],l[2],size)}).join('')})});
       if(z>=14) m.bindTooltip(esc(h.n)+(build?'（興建中）':''),{permanent:true,direction:'right',className:'sm-label sm-st-label'});
       else m.bindTooltip('<b>'+esc(h.n)+'</b><br>'+esc(lineText(ls)),{direction:'right',className:'sm-label'});
       m.on('click',function(){ var v=villageAt(h.lat,h.lng); if(v) select(v,{fit:false,label:h.n+'｜'+lineText(ls),pt:[h.lat,h.lng]}); });
@@ -156,7 +156,7 @@
     });
     var A=data.airport;
     if(A && $('smAir').checked){
-      var as=z>=12?30:24;
+      var as=z>=12?58:36;
       var am=L.marker([A.lat,A.lng],{zIndexOffset:1100,keyboard:false,icon:L.divIcon({className:'sm-hub',iconSize:[as,as],iconAnchor:[as/2,as/2],tooltipAnchor:[as/2,0],html:airBadge(as)})});
       am.bindTooltip(esc(A.n),{permanent:true,direction:'right',className:'sm-label sm-air-label'});
       am.on('click',function(){ map.setView([A.lat,A.lng],Math.max(map.getZoom(),14)); });
@@ -246,7 +246,7 @@
   // 圖例的小圖示（跟地圖上同一套圖案）
   document.querySelectorAll('[data-lg]').forEach(function(el){
     var k=el.getAttribute('data-lg');
-    el.innerHTML=k==='es'||k==='jh'?pin(k,'hsl(95,60%,38%)',16):k==='air'?airBadge(18):badge(k,k==='g',18);
+    el.innerHTML=k==='es'||k==='jh'?pin(k,'hsl(95,60%,38%)',20):k==='air'?airBadge(24):badge(k,k==='g',24);
   });
 
   function fillVillages(town){
@@ -333,7 +333,6 @@
   $('smTown').addEventListener('change',function(){ fillVillages(this.value); });
   $('smVill').addEventListener('change',function(){ var v=data.villages[+this.value]; if(v) select(v); });
   $('smSchools').addEventListener('change',function(){ if(data) drawSchools(); });
-  $('smLabels').addEventListener('change',function(){ if(data) drawSchools(); });
   ['smTra','smMrt','smAir'].forEach(function(id){ $(id).addEventListener('change',function(){ if(data) drawStations(); }); });
   $('smResult').addEventListener('click',function(e){
     var ln=e.target.closest('[data-line-msg]');
