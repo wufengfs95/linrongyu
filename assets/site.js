@@ -37,19 +37,51 @@
     });
   });
 
-  // 物件頁相簿
+  // 物件頁相簿：縮圖、左右箭頭、鍵盤左右鍵、手機左右滑
   var main=document.getElementById('galleryMain');
-  if(main){
-    document.querySelectorAll('.thumbs button').forEach(function(b){
-      b.addEventListener('click',function(){
-        main.src=b.getAttribute('data-src');
-        main.classList.toggle('contain',b.getAttribute('data-fit')==='contain');
-        var link=document.getElementById('galleryLink'); if(link) link.href=main.getAttribute('src');
-        main.alt=b.querySelector('img').alt;
-        document.querySelectorAll('.thumbs button').forEach(function(x){x.setAttribute('aria-current',x===b?'true':'false')});
-      });
+  var thumbs=[].slice.call(document.querySelectorAll('.thumbs button'));
+  if(main&&thumbs.length){
+    var cur=0, link=document.getElementById('galleryLink'), idx=document.getElementById('galleryIndex');
+    var show=function(i){
+      cur=(i+thumbs.length)%thumbs.length;
+      var b=thumbs[cur];
+      main.src=b.getAttribute('data-src');
+      main.alt=b.querySelector('img').alt;
+      main.classList.toggle('contain',b.getAttribute('data-fit')==='contain');
+      if(link) link.href=main.getAttribute('src');
+      if(idx) idx.textContent=cur+1;
+      thumbs.forEach(function(x,j){x.setAttribute('aria-current',j===cur?'true':'false')});
+      var row=b.parentNode;
+      row.scrollTo({left:b.offsetLeft-row.clientWidth/2+b.clientWidth/2,behavior:'smooth'});
+    };
+    thumbs.forEach(function(b,i){b.addEventListener('click',function(){show(i)})});
+    var prev=document.querySelector('.gal-nav.prev'), next=document.querySelector('.gal-nav.next');
+    if(prev) prev.addEventListener('click',function(){show(cur-1)});
+    if(next) next.addEventListener('click',function(){show(cur+1)});
+    document.addEventListener('keydown',function(e){
+      if(/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||'')) return;
+      if(e.key==='ArrowLeft') show(cur-1);
+      if(e.key==='ArrowRight') show(cur+1);
+    });
+    var box=main.closest('.gal-main'), x0=null;
+    box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    box.addEventListener('touchend',function(e){
+      if(x0===null) return;
+      var dx=e.changedTouches[0].clientX-x0; x0=null;
+      if(Math.abs(dx)>40) show(dx<0?cur+1:cur-1);
     });
   }
+
+  // 分享：手機用系統分享，電腦複製網址
+  document.querySelectorAll('[data-share-url]').forEach(function(b){
+    var label=b.textContent;
+    b.addEventListener('click',function(){
+      var url=b.getAttribute('data-share-url');
+      if(navigator.share){navigator.share({title:b.getAttribute('data-share-title')||document.title,url:url}).catch(function(){});return;}
+      var done=function(){b.textContent='已複製網址';setTimeout(function(){b.textContent=label},2000)};
+      try{navigator.clipboard.writeText(url).then(done,function(){b.textContent=url})}catch(err){b.textContent=url}
+    });
+  });
 
   // 物件列表篩選
   var grid=document.getElementById('listingGrid');
