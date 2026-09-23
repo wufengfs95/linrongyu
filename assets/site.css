@@ -526,6 +526,7 @@ section.sm{padding-block:8px 48px}
 .v2-tools-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .v2-tools-head .en{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--brown);text-transform:uppercase}
 .v2-tools-head h2{font-family:var(--serif);font-size:clamp(28px,4vw,36px);color:var(--navy);letter-spacing:.04em;margin:4px 0}
+.v2-tools-head .btn{font-size:28px;padding:14px 32px}
 .v2-tools-head p{margin:0;color:var(--ink);white-space:nowrap;font-size:clamp(15px,1.8vw,20px);line-height:1.9}
 .v2-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .v2-tabs button{font:inherit;font-weight:700;font-size:26px;padding:8px 26px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
@@ -595,6 +596,10 @@ section.sm{padding-block:8px 48px}
   .nav-cta{display:none}
 }
 @media (max-width:600px){
+  .v2-tools-head .btn{font-size:20px;padding:11px 22px}
+  .team .sec-head p.team-lead,.team-note{white-space:normal}
+  .team-col>b{font-size:20px}
+  .team-col ul{font-size:16px}
   .v2-about-text>p{font-size:18px}
   .v2-areas b{font-size:19px}
   .v2-areas span{font-size:16px}
@@ -617,14 +622,16 @@ section.sm{padding-block:8px 48px}
 
 /* 我的家團隊（聯賣加盟店） */
 .team{padding-block:72px;background:#fff}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.team .sec-head p.team-lead{max-width:none;white-space:nowrap;font-size:clamp(16px,2.4vw,28px);color:var(--ink)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px}
 .team-col{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-.team-col>b{display:block;color:var(--navy);font-size:15px;letter-spacing:.04em;padding-bottom:8px;border-bottom:2px solid var(--cream-line);margin-bottom:8px}
-.team-col ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:14px;color:var(--muted)}
-.team-col li::before{content:"・";color:var(--brick-soft)}
+.team-col>b{display:block;color:var(--navy);font-size:24px;letter-spacing:.04em;padding-bottom:8px;border-bottom:2px solid var(--cream-line);margin-bottom:8px}
+.team-col ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:19px;color:var(--muted)}
+.brand-dot{display:inline-block;margin-right:6px;font-size:13px;font-weight:700;color:#fff;background:var(--navy);border-radius:6px;padding:1px 6px;vertical-align:2px;letter-spacing:.02em}
 .team-col li.mine{color:var(--brick);font-weight:700}
-.team-col li.mine span{display:inline-block;margin-left:6px;font-size:12px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:1px 8px}
-.team-note{margin:18px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.team-col li.mine .brand-dot{background:var(--brick)}
+.team-col li.mine .here{display:inline-block;margin-left:6px;font-size:15px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:2px 10px}
+.team-note{margin:22px 0 0;font-size:clamp(15px,1.8vw,22px);color:var(--muted);text-align:center;white-space:nowrap}
 footer .foot-note{width:100%;margin:10px 0 0;font-size:12.5px;color:#93A3B8}
 
 /* 房屋估價頁 */
@@ -725,3 +732,11 @@ section.tq-wrap{padding-block:16px 72px}
 .map-feature.trash{background:linear-gradient(120deg,#2E7D5B 0%,var(--navy) 100%)}
 .v2-tool.trash .band{background:linear-gradient(120deg,#2E7D5B,var(--navy))}
 .v2-tool.trash .tag{background:#fff;color:#2E7D5B}
+
+/* 窄螢幕：原本強制一行的句子改回自動換行（放在檔案最後才會蓋過前面的設定） */
+@media (max-width:900px){
+  .team .sec-head p.team-lead,.team-note,.v2-tools-head p,.v2-why .sec-head p,.v2-lead{white-space:normal}
+  .v2-tools-head .btn{font-size:20px;padding:11px 22px}
+  .team-col>b{font-size:20px}
+  .team-col ul{font-size:16px}
+}
