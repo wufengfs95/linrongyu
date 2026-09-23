@@ -611,3 +611,63 @@ section.sm{padding-block:8px 48px}
 .team-col li.mine span{display:inline-block;margin-left:6px;font-size:12px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:1px 8px}
 .team-note{margin:18px 0 0;font-size:13px;color:var(--muted);text-align:center}
 footer .foot-note{width:100%;margin:10px 0 0;font-size:12.5px;color:#93A3B8}
+
+/* 房屋估價頁 */
+section.v-wrap{padding-block:16px 72px}
+.v-grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:24px;align-items:start}
+.v-form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:grid;gap:14px;box-shadow:0 8px 24px rgba(31,58,95,.06)}
+.v-form h2{font-size:20px;color:var(--navy);margin:0}
+.v-label{font-weight:700;font-size:15px;color:var(--navy)}
+.v-kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+.v-kinds button{font:inherit;font-size:14.5px;padding:9px 4px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.v-kinds button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.v-form input[type=number]{font:inherit;font-size:16px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.v-form input[type=number]:focus,.v-form select:focus{border-color:var(--brick-soft);outline:none;box-shadow:0 0 0 3px rgba(184,92,56,.18)}
+.v-submit{width:100%;font-size:17px;padding:14px}
+.v-status{margin:0;font-size:14px;color:var(--brick-deep);min-height:1.2em}
+.v-status:empty{display:none}
+.v-status.err{color:var(--brick)}
+.v-hint{margin:0;font-size:13px;color:var(--muted)}
+.v-hint a{color:var(--brick);font-weight:700}
+.v-result{border:1px solid var(--cream-line);border-radius:var(--radius);background:var(--cream);padding:24px;min-height:120px}
+.v-result[hidden]{display:none}
+.v-empty{display:grid;gap:8px;color:var(--muted)}
+.v-empty b{font-size:18px;color:var(--navy)}
+.v-empty p{margin:0;font-size:15px;line-height:1.9}
+.v-empty-note{font-size:13px}
+.v-price{display:grid;gap:4px;padding-bottom:14px;border-bottom:1px dashed var(--cream-line)}
+.v-price>span:first-child{font-size:14px;color:var(--brown);font-weight:700}
+.v-price b{font-size:clamp(26px,3.6vw,38px);color:var(--navy);line-height:1.2;font-variant-numeric:tabular-nums}
+.v-unit{font-size:15px;color:var(--ink)}
+.v-meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);margin:12px 0}
+.v-meta b{color:var(--navy)}
+.v-conf-hi{color:#2E7D5B}.v-conf-mid{color:var(--brown)}.v-conf-low{color:var(--brick)}
+.v-judge{display:grid;gap:4px;border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px;background:#fff;border-left:5px solid var(--navy)}
+.v-judge b{font-size:17px}
+.v-judge.v-bad{border-left-color:var(--brick);color:var(--brick-deep)}
+.v-judge.v-good{border-left-color:#2E7D5B;color:#256B4C}
+.v-judge.v-ok{border-left-color:var(--navy);color:var(--navy)}
+.v-warn{font-size:13.5px;color:var(--brick-deep);background:#fff;border-radius:10px;padding:10px 12px;margin:10px 0}
+.v-samples{background:#fff;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px}
+.v-samples summary{font-weight:700;color:var(--navy);cursor:pointer}
+.v-note{font-size:13px;color:var(--muted);margin:8px 0}
+.v-table-wrap{overflow-x:auto}
+.v-table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.v-table th,.v-table td{padding:7px 8px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+.v-table th:first-child,.v-table td:first-child,.v-table th:nth-child(2),.v-table td:nth-child(2){text-align:left}
+.v-table thead th{color:var(--brown);font-weight:700;border-bottom:1.5px solid var(--cream-line)}
+.v-cta{width:100%;margin-top:14px}
+.v-disclaimer{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.v-h2{font-family:var(--serif);font-size:26px;color:var(--navy);margin:48px 0 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.v-h2 small{font-size:14px;font-weight:400;color:var(--muted)}
+.v-quick{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px 16px 4px}
+.v-quick .v-table td:first-child{font-weight:700;color:var(--navy)}
+.v-faq{display:grid;gap:8px}
+.v-faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.v-faq summary{font-weight:700;color:var(--navy);cursor:pointer}
+.v-faq p{margin:10px 0 0;font-size:15px;color:var(--ink)}
+.map-feature.value{background:linear-gradient(120deg,var(--navy) 0%,var(--brick) 100%)}
+@media (max-width:900px){
+  .v-grid{grid-template-columns:1fr}
+  .v-kinds{grid-template-columns:repeat(2,1fr)}
+}
