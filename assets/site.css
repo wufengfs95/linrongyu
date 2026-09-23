@@ -131,6 +131,7 @@ section{padding-block:88px}
 .price small{font-family:var(--sans);font-size:14px;font-weight:700;margin-left:3px}
 .card-l .meta{font-size:14px;color:var(--muted)}
 .more-link{display:flex;justify-content:center;margin-top:32px}
+.more-link .btn{font-size:19px;font-weight:800;padding:15px 34px;letter-spacing:.04em}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:36px 24px;text-align:center;color:var(--muted);background:var(--sky-soft)}
 .empty p{margin:0 0 16px}
 
@@ -474,7 +475,7 @@ section.sm{padding-block:8px 48px}
 .v2-eyebrow{display:inline-block;font-size:clamp(20px,2.4vw,30px);font-weight:900;letter-spacing:.06em;color:var(--brick-deep);background:#fff;border:2.5px solid var(--brick);border-radius:999px;padding:8px 24px;box-shadow:0 4px 14px rgba(150,70,42,.12)}
 .v2-hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.3vw,50px);line-height:1.25;letter-spacing:.04em;margin:18px 0 16px;color:var(--navy)}
 .v2-hero h1 em{font-style:normal;color:var(--brick)}
-.v2-lead{font-size:20px;line-height:1.85;color:var(--ink);max-width:30em;margin:0 0 22px}
+.v2-lead{font-size:clamp(15px,1.8vw,20px);line-height:1.9;color:var(--ink);max-width:none;white-space:nowrap;margin:0 0 22px}
 .v2-checks{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .v2-checks li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;font-weight:700;color:var(--navy);box-shadow:0 2px 8px rgba(31,58,95,.06)}
 .v2-checks li::before{content:"✔ ";color:var(--brick)}
@@ -577,6 +578,7 @@ section.sm{padding-block:8px 48px}
   .ti-ic{font-size:16px}
 }
 @media (max-width:900px){
+  .v2-lead{white-space:normal;font-size:17px}
   .v2-why .sec-head p{white-space:normal}
   .v2-hero{padding-block:36px 96px}
   .v2-hero .wrap{grid-template-columns:1fr;text-align:center}
@@ -671,3 +673,40 @@ section.v-wrap{padding-block:16px 72px}
   .v-grid{grid-template-columns:1fr}
   .v-kinds{grid-template-columns:repeat(2,1fr)}
 }
+
+/* 垃圾車時間查詢 */
+section.tq-wrap{padding-block:16px 72px}
+.tq-search{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.tq-search input{flex:1;min-width:240px;font:inherit;font-size:17px;padding:13px 18px;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.tq-search input:focus{outline:none;border-color:var(--brick-soft);box-shadow:0 0 0 3px rgba(184,92,56,.18)}
+.tq-search .btn{padding:13px 26px;font-size:16px}
+.tq-pick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
+.tq-pick select{font:inherit;font-size:15px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:auto;max-width:100%}
+.tq-status{margin:14px 0 0;font-size:15px;color:var(--navy);min-height:1.2em}
+.tq-status:empty{display:none}
+.tq-status.err{color:var(--brick)}
+.tq-result{margin-top:14px}
+.tq-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.tq-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:6px;align-content:start}
+.tq-card.hit{border-color:var(--brick-soft);box-shadow:0 6px 18px rgba(184,92,56,.12)}
+.tq-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tq-card-top b{font-size:17px;color:var(--navy)}
+.tq-day{flex:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tq-day.on{background:var(--brick);color:#fff}
+.tq-day.off{background:var(--sky-soft);color:var(--muted)}
+.tq-times{display:flex;align-items:baseline;gap:12px}
+.tq-times b{font-size:30px;color:var(--brick);line-height:1.1;font-variant-numeric:tabular-nums}
+.tq-rc{font-size:14px;color:var(--muted)}
+.tq-sub{font-size:13.5px;color:var(--muted);line-height:1.7}
+.tq-more{justify-self:start;font:inherit;font-size:14px;color:var(--navy);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.tq-route{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tq-route-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.tq-route-head b{font-size:19px;color:var(--navy)}
+.tq-route-sub{margin:6px 0 12px;font-size:14px;color:var(--muted)}
+.tq-table td:nth-child(2),.tq-table th:nth-child(2),.tq-table td:nth-child(3),.tq-table th:nth-child(3){text-align:left}
+.tq-table td:first-child{color:var(--muted)}
+.tq-live{margin-top:32px;background:var(--cream);border:1px solid var(--cream-line);border-radius:var(--radius);padding:20px 24px;display:grid;gap:6px;justify-items:start}
+.tq-live b{font-size:17px;color:var(--navy)}
+.tq-live p{margin:0;font-size:15px;color:var(--muted)}
+.tq-live .btn{margin-top:6px}
+.map-feature.trash{background:linear-gradient(120deg,#2E7D5B 0%,var(--navy) 100%)}
