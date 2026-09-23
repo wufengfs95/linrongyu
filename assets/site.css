@@ -637,6 +637,7 @@ section.sm{padding-block:8px 48px}
 .team-legend .brand-logo{width:30px;height:30px}
 .team-legend-note{width:100%;text-align:center;font-size:14px}
 .team-col li.mine{color:var(--ink);font-weight:800;font-size:1.12em}
+.me-ring{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;border:2px solid rgba(31,58,95,.35);background:transparent;flex:none}
 .me-photo{height:56px;width:auto;flex:none;cursor:pointer;transition:transform .25s ease;transform-origin:left bottom}
 .me-photo:hover,.me-photo:focus{transform:scale(4.5);position:relative;z-index:6}
 
