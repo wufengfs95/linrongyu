@@ -548,19 +548,19 @@ section.sm{padding-block:8px 48px}
 /* 關於我 */
 .v2-about{background:var(--cream);padding-block:80px}
 .v2-about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
-.v2-about-text .en{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--brown);text-transform:uppercase}
-.v2-about-text h2{font-family:var(--serif);font-size:clamp(28px,4vw,36px);color:var(--navy);letter-spacing:.04em;margin:4px 0 14px}
-.v2-about-text>p{margin:0 0 20px;font-size:16px}
+.v2-about-text .en{font-size:19px;font-weight:700;letter-spacing:.2em;color:var(--brown);text-transform:uppercase}
+.v2-about-text h2{font-family:var(--serif);font-size:clamp(32px,4.6vw,44px);color:var(--navy);letter-spacing:.04em;margin:4px 0 14px}
+.v2-about-text>p{margin:0 0 22px;font-size:23px;line-height:1.95}
 .v2-about-text b{color:var(--brick)}
 .v2-about-text b.me{color:var(--navy)}
 .v2-areas{display:grid;gap:10px}
-.v2-areas div{background:#fff;border-radius:12px;padding:12px 16px;border:1px solid var(--cream-line)}
-.v2-areas b{display:block;color:var(--navy)}
-.v2-areas span{font-size:14px;color:var(--muted)}
+.v2-areas div{background:#fff;border-radius:12px;padding:16px 20px;border:1px solid var(--cream-line)}
+.v2-areas b{display:block;color:var(--navy);font-size:23px;margin-bottom:2px}
+.v2-areas span{font-size:20px;color:var(--muted);line-height:1.8}
 .v2-services{display:grid;gap:14px}
-.v2-services article{background:#fff;border-radius:var(--radius);padding:20px 22px;border-left:5px solid var(--brick)}
-.v2-services h3{font-size:18px;color:var(--navy);margin-bottom:6px}
-.v2-services p{margin:0;font-size:15px;color:var(--muted)}
+.v2-services article{background:#fff;border-radius:var(--radius);padding:24px 26px;border-left:6px solid var(--brick)}
+.v2-services h3{font-size:27px;color:var(--navy);margin-bottom:8px}
+.v2-services p{margin:0;font-size:21px;color:var(--muted);line-height:1.9}
 
 /* 右側浮動聯絡鈕（電腦）、底部按鈕列（手機） */
 .side-fab{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;display:grid;gap:10px}
@@ -595,6 +595,11 @@ section.sm{padding-block:8px 48px}
   .nav-cta{display:none}
 }
 @media (max-width:600px){
+  .v2-about-text>p{font-size:18px}
+  .v2-areas b{font-size:19px}
+  .v2-areas span{font-size:16px}
+  .v2-services h3{font-size:21px}
+  .v2-services p{font-size:17px}
   .v2-tool .band b{font-size:26px}
   .v2-tool h3{font-size:21px}
   .v2-tool p{font-size:17px}
