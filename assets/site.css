@@ -493,11 +493,11 @@ section.sm{padding-block:8px 48px}
 .v2-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-64px;position:relative;z-index:2}
 .v2-stats a{background:var(--cream);border:1px solid var(--cream-line);border-radius:16px;padding:26px 18px;text-decoration:none;color:inherit;text-align:center;box-shadow:0 8px 22px rgba(31,58,95,.08);transition:transform .2s}
 .v2-stats a:hover{transform:translateY(-3px)}
-.v2-stats .ic{width:68px;height:68px;margin:0 auto 12px;display:grid;place-items:center;border-radius:20px;background:#fff;color:var(--navy);border:1px solid var(--cream-line);box-shadow:0 4px 12px rgba(31,58,95,.07)}
-.v2-stats .ic svg{width:36px;height:36px;stroke-width:1.8}
+.v2-stats .ic{width:104px;height:104px;margin:0 auto 14px;display:grid;place-items:center;border-radius:28px;background:#fff;color:var(--navy);border:1px solid var(--cream-line);box-shadow:0 4px 12px rgba(31,58,95,.07)}
+.v2-stats .ic svg{width:70px;height:70px;stroke-width:1.7}
 .v2-stats b{display:block;font-family:var(--serif);font-size:30px;line-height:1.2;color:var(--navy)}
 .v2-stats small{font-family:var(--sans);font-size:14px;margin-left:3px;color:var(--brick)}
-.v2-stats span{font-family:var(--round);font-size:20px;color:var(--navy);letter-spacing:.02em}
+.v2-stats span{font-family:var(--round);font-size:20px;color:var(--navy);letter-spacing:.02em;white-space:nowrap}
 
 /* 為什麼找我 */
 .v2-why{padding-block:80px 72px;background:var(--paper)}
@@ -592,7 +592,9 @@ section.sm{padding-block:8px 48px}
 @media (max-width:600px){
   .v2-eyebrow{font-size:18px;padding:6px 14px;border-width:2px}
   .v2-why-grid,.v2-toolgrid{grid-template-columns:1fr}
-  .v2-stats b{font-size:26px}
+  .v2-stats span{font-size:16px;white-space:normal}
+  .v2-stats .ic{width:82px;height:82px}
+  .v2-stats .ic svg{width:54px;height:54px}
   .v2-bar .btn{font-size:14px;padding:11px 6px}
 }
 
