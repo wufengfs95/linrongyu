@@ -631,9 +631,17 @@ section.sm{padding-block:8px 48px}
 .team-col{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
 .team-col>b{display:block;color:var(--navy);font-size:24px;letter-spacing:.04em;padding-bottom:8px;border-bottom:2px solid var(--cream-line);margin-bottom:8px}
 .team-col ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:19px;color:var(--muted)}
-.brand-dot{display:inline-block;margin-right:6px;font-size:13px;font-weight:700;color:#fff;background:var(--navy);border-radius:6px;padding:1px 6px;vertical-align:2px;letter-spacing:.02em}
+.bd{display:inline-block;min-width:3.6em;margin-right:7px;font-size:13px;font-weight:700;color:#fff;
+  border-radius:6px;padding:2px 7px;vertical-align:2px;letter-spacing:.02em;text-align:center}
+.bd-u{background:#2E7D4F}   /* 有巢氏房屋 */
+.bd-y{background:#C8862B}   /* 永慶不動產 */
+.bd-i{background:#7E9B2F}   /* 永義房屋 */
+.bd-t{background:#2B6CB0}   /* 台慶不動產 */
+.team-legend{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin-top:22px;font-size:16px;color:var(--muted)}
+.team-legend .bd{margin-right:2px}
+.team-legend-note{width:100%;text-align:center;font-size:14px}
 .team-col li.mine{color:var(--brick);font-weight:700}
-.team-col li.mine .brand-dot{background:var(--brick)}
+.team-col li.mine .bd{box-shadow:0 0 0 2px var(--brick)}
 .team-col li.mine .here{display:inline-block;margin-left:6px;font-size:15px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:2px 10px}
 .team-note{margin:22px 0 0;font-size:clamp(15px,1.8vw,22px);color:var(--muted);text-align:center;white-space:nowrap}
 footer .foot-note{width:100%;margin:10px 0 0;font-size:12.5px;color:#93A3B8}
