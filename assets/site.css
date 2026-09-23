@@ -474,7 +474,7 @@ section.sm{padding-block:8px 48px}
 .v2-eyebrow{display:inline-block;font-size:clamp(20px,2.4vw,30px);font-weight:900;letter-spacing:.06em;color:var(--brick-deep);background:#fff;border:2.5px solid var(--brick);border-radius:999px;padding:8px 24px;box-shadow:0 4px 14px rgba(150,70,42,.12)}
 .v2-hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.3vw,50px);line-height:1.25;letter-spacing:.04em;margin:18px 0 16px;color:var(--navy)}
 .v2-hero h1 em{font-style:normal;color:var(--brick)}
-.v2-lead{font-size:17px;color:var(--ink);max-width:32em;margin:0 0 20px}
+.v2-lead{font-size:20px;line-height:1.85;color:var(--ink);max-width:30em;margin:0 0 22px}
 .v2-checks{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .v2-checks li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;font-weight:700;color:var(--navy);box-shadow:0 2px 8px rgba(31,58,95,.06)}
 .v2-checks li::before{content:"✔ ";color:var(--brick)}
