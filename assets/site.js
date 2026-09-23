@@ -4,7 +4,7 @@
   // 先把訊息複製起來，再開 LINE（個人 LINE 無法預填訊息，只能請客人貼上）
   function copyThenOpenLine(msg,toast){
     var done=function(ok){
-      if(toast) toast.textContent=ok?'已複製訊息，LINE 開啟後加好友、貼上送出就好。':'請手動複製：'+msg.replace(/\n/g,' ');
+      if(toast) toast.textContent=ok?'':'請手動複製：'+msg.replace(/\n/g,' ');
       window.open(LINE_URL,'_blank','noopener');
     };
     try{navigator.clipboard.writeText(msg).then(function(){done(true)},function(){done(false)})}

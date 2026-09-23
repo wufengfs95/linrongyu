@@ -119,7 +119,7 @@ section{padding-block:88px}
 .card-l[hidden]{display:none}
 .card-l .ph{position:relative;aspect-ratio:4/3;background:var(--sky-soft);overflow:hidden}
 .card-l .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:14px;top:14px;background:var(--brick);color:#fff;font-size:30px;font-weight:800;padding:6px 20px;border-radius:999px;letter-spacing:.04em}
+.badge{position:absolute;left:14px;top:14px;background:var(--gold);color:var(--ink);font-size:30px;font-weight:800;padding:6px 20px;border-radius:999px;letter-spacing:.04em}
 .badge.sold{background:var(--navy)}
 .badge.sample{left:auto;right:12px;background:var(--gold);color:var(--ink)}
 .card-l .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -129,7 +129,7 @@ section{padding-block:88px}
 .card-l h3{font-size:22px;line-height:1.5;color:var(--navy)}
 .price{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.2;color:var(--brick);font-variant-numeric:tabular-nums}
 .price small{font-family:var(--sans);font-size:18px;font-weight:700;margin-left:3px}
-.card-l .meta{font-size:15px;color:var(--muted);line-height:1.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-l .meta{font-size:16px;color:var(--muted);line-height:1.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .more-link{display:flex;justify-content:center;margin-top:32px}
 .more-link .btn{font-size:clamp(28px,4vw,38px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:36px 24px;text-align:center;color:var(--muted);background:var(--sky-soft)}
@@ -278,7 +278,7 @@ section.lp{padding-block:12px 72px}
 .booking .sec-head .en{color:var(--gold)}
 .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
 .book-info{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:var(--radius);padding:36px}
-.book-info h3{font-family:var(--serif);font-size:36px;letter-spacing:.06em}
+.book-info h3{font-family:var(--serif);font-size:36px;letter-spacing:.06em;text-align:center}
 .book-info p{color:#D3DCE9;margin:12px 0 26px;font-size:20px;line-height:1.9}
 .contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.25);text-decoration:none}
 .contact-row .k{font-size:17px;color:#BCC8D8;width:58px;flex:none}
@@ -515,7 +515,7 @@ section.sm{padding-block:8px 48px}
 .v2-why-grid .ic svg{width:42px;height:42px}
 .v2-why-grid article:hover .ic{background:var(--brick);border-color:var(--brick);color:#fff;transform:translateY(-3px) scale(1.06) rotate(-5deg)}
 .v2-why-grid h3{grid-area:title;font-size:23px;color:var(--navy);margin:0;line-height:1.4;white-space:nowrap}
-.v2-why-grid p{grid-area:text;margin:0;font-size:19px;line-height:1.8;color:var(--muted)}
+.v2-why-grid p{grid-area:text;margin:0;font-size:19px;line-height:1.8;color:var(--muted);text-wrap:balance;line-break:strict}
 
 /* 精選物件（深色區塊） */
 .v2-featured{background:linear-gradient(160deg,#1F3A5F 0%,#16293F 100%);color:#fff}
@@ -523,7 +523,7 @@ section.sm{padding-block:8px 48px}
 .v2-featured .sec-head p{color:#D3DCE9}
 .v2-featured .sec-head .en{color:var(--gold)}
 .v2-featured .card-l{border-color:transparent}
-.v2-featured .more-link .btn{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.v2-featured .more-link .btn{background:var(--brick);color:#fff;border-color:var(--brick)}
 
 /* 免費工具（分類篩選） */
 .v2-tools{padding-block:80px}
@@ -541,7 +541,7 @@ section.sm{padding-block:8px 48px}
 .v2-tool:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.1)}
 .v2-tool .band{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--sky-soft)}
 .v2-tool .band b{font-family:var(--serif);font-size:32px;color:var(--navy)}
-.v2-tool .tag{font-size:18px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:4px 14px}
+.v2-tool .tag{font-size:26px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:6px 20px}
 .v2-tool.map .band{background:linear-gradient(120deg,var(--brick),var(--navy))}
 .v2-tool.map .band b{color:#fff}
 .v2-tool.map .tag{background:var(--gold);color:var(--ink)}
@@ -557,13 +557,17 @@ section.sm{padding-block:8px 48px}
 .v2-about-text h2{font-family:var(--serif);font-size:clamp(32px,4.6vw,44px);color:var(--navy);letter-spacing:.04em;margin:4px 0 14px}
 .v2-about-text>p{margin:0 0 22px;font-size:23px;line-height:1.95}
 .v2-about-text b{color:var(--brick)}
-.v2-about-text b.me{color:var(--navy)}
+.v2-about-text b.me{color:var(--navy);font-size:1.7em;line-height:1}
 .v2-areas{display:grid;gap:10px}
 .v2-areas div{background:#fff;border-radius:12px;padding:16px 20px;border:1px solid var(--cream-line)}
-.v2-areas b{display:block;color:var(--navy);font-size:23px;margin-bottom:2px}
+.v2-areas b{display:block;color:var(--navy);font-size:27px;margin-bottom:4px}
 .v2-areas span{font-size:20px;color:var(--muted);line-height:1.8}
 .v2-services{display:grid;gap:14px}
-.v2-services article{background:#fff;border-radius:var(--radius);padding:24px 26px;border-left:6px solid var(--brick)}
+.v2-services article{background:#fff;border-radius:var(--radius);padding:24px 26px;border-left:6px solid var(--brick);display:grid;grid-template-columns:auto 1fr;grid-template-areas:"ic title" "text text";align-items:center;gap:10px 16px}
+.v2-services .ic{grid-area:ic;width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:var(--cream);color:var(--navy);border:1px solid var(--cream-line)}
+.v2-services .ic svg{width:34px;height:34px}
+.v2-services h3{grid-area:title}
+.v2-services p{grid-area:text}
 .v2-services h3{font-size:27px;color:var(--navy);margin-bottom:8px}
 .v2-services p{margin:0;font-size:21px;color:var(--muted);line-height:1.9}
 
@@ -641,7 +645,9 @@ section.sm{padding-block:8px 48px}
 .me-photo:hover,.me-photo:focus{transform:scale(7);position:relative;z-index:6}
 
 .team-col li.mine .here{display:inline-block;margin-left:6px;font-size:15px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:2px 10px}
+.team-badge{height:1.05em;width:auto;vertical-align:-2px;margin-left:6px}
 .team-note{margin:22px 0 0;font-size:clamp(15px,1.8vw,22px);color:var(--muted);text-align:center;white-space:nowrap}
+.foot-logo{width:26px;height:26px;object-fit:contain;vertical-align:-7px;margin-right:8px}
 footer .foot-note{width:100%;margin:10px 0 0;font-size:12.5px;color:#93A3B8}
 
 /* 房屋估價頁 */
