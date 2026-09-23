@@ -119,7 +119,7 @@ section{padding-block:88px}
 .card-l[hidden]{display:none}
 .card-l .ph{position:relative;aspect-ratio:4/3;background:var(--sky-soft);overflow:hidden}
 .card-l .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:12px;top:12px;background:var(--brick);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
+.badge{position:absolute;left:14px;top:14px;background:var(--brick);color:#fff;font-size:30px;font-weight:800;padding:6px 20px;border-radius:999px;letter-spacing:.04em}
 .badge.sold{background:var(--navy)}
 .badge.sample{left:auto;right:12px;background:var(--gold);color:var(--ink)}
 .card-l .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -129,7 +129,7 @@ section{padding-block:88px}
 .card-l h3{font-size:22px;line-height:1.5;color:var(--navy)}
 .price{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.2;color:var(--brick);font-variant-numeric:tabular-nums}
 .price small{font-family:var(--sans);font-size:18px;font-weight:700;margin-left:3px}
-.card-l .meta{font-size:16.5px;color:var(--muted);line-height:1.7}
+.card-l .meta{font-size:15px;color:var(--muted);line-height:1.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .more-link{display:flex;justify-content:center;margin-top:32px}
 .more-link .btn{font-size:clamp(28px,4vw,38px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:36px 24px;text-align:center;color:var(--muted);background:var(--sky-soft)}
@@ -750,6 +750,8 @@ section.tq-wrap{padding-block:16px 72px}
   .hint{font-size:17px}
   .card-l h3{font-size:19px}
   .price{font-size:28px}
+  .badge{font-size:20px;padding:4px 14px}
+  .card-l .meta{font-size:14px}
   .v2-tools-head .btn{font-size:20px;padding:11px 22px}
   .team-col>b{font-size:20px}
   .team-col ul{font-size:16px}
