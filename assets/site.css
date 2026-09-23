@@ -477,10 +477,10 @@ section.sm{padding-block:8px 48px}
 .v2-hero h1 em{font-style:normal;color:var(--brick)}
 .v2-lead{font-size:clamp(15px,1.8vw,20px);line-height:1.9;color:var(--ink);max-width:none;white-space:nowrap;margin:0 0 22px}
 .v2-checks{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.v2-checks li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;font-weight:700;color:var(--navy);box-shadow:0 2px 8px rgba(31,58,95,.06)}
+.v2-checks li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-size:21px;font-weight:700;color:var(--navy);box-shadow:0 2px 8px rgba(31,58,95,.06)}
 .v2-checks li::before{content:"✔ ";color:var(--brick)}
 .v2-cta{display:flex;flex-wrap:wrap;gap:12px}
-.v2-cta .btn{padding:14px 26px;font-size:16px}
+.v2-cta .btn{padding:17px 34px;font-size:27px;border-radius:999px}
 .v2-toast{color:var(--brick-deep)}
 .v2-hero-photo{position:relative;justify-self:center;width:min(100%,400px)}
 /* 形象照後面的奶茶色房子形狀 */
@@ -491,14 +491,14 @@ section.sm{padding-block:8px 48px}
 .v2-float b{font-family:var(--round);font-size:30px;font-weight:400;letter-spacing:.06em;color:var(--brick);line-height:1.2}
 
 /* 數字卡片（疊在形象區下緣） */
-.v2-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-64px;position:relative;z-index:2}
+.v2-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:-64px;position:relative;z-index:2}
 .v2-stats a{background:var(--cream);border:1px solid var(--cream-line);border-radius:16px;padding:26px 18px;text-decoration:none;color:inherit;text-align:center;box-shadow:0 8px 22px rgba(31,58,95,.08);transition:transform .2s}
 .v2-stats a:hover{transform:translateY(-3px)}
-.v2-stats .ic{width:104px;height:104px;margin:0 auto 14px;display:grid;place-items:center;border-radius:28px;background:#fff;color:var(--navy);border:1px solid var(--cream-line);box-shadow:0 4px 12px rgba(31,58,95,.07)}
-.v2-stats .ic svg{width:70px;height:70px;stroke-width:1.7}
+.v2-stats .ic{width:112px;height:112px;margin:0 auto 14px;display:grid;place-items:center;border-radius:28px;background:#fff;color:var(--navy);border:1px solid var(--cream-line);box-shadow:0 4px 12px rgba(31,58,95,.07)}
+.v2-stats .ic svg{width:78px;height:78px;stroke-width:1.7}
 .v2-stats b{display:block;font-family:var(--serif);font-size:30px;line-height:1.2;color:var(--navy)}
 .v2-stats small{font-family:var(--sans);font-size:14px;margin-left:3px;color:var(--brick)}
-.v2-stats span{font-family:var(--round);font-size:20px;color:var(--navy);letter-spacing:.02em;white-space:nowrap}
+.v2-stats span{font-family:var(--round);font-size:24px;color:var(--navy);letter-spacing:.02em;white-space:nowrap}
 
 /* 為什麼找我 */
 .v2-why{padding-block:80px 72px;background:var(--paper)}
@@ -535,15 +535,15 @@ section.sm{padding-block:8px 48px}
 .v2-tool[hidden]{display:none}
 .v2-tool:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.1)}
 .v2-tool .band{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--sky-soft)}
-.v2-tool .band b{font-family:var(--serif);font-size:20px;color:var(--navy)}
-.v2-tool .tag{font-size:12px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:2px 10px}
+.v2-tool .band b{font-family:var(--serif);font-size:32px;color:var(--navy)}
+.v2-tool .tag{font-size:18px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:4px 14px}
 .v2-tool.map .band{background:linear-gradient(120deg,var(--brick),var(--navy))}
 .v2-tool.map .band b{color:#fff}
 .v2-tool.map .tag{background:var(--gold);color:var(--ink)}
 .v2-tool .body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.v2-tool h3{font-size:17px;line-height:1.45;color:var(--ink)}
-.v2-tool p{margin:0;font-size:14px;color:var(--muted);flex:1}
-.v2-tool .go{font-size:14px;font-weight:700;color:var(--brick)}
+.v2-tool h3{font-size:25px;line-height:1.45;color:var(--ink)}
+.v2-tool p{margin:0;font-size:19px;color:var(--muted);flex:1;line-height:1.8}
+.v2-tool .go{font-size:19px;font-weight:700;color:var(--brick)}
 
 /* 關於我 */
 .v2-about{background:var(--cream);padding-block:80px}
@@ -595,13 +595,18 @@ section.sm{padding-block:8px 48px}
   .nav-cta{display:none}
 }
 @media (max-width:600px){
+  .v2-tool .band b{font-size:26px}
+  .v2-tool h3{font-size:21px}
+  .v2-tool p{font-size:17px}
+  .v2-checks li{font-size:16px;padding:7px 14px}
+  .v2-cta .btn{font-size:20px;padding:14px 24px}
   .v2-tools-head p{white-space:normal}
   .v2-tabs button{font-size:19px;padding:7px 18px}
   .v2-eyebrow{font-size:18px;padding:6px 14px;border-width:2px}
   .v2-why-grid,.v2-toolgrid{grid-template-columns:1fr}
-  .v2-stats span{font-size:16px;white-space:normal}
-  .v2-stats .ic{width:82px;height:82px}
-  .v2-stats .ic svg{width:54px;height:54px}
+  .v2-stats span{font-size:18px;white-space:normal}
+  .v2-stats .ic{width:94px;height:94px}
+  .v2-stats .ic svg{width:62px;height:62px}
   .v2-bar .btn{font-size:14px;padding:11px 6px}
 }
 
