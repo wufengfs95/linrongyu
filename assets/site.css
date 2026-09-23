@@ -526,7 +526,7 @@ section.sm{padding-block:8px 48px}
 .v2-tools-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .v2-tools-head .en{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--brown);text-transform:uppercase}
 .v2-tools-head h2{font-family:var(--serif);font-size:clamp(28px,4vw,36px);color:var(--navy);letter-spacing:.04em;margin:4px 0}
-.v2-tools-head p{margin:0;color:var(--muted);white-space:nowrap;font-size:clamp(14px,1.45vw,17px)}
+.v2-tools-head p{margin:0;color:var(--ink);white-space:nowrap;font-size:clamp(15px,1.8vw,20px);line-height:1.9}
 .v2-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .v2-tabs button{font:inherit;font-weight:700;font-size:26px;padding:8px 26px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
 .v2-tabs button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
