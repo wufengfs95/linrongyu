@@ -131,7 +131,7 @@ section{padding-block:88px}
 .price small{font-family:var(--sans);font-size:14px;font-weight:700;margin-left:3px}
 .card-l .meta{font-size:14px;color:var(--muted)}
 .more-link{display:flex;justify-content:center;margin-top:32px}
-.more-link .btn{font-size:clamp(26px,3.2vw,40px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
+.more-link .btn{font-size:clamp(28px,4vw,38px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:36px 24px;text-align:center;color:var(--muted);background:var(--sky-soft)}
 .empty p{margin:0 0 16px}
 
