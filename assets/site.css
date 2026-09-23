@@ -278,35 +278,39 @@ section.lp{padding-block:12px 72px}
 .booking .sec-head .en{color:var(--gold)}
 .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
 .book-info{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:var(--radius);padding:36px}
-.book-info h3{font-family:var(--serif);font-size:28px;letter-spacing:.06em}
-.book-info p{color:#D3DCE9;margin:10px 0 24px}
+.book-info h3{font-family:var(--serif);font-size:36px;letter-spacing:.06em}
+.book-info p{color:#D3DCE9;margin:12px 0 26px;font-size:20px;line-height:1.9}
 .contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.25);text-decoration:none}
-.contact-row .k{font-size:13px;color:#BCC8D8;width:46px;flex:none}
-.contact-row .v{font-size:22px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-.book-info .btn{margin-top:18px;width:100%;background:#fff;color:var(--navy)}
+.contact-row .k{font-size:17px;color:#BCC8D8;width:58px;flex:none}
+.contact-row .v{font-size:30px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.book-info .btn{margin-top:18px;width:100%;background:#fff;color:var(--navy);font-size:22px;padding:15px 20px}
 .book-info .btn.line{background:var(--line-green);color:#fff}
 form.book{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:32px;display:grid;gap:18px}
 .booking .field label,.booking .field legend,.booking .chips label{color:#fff}
 .booking .chips span{border-color:rgba(255,255,255,.4)}
 .booking .hint{color:rgba(255,255,255,.78)}
 .booking .toast{color:var(--gold)}
+.booking .sec-head p{font-size:20px}
+.booking form.book input,.booking form.book select,.booking form.book textarea{font-size:19px;padding:13px 16px}
+.booking form.book>.btn{font-size:24px;padding:17px 20px}
+.booking .chips label{font-size:18px}
 .field{display:grid;gap:6px}
-.field label,.field legend{font-weight:700;font-size:15px;color:var(--navy);padding:0}
+.field label,.field legend{font-weight:700;font-size:20px;color:var(--navy);padding:0}
 fieldset.field{border:0;margin:0;padding:0}
 input[type=text],select,textarea{font:inherit;font-size:16px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
 input[type=text]:focus,select:focus,textarea:focus{border-color:var(--brick-soft);outline:none;box-shadow:0 0 0 3px rgba(184,92,56,.18)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{font-weight:500;font-size:14px;color:var(--ink);cursor:pointer}
 .chips input{position:absolute;opacity:0;pointer-events:none}
-.chips span{display:inline-block;padding:7px 16px;border:1.5px solid var(--line);border-radius:999px;transition:all .15s}
+.chips span{display:inline-block;padding:9px 20px;font-size:18px;border:1.5px solid var(--line);border-radius:999px;transition:all .15s}
 .chips input:checked+span{background:var(--brick);border-color:var(--brick);color:#fff}
 .chips input:focus-visible+span{outline:3px solid var(--brick-soft);outline-offset:2px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.hint{font-size:13px;color:var(--muted);margin:0}
+.hint{font-size:16px;color:var(--muted);margin:0}
 .toast{font-size:14px;color:var(--brick-deep);font-weight:700;margin:0;min-height:1.5em}
 
 /* 頁尾 */
-footer{background:var(--navy-deep);color:#BCC8D8;font-size:14px;padding-block:36px}
+footer{background:var(--navy-deep);color:#BCC8D8;font-size:17px;line-height:1.9;padding-block:36px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer b{color:#fff}
 
