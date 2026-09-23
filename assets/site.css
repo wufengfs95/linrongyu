@@ -131,7 +131,7 @@ section{padding-block:88px}
 .price small{font-family:var(--sans);font-size:14px;font-weight:700;margin-left:3px}
 .card-l .meta{font-size:14px;color:var(--muted)}
 .more-link{display:flex;justify-content:center;margin-top:32px}
-.more-link .btn{font-size:19px;font-weight:800;padding:15px 34px;letter-spacing:.04em}
+.more-link .btn{font-size:clamp(26px,3.2vw,40px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:36px 24px;text-align:center;color:var(--muted);background:var(--sky-soft)}
 .empty p{margin:0 0 16px}
 
@@ -502,6 +502,7 @@ section.sm{padding-block:8px 48px}
 
 /* 為什麼找我 */
 .v2-why{padding-block:80px 72px;background:var(--paper)}
+.v2-why .sec-head h2 em{font-style:normal;font-size:1.4em;color:var(--brick);letter-spacing:.02em}
 .v2-why .sec-head p{max-width:none;white-space:nowrap;font-size:clamp(17px,2.1vw,24px);color:var(--ink)}
 .v2-why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .v2-why-grid article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 22px 26px;box-shadow:0 6px 18px rgba(31,58,95,.06);transition:box-shadow .25s,transform .25s;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"ic title" "text text";align-items:center;gap:12px 16px}
@@ -525,9 +526,9 @@ section.sm{padding-block:8px 48px}
 .v2-tools-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .v2-tools-head .en{font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--brown);text-transform:uppercase}
 .v2-tools-head h2{font-family:var(--serif);font-size:clamp(28px,4vw,36px);color:var(--navy);letter-spacing:.04em;margin:4px 0}
-.v2-tools-head p{margin:0;color:var(--muted)}
+.v2-tools-head p{margin:0;color:var(--muted);white-space:nowrap;font-size:clamp(14px,1.45vw,17px)}
 .v2-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.v2-tabs button{font:inherit;font-weight:700;font-size:14px;padding:7px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.v2-tabs button{font:inherit;font-weight:700;font-size:26px;padding:8px 26px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
 .v2-tabs button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
 .v2-toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .v2-tool{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
@@ -594,6 +595,8 @@ section.sm{padding-block:8px 48px}
   .nav-cta{display:none}
 }
 @media (max-width:600px){
+  .v2-tools-head p{white-space:normal}
+  .v2-tabs button{font-size:19px;padding:7px 18px}
   .v2-eyebrow{font-size:18px;padding:6px 14px;border-width:2px}
   .v2-why-grid,.v2-toolgrid{grid-template-columns:1fr}
   .v2-stats span{font-size:16px;white-space:normal}
