@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F3A5F">
+<title>土地導航</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+@font-face{font-family:"Huninn";src:url("../assets/fonts/huninn-subset.woff2") format("woff2");font-display:swap}
+:root{--navy:#1F3A5F;--milk:#F5F0EB;--brick:#B85C38;--ink:#2D2D2D;--bg:#FAFAF8;--line:#E4DDD5;--muted:#6B6B6B;--ok:#2F7A4F;--card:#fff}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 "Huninn",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%}
+header{background:var(--navy);color:#fff;padding:14px 16px 16px}
+header h1{margin:0;font-size:20px;letter-spacing:.05em}
+header p{margin:2px 0 0;font-size:13px;opacity:.8}
+main{max-width:640px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.row{display:flex;gap:8px;align-items:center}
+input,select,button{font:inherit;color:inherit}
+input[type=text],input[type=search],select{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;min-height:48px}
+input:focus,select:focus{outline:none;border-color:var(--navy)}
+#q{font-size:18px}
+button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;min-height:48px;font-weight:600}
+.btn-go{background:var(--navy);color:#fff;white-space:nowrap}
+.btn-nav{background:var(--brick);color:#fff;width:100%;font-size:19px;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:12px}
+.btn-sub{background:var(--milk);color:var(--navy);flex:1;border-radius:10px;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:14px;padding:10px 8px}
+.hint{font-size:13px;color:var(--muted);margin:8px 0 0}
+.county{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.county select{width:auto;min-height:36px;padding:4px 8px;font-size:14px}
+.county label{display:flex;align-items:center;gap:4px;margin-left:auto;cursor:pointer}
+details summary{cursor:pointer;color:var(--navy);font-weight:600;font-size:15px}
+.menu{display:grid;gap:8px;margin-top:10px}
+#msg{display:none;padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:15px}
+#msg.err{display:block;background:#FBEDE8;color:#8A3A1C}
+#msg.info{display:block;background:var(--milk);color:var(--navy)}
+.choices{display:grid;gap:6px;margin-top:8px}
+.choices button{background:var(--milk);color:var(--navy);text-align:left;font-weight:500}
+#result{display:none}
+#result h2{margin:0 0 2px;font-size:20px;color:var(--navy)}
+.coord{font-size:13px;color:var(--muted);margin:0 0 12px}
+.subs{display:flex;gap:8px;margin-top:8px}
+#map{height:320px;border-radius:12px;margin-top:12px;border:1px solid var(--line);z-index:0}
+.dist{font-size:14px;color:var(--ok);margin:8px 0 0;min-height:1em}
+#countdown{display:none;position:fixed;inset:auto 16px 16px 16px;max-width:608px;margin:0 auto;background:var(--navy);color:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:1000;align-items:center;gap:12px}
+#countdown.show{display:flex}
+#countdown span{flex:1}
+#countdown button{background:#fff;color:var(--navy);min-height:40px;padding:8px 14px}
+.hist h3,.set h3{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.hist ul{list-style:none;margin:0;padding:0}
+.hist li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.hist li:first-child{border-top:0}
+.hist .name{flex:1;cursor:pointer;color:var(--ink);background:none;padding:4px 0;min-height:0;text-align:left;font-weight:500}
+.hist a{color:var(--brick);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
+.hist .empty{color:var(--muted);font-size:14px}
+.set input{font-size:13px}
+.set .row{margin-top:8px}
+.set button{background:var(--milk);color:var(--navy);min-height:44px}
+.badge{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--milk);color:var(--navy);vertical-align:middle}
+footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#14181D;--card:#1D232A;--ink:#E8E4DF;--line:#313A44;--milk:#2A3440;--muted:#9AA3AD;--ok:#6CC08F}
+  input[type=text],input[type=search],select{background:#141A20}
+  .btn-sub,.choices button,.set button{color:#CFE0F5}
+  #result h2,.hist h3,.set h3,details summary{color:#CFE0F5}
+  #msg.info{color:#CFE0F5}
+  #msg.err{background:#3A2219;color:#F2C2AE}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>土地導航</h1>
+  <p>輸入地段地號，從你現在的位置直接導航過去</p>
+</header>
+<main>
+  <form class="card" id="f" autocomplete="off">
+    <div class="row">
+      <input type="search" id="q" placeholder="例：大享段955、中壢區大享段955-3" enterkeyhint="search" inputmode="text">
+      <button class="btn-go" type="submit">查詢</button>
+    </div>
+    <div class="county">
+      縣市 <select id="county"><option value="H">桃園市</option></select>
+      <label><input type="checkbox" id="auto"> 查到就自動開導航</label>
+    </div>
+    <p class="hint">段名可以只打前兩個字（大享955）；有「之」號打 955-3 或 955之3。</p>
+  </form>
+
+  <div class="card">
+    <details id="menuBox">
+      <summary>用選單找地段</summary>
+      <div class="menu">
+        <select id="town"><option value="">選鄉鎮市區</option></select>
+        <select id="sect" disabled><option value="">先選鄉鎮市區</option></select>
+        <div class="row">
+          <input type="text" id="no" placeholder="地號，例：955 或 955-3" inputmode="decimal">
+          <button class="btn-go" type="button" id="menuGo">查詢</button>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div id="msg"></div>
+
+  <div class="card" id="result">
+    <h2 id="rTitle"></h2>
+    <p class="coord" id="rCoord"></p>
+    <a class="btn-nav" id="navG" target="_blank" rel="noopener">▶ 開始導航（Google 地圖）</a>
+    <div class="subs">
+      <a class="btn-sub" id="navA" target="_blank" rel="noopener">Apple 地圖</a>
+      <button class="btn-sub" type="button" id="copy">複製座標</button>
+      <button class="btn-sub" type="button" id="share">分享</button>
+    </div>
+    <div id="map"></div>
+    <p class="dist" id="dist"></p>
+    <p class="hint">紅框是這筆土地的大約範圍（外框），紅線是地籍線。土地沒臨路時，導航會停在最近的路邊，最後一段要自己走。座標僅供現場找地參考，正式界址以地政事務所鑑界為準。</p>
+  </div>
+
+  <div class="card hist">
+    <h3>最近查過</h3>
+    <ul id="hist"><li class="empty">還沒有紀錄</li></ul>
+  </div>
+
+  <div class="card set">
+    <details id="setBox">
+      <summary>中繼站設定 <span class="badge" id="proxyState"></span></summary>
+      <p class="hint">國土測繪中心只接受從它自己網站發出的地號查詢，所以要透過你自己的 Google Apps Script 中繼站代查。貼上部署網址（https://script.google.com/macros/s/…/exec）後按儲存。</p>
+      <div class="row">
+        <input type="text" id="proxy" placeholder="https://script.google.com/macros/s/…/exec">
+        <button type="button" id="saveProxy">儲存</button>
+      </div>
+    </details>
+  </div>
+</main>
+
+<div id="countdown"><span id="cdText"></span><button type="button" id="cdCancel">取消</button></div>
+
+<footer>資料來源：內政部國土測繪中心 國土測繪圖資服務雲</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // 部署好 Apps Script 後，把網址填在這裡就不用每支手機各設一次
+  var DEFAULT_PROXY = '';
+  var API = 'https://api.nlsc.gov.tw/other/';
+  var SECT_TTL = 30 * 864e5;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem('landnav.' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem('landnav.' + k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  // ---------- 中繼站 ----------
+  var params = new URLSearchParams(location.search);
+  if (params.get('proxy')) store.set('proxy', params.get('proxy'));
+  function proxyUrl() {
+    var p = store.get('proxy', '') || DEFAULT_PROXY;
+    if (!p && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) p = 'http://localhost:8799/';
+    return p;
+  }
+  function showProxyState() {
+    var p = proxyUrl();
+    $('proxy').value = store.get('proxy', '');
+    $('proxyState').textContent = p ? '已設定' : '尚未設定';
+    if (!p) $('setBox').open = true;
+  }
+  $('saveProxy').onclick = function () {
+    var v = $('proxy').value.trim();
+    if (v && !/^https?:\/\//.test(v)) { say('err', '網址要用 https:// 開頭'); return; }
+    store.set('proxy', v);
+    showProxyState();
+    say('info', v ? '中繼站已儲存，可以開始查了。' : '已清除，改用預設中繼站。');
+  };
+
+  // ---------- 訊息 ----------
+  function say(type, html) { var m = $('msg'); m.className = type || ''; m.innerHTML = html || ''; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // ---------- 國土測繪中心清單（XML） ----------
+  function xmlItems(path, tag) {
+    return fetch(API + path).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    }).then(function (t) {
+      var doc = new DOMParser().parseFromString(t, 'application/xml');
+      return Array.prototype.map.call(doc.getElementsByTagName(tag), function (it) {
+        var o = {};
+        Array.prototype.forEach.call(it.children, function (c) { o[c.tagName] = (c.textContent || '').trim(); });
+        return o;
+      });
+    });
+  }
+
+  var towns = [], sects = [], loading = null;
+  function loadCounty(code) {
+    var cached = store.get('sect.' + code, null);
+    if (cached && Date.now() - cached.t < SECT_TTL) {
+      towns = cached.towns; sects = cached.sects; fillTowns();
+      return (loading = Promise.resolve());
+    }
+    say('info', '第一次使用，正在下載地段清單…');
+    loading = xmlItems('ListTown1/' + code, 'townItem').then(function (ts) {
+      towns = ts.map(function (t) { return { code: t.towncode01, name: t.townname }; });
+      return Promise.all(towns.map(function (t) {
+        return xmlItems('ListLandSection/' + code + '/' + t.code, 'sectItem').then(function (ss) {
+          return ss.map(function (s) { return { town: t.name, towncode: t.code, office: s.office, code: s.sectcode, name: s.sectstr }; });
+        });
+      }));
+    }).then(function (lists) {
+      sects = [].concat.apply([], lists);
+      store.set('sect.' + code, { t: Date.now(), towns: towns, sects: sects });
+      fillTowns(); say('', '');
+    }).catch(function (e) {
+      say('err', '地段清單下載失敗（' + esc(e.message) + '），請確認網路後重新整理。');
+      throw e;
+    });
+    return loading;
+  }
+
+  function fillTowns() {
+    $('town').innerHTML = '<option value="">選鄉鎮市區</option>' + towns.map(function (t) {
+      return '<option value="' + t.code + '">' + esc(t.name) + '</option>';
+    }).join('');
+    $('sect').innerHTML = '<option value="">先選鄉鎮市區</option>';
+    $('sect').disabled = true;
+  }
+  $('town').onchange = function () {
+    var code = this.value;
+    var list = sects.filter(function (s) { return s.towncode === code; });
+    $('sect').innerHTML = '<option value="">選地段（' + list.length + ' 個）</option>' + list.map(function (s) {
+      return '<option value="' + s.office + '_' + s.code + '">' + esc(s.name) + '</option>';
+    }).join('');
+    $('sect').disabled = !code;
+  };
+
+  xmlItems('ListCounty', 'countyItem').then(function (cs) {
+    var cur = store.get('county', 'H');
+    $('county').innerHTML = cs.map(function (c) {
+      return '<option value="' + c.countycode + '"' + (c.countycode === cur ? ' selected' : '') + '>' + esc(c.countyname) + '</option>';
+    }).join('');
+  }).catch(function () {});
+  $('county').onchange = function () { store.set('county', this.value); loadCounty(this.value); };
+
+  // ---------- 輸入解析 ----------
+  function normalize(s) {
+    return String(s).replace(/[０-９]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+      .replace(/[－—−─]/g, '-').replace(/\s+/g, '').replace(/台/g, '臺');
+  }
+  function landno8(no) {
+    no = normalize(no).replace(/之/g, '-');
+    if (/^\d{8}$/.test(no)) return no;
+    var m = no.match(/^(\d{1,4})(?:-(\d{1,4}))?$/);
+    if (!m) return null;
+    return ('0000' + m[1]).slice(-4) + ('0000' + (m[2] || '0')).slice(-4);
+  }
+  function prettyNo(no8) {
+    var a = parseInt(no8.slice(0, 4), 10), b = parseInt(no8.slice(4), 10);
+    return b ? a + '-' + b : String(a);
+  }
+  function parseQuery(text) {
+    var s = normalize(text).replace(/地號$/, '').replace(/號$/, '');
+    var m = s.match(/(\d+(?:[-之]\d+)?)$/);
+    if (!m) return null;
+    return { place: s.slice(0, m.index), no: m[1] };
+  }
+  function findSections(place) {
+    var town = null;
+    towns.forEach(function (t) { if (place.indexOf(t.name) > -1) town = t; });
+    var rest = town ? place.slice(place.indexOf(town.name) + town.name.length) : place;
+    rest = rest.replace(/^.{2}[市縣]/, '');
+    var pool = town ? sects.filter(function (s) { return s.towncode === town.code; }) : sects;
+    if (!rest) return [];
+    var exact = pool.filter(function (s) { return rest === s.name || rest + '段' === s.name || rest.slice(-s.name.length) === s.name; });
+    if (exact.length) return exact;
+    var starts = pool.filter(function (s) { return s.name.indexOf(rest) === 0; });
+    if (starts.length) return starts;
+    return pool.filter(function (s) { return s.name.indexOf(rest) > -1; });  // 只打小段名：坑底小段 → 三層段坑底小段
+  }
+
+  // ---------- 查詢 ----------
+  var map, parcelLayer, meMarker, current, timer;
+
+  function search(text) {
+    var p = parseQuery(text);
+    if (!p) { say('err', '找不到地號數字。請打「段名＋地號」，例：大享段955'); return; }
+    if (!p.place) { say('err', '請在地號前面打地段名稱，例：大享段' + esc(p.no)); return; }
+    var no8 = landno8(p.no);
+    if (!no8) { say('err', '地號格式不對：' + esc(p.no) + '（母號、子號最多各 4 位數）'); return; }
+    (loading || loadCounty($('county').value)).then(function () {
+      var hits = findSections(p.place);
+      if (!hits.length) { say('err', '找不到「' + esc(p.place) + '」這個地段。可以試著加上區名，或用下方「用選單找地段」。'); return; }
+      if (hits.length === 1) { locate(hits[0], no8); return; }
+      say('info', '有 ' + hits.length + ' 個地段符合，請選一個：<div class="choices">' + hits.slice(0, 20).map(function (h, i) {
+        return '<button type="button" data-i="' + i + '">' + esc(h.town + '　' + h.name) + '</button>';
+      }).join('') + '</div>');
+      Array.prototype.forEach.call(document.querySelectorAll('.choices button'), function (b) {
+        b.onclick = function () { locate(hits[+b.dataset.i], no8); };
+      });
+    });
+  }
+
+  function locate(sect, no8) {
+    var px = proxyUrl();
+    if (!px) {
+      say('err', '還沒設定中繼站，請先到頁面最下面的「中繼站設定」貼上網址。');
+      $('setBox').open = true; $('setBox').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    var label = sect.town + ' ' + sect.name + ' ' + prettyNo(no8) + ' 地號';
+    say('info', '查詢中：' + esc(label) + '…');
+    var url = px + (px.indexOf('?') > -1 ? '&' : '?') + 'office=' + sect.office + '&sect=' + sect.code + '&landno=' + no8;
+    fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.ok) { say('err', esc(label) + '：' + esc(d.msg || '查不到') + '<br>請確認地號是否正確（分割、合併後地號可能已經變了）。'); return; }
+      say('', '');
+      show({ label: label, q: sect.town + sect.name + prettyNo(no8), lat: +d.lat, lng: +d.lng, bbox: d.bbox });
+    }).catch(function (e) {
+      say('err', '連不上中繼站（' + esc(e.message) + '）。請確認網路，或檢查中繼站網址是否正確。');
+    });
+  }
+
+  function gUrl(c) { return 'https://www.google.com/maps/dir/?api=1&destination=' + c.lat + ',' + c.lng + '&travelmode=driving'; }
+  function aUrl(c) { return 'https://maps.apple.com/?daddr=' + c.lat + ',' + c.lng + '&dirflg=d'; }
+
+  function show(c) {
+    current = c;
+    $('result').style.display = 'block';
+    $('rTitle').textContent = c.label;
+    $('rCoord').textContent = '座標 ' + c.lat.toFixed(6) + ', ' + c.lng.toFixed(6);
+    $('navG').href = gUrl(c);
+    $('navA').href = aUrl(c);
+    $('dist').textContent = '';
+    drawMap(c);
+    addHistory(c);
+    history.replaceState(null, '', '?q=' + encodeURIComponent(c.q));
+    $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if ($('auto').checked) startCountdown(c);
+  }
+
+  function drawMap(c) {
+    if (!window.L) return;
+    if (!map) {
+      map = L.map('map', { zoomControl: true, attributionControl: true });
+      L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
+        maxZoom: 20, maxNativeZoom: 19, attribution: '© 內政部國土測繪中心'
+      }).addTo(map);
+      L.tileLayer('https://wmts.nlsc.gov.tw/wmts/LAND_OPENDATA/default/GoogleMapsCompatible/{z}/{y}/{x}', {
+        maxZoom: 20, maxNativeZoom: 19, minZoom: 16, opacity: .9
+      }).addTo(map);
+      var Me = L.Control.extend({
+        options: { position: 'topright' },
+        onAdd: function () {
+          var b = L.DomUtil.create('button', '');
+          b.type = 'button'; b.textContent = '我的位置';
+          b.style.cssText = 'background:#fff;color:#1F3A5F;border:2px solid rgba(0,0,0,.2);border-radius:8px;min-height:36px;padding:4px 10px;font-size:13px';
+          L.DomEvent.on(b, 'click', function (e) { L.DomEvent.stop(e); locateMe(); });
+          return b;
+        }
+      });
+      map.addControl(new Me());
+    }
+    if (parcelLayer) map.removeLayer(parcelLayer);
+    var b = c.bbox;
+    parcelLayer = L.featureGroup([
+      L.rectangle([[b[1], b[0]], [b[3], b[2]]], { color: '#B85C38', weight: 3, fillOpacity: .12 }),
+      L.marker([c.lat, c.lng])
+    ]).addTo(map);
+    setTimeout(function () {
+      map.invalidateSize();
+      map.fitBounds(parcelLayer.getBounds(), { padding: [40, 40], maxZoom: 18 });
+    }, 50);
+  }
+
+  function locateMe() {
+    if (!navigator.geolocation) { $('dist').textContent = '這支手機不支援定位'; return; }
+    $('dist').textContent = '定位中…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var me = [pos.coords.latitude, pos.coords.longitude];
+      if (meMarker) map.removeLayer(meMarker);
+      meMarker = L.circleMarker(me, { radius: 8, color: '#fff', weight: 3, fillColor: '#2B7BE4', fillOpacity: 1 }).addTo(map);
+      var d = map.distance(me, [current.lat, current.lng]);
+      $('dist').textContent = '你離這塊地直線距離約 ' + (d >= 1000 ? (d / 1000).toFixed(1) + ' 公里' : Math.round(d) + ' 公尺');
+      map.fitBounds(L.latLngBounds([me, [current.lat, current.lng]]), { padding: [40, 40], maxZoom: 18 });
+    }, function (err) {
+      $('dist').textContent = err.code === 1 ? '沒有開定位權限，請到瀏覽器設定允許定位' : '定位失敗，請稍後再試';
+    }, { enableHighAccuracy: true, timeout: 15000 });
+  }
+
+  // ---------- 自動導航倒數 ----------
+  function startCountdown(c) {
+    var n = 3;
+    clearInterval(timer);
+    $('countdown').classList.add('show');
+    $('cdText').textContent = n + ' 秒後開啟導航…';
+    timer = setInterval(function () {
+      n -= 1;
+      if (n > 0) { $('cdText').textContent = n + ' 秒後開啟導航…'; return; }
+      stopCountdown();
+      location.href = gUrl(c);
+    }, 1000);
+  }
+  function stopCountdown() { clearInterval(timer); $('countdown').classList.remove('show'); }
+  $('cdCancel').onclick = stopCountdown;
+  $('auto').checked = store.get('auto', false);
+  $('auto').onchange = function () { store.set('auto', this.checked); };
+
+  // ---------- 複製、分享 ----------
+  $('copy').onclick = function () {
+    var t = current.lat.toFixed(6) + ',' + current.lng.toFixed(6);
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      $('copy').textContent = '已複製';
+      setTimeout(function () { $('copy').textContent = '複製座標'; }, 1500);
+    }).catch(function () { prompt('複製這串座標', t); });
+  };
+  $('share').onclick = function () {
+    var text = current.label + '\n導航：' + gUrl(current);
+    if (navigator.share) navigator.share({ title: current.label, text: text }).catch(function () {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { $('share').textContent = '已複製'; setTimeout(function () { $('share').textContent = '分享'; }, 1500); });
+  };
+
+  // ---------- 最近查過 ----------
+  function addHistory(c) {
+    var h = store.get('hist', []).filter(function (x) { return x.q !== c.q; });
+    h.unshift({ q: c.q, label: c.label, lat: c.lat, lng: c.lng, bbox: c.bbox });
+    store.set('hist', h.slice(0, 15));
+    renderHistory();
+  }
+  function renderHistory() {
+    var h = store.get('hist', []);
+    if (!h.length) { $('hist').innerHTML = '<li class="empty">還沒有紀錄</li>'; return; }
+    $('hist').innerHTML = h.map(function (x, i) {
+      return '<li><button type="button" class="name" data-i="' + i + '">' + esc(x.label) + '</button><a href="' + gUrl(x) + '" target="_blank" rel="noopener">導航</a></li>';
+    }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('#hist .name'), function (b) {
+      b.onclick = function () { var x = h[+b.dataset.i]; $('auto').checked = false; show(x); $('auto').checked = store.get('auto', false); };
+    });
+  }
+
+  // ---------- 啟動 ----------
+  $('f').onsubmit = function (e) { e.preventDefault(); stopCountdown(); $('q').blur(); search($('q').value); };
+  $('menuGo').onclick = function () {
+    var v = $('sect').value, no8 = landno8($('no').value);
+    if (!v) { say('err', '請先選鄉鎮市區和地段'); return; }
+    if (!no8) { say('err', '請輸入地號，例：955 或 955-3'); return; }
+    var parts = v.split('_');
+    var s = sects.filter(function (x) { return x.office === parts[0] && x.code === parts[1]; })[0];
+    locate(s, no8);
+  };
+
+  showProxyState();
+  renderHistory();
+  loadCounty(store.get('county', 'H')).then(function () {
+    var q = params.get('q');
+    if (q) { $('q').value = q; search(q); }
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
