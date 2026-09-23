@@ -710,3 +710,5 @@ section.tq-wrap{padding-block:16px 72px}
 .tq-live p{margin:0;font-size:15px;color:var(--muted)}
 .tq-live .btn{margin-top:6px}
 .map-feature.trash{background:linear-gradient(120deg,#2E7D5B 0%,var(--navy) 100%)}
+.v2-tool.trash .band{background:linear-gradient(120deg,#2E7D5B,var(--navy))}
+.v2-tool.trash .tag{background:#fff;color:#2E7D5B}
