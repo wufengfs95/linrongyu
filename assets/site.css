@@ -292,7 +292,7 @@ section.lp{padding-block:12px 72px;font-size:19px}
 form.book{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:32px;display:grid;gap:18px}
 .booking .field label,.booking .field legend,.booking .chips label{color:#fff}
 .booking .chips span{border-color:rgba(255,255,255,.4);font-size:clamp(14.5px,1.42vw,18px);padding:9px clamp(10px,1.1vw,16px)}
-.booking .hint{color:rgba(255,255,255,.78)}
+.booking .hint{color:rgba(255,255,255,.78);font-size:clamp(14px,1.45vw,18px);line-height:1.6;white-space:nowrap}
 .booking .toast{color:var(--gold)}
 .booking .sec-head p{font-size:20px}
 .booking form.book input,.booking form.book select,.booking form.book textarea{font-size:19px;padding:13px 16px}
@@ -650,7 +650,7 @@ section.sm{padding-block:8px 48px}
 .me-photo:hover,.me-photo:focus{transform:translate(16px,-2px) scale(4.9);position:relative;z-index:6}
 
 .team-col li.mine .here{display:inline-block;margin-left:6px;font-size:15px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:2px 10px}
-.team-badge{display:inline-block;height:clamp(38px,5.15vw,66px);width:auto;vertical-align:middle;margin-left:14px}
+.team-badge{display:inline-block;height:clamp(36px,4.85vw,62px);width:auto;vertical-align:middle;margin-left:14px}
 .team-note{margin:22px 0 0;font-size:clamp(15px,1.8vw,22px);color:var(--muted);text-align:center;white-space:nowrap}
 .foot-logo{width:44px;height:44px;object-fit:contain;flex:none}
 .foot-lines{min-width:0}
@@ -761,6 +761,7 @@ section.tq-wrap{padding-block:16px 72px}
   .team .sec-head h2{white-space:normal}
   .team-legend{font-size:20px}
   .team-legend .brand-logo{width:36px;height:36px;margin-right:-10px}
+  .booking .hint{font-size:18px}
   footer .wrap{flex-wrap:wrap}
   .foot-logo{width:34px;height:34px}
   .hint{font-size:17px}
@@ -771,4 +772,8 @@ section.tq-wrap{padding-block:16px 72px}
   .v2-tools-head .btn{font-size:20px;padding:11px 22px}
   .team-col>b{font-size:20px}
   .team-col ul{font-size:16px}
+}
+
+@media (max-width:560px){
+  .booking .hint{font-size:16px;white-space:normal}
 }
