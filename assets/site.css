@@ -576,8 +576,8 @@ section.sm{padding-block:8px 48px}
 .v2-services p{margin:0;font-size:21px;color:var(--muted);line-height:1.9}
 
 /* 右側浮動聯絡鈕（電腦）、底部按鈕列（手機） */
-.side-fab{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;display:grid;gap:10px}
-.side-fab a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:700;color:#fff;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.2);transition:transform .2s}
+.side-fab{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:30;display:grid;gap:20px}
+.side-fab a{width:108px;height:108px;border-radius:50%;display:grid;place-items:center;font-size:25px;font-weight:700;letter-spacing:.04em;color:#fff;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.24);transition:transform .2s}
 .side-fab a:hover{transform:scale(1.08)}
 .sf-book{background:var(--brick)}
 .sf-line{background:#06C755}
