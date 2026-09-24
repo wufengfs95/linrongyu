@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>委託物件競品分析：同社區成交＋在售競品，算出建議開價｜林容瑜</title>
+<meta name="description" content="賣房開價參考：比對桃園市同社區、同路段實價登錄成交與在售競品，算出屋主開價的落點、預估成交價、建議開價，並產生屋主溝通版說明。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/compete/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="委託物件競品分析：同社區成交＋在售競品，算出建議開價｜林容瑜">
+<meta property="og:description" content="賣房開價參考：比對桃園市同社區、同路段實價登錄成交與在售競品，算出屋主開價的落點、預估成交價、建議開價，並產生屋主溝通版說明。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/compete/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=aee79099">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "委託物件競品分析", "url": "https://wufengfs95.github.io/linrongyu/compete/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "賣房開價參考：比對桃園市同社區、同路段實價登錄成交與在售競品，算出屋主開價的落點、預估成交價、建議開價，並產生屋主溝通版說明。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 委託競品分析</p>
+  <h1>委託物件競品分析</h1>
+  <p class="sm-sub">輸入屋主的房子和想開的價，自動比對同社區實價登錄成交，加上附近在售的競品，看開價落在哪裡，並產生可以直接傳給屋主的溝通版說明。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="cForm" class="v-form" novalidate>
+      <h2>屋主的房子</h2>
+      <div class="field"><span class="v-label">房屋類型</span>
+        <div class="v-kinds" id="cKinds" role="group" aria-label="房屋類型">
+          <button type="button" data-k="a" aria-pressed="true">住宅大樓</button><button type="button" data-k="b" aria-pressed="false">華廈</button>
+          <button type="button" data-k="c" aria-pressed="false">公寓</button><button type="button" data-k="d" aria-pressed="false">透天厝</button>
+        </div></div>
+      <div class="row3">
+        <div class="field"><label for="cTown">行政區</label><select id="cTown"><option value="">載入中…</option></select></div>
+        <div class="field"><label for="cRoad">路段</label><input type="text" id="cRoad" list="cRoadList" autocomplete="off"><datalist id="cRoadList"></datalist></div>
+        <div class="field"><label for="cLane">巷</label><input type="number" id="cLane" inputmode="numeric" placeholder="無"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cBuilt">完工年（民國）</label><input type="number" id="cBuilt" inputmode="numeric" placeholder="例：103"></div>
+        <div class="field"><label for="cArea">房屋坪數（不含車位）</label><input type="number" id="cArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cFloor">樓層</label><input type="number" id="cFloor" inputmode="numeric"></div>
+        <div class="field"><label for="cTops">總樓層</label><input type="number" id="cTops" inputmode="numeric"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cPark">車位</label><select id="cPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+        <div class="field"><label for="cAsk">屋主想開價（萬，含車位）</label><input type="number" id="cAsk" inputmode="numeric" placeholder="選填"></div>
+      </div>
+      <h2>附近在售的競品<small class="rt-small">從 591、樂屋網抄開價和坪數，選填</small></h2>
+      <div id="cComps"></div>
+      <button type="button" class="btn btn-ghost" id="cAdd">＋ 再加一間競品</button>
+      <button type="submit" class="btn btn-main v-submit">產生競品分析</button>
+    </form>
+    <div id="cResult" class="v-result"><div class="v-empty">
+      <b>分析結果會出現在這裡</b>
+      <p>會自動整理：<br>・同社區（或同路段）實價登錄成交行情<br>・屋主開價在成交和在售競品裡的落點<br>・預估成交價與建議開價<br>・一段可以直接傳給屋主的「屋主溝通版」說明，也能產生分享連結</p>
+      <p class="v-empty-note">行情資料：內政部實價登錄桃園市住宅成交，近三年，目前更新到 <b id="cUpdated">—</b>。</p>
+    </div></div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼不能直接貼 591 網址？</summary><p>591 等房屋網站不開放其他網站讀取他們的資料，網頁工具沒辦法自動抓。所以「在售競品」請自己抄開價和坪數；「成交行情」則是自動從內政部實價登錄抓，這也是屋主最能接受的依據。</p></details><details><summary>同社區怎麼判斷？</summary><p>實價登錄只公布到門牌區段，所以用「同一條路＋同一條巷＋完工年份相差 1 年內＋同型態」判斷是同一個社區。同社區近三年不到 3 筆成交，會改用同路段、屋齡坪數相近的成交，再不夠才擴大到全區。</p></details><details><summary>建議開價怎麼算？</summary><p>預估成交價＝成交中位單價 × 坪數＋車位行情，建議開價抓預估成交價再加 5～8%，保留正常議價空間。屋主開價比行情高 15% 以上，通常會變成同區最貴的一間，帶看量會明顯變少。</p></details></div>
+  <p class="sm-note">本分析依內政部實價登錄成交資料自動統計，非不動產估價師法所稱之估價報告。資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=fe1b5629" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="08fe2241"></script>
+<script src="app.js?v=15683f46" data-v="08fe2241" defer></script>
+</body>
+</html>

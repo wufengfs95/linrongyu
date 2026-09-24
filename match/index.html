@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>買方配案：依預算與需求產生專屬物件報告｜林容瑜</title>
+<meta name="description" content="輸入預算、區域、房數、屋齡與車位需求，自動比對桃園中壢、平鎮在售物件的符合度，挑選後產生可分享、可列印的專屬物件報告。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/match/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="買方配案：依預算與需求產生專屬物件報告｜林容瑜">
+<meta property="og:description" content="輸入預算、區域、房數、屋齡與車位需求，自動比對桃園中壢、平鎮在售物件的符合度，挑選後產生可分享、可列印的專屬物件報告。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/match/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=aee79099">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "買方配案・專屬物件報告", "url": "https://wufengfs95.github.io/linrongyu/match/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入預算、區域、房數、屋齡與車位需求，自動比對桃園中壢、平鎮在售物件的符合度，挑選後產生可分享、可列印的專屬物件報告。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 買方配案</p>
+  <h1>買方配案・專屬物件報告</h1>
+  <p class="sm-sub">把買方需求變成可篩選、可挑選、可分享的專屬物件報告。依預算、區域、房數、屋齡、車位算出每間物件的符合度，挑好後一鍵產生報告連結。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div id="mTool">
+  <div class="v-grid">
+    <form id="mForm" class="v-form" novalidate>
+      <h2>買方需求</h2>
+      <div class="field"><label for="mName">客戶稱呼（會顯示在報告上）</label><input type="text" id="mName" placeholder="例：王先生"></div>
+      <div class="row2">
+        <div class="field"><label for="mLo">預算下限（萬）</label><input type="number" id="mLo" inputmode="numeric" placeholder="不限"></div>
+        <div class="field"><label for="mHi">預算上限（萬）</label><input type="number" id="mHi" inputmode="numeric" placeholder="例：1200"></div>
+      </div>
+      <div class="field"><span class="v-label">想要的區域（可複選）</span><div class="rt-chipset" id="mAreas"></div></div>
+      <div class="field"><span class="v-label">物件類型（可複選）</span><div class="rt-chipset" id="mKinds"></div></div>
+      <div class="row2">
+        <div class="field"><label for="mRooms">房間數</label><select id="mRooms"><option value="">不限</option><option value="2">2 房以上</option><option value="3">3 房以上</option><option value="4">4 房以上</option></select></div>
+        <div class="field"><label for="mAge">屋齡</label><select id="mAge"><option value="">不限</option><option value="10">10 年內</option><option value="20">20 年內</option><option value="30">30 年內</option></select></div>
+      </div>
+      <label class="rt-check"><input type="checkbox" id="mPark"> 一定要車位</label>
+      <div class="field"><label for="mNote">給客戶的話（選填，會放在報告最上面）</label><textarea id="mNote" rows="3" placeholder="例：這幾間都在你想要的學區，週末可以一起看。"></textarea></div>
+      <button type="submit" class="btn btn-main v-submit">開始配案</button>
+    </form>
+    <div class="v-result">
+      <p class="count" id="mCount" role="status">載入物件中…</p>
+      <div id="mList" class="rt-cards"></div>
+    </div>
+  </div>
+  <div class="rt-pickbar"><span>已挑 <b id="mPickN">0</b> 間</span><button type="button" class="btn btn-main" id="mMake" disabled>產生專屬物件報告</button></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>這個工具怎麼用？</summary><p>填買方的預算、區域、房數、屋齡、車位，系統會把網站上的每間物件算出「符合度」並排序。勾選想推薦的物件，按「產生專屬物件報告」，就會得到一個可以直接傳給客戶的連結，也可以列印或存成 PDF。</p></details><details><summary>報告連結會不會洩漏資料？</summary><p>條件和挑選的物件只放在網址裡，不會存到任何伺服器；報告上只有網站本來就公開的物件資訊（照片、價格、格局），不會出現屋主資料或底價。</p></details><details><summary>找不到符合的物件怎麼辦？</summary><p>網站只放一部分物件，還有很多未公開、剛委託的物件。直接加 LINE 告訴我需求，我幫你從公司物件和聯賣系統裡找。</p></details></div>
+  </div>
+  <div id="mReport" hidden></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=fe1b5629" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="aa197bb5"></script>
+<script src="app.js?v=be5029f9" data-v="aa197bb5" defer></script>
+</body>
+</html>

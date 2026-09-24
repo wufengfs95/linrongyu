@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>物件追蹤：591、信義、永慶物件降價紀錄｜林容瑜</title>
+<meta name="description" content="免費物件追蹤工具：貼上 591、信義、永慶等物件網址，記錄開價與每次調價，算出累計降幅，追蹤鄰居競品或想買的房子。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/track/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="物件追蹤：591、信義、永慶物件降價紀錄｜林容瑜">
+<meta property="og:description" content="免費物件追蹤工具：貼上 591、信義、永慶等物件網址，記錄開價與每次調價，算出累計降幅，追蹤鄰居競品或想買的房子。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/track/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=aee79099">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "物件追蹤・降價紀錄", "url": "https://wufengfs95.github.io/linrongyu/track/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費物件追蹤工具：貼上 591、信義、永慶等物件網址，記錄開價與每次調價，算出累計降幅，追蹤鄰居競品或想買的房子。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 物件追蹤</p>
+  <h1>物件追蹤・降價紀錄</h1>
+  <p class="sm-sub">貼一個物件網址就開始追蹤：記下每次調價、算出累計降了多少。591、信義、永慶都支援，追鄰居的競品當談判籌碼，或追你正在考慮的那幾間。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="tForm" class="v-form" novalidate>
+      <h2>加入追蹤</h2>
+      <div class="field"><label for="tUrl">物件網址</label><input type="url" id="tUrl" placeholder="https://sale.591.com.tw/home/house/detail/…"></div>
+      <div class="field"><label for="tTitle">名稱（自己看得懂就好）</label><input type="text" id="tTitle" placeholder="例：中悅桂冠 12 樓 3 房"></div>
+      <div class="row2">
+        <div class="field"><label for="tPrice">目前開價（萬）</label><input type="number" id="tPrice" inputmode="numeric" placeholder="例：1288"></div>
+        <div class="field"><label for="tArea">權狀坪數（選填）</label><input type="number" id="tArea" inputmode="decimal" step="0.1"></div>
+      </div>
+      <div class="field"><label for="tNote">備註（選填）</label><input type="text" id="tNote" placeholder="例：鄰居在賣，談判參考"></div>
+      <button type="submit" class="btn btn-main v-submit">開始追蹤</button>
+      <p class="toast" id="tToast" role="status"></p>
+      <p class="v-hint">591、信義、永慶、住商、樂屋網都可以。清單存在這個瀏覽器，不會上傳；換手機前記得用下面的「複製備份碼」。</p>
+      <p class="v-hint">📌 電腦版小技巧：把 <a id="tBookmark" href="#">＋加入追蹤</a> 拖到書籤列，逛到物件頁時點一下，網址和標題就會自動帶進來。</p>
+      <div class="rt-actions"><button type="button" class="btn btn-ghost" id="tExport">複製備份碼</button><button type="button" class="btn btn-ghost" id="tImport">貼上備份碼還原</button></div>
+    </form>
+    <div class="v-result">
+      <p class="count" id="tSum" role="status"></p>
+      <div id="tList"></div>
+      <a class="btn btn-line v-cta" id="tAsk" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener" data-rt-line="" data-toast="tToast2" hidden>把清單傳給容瑜，請她幫我盯降價</a>
+      <p class="toast" id="tToast2" role="status"></p>
+    </div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>可以自動通知降價嗎？</summary><p>網頁沒辦法自己去讀 591、信義、永慶的頁面（對方網站會擋），所以價格要自己更新。想要有人幫你盯，按「把清單傳給容瑜」，有降價、下架或成交，我用 LINE 通知你。</p></details><details><summary>追蹤這些有什麼用？</summary><p>想買的人：追你正在考慮的那幾間，降價就是出手時機。想賣的人：追鄰居在賣的競品，他降價、成交了，就是你調整開價的依據。</p></details><details><summary>資料存在哪裡？</summary><p>只存在你這個瀏覽器（localStorage），不會上傳到任何伺服器。清除瀏覽器資料或換手機就會不見，所以記得用「複製備份碼」存一份。</p></details></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=fe1b5629" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v=""></script>
+<script src="app.js?v=41b57fb8" data-v="" defer></script>
+</body>
+</html>
