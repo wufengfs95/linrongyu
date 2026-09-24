@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>謄本估價・建議開價｜上傳謄本比對同社區實價登錄｜林容瑜</title>
+<meta name="description" content="上傳建物謄本 PDF，自動判讀坪數、公設、車位、屋齡、產權與抵押，比對桃園市同社區實價登錄成交，算出預估成交價、建議開價與底價。謄本只在瀏覽器讀取，不會上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/deed/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="謄本估價・建議開價｜上傳謄本比對同社區實價登錄｜林容瑜">
+<meta property="og:description" content="上傳建物謄本 PDF，自動判讀坪數、公設、車位、屋齡、產權與抵押，比對桃園市同社區實價登錄成交，算出預估成交價、建議開價與底價。謄本只在瀏覽器讀取，不會上傳。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/deed/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=f413dc54">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "謄本估價・建議開價", "url": "https://wufengfs95.github.io/linrongyu/deed/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "上傳建物謄本 PDF，自動判讀並比對桃園市同社區實價登錄成交，算出預估成交價與建議開價。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body>
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 謄本估價</p>
+  <h1>謄本估價・建議開價</h1>
+  <p class="sm-sub">上傳建物謄本 PDF，自動判讀坪數、公設、車位、屋齡、所有權人與抵押，再用內政部實價登錄找同社區成交，算出預估成交價、建議開價和底價。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <div class="v-form d-side">
+      <h2>① 上傳謄本</h2>
+      <label id="dDrop" class="d-drop" for="dFile">
+        <input id="dFile" type="file" accept="application/pdf,.pdf">
+        <b>點這裡選擇謄本 PDF</b><span>或把檔案拖進來</span><small id="dFileName"></small>
+      </label>
+      <p class="v-hint">🔒 謄本只在你的瀏覽器裡讀取，<b>不會上傳</b>到任何伺服器。支援電傳謄本、地政事務所謄本的 PDF；拍照或掃描的圖片讀不到文字。</p>
+      <details class="d-paste"><summary>沒有 PDF？貼上謄本文字</summary>
+        <textarea id="dPaste" rows="6" placeholder="把謄本全文複製貼上（建物標示部、所有權部、他項權利部）"></textarea>
+        <button type="button" id="dPasteGo" class="btn btn-ghost">讀取文字</button>
+      </details>
+      <p id="dStatus" class="v-status" role="status"></p>
+
+      <form id="dForm" class="d-check" novalidate>
+        <h2>② 確認資料</h2>
+        <p class="v-hint">讀到的資料會自動填進來，讀錯可以直接改，再按「重新估價」。</p>
+        <div class="field">
+          <span class="v-label">房屋類型</span>
+          <div class="v-kinds" id="dKinds" role="group" aria-label="房屋類型">
+            <button type="button" data-k="a" aria-pressed="true">住宅大樓</button>
+            <button type="button" data-k="b" aria-pressed="false">華廈</button>
+            <button type="button" data-k="c" aria-pressed="false">公寓</button>
+            <button type="button" data-k="d" aria-pressed="false">透天厝</button>
+          </div>
+        </div>
+        <div class="row3">
+          <div class="field"><label for="dTown">行政區</label><select id="dTown"><option value="">載入中…</option></select></div>
+          <div class="field"><label for="dRoad">路段</label><input type="text" id="dRoad" autocomplete="off"></div>
+          <div class="field"><label for="dLane">巷</label><input type="number" id="dLane" inputmode="numeric" placeholder="無"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dHouse">房屋坪數（不含車位）</label><input type="number" id="dHouse" inputmode="decimal" step="0.01"></div>
+          <div class="field"><label for="dBuilt">完工年（民國）</label><input type="number" id="dBuilt" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dFloor">樓層</label><input type="number" id="dFloor" inputmode="numeric"></div>
+          <div class="field"><label for="dTops">總樓層</label><input type="number" id="dTops" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dPark">車位</label><select id="dPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+          <div class="field"><label for="dParkP">車位坪數</label><input type="number" id="dParkP" inputmode="decimal" step="0.01"></div>
+        </div>
+        <h2>③ 現場條件</h2>
+        <div class="row2">
+          <div class="field"><label for="dCond">屋況</label><select id="dCond">
+            <option value="5">新裝潢、精裝（+5%）</option><option value="2">整理得不錯（+2%）</option>
+            <option value="0" selected>一般</option><option value="-5">老舊需整理（−5%）</option><option value="-10">漏水、壁癌、瑕疵（−10%）</option></select></div>
+          <div class="field"><label for="dView">景觀採光</label><select id="dView">
+            <option value="3">景觀戶、邊間（+3%）</option><option value="0" selected>一般</option><option value="-3">採光差、面嫌惡設施（−3%）</option></select></div>
+        </div>
+        <div class="field"><label for="dNego">議價空間 <b id="dNegoV">7%</b></label>
+          <input type="range" id="dNego" min="3" max="12" step="1" value="7">
+          <span class="v-hint">中壢、平鎮的大樓一般 5～8%，公寓、透天、屋況差 8～12%。</span></div>
+        <button type="submit" class="btn btn-main v-submit">重新估價</button>
+      </form>
+    </div>
+    <div id="dResult" class="v-result"><div class="v-empty">
+      <b>估價結果會出現在這裡</b>
+      <p>上傳謄本後會自動算出：<br>・建議開價（快速成交／標準／試水溫三種）與底價<br>・預估成交價區間與基準單價<br>・謄本判讀：公設比、持有年數、房地合一稅率、抵押與推估購入價<br>・比對到的同社區實價登錄成交<br>・可以直接傳給屋主的開價說法</p>
+      <p class="v-empty-note">行情資料：內政部實價登錄桃園市住宅成交，近三年，目前更新到 <b id="dUpdated">—</b>。</p>
+    </div></div>
+  </div>
+
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq">
+    <details open><summary>怎麼找到「同社區」的成交？</summary><p>實價登錄只公布到門牌區段，所以用「同一條路＋同一條巷＋完工年份相差 1 年內＋同型態」判斷是同一個社區。同社區近三年有 3 筆以上成交就用同社區行情；不夠的話，改用同路段、屋齡坪數相近的成交，再不夠就擴大到全區。</p></details>
+    <details><summary>車位沒拆價的成交怎麼辦？</summary><p>很多社區的實價登錄車位沒有拆開填價格，一般估價會直接丟掉。這裡會保留同社區這類成交，用同社區有拆價的車位（沒有就用行政區車位中位數）把車位價和車位坪數扣掉，再換算房屋單價，表格裡會標 *。</p></details>
+    <details><summary>開價跟底價怎麼抓？</summary><p>標準開價 = 預估成交價 ×（1＋議價空間），個位數調成 8；剛好超過 1,000、1,500、2,000 萬這種搜尋門檻一點點的，會壓回門檻下面（例如 1,998 萬），買方用價格篩選時才看得到。底價建議抓在預估成交價附近。</p></details>
+    <details><summary>推估購入價準嗎？</summary><p>只在「買賣取得」而且買入同時有銀行設定抵押時才會算：銀行設定金額通常是貸款的 1.2 倍、貸款成數 7～8 成，所以只是推估區間，當作了解屋主心理價的參考。</p></details>
+    <details><summary>哪些謄本讀不到？</summary><p>拍照、掃描成圖片的謄本沒有文字可讀，請改用電傳謄本 PDF 或貼上文字。透天厝、一樓店面、土地謄本線上估價誤差大，結果只能參考。</p></details>
+  </div>
+  <p class="sm-note">本結果依謄本與內政部實價登錄成交資料自動統計，供參考，非不動產估價師法所稱之估價報告。<br>
+    資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>（政府資料開放授權）。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=fe1b5629" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="app.js?v=b4287e6f" data-v="08fe2241" defer></script>
+</body>
+</html>

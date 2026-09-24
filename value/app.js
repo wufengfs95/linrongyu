@@ -68,7 +68,7 @@
       var L=LEVELS[li], comps=[];
       for(var i=0;i<d.rows.length;i++){
         var r=d.rows[i];                     // [路段, 型態, 年, 季, 單價, 坪數, 樓層, 總樓層, 屋齡]
-        if(r[1]!==inp.kind) continue;
+        if(r[1]!==inp.kind || r[13]) continue;   // r[13]=1：車位未拆價，只給謄本估價用
         if(L.road && inp.road>=0 && r[0]!==inp.road) continue;
         var age=(ly-r[2])*4+(lq-r[3]);       // 距今幾季
         if(age>L.seasons) continue;

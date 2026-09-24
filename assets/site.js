@@ -95,6 +95,25 @@
     });
   });
 
+  // 免費工具頁：依分類篩選（版面比照物件列表）
+  var tgrid=document.getElementById('toolGrid');
+  if(tgrid){
+    var tcount=document.getElementById('toolCount');
+    var tbtns=[].slice.call(document.querySelectorAll('.tool-filter .fbtn'));
+    tbtns.forEach(function(b){
+      b.addEventListener('click',function(){
+        var tag=b.getAttribute('data-tag')||'';
+        tbtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+        var n=0;
+        tgrid.querySelectorAll('.v2-tool').forEach(function(c){
+          var ok=!tag||(c.getAttribute('data-tags')||'').split(' ').indexOf(tag)>=0;
+          c.hidden=!ok; if(ok) n++;
+        });
+        if(tcount) tcount.textContent='共 '+n+' 個工具';
+      });
+    });
+  }
+
   // 物件列表篩選
   var grid=document.getElementById('listingGrid');
   if(grid){
