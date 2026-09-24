@@ -113,7 +113,7 @@ section{padding-block:88px}
 .svc li::marker{color:var(--brick-soft)}
 
 /* 物件卡片 */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;--cardw:calc((min(1080px,100vw - 48px) - 48px)/3 - 44px)}
 .card-l{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
 .card-l:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.12)}
 .card-l[hidden]{display:none}
@@ -126,7 +126,7 @@ section{padding-block:88px}
 .ktags{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:17px;font-weight:700;color:var(--brown)}
 .ktags span::before{content:"["}
 .ktags span::after{content:"]"}
-.card-l h3{font-size:22px;line-height:1.5;color:var(--navy)}
+.card-l h3{font-size:min(22px,calc(var(--cardw,302px)/var(--len,1)));line-height:1.5;color:var(--navy);text-wrap:wrap;text-wrap:pretty;text-align:justify;text-justify:inter-ideograph}
 .price{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.2;color:var(--brick);font-variant-numeric:tabular-nums}
 .price small{font-family:var(--sans);font-size:18px;font-weight:700;margin-left:3px}
 .card-l .meta{font-size:16px;color:var(--muted);line-height:1.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -539,7 +539,7 @@ section.sm{padding-block:8px 48px}
 .v2-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .v2-tabs button{font:inherit;font-weight:700;font-size:26px;padding:8px 26px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
 .v2-tabs button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
-.v2-toolgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.v2-toolgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;--colw:calc((min(1080px,100vw - 48px) - 36px)/3 - 48px)}
 .v2-tool{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
 .v2-tool[hidden]{display:none}
 .v2-tool:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.1)}
@@ -550,8 +550,8 @@ section.sm{padding-block:8px 48px}
 .v2-tool.map .band b{color:#fff}
 .v2-tool.map .tag{background:var(--gold);color:var(--ink)}
 .v2-tool .body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.v2-tool h3{font-size:25px;line-height:1.45;color:var(--ink)}
-.v2-tool p{margin:0;font-size:19px;color:var(--muted);flex:1;line-height:1.8}
+.v2-tool h3{font-size:min(23.5px,calc(var(--colw,306px)/var(--len,12)));line-height:1.45;color:var(--ink);text-wrap:wrap;text-wrap:pretty;text-align:justify;text-justify:inter-ideograph}
+.v2-tool p{margin:0;font-size:19px;color:var(--muted);flex:1;line-height:1.8;text-align:justify;text-justify:inter-ideograph}
 .v2-tool .go{font-size:19px;font-weight:700;color:var(--brick)}
 
 /* 關於我 */
