@@ -213,12 +213,12 @@ section.lp{padding-block:12px 72px;font-size:26px}
 .pc-rows dt{flex:none;width:2.6em;color:var(--muted)}
 .pc-rows dd{margin:0;color:var(--ink)}
 .pc-rows a{color:var(--brick);font-weight:700;margin-left:8px;white-space:nowrap}
-.agent-card{margin-top:16px;border:1px solid var(--cream-line);border-radius:var(--radius);padding:20px;background:var(--cream);display:grid;gap:10px}
+.agent-card{container-type:inline-size;margin-top:16px;border:1px solid var(--cream-line);border-radius:var(--radius);padding:20px;background:var(--cream);display:grid;gap:10px}
 .ag-head{display:flex;gap:12px;align-items:center}
 .ag-photo{flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center 12%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .ag-head b{display:block;font-size:34px;font-weight:800;color:var(--navy);letter-spacing:.04em}
-.ag-meta{display:grid;gap:2px;margin-top:10px}
-.ag-meta span{display:block;font-size:16px;line-height:1.65;color:var(--muted);white-space:nowrap}
+.ag-meta{display:grid;gap:3px;margin-top:10px;font-size:min(23px,calc(100cqw / var(--len,14)))}
+.ag-meta span{display:block;font-size:inherit;line-height:1.75;color:var(--muted);text-align:justify;text-align-last:justify;text-justify:inter-ideograph}
 .ag-text{margin:2px 0 0;font-size:18px;white-space:nowrap;color:var(--ink)}
 .agent-card .btn{width:100%;font-size:21px;padding:15px 20px}
 .agent-card .toast{color:var(--brick-deep)}
