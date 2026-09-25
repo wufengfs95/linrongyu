@@ -134,6 +134,7 @@ section{padding-block:88px}
 .more-link .btn{font-size:clamp(28px,4vw,38px);font-weight:800;padding:18px 48px;letter-spacing:.08em;border-radius:999px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:40px 24px;text-align:center;color:var(--muted);background:var(--sky-soft);font-size:20px;line-height:1.8}
 .empty .btn{font-size:20px;padding:14px 32px}
+.empty b.me{font-size:1.45em;font-weight:800;color:var(--navy);line-height:1}
 .empty p{margin:0 0 16px}
 
 /* 內頁標題 */
