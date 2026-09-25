@@ -42,10 +42,18 @@
   var thumbs=[].slice.call(document.querySelectorAll('.thumbs button'));
   if(main&&thumbs.length){
     var cur=0, link=document.getElementById('galleryLink'), idx=document.getElementById('galleryIndex');
+    var cleanOn=false;
+    var btn=document.getElementById('declutterBtn'), note=document.getElementById('declutterNote');
     var show=function(i){
       cur=(i+thumbs.length)%thumbs.length;
       var b=thumbs[cur];
-      main.src=b.getAttribute('data-src');
+      var clean=b.getAttribute('data-clean');
+      main.src=(cleanOn&&clean)?clean:b.getAttribute('data-src');
+      if(note){
+        var miss=cleanOn&&!clean;
+        note.hidden=!miss;
+        if(miss) note.textContent='這張照片還沒有清空版本，顯示原圖';
+      }
       main.alt=b.querySelector('img').alt;
       main.classList.toggle('contain',b.getAttribute('data-fit')==='contain');
       if(link) link.href=main.getAttribute('src');
@@ -55,6 +63,20 @@
       row.scrollTo({left:b.offsetLeft-row.clientWidth/2+b.clientWidth/2,behavior:'smooth'});
     };
     thumbs.forEach(function(b,i){b.addEventListener('click',function(){show(i)})});
+    if(btn){
+      btn.addEventListener('click',function(){
+        cleanOn=!cleanOn;
+        btn.setAttribute('aria-pressed',cleanOn?'true':'false');
+        btn.textContent=cleanOn?'關閉一鍵清空 ×':'一鍵清空';
+        thumbs.forEach(function(x){
+          var im=x.querySelector('img'), cs=x.getAttribute('data-clean-s');
+          if(!im) return;
+          if(!im.dataset.orig) im.dataset.orig=im.getAttribute('src');
+          im.src=(cleanOn&&cs)?cs:im.dataset.orig;
+        });
+        show(cur);
+      });
+    }
     var prev=document.querySelector('.gal-nav.prev'), next=document.querySelector('.gal-nav.next');
     if(prev) prev.addEventListener('click',function(){show(cur-1)});
     if(next) next.addEventListener('click',function(){show(cur+1)});
