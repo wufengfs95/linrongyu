@@ -560,10 +560,10 @@ section.sm{padding-block:8px 48px}
 .v2-tool[hidden]{display:none}
 .v2-tool:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.1)}
 .v2-tool .band{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--sky-soft)}
-.v2-tool .tic{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.8);color:var(--brick)}
-.v2-tool .tic svg{width:30px;height:30px}
+.v2-tool .tic{flex:none;display:grid;place-items:center;width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.85);color:var(--brick)}
+.v2-tool .tic svg{width:48px;height:48px;stroke-width:1.7}
 .v2-tool.map .tic{background:rgba(255,255,255,.22);color:#fff}
-.v2-tool .band b{font-family:var(--serif);font-size:32px;color:var(--navy)}
+.v2-tool .band b{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);color:var(--navy)}
 .v2-tool .tag{font-size:26px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:6px 20px}
 .v2-tool.map .band{background:linear-gradient(120deg,var(--brick),var(--navy))}
 .v2-tool.map .band b{color:#fff}
