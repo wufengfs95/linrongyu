@@ -212,9 +212,10 @@ section.lp{padding-block:12px 72px;font-size:26px}
 .pc-rows a{color:var(--brick);font-weight:700;margin-left:8px;white-space:nowrap}
 .agent-card{margin-top:16px;border:1px solid var(--cream-line);border-radius:var(--radius);padding:20px;background:var(--cream);display:grid;gap:10px}
 .ag-head{display:flex;gap:12px;align-items:center}
-.ag-photo{flex:none;width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center 12%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-.ag-head b{display:block;font-size:25px;color:var(--navy)}
-.ag-head span{display:block;font-size:16px;line-height:1.6;color:var(--muted);white-space:nowrap}
+.ag-photo{flex:none;width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center 12%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.ag-head b{display:block;font-size:34px;font-weight:800;color:var(--navy);letter-spacing:.04em}
+.ag-meta{display:grid;gap:2px;margin-top:10px}
+.ag-meta span{display:block;font-size:16px;line-height:1.65;color:var(--muted);white-space:nowrap}
 .ag-text{margin:2px 0 0;font-size:18px;white-space:nowrap;color:var(--ink)}
 .agent-card .btn{width:100%;font-size:21px;padding:15px 20px}
 .agent-card .toast{color:var(--brick-deep)}
@@ -580,8 +581,8 @@ section.sm{padding-block:8px 48px}
 .v2-areas span{font-size:20px;color:var(--muted);line-height:1.8}
 .v2-services{display:grid;gap:14px}
 .v2-services article{background:#fff;border-radius:var(--radius);padding:24px 26px;border-left:6px solid var(--brick);display:grid;grid-template-columns:auto 1fr;grid-template-areas:"ic title" "text text";align-items:center;gap:10px 16px}
-.v2-services .ic{grid-area:ic;width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:var(--cream);color:var(--navy);border:1px solid var(--cream-line)}
-.v2-services .ic svg{width:34px;height:34px}
+.v2-services .ic{grid-area:ic;width:86px;height:86px;border-radius:22px;display:grid;place-items:center;background:var(--cream);color:var(--navy);border:1px solid var(--cream-line)}
+.v2-services .ic svg{width:50px;height:50px}
 .v2-services h3{grid-area:title}
 .v2-services p{grid-area:text}
 .v2-services h3{font-size:27px;color:var(--navy);margin-bottom:8px}
@@ -984,4 +985,24 @@ section.tq-wrap{padding-block:16px 72px}
   .nearby{flex-wrap:wrap;white-space:normal;font-size:18px}
   .kv,.desc-body,section.lp{font-size:20px}
   .lp-sec>h2,.pay h2,.desc h2,.similar h2{font-size:26px}
+}
+
+/* 物件頁：優質房屋賣點標籤 */
+.qbadges{display:flex;align-items:flex-start;gap:18px;margin-top:18px}
+.qlabel{flex:none;font-size:20px;color:var(--muted);padding-top:12px}
+.qcards{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.qc{border-radius:14px;padding:14px 18px;border:1px solid #DCEBE1;background:linear-gradient(135deg,#F2FBF5,#E6F4EA)}
+.qc b{display:block;font-size:22px;margin-bottom:4px;color:#2E7D5B}
+.qc p{margin:0;font-size:18px;line-height:1.6;color:var(--ink)}
+.qc.school,.qc.metro{border-color:#D8E6F8;background:linear-gradient(135deg,#F2F7FF,#E5EEFB)}
+.qc.school b,.qc.metro b{color:var(--navy)}
+.qc.warm{border-color:#F6DFC9;background:linear-gradient(135deg,#FFF7EF,#FCEBDC)}
+.qc.warm b{color:var(--brick)}
+.qc.cp{border-color:#EFD9A8;background:linear-gradient(135deg,#FFFAEC,#FBF0D3)}
+.qc.cp b{color:var(--brown)}
+@media (max-width:760px){
+  .qbadges{flex-direction:column;gap:10px}
+  .qlabel{padding-top:0;font-size:18px}
+  .qc b{font-size:20px}
+  .qc p{font-size:17px}
 }
