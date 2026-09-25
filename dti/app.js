@@ -18,14 +18,14 @@
              [Infinity,'高風險區','t5','過件難度很高，建議重新抓購屋預算：降總價、多準備自備款，或等負債減少再申請。']];
   var RATES=[[1.775,'新青安 3.0（前 3 年）'],[2.2,'公股銀行首購常見'],[2.35,'五大行庫平均附近'],[2.5,'一般房貸常見'],[2.8,'民營銀行、非首購']];
   var CASES={
-    single:{mode:1,city:'桃園市',dep:0,inc1:45000,k1:'salary',dStudent:3000,price:800,ratio:80,rate:1.775,years:40,grace:0,
-      note:'學貸每月 3,000 元影響不大，收入其實撐得住 800 萬左右的兩房。真正要注意的是自備款：800 萬貸 8 成，自備款加稅費要準備約 190 萬。'},
-    couple:{mode:2,city:'桃園市',dep:1,inc1:48000,k1:'salary',inc2:42000,k2:'salary',dCar:12000,price:1300,ratio:80,rate:2.2,years:30,grace:0,
-      note:'夫妻合併申請，收入加在一起算，但兩個人的負債也都會算進去。車貸每月 1.2 萬如果快繳完，等繳清再送件，收支比會明顯下降。'},
-    self:{mode:1,city:'桃園市',dep:0,inc1:100000,k1:'self',price:1000,ratio:80,rate:2.5,years:30,grace:0,gInc:0,
-      note:'自營收入銀行通常只認 7 成，月入 10 萬只算 7 萬。報稅收入越完整越好；收支比偏高時，最常見的解法是配偶或二等親當保證人。'},
-    swap:{mode:2,city:'桃園市',dep:1,inc1:70000,k1:'salary',inc2:50000,k2:'salary',dHome:23000,dPersonal:8000,price:1800,ratio:70,rate:2.5,years:30,grace:0,
-      note:'舊房貸還在，銀行會把它算進負債，第二戶成數也比較低。建議先賣後買，或跟我討論「買賣同步」的時程，避免兩邊房貸一起扛。'}
+    single:{mode:1,city:'桃園市',dep:0,inc1:65000,k1:'salary',dStudent:3000,price:650,ratio:80,rate:1.775,years:40,grace:0,
+      note:'月薪 6.5 萬、學貸每月 3,000 元，用新青安 40 年買 650 萬的兩房，收支比剛好落在 55% 安全區內，總價再往上加就會進嚴審區。中壢、平鎮這個價位還有不少選擇。'},
+    couple:{mode:2,city:'桃園市',dep:0,inc1:60000,k1:'salary',inc2:50000,k2:'salary',dCar:8000,price:1100,ratio:80,rate:1.775,years:40,grace:0,
+      note:'夫妻合併申請，收入加在一起算，但兩個人的負債也都會算進去。車貸每月 8,000 元如果快繳完，等繳清再送件，收支比可以降到嚴審區以內。'},
+    self:{mode:1,city:'桃園市',dep:0,inc1:100000,k1:'self',price:1000,ratio:80,rate:2.5,years:30,grace:0,
+      note:'自營收入銀行通常只認 7 成，月入 10 萬只算 7 萬。報稅收入越完整越好；收支比偏高時，最常見的解法是配偶或二等親當保證人，或拉長到 40 年。'},
+    swap:{mode:2,city:'桃園市',dep:0,inc1:70000,k1:'salary',inc2:50000,k2:'salary',dHome:23000,dPersonal:8000,price:1800,ratio:70,rate:2.5,years:30,grace:0,
+      note:'舊房貸還在，銀行會把它算進負債，第二戶成數也比較低，兩邊一起扛收支比會爆表。建議先賣後買，或跟我討論「買賣同步」的時程安排。'}
   };
   var FIELDS=['city','dep','inc1','k1','inc2','k2','oRent','oDiv','oPart','gInc','gDebt','price','ratio','rate','years','grace'].concat(DEBTS.map(function(d){return d[0]}));
   var mode=1, step=0;
@@ -75,7 +75,7 @@
   function calc(caseNote){
     var o=read(), R=$('dtiResult');
     if(!o.inc[0].raw&&o.income<=0){ R.innerHTML=R.getAttribute('data-empty'); return; }
-    if(!o.price){ R.innerHTML='<div class="v-empty"><b>再填「房貸規劃」的房屋總價</b><p>收入和負債都有了，最後填想買的總價、成數、利率，就能算出收支比。</p>'+
+    if(!o.price){ R.innerHTML='<div class="v-empty"><b>再填「房貸規劃」的房屋總價</b><p>收入填好了，負債有的話也填上，最後填想買的總價、成數、利率，就能算出收支比。</p>'+
       '<p>先參考：依收支比 55%，你最多可貸約 <b>'+RT.wan(maxLoan(o,55))+'</b>（'+o.rate+'%、'+o.years+' 年）。</p></div>'; return; }
     var t=tierOf(o.dti), T=TIERS[t], d=o.dti;
     var html='<div class="dt-head"><span>收支負債比（DTI）</span><b class="dt-'+T[2]+'">'+(isFinite(d)?d.toFixed(1)+'%':'—')+'</b><em class="dt-tag dt-'+T[2]+'">'+T[1]+'</em></div>'+
@@ -104,7 +104,7 @@
       var safePrice=m55/(o.ratio/100);
       if(safePrice>0&&safePrice<o.price) tips.push('同樣條件，55% 安全區能買的總價約 <b>'+RT.wan(safePrice)+'</b>。');
       o.debts.forEach(function(x){ if(x[0]==='信貸'||x[0]==='車貸'||x[0]==='信用卡分期／循環') tips.push('還清'+x[0]+'（每月 '+RT.comma(x[1])+' 元）：收支比降到 <b>'+dtiWith(o,{debt:x[1]}).toFixed(1)+'%</b>。'); });
-      if(!o.gInc) tips.push('加一位保證人，他的收入可以一起算，但他的負債和生活費也會算進來。在「收入資料」最下面可以試填。');
+      if(!o.gInc) tips.push('加一位保證人，他的收入可以一起算，但他的負債和生活費也會算進來。在「收入」步驟最下面可以試填。');
       html+='<div class="v-samples"><b class="dt-tip">💡 怎麼調，收支比會下降？</b><ul class="rt-list">'+tips.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>';
     }
     // 利率比較

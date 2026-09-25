@@ -1,0 +1,69 @@
+/* 收支比試算（/dti/）專用樣式；共用的 v-、rt- 樣式在 assets/site.css */
+.dt-top{display:grid;gap:10px}
+.dt-top>span{font-size:13.5px;color:var(--muted)}
+.dt-top b{color:var(--brick-deep)}
+.dt-mode{grid-template-columns:1fr 1fr;margin:0}
+.dt-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;counter-reset:dt}
+.dt-steps li{counter-increment:dt}
+.dt-steps button{font:inherit;width:100%;display:grid;justify-items:center;gap:4px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--muted);font-size:13px}
+.dt-steps button::before{content:counter(dt);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700}
+.dt-steps button[aria-current="step"]{color:var(--navy);font-weight:700}
+.dt-steps button[aria-current="step"]::before{background:var(--navy);border-color:var(--navy);color:#fff}
+.dt-steps button.done::before{content:"✓";background:var(--cream);border-color:var(--cream-line);color:var(--navy)}
+.dt-step{border:0;margin:0;padding:0;min-width:0;display:grid;gap:14px}
+.dt-step[hidden]{display:none}
+.dt-step .row2[hidden]{display:none}
+.dt-step .v-hint{margin-top:4px;font-weight:700;color:var(--navy)}
+.v-form select{font:inherit;font-size:16px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.dt-nav{display:flex;gap:10px}
+.dt-nav .btn{flex:1;font-size:17px;padding:13px}
+.dt-prev{font:inherit;font-size:16px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+
+/* 結果 */
+.dt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.dt-head>span{flex-basis:100%;font-size:14px;color:var(--brown);font-weight:700}
+.dt-head>b{font-size:clamp(34px,5vw,48px);line-height:1.1;font-variant-numeric:tabular-nums}
+.dt-tag{font-style:normal;font-weight:700;font-size:15px;padding:3px 12px;border-radius:999px;color:#fff!important}
+.dt-tag.dt-t1{background:#2E7D5B}.dt-tag.dt-t2{background:#A07A1E}.dt-tag.dt-t3{background:#C46A2B}.dt-tag.dt-t4{background:var(--brick)}.dt-tag.dt-t5{background:#8E2F2F}
+b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{color:#B35E22}b.dt-t4,td.dt-t4{color:var(--brick-deep)}b.dt-t5,td.dt-t5{color:#8E2F2F}
+.dt-gauge{position:relative;margin:14px 0 22px}
+.dt-bar{display:grid;grid-template-columns:41.7fr 8.3fr 8.3fr 8.4fr 33.3fr;height:12px;border-radius:999px;overflow:hidden}
+.dt-bar i.t1{background:#6FB38F}.dt-bar i.t2{background:#E0C15A}.dt-bar i.t3{background:#E59A5C}.dt-bar i.t4{background:#D2724F}.dt-bar i.t5{background:#A94444}
+.dt-pin{position:absolute;top:-5px;width:6px;height:22px;margin-left:-3px;border-radius:3px;background:var(--navy);box-shadow:0 0 0 2px #fff}
+.dt-ticks{position:relative;height:16px;font-size:11.5px;color:var(--muted)}
+.dt-ticks span{position:absolute;top:3px;transform:translateX(-50%)}
+.dt-say{margin:0 0 6px;font-size:15px}
+.dt-tbl td{white-space:normal}
+.dt-tbl td small{display:block;font-size:12px;color:var(--muted)}
+.dt-tbl td:nth-child(2){text-align:right;color:var(--muted);white-space:nowrap}
+.dt-tbl tr.dt-sec td{font-weight:700;color:var(--brown);background:var(--cream);border-bottom:0}
+.dt-tbl tr.dt-sum td{font-weight:700;color:var(--navy)}
+.dt-tip{color:var(--navy)}
+.v-table tr.rt-on td{background:var(--cream);font-weight:700}
+
+/* 分級、公式 */
+.dt-tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.dt-tier{background:#fff;border:1px solid var(--line);border-top:6px solid;border-radius:var(--radius);padding:14px;display:grid;gap:4px;align-content:start}
+.dt-tier b{font-size:14px;color:var(--muted)}
+.dt-tier strong{font-size:19px}
+.dt-tier p{margin:0;font-size:14px;color:var(--ink)}
+.dt-tier.dt-t1{border-top-color:#6FB38F}.dt-tier.dt-t1 strong{color:#2E7D5B}
+.dt-tier.dt-t2{border-top-color:#E0C15A}.dt-tier.dt-t2 strong{color:#8A6A12}
+.dt-tier.dt-t3{border-top-color:#E59A5C}.dt-tier.dt-t3 strong{color:#B35E22}
+.dt-tier.dt-t4{border-top-color:#D2724F}.dt-tier.dt-t4 strong{color:var(--brick-deep)}
+.dt-tier.dt-t5{border-top-color:#A94444}.dt-tier.dt-t5 strong{color:#8E2F2F}
+.dt-formula{background:var(--cream);border:1px solid var(--cream-line);border-radius:var(--radius);padding:20px;display:grid;gap:14px;margin-bottom:14px}
+.dt-formula>b{font-size:clamp(17px,2.4vw,22px);color:var(--navy);text-align:center}
+.dt-f3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dt-f3>div{background:#fff;border-radius:12px;padding:14px}
+.dt-f3 strong{color:var(--navy)}
+.dt-f3 p{margin:6px 0 0;font-size:14.5px}
+.dt-rec td:nth-child(2){text-align:left}
+@media (max-width:899px){
+  .dt-tiers{grid-template-columns:1fr 1fr}
+  .dt-f3{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .dt-tiers{grid-template-columns:1fr}
+  .dt-steps button{font-size:12px}
+}

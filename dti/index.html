@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>收支比試算 DTI：月收入能貸多少、買多少的房子｜林容瑜</title>
-<meta name="description" content="免費收支比（DTI）試算：輸入月收入與車貸、信貸等負債，算出房貸可貸金額、可買總價、需準備自備款，並比較不同利率與收支比。">
+<title>收支比試算 DTI：房貸收支負債比計算、銀行過件分級｜林容瑜</title>
+<meta name="description" content="免費房貸收支比（DTI）試算：支援單人／夫妻合併與保證人，依收入類型打折認列、套用 115 年各縣市最低生活費，算出收支比風險分級、可貸金額與調整建議。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://wufengfs95.github.io/linrongyu/dti/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:title" content="收支比試算 DTI：月收入能貸多少、買多少的房子｜林容瑜">
-<meta property="og:description" content="免費收支比（DTI）試算：輸入月收入與車貸、信貸等負債，算出房貸可貸金額、可買總價、需準備自備款，並比較不同利率與收支比。">
+<meta property="og:title" content="收支比試算 DTI：房貸收支負債比計算、銀行過件分級｜林容瑜">
+<meta property="og:description" content="免費房貸收支比（DTI）試算：支援單人／夫妻合併與保證人，依收入類型打折認列、套用 115 年各縣市最低生活費，算出收支比風險分級、可貸金額與調整建議。">
 <meta property="og:url" content="https://wufengfs95.github.io/linrongyu/dti/">
 <meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
 <link rel="stylesheet" href="../assets/site.css?v=8c1e4b1f">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "收支比試算（DTI）", "url": "https://wufengfs95.github.io/linrongyu/dti/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費收支比（DTI）試算：輸入月收入與車貸、信貸等負債，算出房貸可貸金額、可買總價、需準備自備款，並比較不同利率與收支比。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "收支比試算（DTI）", "url": "https://wufengfs95.github.io/linrongyu/dti/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費房貸收支比（DTI）試算：支援單人／夫妻合併與保證人，依收入類型打折認列、套用 115 年各縣市最低生活費，算出收支比風險分級、可貸金額與調整建議。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
 <div class="topinfo">
@@ -45,41 +45,77 @@
 <div class="wrap">
   <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 收支比試算</p>
   <h1>收支比試算（DTI）</h1>
-  <p class="sm-sub">輸入收入和現在的負債，算出房貸每月還得起多少、能貸多少、可以買多少錢的房子。附 4 個常見案例，點一下就能看。</p>
+  <p class="sm-sub">四個步驟填收入、負債、想買的總價，自動套用各縣市最低生活費和銀行收入認列比例，算出收支比落在哪一區、過件難不難、要怎麼調。支援夫妻合併、保證人。</p>
 </div>
 </section>
 <section class="v-wrap">
 <div class="wrap">
+  <link rel="stylesheet" href="dti.css?v=ac823784">
   <h2 class="v-h2" style="margin-top:8px">先看看跟你很像的案例<small>點一下就會帶入數字</small></h2>
-  <div class="rt-cases"><button type="button" data-case="single" aria-pressed="false"><b>小資單身首購</b><span>月薪 4.5 萬・自備 150 萬</span></button><button type="button" data-case="couple" aria-pressed="false"><b>雙薪小家庭</b><span>合計 9 萬・有車貸</span></button><button type="button" data-case="personal" aria-pressed="false"><b>有信貸的上班族</b><span>月薪 6 萬・信貸 1.5 萬</span></button><button type="button" data-case="swap" aria-pressed="false"><b>換屋族</b><span>舊房貸還沒繳完</span></button></div>
-  <div class="v-grid">
+  <div class="rt-cases"><button type="button" data-case="single" aria-pressed="false"><b>小資單身首購</b><span>月薪 6.5 萬・新青安買 650 萬</span></button><button type="button" data-case="couple" aria-pressed="false"><b>雙薪小家庭</b><span>合計 11 萬・有車貸・買 1,100 萬</span></button><button type="button" data-case="self" aria-pressed="false"><b>自營業者</b><span>月入 10 萬・銀行只認 7 成</span></button><button type="button" data-case="swap" aria-pressed="false"><b>換屋族</b><span>舊房貸還沒繳完・買 1,800 萬</span></button></div>
+  <div class="v-grid" id="dtTool">
     <form id="dtiForm" class="v-form" novalidate>
-      <h2>收入</h2>
-      <div class="row2">
-        <div class="field"><label for="iInc">本人月收入（元）</label><input type="number" id="iInc" inputmode="numeric" placeholder="例：50000"></div>
-        <div class="field"><label for="iInc2">共同借款人月收入</label><input type="number" id="iInc2" inputmode="numeric" placeholder="配偶，選填"></div>
-      </div>
-      <h2>每月已經在繳的負債（元）</h2>
-      <div class="row2"><div class="field"><label for="dCar">車貸</label><input type="number" id="dCar" inputmode="numeric" placeholder="0"></div><div class="field"><label for="dPersonal">信貸</label><input type="number" id="dPersonal" inputmode="numeric" placeholder="0"></div></div>
-      <div class="row2"><div class="field"><label for="dStudent">學貸</label><input type="number" id="dStudent" inputmode="numeric" placeholder="0"></div><div class="field"><label for="dCard">信用卡分期／循環</label><input type="number" id="dCard" inputmode="numeric" placeholder="0"></div></div>
-      <div class="row2"><div class="field"><label for="dHome">其他房貸</label><input type="number" id="dHome" inputmode="numeric" placeholder="0"></div><div class="field"><label for="iDown">自備款（萬）</label><input type="number" id="iDown" inputmode="numeric" placeholder="例：200"></div></div>
-      <h2>貸款條件</h2>
-      <div class="field"><label for="iRate">利率（%）</label><input type="number" id="iRate" inputmode="decimal" step="0.001" value="2.2">
-        <div class="rt-chips"><button type="button" data-rate="1.775">新青安 1.775</button><button type="button" data-rate="2.2">公股首購 2.2</button><button type="button" data-rate="2.5">一般 2.5</button><button type="button" data-rate="2.8">民營 2.8</button></div></div>
-      <div class="row2">
-        <div class="field"><label for="iYears">貸款年限</label><select id="iYears"><option value="20">20 年</option><option value="30" selected>30 年</option><option value="40">40 年</option></select></div>
-        <div class="field"><label for="iGrace">寬限期</label><select id="iGrace"><option value="0">不用</option><option value="1">1 年</option><option value="2">2 年</option><option value="3">3 年</option><option value="5">5 年</option></select></div>
-      </div>
-      <div class="field"><label for="iCap">收支比上限</label><select id="iCap"><option value="33">1/3：最輕鬆</option><option value="50" selected>1/2：多數銀行好過件</option><option value="60">60%：偏緊</option><option value="70">70%：銀行上限</option></select></div>
-      <button type="submit" class="btn btn-main v-submit">算算看能貸多少</button>
+      <div class="dt-top"><span>收入、負債填<b>每月「元」</b>，總價填<b>「萬」</b></span>
+        <div class="v-kinds dt-mode" id="dtMode" role="group" aria-label="申請方式"><button type="button" data-m="1" aria-pressed="true">單人申請</button><button type="button" data-m="2" aria-pressed="false">夫妻合併</button></div></div>
+      <ol class="dt-steps" id="dtSteps"><li><button type="button">基本資料</button></li><li><button type="button">收入</button></li><li><button type="button">現有負債</button></li><li><button type="button">房貸規劃</button></li></ol>
+      <fieldset class="dt-step">
+        <h2>基本資料</h2>
+        <div class="field"><label for="city">工作／居住縣市<span class="rt-small">銀行會用當地的最低生活費，算進每月支出</span></label><select id="city" data-def="桃園市"><option>臺北市</option><option>新北市</option><option selected>桃園市</option><option>臺中市</option><option>臺南市</option><option>高雄市</option><option>基隆市</option><option>新竹市</option><option>新竹縣</option><option>苗栗縣</option><option>彰化縣</option><option>南投縣</option><option>雲林縣</option><option>嘉義市</option><option>嘉義縣</option><option>屏東縣</option><option>宜蘭縣</option><option>花蓮縣</option><option>臺東縣</option><option>澎湖縣</option><option>金門縣</option><option>連江縣</option></select></div>
+        <div class="field"><label for="dep">要扶養的家人人數<span class="rt-small">未成年子女、沒有收入的父母；借款人本人不用算</span></label><input type="number" id="dep" inputmode="numeric" placeholder="0"></div>
+      </fieldset>
+      <fieldset class="dt-step" hidden>
+        <h2>收入</h2>
+        <div class="row2"><div class="field"><label for="inc1">本人月收入</label><input type="number" id="inc1" inputmode="numeric" placeholder="例：50000"></div><div class="field"><label for="k1">收入類型</label><select id="k1" data-def="salary"><option value="salary">受薪（認列 100%）</option><option value="self">自營、接案（認列 70%）</option><option value="bonus">業務、獎金為主（認列 70%）</option></select></div></div>
+        <div class="row2 dt-p2" hidden><div class="field"><label for="inc2">配偶月收入</label><input type="number" id="inc2" inputmode="numeric" placeholder="例：40000"></div><div class="field"><label for="k2">收入類型</label><select id="k2" data-def="salary"><option value="salary">受薪（認列 100%）</option><option value="self">自營、接案（認列 70%）</option><option value="bonus">業務、獎金為主（認列 70%）</option></select></div></div>
+        <p class="v-hint">其他收入（選填，銀行會打折認列）</p>
+        <div class="row2"><div class="field"><label for="oRent">租金（認列 70%）</label><input type="number" id="oRent" inputmode="numeric" placeholder="0"></div><div class="field"><label for="oDiv">股利・年領÷12（認列 65%）</label><input type="number" id="oDiv" inputmode="numeric" placeholder="0"></div></div>
+        <div class="row2"><div class="field"><label for="oPart">兼職、其他（認列 70%）</label><input type="number" id="oPart" inputmode="numeric" placeholder="0"></div><div></div></div>
+        <p class="v-hint">保證人（選填）：收入可以一起算，但他的負債和生活費也會算進來</p>
+        <div class="row2"><div class="field"><label for="gInc">保證人月收入</label><input type="number" id="gInc" inputmode="numeric" placeholder="0"></div><div class="field"><label for="gDebt">保證人每月負債</label><input type="number" id="gDebt" inputmode="numeric" placeholder="0"></div></div>
+      </fieldset>
+      <fieldset class="dt-step" hidden>
+        <h2>現有負債</h2>
+        <p class="v-hint">每月要繳的金額；夫妻合併的話兩個人加起來填</p>
+        <div class="row2"><div class="field"><label for="dHome">既有房貸</label><input type="number" id="dHome" inputmode="numeric" placeholder="0"></div><div class="field"><label for="dPersonal">信貸</label><input type="number" id="dPersonal" inputmode="numeric" placeholder="0"></div></div>
+        <div class="row2"><div class="field"><label for="dCar">車貸</label><input type="number" id="dCar" inputmode="numeric" placeholder="0"></div><div class="field"><label for="dStudent">學貸</label><input type="number" id="dStudent" inputmode="numeric" placeholder="0"></div></div>
+        <div class="row2"><div class="field"><label for="dCard">信用卡分期／循環</label><input type="number" id="dCard" inputmode="numeric" placeholder="0"></div><div class="field"><label for="dStock">股票質借（每月利息）</label><input type="number" id="dStock" inputmode="numeric" placeholder="0"></div></div>
+        <div class="row2"><div class="field"><label for="dOther">其他貸款</label><input type="number" id="dOther" inputmode="numeric" placeholder="0"></div><div></div></div>
+      </fieldset>
+      <fieldset class="dt-step" hidden>
+        <h2>房貸規劃</h2>
+        <div class="row2"><div class="field"><label for="price">房屋總價（萬）</label><input type="number" id="price" inputmode="numeric" placeholder="例：1000"></div><div class="field"><label for="ratio">貸款成數</label><select id="ratio" data-def="80"><option value="85">8.5 成</option><option value="80" selected>8 成</option><option value="75">7.5 成</option><option value="70">7 成</option><option value="60">6 成</option><option value="50">5 成</option></select></div></div>
+        <div class="field"><label for="rate">利率（%）</label><input type="number" id="rate" inputmode="decimal" step="0.001" value="2.2">
+          <div class="rt-chips"><button type="button" data-rate="1.775">新青安 1.775</button><button type="button" data-rate="2.2">公股首購 2.2</button><button type="button" data-rate="2.5">一般 2.5</button><button type="button" data-rate="2.8">民營 2.8</button></div></div>
+        <div class="row2">
+          <div class="field"><label for="years">貸款年限</label><select id="years" data-def="30"><option value="20">20 年</option><option value="25">25 年</option><option value="30" selected>30 年</option><option value="35">35 年</option><option value="40">40 年</option></select></div>
+          <div class="field"><label for="grace">寬限期</label><select id="grace" data-def="0"><option value="0">不用</option><option value="1">1 年</option><option value="2">2 年</option><option value="3">3 年</option><option value="5">5 年</option></select></div>
+        </div>
+      </fieldset>
+      <div class="dt-nav"><button type="button" class="dt-prev" id="dtPrev" hidden>上一步</button><button type="button" class="btn btn-main" id="dtNext">下一步</button></div>
     </form>
     <div id="dtiResult" class="v-result"><div class="v-empty">
       <b>結果會出現在這裡</b>
-      <p>填月收入和每月負債，就會算出：<br>・房貸每月最多能繳多少<br>・可貸金額、可買總價、要準備的自備款<br>・收支比 1/3～70% 各能貸多少<br>・還掉信貸、車貸能多貸多少</p>
+      <p>照四個步驟填，邊填邊算：<br>・銀行認列收入（自營、租金會打折）<br>・既有負債＋當地最低生活費＋新房貸月付<br>・收支比落在哪一區、過件難不難<br>・怎麼調（年限、成數、還信貸、加保證人）收支比會降多少</p>
     </div></div>
   </div>
+  <h2 class="v-h2">收支比（DTI）風險分級<small>各銀行標準不同，以下是常見的審核區間</small></h2>
+  <div class="dt-tiers"><div class="dt-tier dt-t1"><b>55% 以下</b><strong>安全區</strong><p>銀行核貸機率高，月付之外還有餘裕，利率也比較好談。</p></div><div class="dt-tier dt-t2"><b>55～60%</b><strong>嚴審區</strong><p>銀行會看更完整的收入證明（薪轉存摺、扣繳憑單），部分銀行要保證人。</p></div><div class="dt-tier dt-t3"><b>60～65%</b><strong>高壓力區</strong><p>過件難度明顯提高，建議降成數、拉長年限或提供保證人。</p></div><div class="dt-tier dt-t4"><b>65～70%</b><strong>需調整區</strong><p>多半要砍成數、加保證人或換方案；先還信貸、卡債最有效。</p></div><div class="dt-tier dt-t5"><b>70% 以上</b><strong>高風險區</strong><p>建議重新抓預算：降總價、多存自備款，或等負債變少再申請。</p></div></div>
+  <h2 class="v-h2">銀行怎麼算收支比？</h2>
+  <div class="dt-formula"><b>收支比 ＝ 每月總支出 ÷ 每月認列收入 × 100%</b>
+    <div class="dt-f3"><div><strong>① 加總收入</strong><p>月收入 × 認列比例。受薪全額，自營、獎金、租金約 7 成，股利約 6.5 成。</p></div>
+    <div><strong>② 加總支出</strong><p>既有負債月付＋當地最低生活費 × 人數＋新房貸月付（寬限期後）。</p></div>
+    <div><strong>③ 算出收支比</strong><p>55% 以下通常順利；超過 70% 大多要調整條件。</p></div></div></div>
+  <div class="v-quick"><table class="v-table dt-rec"><thead><tr><th>收入類型</th><th>認列比例</th><th>銀行要看的證明</th></tr></thead><tbody>
+    <tr><td>受薪（固定薪資）</td><td>100%</td><td>薪轉存摺、扣繳憑單</td></tr>
+    <tr><td>自營、接案</td><td>約 70%</td><td>報稅資料、營業登記、存摺往來</td></tr>
+    <tr><td>業務（獎金為主）</td><td>約 70%</td><td>近一年扣繳憑單、薪轉明細</td></tr>
+    <tr><td>租金收入</td><td>約 70%</td><td>租約、租金入帳紀錄、報稅資料</td></tr>
+    <tr><td>股利配息</td><td>約 65%</td><td>股利通知書、集保存摺</td></tr>
+    <tr><td>兼職、其他</td><td>約 70%</td><td>入帳紀錄、扣繳憑單</td></tr>
+  </tbody></table></div>
+  <p class="sm-note">最低生活費用 115 年公告：臺北市 20,744、新北市 17,750、桃園市 17,186、臺中市 16,431、高雄市 16,970、臺南市與其他縣市 15,515、金門連江 15,173 元（每人每月）。</p>
   <h2 class="v-h2">常見問題</h2>
-  <div class="v-faq"><details open><summary>什麼是收支比（DTI）？</summary><p>收支比＝每月所有負債的月付 ÷ 每月收入。銀行核房貸時會把新房貸的月付加上你原本的車貸、信貸、卡費一起算，一般抓 1/2 以內最好過，最高很少超過 70%。自己的生活品質來看，房貸月付在收入 1/3 以內最輕鬆。</p></details><details><summary>收入要怎麼算？</summary><p>用「銀行看得到的收入」：薪轉存摺、扣繳憑單、報稅資料。現金收入、沒報稅的業績獎金，銀行多半不認或打折。夫妻可以一起當借款人，收入合併計算。</p></details><details><summary>寬限期會讓我貸更多嗎？</summary><p>不會。銀行審核時看的是寬限期結束後、要開始還本金的月付，所以這裡也用寬限期後的月付來算可貸金額。寬限期只是前幾年繳比較少。</p></details><details><summary>為什麼算出來的可買總價比可貸金額高？</summary><p>一般房貸最多貸 8 成，所以可買總價＝可貸金額 ÷ 0.8；如果你有填自備款，會再用「可貸金額＋自備款」取比較小的那個。另外還要準備總價 3～5% 的稅費、代書費、仲介服務費。</p></details></div>
+  <div class="v-faq"><details open><summary>收支比要多少以下銀行才會過？</summary><p>多數銀行把 55% 以下當安全區，60～70% 會嚴審或要求保證人、降成數，超過 70% 通常很難照原條件過件。實際標準各銀行不同，職業、信用分數、物件條件也會影響。</p></details><details><summary>為什麼要算「最低生活費」？</summary><p>銀行不只看你有沒有能力繳房貸，也要確定繳完之後還過得了生活，所以會把當地最低生活費乘上家庭人數算進支出。桃園 115 年是每人每月 17,186 元。</p></details><details><summary>夫妻合併申請比較好嗎？</summary><p>收入可以相加，但兩個人的車貸、信貸、卡費也都會算進去，生活費也算兩人。配偶收入高、負債少時合併很有利；配偶負債重的話，改用「一人借款、一人當保證人」有時候更好。</p></details><details><summary>寬限期會讓收支比變好看嗎？</summary><p>不會。銀行審核用的是寬限期結束、開始還本金後的月付，所以這裡也是用寬限期後的月付算收支比。</p></details><details><summary>收支比太高，最有效的調整是什麼？</summary><p>通常依序是：還掉信貸、卡債這類月付高的負債 → 拉長年限到 40 年 → 降成數多放自備款 → 配偶合併或加保證人 → 降低購屋總價。上面的試算結果會直接算出每一招能降多少。</p></details></div>
   <p class="sm-note">本工具試算結果僅供參考，實際可貸金額以銀行審核為準。</p>
 </div>
 </section>
@@ -99,6 +135,6 @@
 
 <script src="../assets/site.js?v=fe1b5629" defer></script>
 <script src="../assets/tools.js?v=b0879141" data-v=""></script>
-<script src="app.js?v=310507a4" data-v="" defer></script>
+<script src="app.js?v=b32eeb33" data-v="" defer></script>
 </body>
 </html>
