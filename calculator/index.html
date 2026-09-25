@@ -2540,7 +2540,8 @@ function printForClient() {
       var locked = document.querySelector('.tab[data-tab="' + only + '"]');
       if (locked){ locked.classList.add('active'); locked.style.cursor = 'default'; locked.style.pointerEvents = 'none'; }
       var bar = document.querySelector('.tabs');
-      if (bar){ bar.style.justifyContent = 'center'; }
+      if (bar){ bar.style.display = 'none'; }        // 單一工具：整條分頁列不顯示
+      document.body.classList.add('solo-tool');
     }
   }catch(e){}
 })();

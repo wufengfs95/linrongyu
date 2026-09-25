@@ -1,11 +1,11 @@
 /* 收支比試算（/dti/）專用樣式；共用的 v-、rt- 樣式在 assets/site.css */
 .dt-top{display:grid;gap:10px}
-.dt-top>span{font-size:13.5px;color:var(--muted)}
+.dt-top>span{font-size:17.5px;color:var(--muted)}
 .dt-top b{color:var(--brick-deep)}
 .dt-mode{grid-template-columns:1fr 1fr;margin:0}
 .dt-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;counter-reset:dt}
 .dt-steps li{counter-increment:dt}
-.dt-steps button{font:inherit;width:100%;display:grid;justify-items:center;gap:4px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--muted);font-size:13px}
+.dt-steps button{font:inherit;width:100%;display:grid;justify-items:center;gap:4px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--muted);font-size:17px}
 .dt-steps button::before{content:counter(dt);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:700}
 .dt-steps button[aria-current="step"]{color:var(--navy);font-weight:700}
 .dt-steps button[aria-current="step"]::before{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -14,27 +14,27 @@
 .dt-step[hidden]{display:none}
 .dt-step .row2[hidden]{display:none}
 .dt-step .v-hint{margin-top:4px;font-weight:700;color:var(--navy)}
-.v-form select{font:inherit;font-size:16px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.v-form select{font:inherit;font-size:20px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
 .dt-nav{display:flex;gap:10px}
 .dt-nav .btn{flex:1;font-size:17px;padding:13px}
-.dt-prev{font:inherit;font-size:16px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.dt-prev{font:inherit;font-size:20px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
 
 /* 結果 */
 .dt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
-.dt-head>span{flex-basis:100%;font-size:14px;color:var(--brown);font-weight:700}
+.dt-head>span{flex-basis:100%;font-size:18px;color:var(--brown);font-weight:700}
 .dt-head>b{font-size:clamp(34px,5vw,48px);line-height:1.1;font-variant-numeric:tabular-nums}
-.dt-tag{font-style:normal;font-weight:700;font-size:15px;padding:3px 12px;border-radius:999px;color:#fff!important}
+.dt-tag{font-style:normal;font-weight:700;font-size:19px;padding:3px 12px;border-radius:999px;color:#fff!important}
 .dt-tag.dt-t1{background:#2E7D5B}.dt-tag.dt-t2{background:#A07A1E}.dt-tag.dt-t3{background:#C46A2B}.dt-tag.dt-t4{background:var(--brick)}.dt-tag.dt-t5{background:#8E2F2F}
 b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{color:#B35E22}b.dt-t4,td.dt-t4{color:var(--brick-deep)}b.dt-t5,td.dt-t5{color:#8E2F2F}
 .dt-gauge{position:relative;margin:14px 0 22px}
 .dt-bar{display:grid;grid-template-columns:41.7fr 8.3fr 8.3fr 8.4fr 33.3fr;height:12px;border-radius:999px;overflow:hidden}
 .dt-bar i.t1{background:#6FB38F}.dt-bar i.t2{background:#E0C15A}.dt-bar i.t3{background:#E59A5C}.dt-bar i.t4{background:#D2724F}.dt-bar i.t5{background:#A94444}
 .dt-pin{position:absolute;top:-5px;width:6px;height:22px;margin-left:-3px;border-radius:3px;background:var(--navy);box-shadow:0 0 0 2px #fff}
-.dt-ticks{position:relative;height:16px;font-size:11.5px;color:var(--muted)}
+.dt-ticks{position:relative;height:16px;font-size:15px;color:var(--muted)}
 .dt-ticks span{position:absolute;top:3px;transform:translateX(-50%)}
-.dt-say{margin:0 0 6px;font-size:15px}
+.dt-say{margin:0 0 6px;font-size:19px}
 .dt-tbl td{white-space:normal}
-.dt-tbl td small{display:block;font-size:12px;color:var(--muted)}
+.dt-tbl td small{display:block;font-size:16px;color:var(--muted)}
 .dt-tbl td:nth-child(2){text-align:right;color:var(--muted);white-space:nowrap}
 .dt-tbl tr.dt-sec td{font-weight:700;color:var(--brown);background:var(--cream);border-bottom:0}
 .dt-tbl tr.dt-sum td{font-weight:700;color:var(--navy)}
@@ -44,9 +44,9 @@ b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{c
 /* 分級、公式 */
 .dt-tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .dt-tier{background:#fff;border:1px solid var(--line);border-top:6px solid;border-radius:var(--radius);padding:14px;display:grid;gap:4px;align-content:start}
-.dt-tier b{font-size:14px;color:var(--muted)}
+.dt-tier b{font-size:18px;color:var(--muted)}
 .dt-tier strong{font-size:19px}
-.dt-tier p{margin:0;font-size:14px;color:var(--ink)}
+.dt-tier p{margin:0;font-size:18px;color:var(--ink)}
 .dt-tier.dt-t1{border-top-color:#6FB38F}.dt-tier.dt-t1 strong{color:#2E7D5B}
 .dt-tier.dt-t2{border-top-color:#E0C15A}.dt-tier.dt-t2 strong{color:#8A6A12}
 .dt-tier.dt-t3{border-top-color:#E59A5C}.dt-tier.dt-t3 strong{color:#B35E22}
@@ -57,7 +57,7 @@ b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{c
 .dt-f3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .dt-f3>div{background:#fff;border-radius:12px;padding:14px}
 .dt-f3 strong{color:var(--navy)}
-.dt-f3 p{margin:6px 0 0;font-size:14.5px}
+.dt-f3 p{margin:6px 0 0;font-size:18.5px}
 .dt-rec td:nth-child(2){text-align:left}
 @media (max-width:899px){
   .dt-tiers{grid-template-columns:1fr 1fr}
@@ -65,23 +65,23 @@ b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{c
 }
 @media (max-width:520px){
   .dt-tiers{grid-template-columns:1fr}
-  .dt-steps button{font-size:12px}
+  .dt-steps button{font-size:16px}
 }
 
 /* 公股銀行利率比較 */
 .dt-banks{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:14px}
 .dt-bavg{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;background:var(--cream);border:1px solid var(--cream-line);border-radius:12px;padding:14px 16px}
 .dt-bavg>b{font-size:30px;color:var(--navy);font-variant-numeric:tabular-nums}
-.dt-bavg>span{flex:1;min-width:220px;font-size:14px}
+.dt-bavg>span{flex:1;min-width:220px;font-size:18px}
 .dt-bavg a{color:var(--brick)}
 .dt-bctl{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:460px}
-.dt-bctl label{font-size:15px}
-.dt-bctl input,.dt-bctl select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.dt-bctl label{font-size:19px}
+.dt-bctl input,.dt-bctl select{font:inherit;font-size:20px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
 .dt-btbl td{vertical-align:top}
 .dt-btbl td:first-child{white-space:normal;min-width:190px}
-.dt-btbl td small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.dt-btbl td small{display:block;font-size:16.5px;color:var(--muted);margin-top:2px}
 .dt-btbl td small a{color:var(--brick)}
 .dt-btbl td:nth-child(2){font-weight:700;color:var(--navy)}
-.dt-btag{font-style:normal;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--cream);color:var(--brown);border:1px solid var(--cream-line)}
-.dt-use{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--brick);background:#fff;color:var(--brick-deep);cursor:pointer;white-space:nowrap}
+.dt-btag{font-style:normal;font-size:15px;padding:1px 8px;border-radius:999px;background:var(--cream);color:var(--brown);border:1px solid var(--cream-line)}
+.dt-use{font:inherit;font-size:17px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--brick);background:#fff;color:var(--brick-deep);cursor:pointer;white-space:nowrap}
 .dt-use:hover{background:var(--brick);color:#fff}
