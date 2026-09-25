@@ -2541,6 +2541,8 @@ function printForClient() {
       if (locked){ locked.classList.add('active'); locked.style.cursor = 'default'; locked.style.pointerEvents = 'none'; }
       var bar = document.querySelector('.tabs');
       if (bar){ bar.style.display = 'none'; }        // 單一工具：整條分頁列不顯示
+      var hd = document.querySelector('.header');
+      if (hd){ hd.style.display = 'none'; }          // 網站上面已經有選單，這條標題列是多餘的
       document.body.classList.add('solo-tool');
     }
   }catch(e){}

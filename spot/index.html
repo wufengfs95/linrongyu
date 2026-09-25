@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>10 秒找亮點：找不同小遊戲，每週排行榜｜林容瑜</title>
+<meta name="description" content="找不同小遊戲：同一間房子的兩張照片，10 秒內找出 3 個不同處，每局隨機、可以一直重玩，還有每週排行榜。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/spot/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="10 秒找亮點：找不同小遊戲，每週排行榜｜林容瑜">
+<meta property="og:description" content="找不同小遊戲：同一間房子的兩張照片，10 秒內找出 3 個不同處，每局隨機、可以一直重玩，還有每週排行榜。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/spot/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=1f3006d1">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "10 秒找亮點", "url": "https://wufengfs95.github.io/linrongyu/spot/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "找不同小遊戲：同一間房子的兩張照片，10 秒內找出 3 個不同處，每局隨機、可以一直重玩，還有每週排行榜。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 10 秒找亮點</p>
+  <h1>10 秒找亮點</h1>
+  <p class="sm-sub">同一間房子的兩張照片，10 秒內找出 3 個不同！點錯扣 1 秒，每週排行榜看看你能擠進第幾名。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <link rel="stylesheet" href="spot.css?v=1aaa0793">
+  <div class="sp-hud">
+    <div class="sp-clock" id="spClock"><span id="spTime">10.00</span><small>秒</small></div>
+    <div class="sp-track"><div class="sp-bar" id="spBar"></div></div>
+    <div class="sp-dots" id="spDots" aria-label="找到幾個"><i></i><i></i><i></i></div>
+  </div>
+  <div class="sp-board cover" id="spBoard">
+    <figure class="sp-pic"><canvas id="spA" width="720" height="540" aria-label="原圖"></canvas><figcaption>原圖</figcaption><div class="sp-layer"></div></figure>
+    <figure class="sp-pic"><canvas id="spB" width="720" height="540" aria-label="被改過的照片"></canvas><figcaption>找 3 個不同</figcaption><div class="sp-layer"></div></figure>
+    <div class="sp-cover" id="spCover"><p id="spCoverText">同一間房子的兩張照片，<br>10 秒內找出 <b>3 個不同</b>！</p>
+      <button type="button" class="btn btn-main" id="spStart" disabled>照片準備中…</button></div>
+  </div>
+  <div class="sp-result" id="spResult" hidden aria-live="polite">
+    <p class="sp-head" id="spHead"></p>
+    <p class="sp-rank" id="spRank"></p>
+    <div class="sp-top" id="spTop"></div>
+    <p class="sp-house" id="spHouse"></p>
+    <div class="sp-acts"><button type="button" class="btn btn-main" id="spAgain">再玩一次</button>
+      <button type="button" class="btn btn-line" id="spShare">揪朋友來比</button></div>
+    <p class="toast" id="spToast" role="status"></p>
+    <p class="sp-name" id="spNameRow"><label for="spName">排行榜暱稱</label><input type="text" id="spName" maxlength="12" placeholder="匿名玩家"></p>
+  </div>
+  <h2 class="v-h2">怎麼玩</h2>
+  <div class="sp-how"><div><b>① 兩張照片</b>左邊是原圖，右邊被偷偷改了 3 個地方（手機是上下兩張）。</div><div><b>② 10 秒內點出來</b>點哪一張都可以。點錯扣 1 秒，亂點會更慢喔。</div><div><b>③ 比誰最快</b>3 個都找到就過關，秒數越少排名越前面，每週一重新排名。</div></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>照片是哪裡來的？</summary><p>都是我正在賣的房子。玩完會告訴你這張是哪一間，看到喜歡的可以直接點進去看物件，或 LINE 我約帶看。</p></details><details><summary>每次玩都一樣嗎？</summary><p>不一樣。不同的地方是每一局隨機產生的，照片也會輪流換，所以可以一直重玩、一直刷新紀錄。</p></details><details><summary>排行榜會記我的什麼資料？</summary><p>只記你自己取的暱稱和秒數，不用註冊、不用留電話。暱稱不填就顯示「匿名玩家」。</p></details></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=7a2754ba" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="110200ba"></script>
+<script src="app.js?v=5108eff5" data-v="110200ba" defer></script>
+</body>
+</html>
