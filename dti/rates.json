@@ -31,11 +31,11 @@
       "bank": "土地銀行",
       "plan": "一般購屋貸款",
       "rate": 2.575,
-      "text": "官網揭露起始利率",
+      "text": "指數型房貸指標利率（月調）＋0.855% 起機動計息",
       "years": 30,
       "tag": "公股",
       "src": "https://oi.landbank.com.tw/product/10",
-      "checked": "2026-07-22"
+      "checked": "2026-09-25"
     },
     {
       "bank": "兆豐銀行",
