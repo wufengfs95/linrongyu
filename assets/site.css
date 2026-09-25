@@ -135,6 +135,8 @@ section{padding-block:88px}
 .empty{border:1.5px dashed var(--sky);border-radius:var(--radius);padding:40px 24px;text-align:center;color:var(--muted);background:var(--sky-soft);font-size:20px;line-height:1.8}
 .empty .btn{font-size:20px;padding:14px 32px}
 .empty b.me{font-size:1.45em;font-weight:800;color:var(--navy);line-height:1}
+.empty.one{container-type:inline-size}
+.empty.one p{white-space:nowrap;font-size:min(20px,calc(100cqw / 54.5))}
 .empty p{margin:0 0 16px}
 
 /* 內頁標題 */
@@ -198,8 +200,9 @@ section.lp{padding-block:12px 72px;font-size:26px}
 .pc-sub a{color:var(--brick);font-weight:700;margin-left:8px}
 .pc-ask{display:inline-block;margin-top:10px;font-size:21px;font-weight:700;color:var(--brown);text-decoration:none}
 .pc-ask:hover{text-decoration:underline}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0 14px}
-.facts div{background:#fff;padding:12px 8px;text-align:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0 14px}
+.facts div{background:#fff;padding:12px 8px;text-align:center}
+.facts div.blank{padding:0}
 .facts div.wide{grid-column:1/-1}
 .facts b{display:block;font-size:23px;line-height:1.4;color:var(--ink)}
 .facts b i{display:block;font-style:normal;font-size:.68em;color:var(--muted);line-height:1.5}
@@ -557,6 +560,9 @@ section.sm{padding-block:8px 48px}
 .v2-tool[hidden]{display:none}
 .v2-tool:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,58,95,.1)}
 .v2-tool .band{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--sky-soft)}
+.v2-tool .tic{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.8);color:var(--brick)}
+.v2-tool .tic svg{width:30px;height:30px}
+.v2-tool.map .tic{background:rgba(255,255,255,.22);color:#fff}
 .v2-tool .band b{font-family:var(--serif);font-size:32px;color:var(--navy)}
 .v2-tool .tag{font-size:26px;font-weight:700;color:#fff;background:var(--brick);border-radius:999px;padding:6px 20px}
 .v2-tool.map .band{background:linear-gradient(120deg,var(--brick),var(--navy))}
@@ -989,11 +995,11 @@ section.tq-wrap{padding-block:16px 72px}
 
 /* 物件頁：優質房屋賣點標籤 */
 .qbadges{display:flex;align-items:flex-start;gap:18px;margin-top:18px}
-.qlabel{flex:none;font-size:20px;color:var(--muted);padding-top:12px}
+.qlabel{flex:none;font-size:24px;color:var(--muted);padding-top:12px}
 .qcards{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
 .qc{border-radius:14px;padding:14px 18px;border:1px solid #DCEBE1;background:linear-gradient(135deg,#F2FBF5,#E6F4EA)}
-.qc b{display:block;font-size:22px;margin-bottom:4px;color:#2E7D5B}
-.qc p{margin:0;font-size:18px;line-height:1.6;color:var(--ink)}
+.qc b{display:block;font-size:27px;margin-bottom:4px;color:#2E7D5B}
+.qc p{margin:0;font-size:21px;line-height:1.6;color:var(--ink)}
 .qc.school,.qc.metro{border-color:#D8E6F8;background:linear-gradient(135deg,#F2F7FF,#E5EEFB)}
 .qc.school b,.qc.metro b{color:var(--navy)}
 .qc.warm{border-color:#F6DFC9;background:linear-gradient(135deg,#FFF7EF,#FCEBDC)}
@@ -1005,4 +1011,30 @@ section.tq-wrap{padding-block:16px 72px}
   .qlabel{padding-top:0;font-size:18px}
   .qc b{font-size:20px}
   .qc p{font-size:17px}
+}
+
+@media (max-width:760px){
+  .empty.one p{white-space:normal;font-size:18px}
+}
+
+/* 小工具頁：字級比照首頁 */
+.toolpage main{font-size:19px}
+.toolpage h1{font-size:clamp(28px,3.4vw,38px)}
+.toolpage h2,.toolpage .v-h2{font-size:26px}
+.toolpage h3{font-size:21px}
+.toolpage p{font-size:18.5px;line-height:1.85}
+.toolpage label,.toolpage legend,.toolpage .v-label{font-size:19px}
+.toolpage input,.toolpage select,.toolpage textarea,.toolpage button,.toolpage .btn{font-size:19px}
+.toolpage table th,.toolpage table td{font-size:17px}
+.toolpage small{font-size:16.5px}
+.toolpage summary{font-size:19px}
+.toolpage .crumbs{font-size:18px}
+.toolpage .sm-sub,.toolpage .tq-status,.toolpage .v-empty-note{font-size:19px}
+.toolpage .sm-note,.toolpage .foot-note{font-size:15px}
+@media (max-width:760px){
+  .toolpage main{font-size:17px}
+  .toolpage p{font-size:17px}
+  .toolpage label,.toolpage legend,.toolpage .v-label,.toolpage input,.toolpage select,
+  .toolpage textarea,.toolpage button,.toolpage .btn{font-size:17px}
+  .toolpage table th,.toolpage table td{font-size:15.5px}
 }
