@@ -67,3 +67,21 @@ b.dt-t1,td.dt-t1{color:#2E7D5B}b.dt-t2,td.dt-t2{color:#8A6A12}b.dt-t3,td.dt-t3{c
   .dt-tiers{grid-template-columns:1fr}
   .dt-steps button{font-size:12px}
 }
+
+/* 公股銀行利率比較 */
+.dt-banks{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:14px}
+.dt-bavg{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;background:var(--cream);border:1px solid var(--cream-line);border-radius:12px;padding:14px 16px}
+.dt-bavg>b{font-size:30px;color:var(--navy);font-variant-numeric:tabular-nums}
+.dt-bavg>span{flex:1;min-width:220px;font-size:14px}
+.dt-bavg a{color:var(--brick)}
+.dt-bctl{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:460px}
+.dt-bctl label{font-size:15px}
+.dt-bctl input,.dt-bctl select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.dt-btbl td{vertical-align:top}
+.dt-btbl td:first-child{white-space:normal;min-width:190px}
+.dt-btbl td small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.dt-btbl td small a{color:var(--brick)}
+.dt-btbl td:nth-child(2){font-weight:700;color:var(--navy)}
+.dt-btag{font-style:normal;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--cream);color:var(--brown);border:1px solid var(--cream-line)}
+.dt-use{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--brick);background:#fff;color:var(--brick-deep);cursor:pointer;white-space:nowrap}
+.dt-use:hover{background:var(--brick);color:#fff}

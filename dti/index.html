@@ -45,12 +45,12 @@
 <div class="wrap">
   <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 收支比試算</p>
   <h1>收支比試算（DTI）</h1>
-  <p class="sm-sub">四個步驟填收入、負債、想買的總價，自動套用各縣市最低生活費和銀行收入認列比例，算出收支比落在哪一區、過件難不難、要怎麼調。支援夫妻合併、保證人。</p>
+  <p class="sm-sub">四個步驟填收入、負債、想買的總價，自動套用各縣市最低生活費和銀行收入認列比例，算出收支比落在哪一區、過件難不難、要怎麼調。支援夫妻合併、保證人，附公股銀行房貸利率比較（每季更新）。</p>
 </div>
 </section>
 <section class="v-wrap">
 <div class="wrap">
-  <link rel="stylesheet" href="dti.css?v=ac823784">
+  <link rel="stylesheet" href="dti.css?v=7639757b">
   <h2 class="v-h2" style="margin-top:8px">先看看跟你很像的案例<small>點一下就會帶入數字</small></h2>
   <div class="rt-cases"><button type="button" data-case="single" aria-pressed="false"><b>小資單身首購</b><span>月薪 6.5 萬・新青安買 650 萬</span></button><button type="button" data-case="couple" aria-pressed="false"><b>雙薪小家庭</b><span>合計 11 萬・有車貸・買 1,100 萬</span></button><button type="button" data-case="self" aria-pressed="false"><b>自營業者</b><span>月入 10 萬・銀行只認 7 成</span></button><button type="button" data-case="swap" aria-pressed="false"><b>換屋族</b><span>舊房貸還沒繳完・買 1,800 萬</span></button></div>
   <div class="v-grid" id="dtTool">
@@ -100,6 +100,14 @@
   </div>
   <h2 class="v-h2">收支比（DTI）風險分級<small>各銀行標準不同，以下是常見的審核區間</small></h2>
   <div class="dt-tiers"><div class="dt-tier dt-t1"><b>55% 以下</b><strong>安全區</strong><p>銀行核貸機率高，月付之外還有餘裕，利率也比較好談。</p></div><div class="dt-tier dt-t2"><b>55～60%</b><strong>嚴審區</strong><p>銀行會看更完整的收入證明（薪轉存摺、扣繳憑單），部分銀行要保證人。</p></div><div class="dt-tier dt-t3"><b>60～65%</b><strong>高壓力區</strong><p>過件難度明顯提高，建議降成數、拉長年限或提供保證人。</p></div><div class="dt-tier dt-t4"><b>65～70%</b><strong>需調整區</strong><p>多半要砍成數、加保證人或換方案；先還信貸、卡債最有效。</p></div><div class="dt-tier dt-t5"><b>70% 以上</b><strong>高風險區</strong><p>建議重新抓預算：降總價、多存自備款，或等負債變少再申請。</p></div></div>
+  <h2 class="v-h2" id="bankRates">公股銀行房貸利率比較<small id="brUpdated">每季更新</small></h2>
+  <div class="dt-banks">
+    <div class="dt-bavg" id="brAvg"></div>
+    <div class="dt-bctl"><div class="field"><label for="brLoan">貸款金額（萬）</label><input type="number" id="brLoan" inputmode="numeric" value="1000"></div>
+      <div class="field"><label for="brYears">貸款年限</label><select id="brYears"><option value="20">20 年</option><option value="30" selected>30 年</option><option value="40">40 年</option></select></div></div>
+    <div class="v-table-wrap"><table class="v-table dt-btbl"><thead><tr><th>銀行／方案</th><th>官網公告利率</th><th>月付</th><th></th></tr></thead><tbody id="brBody"><tr><td colspan="4">讀取中…</td></tr></tbody></table></div>
+    <p class="v-note">利率是各銀行官網公告的「起始利率」，只有條件最好的客戶拿得到；實際利率看職業、信用、物件鑑價，大多落在上面的五大銀行平均附近。月付用本息平均攤還計算，年限超過該方案上限時以上限計。點「用這個利率算」會帶進上面的收支比試算。</p>
+  </div>
   <h2 class="v-h2">銀行怎麼算收支比？</h2>
   <div class="dt-formula"><b>收支比 ＝ 每月總支出 ÷ 每月認列收入 × 100%</b>
     <div class="dt-f3"><div><strong>① 加總收入</strong><p>月收入 × 認列比例。受薪全額，自營、獎金、租金約 7 成，股利約 6.5 成。</p></div>
@@ -134,7 +142,7 @@
 <a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
 
 <script src="../assets/site.js?v=fe1b5629" defer></script>
-<script src="../assets/tools.js?v=b0879141" data-v=""></script>
-<script src="app.js?v=b32eeb33" data-v="" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="87dc8ba5"></script>
+<script src="app.js?v=46ca4b6f" data-v="87dc8ba5" defer></script>
 </body>
 </html>

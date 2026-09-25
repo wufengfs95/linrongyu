@@ -16,7 +16,7 @@
              [65,'高壓力區','t3','過件難度明顯提高，建議降低貸款成數、拉長年限，或加保證人。'],
              [70,'需調整區','t4','多半要調整條件才過得了：砍成數、加保證人或換方案，優先還掉信貸、卡債。'],
              [Infinity,'高風險區','t5','過件難度很高，建議重新抓購屋預算：降總價、多準備自備款，或等負債減少再申請。']];
-  var RATES=[[1.775,'新青安 3.0（前 3 年）'],[2.2,'公股銀行首購常見'],[2.35,'五大行庫平均附近'],[2.5,'一般房貸常見'],[2.8,'民營銀行、非首購']];
+  var RATES=[[1.775,'新青安 3.0（前 3 年）'],[2.2,'公股銀行首購常見'],[2.321,'五大銀行實際平均'],[2.5,'一般房貸常見'],[2.8,'民營銀行、非首購']];
   var CASES={
     single:{mode:1,city:'桃園市',dep:0,inc1:65000,k1:'salary',dStudent:3000,price:650,ratio:80,rate:1.775,years:40,grace:0,
       note:'月薪 6.5 萬、學貸每月 3,000 元，用新青安 40 年買 650 萬的兩房，收支比剛好落在 55% 安全區內，總價再往上加就會進嚴審區。中壢、平鎮這個價位還有不少選擇。'},
@@ -157,6 +157,36 @@
   document.querySelectorAll('[data-go-calc]').forEach(function(b){ b.addEventListener('click',function(){ $('dtTool').scrollIntoView({behavior:'smooth'}); }); });
   $('dtiForm').addEventListener('input',function(){ calc(); });
   $('dtiForm').addEventListener('submit',function(e){ e.preventDefault(); });
+
+  // ---- 公股銀行利率比較（資料在 rates.json，每季排程更新） ----
+  var BANKS=null;
+  function drawBanks(){
+    if(!BANKS) return;
+    var loan=RT.val('brLoan'), yrs=RT.val('brYears')||30, a=BANKS.avg;
+    $('brUpdated').textContent='資料更新：'+BANKS.updated;
+    $('brAvg').innerHTML='<b>'+a.rate+'%</b><span>'+esc(a.label)+'（'+esc(a.month)+'，<a href="'+esc(a.src)+'" target="_blank" rel="noopener">中央銀行</a>）<br>這是大家實際拿到的平均利率，同樣貸 '+RT.wan(loan)+'、'+yrs+' 年，月付約 <b>'+RT.yuan(RT.pmt(loan*10000,a.rate,yrs*12))+'</b></span>'+
+      '<button type="button" class="dt-use" data-use="'+a.rate+'" data-years="'+yrs+'">用這個利率算</button>';
+    $('brBody').innerHTML=BANKS.banks.map(function(b){
+      var n=Math.min(yrs,b.years)*12;
+      return '<tr><td><b>'+esc(b.bank)+'</b> <em class="dt-btag">'+esc(b.tag)+'</em><small>'+esc(b.plan)+'・最長 '+b.years+' 年</small><small>'+esc(b.text)+'</small>'+
+        '<small><a href="'+esc(b.src)+'" target="_blank" rel="noopener">官網</a>・查核 '+esc(b.checked)+'</small></td>'+
+        '<td>'+(b.rate!=null?b.rate+'% 起':'依個案核定')+'</td>'+
+        '<td>'+(b.rate!=null&&loan?RT.yuan(RT.pmt(loan*10000,b.rate,n)):'—')+'</td>'+
+        '<td>'+(b.rate!=null?'<button type="button" class="dt-use" data-use="'+b.rate+'" data-years="'+Math.min(yrs,b.years)+'">用這個利率算</button>':'')+'</td></tr>';
+    }).join('');
+  }
+  fetch('rates.json'+(document.querySelector('script[data-v]')?'?v='+document.querySelector('script[data-v]').getAttribute('data-v'):''))
+    .then(function(r){return r.json()}).then(function(d){
+      BANKS=d; RATES[2]=[d.avg.rate,'五大銀行實際平均（'+d.avg.month+'）']; drawBanks();
+    }).catch(function(){ $('brBody').innerHTML='<tr><td colspan="4">利率資料讀取失敗，請重新整理。</td></tr>'; });
+  ['brLoan','brYears'].forEach(function(id){ $(id).addEventListener('input',drawBanks); $(id).addEventListener('change',drawBanks); });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.dt-use'); if(!b) return;
+    $('rate').value=b.getAttribute('data-use');
+    if(b.getAttribute('data-years')) $('years').value=b.getAttribute('data-years');
+    if(!$('price').value&&RT.val('brLoan')) $('price').value=Math.round(RT.val('brLoan')/0.8);
+    go(3); calc(); $('dtTool').scrollIntoView({behavior:'smooth'});
+  });
 
   $('dtiResult').setAttribute('data-empty',$('dtiResult').innerHTML);
   var saved=RT.store.get('rt-dti',null);

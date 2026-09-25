@@ -1,0 +1,101 @@
+{
+  "updated": "2026-09-25",
+  "avg": {
+    "rate": 2.321,
+    "month": "2026 年 8 月",
+    "label": "五大銀行新承做房貸平均利率",
+    "src": "https://www.cbc.gov.tw/tw/np-528-1.html"
+  },
+  "banks": [
+    {
+      "bank": "新青安 3.0",
+      "plan": "8 家公股銀行承辦",
+      "rate": 1.775,
+      "text": "前 3 年 1.775%，第 4 年起每年加半碼，第 7 年起約 2.275%",
+      "years": 40,
+      "tag": "政策",
+      "src": "https://www.bankchb.com/frontend/mashup.jsp?funcId=daa56da615",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "華南銀行",
+      "plan": "房屋貸款",
+      "rate": 2.55,
+      "text": "定儲利率指數加碼機動計息，最高 8.5 成",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.hncb.com.tw/wps/portal/HNCB/per_finance/area1/loan/housing_loan",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "土地銀行",
+      "plan": "一般購屋貸款",
+      "rate": 2.575,
+      "text": "官網揭露起始利率",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://oi.landbank.com.tw/product/10",
+      "checked": "2026-07-22"
+    },
+    {
+      "bank": "兆豐銀行",
+      "plan": "優利方案",
+      "rate": 2.5,
+      "text": "消金指標利率＋0.782% 起，每月浮動，最高 8 成",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.megabank.com.tw/personal/loan/house/mortgage-diversity",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "臺灣企銀",
+      "plan": "幸福優加利",
+      "rate": 2.5,
+      "text": "定儲利率指數（月）＋0.76% 起機動計息，約 2.50%",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.tbb.com.tw/zh-tw/personal/loans/home-loans/mortgage/family-plus-home-loan",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "合作金庫",
+      "plan": "首次購屋貸款",
+      "rate": 2.698,
+      "text": "一般購屋貸款 2.998% 起",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.tcb-bank.com.tw/personal-banking/loan/mortgage/house-loan-02",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "第一銀行",
+      "plan": "購屋貸款",
+      "rate": 2.7,
+      "text": "放款指數利率（115/7/15 為 1.74%）加碼機動計息",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.firstbank.com.tw/sites/fcb/touch/1565687620701",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "彰化銀行",
+      "plan": "購屋貸款",
+      "rate": null,
+      "text": "官網沒有公告一般購屋起始利率，依個案核定",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.bankchb.com/frontend/mashup.jsp?funcId=ebd36fcb15",
+      "checked": "2026-09-25"
+    },
+    {
+      "bank": "臺灣銀行",
+      "plan": "一般性房屋購置貸款",
+      "rate": null,
+      "text": "官網只公告牌告利率 3.37%～3.77%，實際依個案核定、通常低於牌告",
+      "years": 30,
+      "tag": "公股",
+      "src": "https://www.bot.com.tw/Business/Loans/ConsumerLoan/Pages/consumer_rate_o.aspx",
+      "checked": "2026-09-25"
+    }
+  ]
+}
