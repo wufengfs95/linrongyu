@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>自備款人生：買房人生模擬小遊戲，你幾歲買得起房？｜林容瑜</title>
+<meta name="description" content="買房人生模擬遊戲：從 25 歲開始，每年選擇進修、跳槽、結婚、買車或投資，存到自備款、收支比過關就能在中壢買房，看你幾歲買得起。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/life/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="自備款人生：買房人生模擬小遊戲，你幾歲買得起房？｜林容瑜">
+<meta property="og:description" content="買房人生模擬遊戲：從 25 歲開始，每年選擇進修、跳槽、結婚、買車或投資，存到自備款、收支比過關就能在中壢買房，看你幾歲買得起。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/life/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=f73b19d9">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "自備款人生：你幾歲買得起房？", "url": "https://wufengfs95.github.io/linrongyu/life/", "applicationCategory": "GameApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "買房人生模擬遊戲：從 25 歲開始，每年選擇進修、跳槽、結婚、買車或投資，存到自備款、收支比過關就能在中壢買房，看你幾歲買得起。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../deals/">成交地圖</a>
+      <a href="../tools/">免費工具</a>
+      <a href="../game/" aria-current="page">房產遊戲室</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../game/">房產遊戲室</a> › 自備款人生</p>
+  <h1>自備款人生：你幾歲買得起房？</h1>
+  <p class="sm-sub">從 25 歲開始，每年做一個人生選擇，存到自備款、收支比也過關，才能在中壢買下第一間房。房價每年都在漲，看你幾歲買得到。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="gm-hud">
+    <span class="gm-stat">年紀<b id="lfAge">25</b>歲</span>
+    <span class="gm-sp"></span>
+    <span class="gm-stat">存款<b id="lfSave">30 萬</b></span>
+  </div>
+  <div class="gm-stage">
+    <div class="gm-start" id="lfStart"><p>你 <b>25 歲</b>，月薪 4.2 萬、存款 30 萬，<br>目標是<b>中壢 2 房電梯華廈（900 萬）</b>。<br>每年做一個選擇，看你幾歲買得起！</p>
+      <button type="button" class="btn btn-main gm-big" id="lfGo">開始人生</button></div>
+    <div class="gm-play" id="lfPlay" hidden>
+      <div class="lf-stat" id="lfStat"></div>
+      <div class="lf-meter"><p id="lfDownT"></p><div class="lf-bar"><div class="lf-fill" id="lfDown"></div></div></div>
+      <div class="lf-meter"><p id="lfDtiT"></p><div class="lf-bar lf-dti"><div class="lf-fill" id="lfDti"></div><i style="left:66.7%"></i></div></div>
+      <button type="button" class="btn btn-main lf-buy" id="lfBuy" disabled></button>
+      <p class="gm-q lf-q">今年你要…</p>
+      <div class="lf-choices" id="lfChoices"></div>
+      <ol class="lf-log" id="lfLog"></ol>
+    </div>
+  </div>
+  <div class="gm-result" id="lfResult" hidden aria-live="polite">
+    <p class="gm-head" id="lfHead"></p>
+    <p class="gm-rank" id="lfRank"></p>
+    <div id="lfTop"></div>
+    <div id="lfExtra"></div>
+    <p class="gm-cta" id="lfCta"></p>
+    <div class="gm-acts"><button type="button" class="btn btn-main" id="lfAgain">重新開始人生</button>
+      <button type="button" class="btn btn-line" id="lfShare">揪朋友來比</button></div>
+    <p class="toast" id="lfToast" role="status"></p>
+    <p class="gm-name" hidden><label for="lfName">排行榜暱稱</label><input type="text" id="lfName" maxlength="12" placeholder="匿名玩家" data-gm-name></p>
+  </div>
+  <h2 class="v-h2">怎麼玩</h2>
+  <div class="gm-how"><div><b>① 每年做一個選擇</b>進修、跳槽、搬回家、買車、結婚、兼差、投資…每個選擇都會影響收入、存款和負債。</div><div><b>② 自備款＋收支比都要過</b>自備款要存到房價 2 成加稅費；房貸月付加其他負債，不能超過銀行認列收入的 60%。</div><div><b>③ 越年輕買到越厲害</b>房價每年都在漲，45 歲前買到就過關，買到的年紀就是成績。</div></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>遊戲裡的算法跟銀行一樣嗎？</summary><p>簡化過，但原則一樣：一般房貸最多 8 成、30 年；收支比過 60% 銀行就會很嚴；兼差、接案收入通常只認列 7 成；車貸、信貸都會算進負債。</p></details><details><summary>我真實的情況能買多少？</summary><p>用<a href="../dti/">收支比試算</a>輸入你的收入和負債，就知道銀行大概會怎麼看；首購可以再看<a href="../youth-loan/">新青安試算</a>。想要有人一起算，直接 LINE 我。</p></details></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=da13af33" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v=""></script>
+<link rel="stylesheet" href="../assets/game.css?v=3fc677c5">
+<script src="../assets/game.js?v=305e0984" defer></script>
+<script src="app.js?v=c54ca12f" data-v="" defer></script>
+</body>
+</html>

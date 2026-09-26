@@ -1066,3 +1066,22 @@ section.tq-wrap{padding-block:16px 72px}
   .buyer-grid{grid-template-columns:1fr}
   .buyer-how{padding:22px}
 }
+
+/* 成交地圖 */
+.deal-map{height:min(62vh,560px);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);z-index:0}
+.deal-note{margin:14px 0 0;font-size:18px;color:var(--muted)}
+.dm-icon{background:none;border:0}
+.dm-pin{display:inline-flex;align-items:center;justify-content:center;min-width:70px;padding:5px 10px;border-radius:999px;
+  background:var(--brick);color:#fff;font-size:17px;font-weight:800;box-shadow:0 3px 10px rgba(0,0,0,.28);white-space:nowrap}
+.dm-pin::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:var(--brick)}
+.deal-table{margin-top:10px;overflow-x:auto}
+.deal-table table{width:100%;border-collapse:collapse;font-size:19px}
+.deal-table th,.deal-table td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.deal-table th{color:var(--navy);background:var(--sky-soft);font-size:18px}
+.deal-table .num{text-align:right;font-weight:800;color:var(--brick);font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .deal-map{height:56vh}
+  .deal-table table{font-size:17px}
+  .deal-table th,.deal-table td{padding:11px 8px}
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>預算內蓋夢想屋：用實價登錄算你的預算能買什麼｜林容瑜</title>
+<meta name="description" content="買房預算小遊戲：每週一個預算，挑桃園的區域、型態、屋齡、房數和車位，用實價登錄中位單價估價，看預算內能買到幾分的夢想屋。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/dream/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="預算內蓋夢想屋：用實價登錄算你的預算能買什麼｜林容瑜">
+<meta property="og:description" content="買房預算小遊戲：每週一個預算，挑桃園的區域、型態、屋齡、房數和車位，用實價登錄中位單價估價，看預算內能買到幾分的夢想屋。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/dream/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=f73b19d9">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "預算內蓋夢想屋", "url": "https://wufengfs95.github.io/linrongyu/dream/", "applicationCategory": "GameApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "買房預算小遊戲：每週一個預算，挑桃園的區域、型態、屋齡、房數和車位，用實價登錄中位單價估價，看預算內能買到幾分的夢想屋。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../deals/">成交地圖</a>
+      <a href="../tools/">免費工具</a>
+      <a href="../game/" aria-current="page">房產遊戲室</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../game/">房產遊戲室</a> › 預算內蓋夢想屋</p>
+  <h1>預算內蓋夢想屋</h1>
+  <p class="sm-sub">每週一個預算，挑區域、型態、屋齡、房數、車位，用實價登錄估價，看你能在預算內蓋出幾分的夢想屋。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="gm-hud">
+    <span class="gm-stat">本週預算<b id="drBudget">—</b>萬</span>
+    <span class="gm-track"><span class="gm-bar dr-bar" id="drBar" style="display:block;transform:scaleX(0)"></span></span>
+    <span class="gm-stat">夢想分數<b id="drScore">0</b></span>
+  </div>
+  <div class="gm-stage">
+    <div class="dr-price" id="drPrice"></div>
+    <div class="dr-groups" id="drGroups"></div>
+    <button type="button" class="btn btn-main dr-go" id="drGo" disabled>先把每一項都選好</button>
+    <p class="toast" id="drMsg" role="status"></p>
+  </div>
+  <div class="gm-result" id="drResult" hidden aria-live="polite">
+    <p class="gm-head" id="drHead"></p>
+    <p class="gm-rank" id="drRank"></p>
+    <div id="drTop"></div>
+    <div id="drExtra"></div>
+    <p class="gm-cta" id="drCta"></p>
+    <div class="gm-acts"><button type="button" class="btn btn-main" id="drAgain">再蓋一次</button>
+      <button type="button" class="btn btn-line" id="drShare">揪朋友來比</button></div>
+    <p class="toast" id="drToast" role="status"></p>
+    <p class="gm-name" hidden><label for="drName">排行榜暱稱</label><input type="text" id="drName" maxlength="12" placeholder="匿名玩家" data-gm-name></p>
+  </div>
+  <h2 class="v-h2">怎麼玩</h2>
+  <div class="gm-how"><div><b>① 每週一個預算</b>每週的預算不一樣（800～1,500 萬），大家用同一個預算比。</div><div><b>② 挑條件</b>區域、型態、屋齡、房數、車位，每一項都有夢想分數，價格用實價登錄近一年半的中位單價估。</div><div><b>③ 不能超過預算</b>在預算內分數越高越好，剩下的錢每 10 萬再加 1 分。你會怎麼取捨？</div></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>價格是怎麼算的？</summary><p>用內政部實價登錄桃園市近一年半的成交，算出每一區、每一種型態、每個屋齡級距的中位單價（不含車位），乘上房數對應的坪數，再加上該區車位的中位價。實際價格還會看樓層、社區、屋況。</p></details><details><summary>為什麼有些組合不能選？</summary><p>近一年半成交少於 8 筆的組合（例如某些區的新公寓），價格不準，就先不給選。</p></details><details><summary>想找真的符合條件的房子？</summary><p>結果頁會列出我正在賣、預算內的物件，也可以用<a href="../match/">買方配案</a>把條件存下來，或直接 LINE 我幫你找。</p></details></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=da13af33" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="e1f47d00"></script>
+<link rel="stylesheet" href="../assets/game.css?v=3fc677c5">
+<script src="../assets/game.js?v=305e0984" defer></script>
+<script src="app.js?v=7787b5e4" data-v="e1f47d00" defer></script>
+</body>
+</html>
