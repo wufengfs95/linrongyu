@@ -1,0 +1,107 @@
+/* 房產遊戲室共用樣式（找亮點另有 spot/spot.css） */
+.gm-hud{position:sticky;top:72px;z-index:5;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(31,58,95,.07)}
+.gm-stat{font-size:15px;color:var(--muted);white-space:nowrap}
+.gm-stat b{font-family:var(--round);font-size:28px;font-weight:800;color:var(--navy);margin:0 3px;font-variant-numeric:tabular-nums}
+.gm-stat.hot b{color:var(--brick)}
+.gm-track{flex:1;height:10px;border-radius:999px;background:var(--cream);overflow:hidden}
+.gm-bar{height:100%;background:linear-gradient(90deg,var(--brick),var(--gold));transform-origin:left}
+.gm-pop{animation:gm-pop .35s}
+@keyframes gm-pop{50%{transform:scale(1.25)}}
+.gm-shake{animation:gm-shake .35s}
+@keyframes gm-shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+
+.gm-stage{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(31,58,95,.06)}
+.gm-q{font-size:clamp(21px,3vw,26px);font-weight:700;color:var(--navy);text-align:center;margin:0 0 16px;line-height:1.5}
+.gm-start{display:grid;justify-items:center;gap:14px;text-align:center;padding:26px 10px}
+.gm-start p{margin:0;font-size:19px;line-height:1.7}
+.gm-big{font-size:24px!important;padding:16px 44px!important;box-shadow:0 8px 20px rgba(184,92,56,.3)}
+.gm-start[hidden],.gm-play[hidden],.gm-name[hidden]{display:none}
+
+/* 成交卡片（誰比較貴、猜價王） */
+.gm-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gm-deal{position:relative;display:grid;gap:8px;text-align:left;font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:16px 18px;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+button.gm-deal:hover{border-color:var(--brick-soft);transform:translateY(-2px)}
+div.gm-deal{cursor:default}
+.gm-deal .kind{justify-self:start;font-size:14px;font-weight:700;color:#fff;background:var(--navy-soft);border-radius:999px;padding:2px 12px}
+.gm-deal h3{font-size:24px;color:var(--navy);line-height:1.35}
+.gm-deal h3 small{display:block;font-size:16px;color:var(--muted);font-weight:400}
+.gm-deal dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:17px}
+.gm-deal dt{color:var(--muted)}
+.gm-deal dd{margin:0;font-weight:700}
+.gm-ans{display:none;border-top:1px dashed var(--cream-line);padding-top:10px;font-size:17px}
+.gm-ans b{font-family:var(--round);font-size:30px;color:var(--navy);font-variant-numeric:tabular-nums}
+.gm-reveal .gm-ans{display:block;animation:gm-in .3s ease-out}
+@keyframes gm-in{from{opacity:0;transform:translateY(6px)}}
+.gm-deal.win{border-color:var(--line-green);background:#effbf3}
+.gm-deal.lose{border-color:var(--cream-line)}
+.gm-deal.pick::after{content:'你選的';position:absolute;right:12px;top:12px;font-size:13px;font-weight:700;color:var(--brick-deep);background:#fff;border:1.5px solid var(--brick-soft);border-radius:999px;padding:1px 10px}
+.gm-vs{display:none}
+.gm-why{margin:14px 0 0;min-height:1.6em;text-align:center;font-size:18px;line-height:1.6}
+.gm-why.ok{color:#1c7c3f}
+.gm-why.no{color:var(--brick-deep)}
+.gm-next{display:flex;justify-content:center;margin-top:12px}
+.gm-next[hidden]{display:none}
+
+/* 是非題 */
+.gm-tf{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gm-tf button{font:inherit;font-size:28px;font-weight:800;padding:22px 10px;border-radius:16px;border:2.5px solid var(--line);background:var(--paper);cursor:pointer;color:var(--navy);transition:transform .12s,border-color .12s}
+.gm-tf button:hover:not(:disabled){transform:translateY(-2px);border-color:var(--navy-soft)}
+.gm-tf button.right{background:#effbf3;border-color:var(--line-green);color:#1c7c3f}
+.gm-tf button.wrong{background:#fdf0ea;border-color:var(--brick);color:var(--brick-deep)}
+.gm-tf button:disabled{cursor:default}
+.gm-explain{margin:16px 0 0;background:var(--cream);border-radius:12px;padding:12px 16px;font-size:17px;line-height:1.7}
+.gm-explain[hidden]{display:none}
+
+/* 猜價輸入 */
+.gm-guess{display:grid;gap:12px;margin-top:16px}
+.gm-guess label{font-size:18px;font-weight:700;color:var(--navy)}
+.gm-guess .row{display:flex;align-items:center;gap:10px}
+.gm-guess input[type=range]{flex:1;accent-color:var(--brick);height:32px}
+.gm-guess input[type=number]{font:inherit;font-size:24px;font-weight:700;width:5.2em;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;text-align:right;color:var(--ink)}
+.gm-guess .unit{font-size:18px}
+
+/* 結果 */
+.gm-result{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;text-align:center;box-shadow:0 8px 24px rgba(31,58,95,.06)}
+.gm-result[hidden]{display:none}
+.gm-head{font-size:24px;color:var(--navy);margin:0 0 6px;line-height:1.5}
+.gm-head b{font-size:44px;color:var(--brick);font-variant-numeric:tabular-nums}
+.gm-head small{display:block;font-size:16px;color:var(--muted);font-weight:400}
+.gm-rank{font-size:19px;margin:6px 0}
+.gm-rank b{color:var(--brick);font-size:24px}
+.gm-rank small{color:var(--muted);font-size:15px}
+.gm-top{list-style:none;counter-reset:r;padding:0;margin:10px auto;max-width:320px;text-align:left}
+.gm-top li{counter-increment:r;display:flex;gap:10px;padding:5px 12px;border-radius:8px;font-size:16px}
+.gm-top li::before{content:counter(r);width:1.6em;color:var(--muted);font-weight:700}
+.gm-top li:nth-child(-n+3)::before{color:var(--brick)}
+.gm-top li span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gm-top li b{font-variant-numeric:tabular-nums}
+.gm-top li.me{background:var(--cream)}
+.gm-cta{margin:14px auto 16px;max-width:520px;background:var(--sky-soft);border-radius:12px;padding:12px 16px;font-size:17px;line-height:1.7}
+.gm-cta a{color:var(--brick-deep);font-weight:700}
+.gm-acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.gm-acts .btn{font-size:19px;padding:13px 28px}
+.gm-name{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 0;font-size:15px;color:var(--muted)}
+.gm-name input{font:inherit;font-size:16px;padding:6px 12px;border:1.5px solid var(--line);border-radius:8px;width:10em}
+.gm-review{text-align:left;max-width:640px;margin:16px auto 0;display:grid;gap:10px}
+.gm-review div{border-left:4px solid var(--brick-soft);background:var(--paper);border-radius:0 10px 10px 0;padding:8px 14px;font-size:16px;line-height:1.65}
+.gm-review b{display:block;color:var(--navy)}
+.gm-rounds{list-style:none;padding:0;margin:12px auto;max-width:520px;display:grid;gap:6px;text-align:left}
+.gm-rounds li{display:flex;justify-content:space-between;gap:10px;background:var(--paper);border-radius:8px;padding:6px 12px;font-size:16px}
+.gm-rounds li b{font-variant-numeric:tabular-nums;color:var(--navy)}
+
+.gm-how{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+.gm-how div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:16px;line-height:1.6}
+.gm-how b{display:block;color:var(--navy);font-size:18px}
+
+@media (max-width:760px){
+  .gm-hud{top:64px;padding:8px 12px;gap:10px}
+  .gm-stat b{font-size:23px}
+  .gm-stage{padding:16px 12px}
+  .gm-pair{grid-template-columns:1fr;gap:10px}
+  .gm-deal{padding:12px 14px;gap:6px}
+  .gm-deal h3{font-size:21px}
+  .gm-deal dl{font-size:16px;grid-template-columns:auto 1fr auto 1fr}
+  .gm-tf button{font-size:24px;padding:18px 8px}
+  .gm-how{grid-template-columns:1fr}
+  .gm-head b{font-size:36px}
+}

@@ -54,11 +54,11 @@
     return mine;
   };
 
-  // 暱稱欄：<input data-gm-name>，沒開線上排行榜就整行藏起來
+  // 暱稱欄：<p class="gm-name" hidden><input data-gm-name></p>，有開線上排行榜才顯示
   document.querySelectorAll('[data-gm-name]').forEach(function(el){
     el.value=ME.name||'';
     el.addEventListener('change',function(){ GM.setName(el.value); });
-    if(!BOARD){ var row=el.closest('.gm-name'); if(row) row.hidden=true; }
+    var row=el.closest('.gm-name'); if(row) row.hidden=!BOARD;
   });
 
   GM.share=function(text,toast){

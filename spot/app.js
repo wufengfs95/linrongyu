@@ -1,24 +1,14 @@
 /* 10 秒找亮點：同一張物件照片，右邊（手機是下面）被程式偷改 3 個地方，10 秒內全部點到就過關。
    照片來自網站上架物件（photos.json 由 build.py 產生），不同處每局隨機產生，所以可以一直重玩。
-   排行榜：BOARD 填 Apps Script 網址就會用線上週排行（000_Agent/tools/spot-board/board.gs）；
-   沒填就只記這個瀏覽器自己的本週最佳。 */
+   排行榜用房產遊戲室共用的 assets/game.js（GM.board）。 */
 (function(){
-  var BOARD='';   // 部署 board.gs 後，把「網頁應用程式」網址貼在這裡
-  var RT=window.RT, $=RT.$, esc=RT.esc;
+  var RT=window.RT, GM=window.GM, $=RT.$, esc=RT.esc;
   var LIMIT=10, PENALTY=1, N=3, W=720;   // 秒數、點錯扣秒、不同處數量、運算用寬度
-  var KEY='rt-spot', ME=RT.store.get(KEY,{id:'',name:'',runs:[]});
-  if(!ME.id){ ME.id=Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4); RT.store.set(KEY,ME); }
+  var played=0, last=null;   // 這次打開頁面玩了幾局、上一局秒數（分享用）
 
   var photos=[], deck=[], cur=null, diffs=[], found=0, t0=0, extra=0, raf=0, state='idle';
   var cvA=$('spA'), cvB=$('spB'), ctxA=cvA.getContext('2d'), ctxB=cvB.getContext('2d');
 
-  // 本週（台灣時間，週一開始）：2026-W39 這種格式
-  function week(){
-    var d=new Date(Date.now()+8*3600e3); d=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));
-    var day=d.getUTCDay()||7; d.setUTCDate(d.getUTCDate()+4-day);
-    var y=d.getUTCFullYear(), w=Math.ceil(((d-Date.UTC(y,0,1))/864e5+1)/7);
-    return y+'-W'+('0'+w).slice(-2);
-  }
   function sec(t){ return t.toFixed(2); }
 
   // ---------- 產生不同處 ----------
@@ -118,7 +108,7 @@
     state='ready'; found=0; extra=0;
     [].forEach.call(document.querySelectorAll('.sp-layer'),function(l){l.innerHTML=''});
     $('spBoard').classList.add('cover'); $('spBoard').classList.remove('over');
-    $('spCover').hidden=false; $('spStart').disabled=false; $('spStart').textContent=ME.runs.length?'再挑戰一次':'開始（10 秒）';
+    $('spCover').hidden=false; $('spStart').disabled=false; $('spStart').textContent=played?'再挑戰一次':'開始（10 秒）';
     $('spBar').style.transform='scaleX(1)'; $('spTime').textContent=sec(LIMIT); renderDots();
     prepare(0);
   }
@@ -166,41 +156,14 @@
   function end(win,t){
     cancelAnimationFrame(raf); state='over'; document.body.classList.remove('sp-playing'); $('spTime').textContent=sec(Math.max(0,LIMIT-t)); $('spBar').style.transform='scaleX('+Math.max(0,1-t/LIMIT)+')'; $('spBoard').classList.add('over');
     diffs.forEach(function(d){ if(!d.hit) mark(d,'miss'); });
-    var wk=week(); ME.runs=ME.runs.filter(function(r){return r.w===wk});
-    ME.runs.push({w:wk,t:win?Math.round(t*100)/100:null,f:found}); RT.store.set(KEY,ME);
-    var mine=ME.runs.filter(function(r){return r.t}).map(function(r){return r.t}), best=mine.length?Math.min.apply(null,mine):null;
+    played++; last=win?Math.round(t*100)/100:null;
+    var mine=GM.board({game:'spot',score:last,asc:true,fmt:sec,unit:' 秒',rank:$('spRank'),top:$('spTop')});
     $('spResult').hidden=false;
-    $('spHead').innerHTML=win?'<b>'+sec(t)+'</b> 秒找到 3 個亮點！'+(best===Math.round(t*100)/100&&mine.length>1?'<small>刷新你的本週最佳</small>':'')
+    $('spHead').innerHTML=win?'<b>'+sec(t)+'</b> 秒找到 3 個亮點！'+(mine.better&&mine.n>1?'<small>刷新你的本週最佳</small>':'')
                               :'時間到！找到 <b>'+found+'</b> / 3 個<small>紅圈是漏掉的地方</small>';
     $('spHouse').innerHTML=cur.s?'這張是 <a href="../listings/'+esc(cur.s)+'/">'+esc(cur.t)+'</a>，正在賣喔 →':'';
     $('spAgain').focus({preventScroll:true});
     setTimeout(function(){ var r=$('spResult').getBoundingClientRect(); if(r.bottom>innerHeight) window.scrollBy({top:Math.min(r.top-120,r.bottom-innerHeight+16),behavior:'smooth'}); },900);   // 先讓人看一下紅綠圈，再捲到成績
-    board(win?Math.round(t*100)/100:null,best);
-  }
-
-  // ---------- 排行榜 ----------
-  function localBoard(best){
-    var n=ME.runs.length;
-    $('spRank').innerHTML=best?'你本週最快 <b>'+sec(best)+'</b> 秒・已挑戰 '+n+' 次':'本週還沒過關・已挑戰 '+n+' 次，再試一次！';
-    $('spTop').innerHTML='';
-  }
-  function showBoard(res,best){
-    var top=res.top||[];
-    var line=top.length?'本週最快 <b>'+sec(top[0].t)+'</b> 秒':'本週還沒有人過關';
-    if(res.rank) line+='，你第 <b>'+res.rank+'</b> 名<small>（共 '+res.total+' 人）</small>';
-    else if(best==null) line+='，過關就能上榜！';
-    $('spRank').innerHTML=line;
-    $('spTop').innerHTML=top.length?'<ol>'+top.map(function(r){return '<li'+(r.me?' class="me"':'')+'><span>'+esc(r.n)+'</span><b>'+sec(r.t)+'</b></li>'}).join('')+'</ol>':'';
-  }
-  function board(t,best){
-    if(!BOARD) return localBoard(best);
-    $('spRank').textContent='排行榜讀取中…';
-    var name=($('spName').value||'').trim().slice(0,12);
-    if(name&&name!==ME.name){ ME.name=name; RT.store.set(KEY,ME); }
-    var body={w:week(),id:ME.id,n:ME.name||'匿名玩家',t:t};
-    fetch(BOARD,{method:'POST',body:JSON.stringify(body)})   // text/plain，不會觸發 CORS 預檢
-      .then(function(r){return r.json()}).then(function(res){ showBoard(res,best); })
-      .catch(function(){ localBoard(best); });
   }
 
   function msg(s){ $('spCover').hidden=false; $('spCoverText').innerHTML=s; $('spStart').hidden=true; }
@@ -209,15 +172,9 @@
   [cvA,cvB].forEach(function(cv){ cv.addEventListener('pointerdown',tap); });
   $('spStart').addEventListener('click',start);
   $('spAgain').addEventListener('click',again);
-  $('spName').value=ME.name||'';
-  $('spName').addEventListener('change',function(){ ME.name=this.value.trim().slice(0,12); RT.store.set(KEY,ME); });
   $('spShare').addEventListener('click',function(){
-    var last=ME.runs[ME.runs.length-1]||{}, url=location.href.split('#')[0];
-    var text=last.t?'我 '+sec(last.t)+' 秒就找到 3 個不同，你能比我快嗎？👀\n'+url:'10 秒找 3 個不同，我差一點點！換你試試 👀\n'+url;
-    if(navigator.share) navigator.share({text:text}).catch(function(){});
-    else RT.copy(text,$('spToast'),'已複製，貼到 LINE 揪朋友來比。');
+    GM.share(last?'我 '+sec(last)+' 秒就找到 3 個不同，你能比我快嗎？👀':'10 秒找 3 個不同，我差一點點！換你試試 👀',$('spToast'));
   });
-  if(!BOARD) $('spNameRow').hidden=true;
 
   fetch('photos.json?v='+(document.currentScript&&document.currentScript.getAttribute('data-v')||''))
     .then(function(r){return r.json()}).then(function(list){

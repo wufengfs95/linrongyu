@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>誰比較貴？桃園實價登錄房價二選一小遊戲｜林容瑜</title>
+<meta name="description" content="桃園房價小遊戲：兩筆實價登錄真實成交，猜哪一間每坪單價比較高，連對越多題排名越前面，每週排行榜。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/higher/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="誰比較貴？桃園實價登錄房價二選一小遊戲｜林容瑜">
+<meta property="og:description" content="桃園房價小遊戲：兩筆實價登錄真實成交，猜哪一間每坪單價比較高，連對越多題排名越前面，每週排行榜。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/higher/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=29309378">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "誰比較貴？桃園房價二選一", "url": "https://wufengfs95.github.io/linrongyu/higher/", "applicationCategory": "GameApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "桃園房價小遊戲：兩筆實價登錄真實成交，猜哪一間每坪單價比較高，連對越多題排名越前面，每週排行榜。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../tools/">免費工具</a>
+      <a href="../game/" aria-current="page">房產遊戲室</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../game/">房產遊戲室</a> › 誰比較貴</p>
+  <h1>誰比較貴？桃園房價二選一</h1>
+  <p class="sm-sub">兩筆桃園真實成交，猜哪一間每坪比較貴。猜對繼續、猜錯結束，看你能連對幾題，順便練出看房價的眼光。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="gm-hud">
+    <span class="gm-stat">連對<b id="hiStreak">0</b>題</span>
+    <span class="gm-track"></span>
+    <span class="gm-stat">本週最佳<b id="hiBest">0</b></span>
+  </div>
+  <div class="gm-stage">
+    <div class="gm-start" id="hiStart"><p>兩筆<b>桃園真實成交</b>擺在一起，<br>猜猜哪一間的<b>每坪單價</b>比較高？猜錯就結束！</p>
+      <button type="button" class="btn btn-main gm-big" id="hiGo" disabled>資料準備中…</button></div>
+    <div class="gm-play" id="hiPlay" hidden>
+      <p class="gm-q">哪一間每坪比較貴？</p>
+      <div class="gm-pair" id="hiPair"></div>
+      <p class="gm-why" id="hiWhy" role="status"></p>
+      <div class="gm-next" id="hiNextRow" hidden><button type="button" class="btn btn-main" id="hiNext">下一題 →</button></div>
+    </div>
+  </div>
+  <div class="gm-result" id="hiResult" hidden aria-live="polite">
+    <p class="gm-head" id="hiHead"></p>
+    <p class="gm-rank" id="hiRank"></p>
+    <div id="hiTop"></div>
+    <div id="hiExtra"></div>
+    <p class="gm-cta" id="hiCta"></p>
+    <div class="gm-acts"><button type="button" class="btn btn-main" id="hiAgain">再玩一次</button>
+      <button type="button" class="btn btn-line" id="hiShare">揪朋友來比</button></div>
+    <p class="toast" id="hiToast" role="status"></p>
+    <p class="gm-name" hidden><label for="hiName">排行榜暱稱</label><input type="text" id="hiName" maxlength="12" placeholder="匿名玩家" data-gm-name></p>
+  </div>
+  <h2 class="v-h2">怎麼玩</h2>
+  <div class="gm-how"><div><b>① 看兩筆成交</b>行政區、路段、屋齡、樓層、坪數都寫在卡片上，都是內政部實價登錄的真實成交。</div><div><b>② 點比較貴的那間</b>比的是「每坪單價」（不含車位）。猜對會自動出下一題，越後面兩間價差越小。</div><div><b>③ 看你能連對幾題</b>猜錯就結束，連對題數就是成績，每週一重新排名。</div></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼要比每坪單價，不比總價？</summary><p>總價主要看坪數大小，一看就知道；每坪單價才看得出地段、屋齡、大樓還是公寓的差別，這也是估價時最重要的數字。</p></details><details><summary>資料從哪裡來？</summary><p>內政部不動產交易實價查詢服務網，桃園市近一年半的住宅成交。只顯示路段和季別，不會出現門牌。</p></details><details><summary>想知道我家每坪值多少？</summary><p>用<a href="../value/">房屋估價</a>輸入路段、坪數，30 秒算出合理價格區間；想更準，直接 LINE 我，我幫你拉同社區的成交。</p></details></div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=7a2754ba" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v="7a54eb06"></script>
+<link rel="stylesheet" href="../assets/game.css?v=97d708a5">
+<script src="../assets/game.js?v=7cd56616" defer></script>
+<script src="app.js?v=eec300c5" data-v="7a54eb06" defer></script>
+</body>
+</html>
