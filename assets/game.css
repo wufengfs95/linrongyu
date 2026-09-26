@@ -1,8 +1,9 @@
 /* 房產遊戲室共用樣式（找亮點另有 spot/spot.css） */
-.gm-hud{position:sticky;top:72px;z-index:5;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(31,58,95,.07)}
+.gm-hud{position:sticky;top:var(--gm-top,72px);z-index:5;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(31,58,95,.07)}
 .gm-stat{font-size:15px;color:var(--muted);white-space:nowrap}
 .gm-stat b{font-family:var(--round);font-size:28px;font-weight:800;color:var(--navy);margin:0 3px;font-variant-numeric:tabular-nums}
 .gm-stat.hot b{color:var(--brick)}
+.gm-sp{flex:1}
 .gm-track{flex:1;height:10px;border-radius:999px;background:var(--cream);overflow:hidden}
 .gm-bar{height:100%;background:linear-gradient(90deg,var(--brick),var(--gold));transform-origin:left}
 .gm-pop{animation:gm-pop .35s}
@@ -94,13 +95,12 @@ div.gm-deal{cursor:default}
 .gm-how b{display:block;color:var(--navy);font-size:18px}
 
 @media (max-width:760px){
-  .gm-hud{top:64px;padding:8px 12px;gap:10px}
+  .gm-hud{padding:8px 12px;gap:10px}
   .gm-stat b{font-size:23px}
   .gm-stage{padding:16px 12px}
   .gm-pair{grid-template-columns:1fr;gap:10px}
   .gm-deal{padding:12px 14px;gap:6px}
   .gm-deal h3{font-size:21px}
-  .gm-deal dl{font-size:16px;grid-template-columns:auto 1fr auto 1fr}
   .gm-tf button{font-size:24px;padding:18px 8px}
   .gm-how{grid-template-columns:1fr}
   .gm-head b{font-size:36px}

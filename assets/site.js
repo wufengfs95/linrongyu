@@ -29,6 +29,26 @@
     });
   }
 
+  // 買方需求配對表單
+  var bform=document.getElementById('buyerForm');
+  if(bform){
+    bform.addEventListener('submit',function(e){
+      e.preventDefault();
+      var pick=function(n){var el=bform.querySelector('input[name='+n+']:checked');return el?el.value:''};
+      var val=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
+      var msg='容瑜你好，我想找房子：\n'+
+        '・類型：'+pick('bkind')+'\n'+
+        '・區域：'+pick('barea')+'\n'+
+        '・房數：'+pick('broom')+'\n'+
+        '・總價：'+pick('bbudget')+'\n'+
+        '・時程：'+pick('bwhen')+'\n'+
+        '・稱呼：'+(val('by-name')||'（未填）')+'\n'+
+        '・方便聯絡：'+val('by-contact')+
+        (val('by-note')?'\n・其他條件：'+val('by-note'):'');
+      copyThenOpenLine(msg,document.getElementById('by-toast'));
+    });
+  }
+
   // 物件頁「LINE 預約帶看」
   document.querySelectorAll('[data-line-msg]').forEach(function(btn){
     btn.addEventListener('click',function(e){

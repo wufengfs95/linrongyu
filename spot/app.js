@@ -120,7 +120,7 @@
     if(state!=='ready') return;
     state='play'; $('spCover').hidden=true; $('spBoard').classList.remove('cover');
     document.body.classList.add('sp-playing');
-    var top=$('spBoard').getBoundingClientRect().top; if(top<60||top>innerHeight*.35) window.scrollTo({top:top+scrollY-(innerWidth<761?130:150),behavior:'smooth'});
+    var top=$('spBoard').getBoundingClientRect().top; if(top<60||top>innerHeight*.35) window.scrollTo({top:top+scrollY-(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--gm-top'))||72)-$('spClock').parentNode.offsetHeight-10,behavior:'smooth'});
     t0=performance.now(); tick();
   }
   function elapsed(){ return (performance.now()-t0)/1000+extra; }

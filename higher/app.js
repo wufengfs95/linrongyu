@@ -34,7 +34,7 @@
     var s=[];
     if(w.town!==l.town) s.push(w.town+'行情本來就比'+l.town+'高');
     if(l.age-w.age>=10) s.push('屋齡新 '+(l.age-w.age)+' 年');
-    if(w.age-l.age>=10) s.push('雖然舊了 '+(w.age-l.age)+' 年，地段還是撐得住');
+    if(w.age-l.age>=10) s.push('雖然舊了 '+(w.age-l.age)+' 年，單價還是比較高');
     if(w.k!==l.k&&(w.k==='a'||w.k==='b')&&(l.k==='c'||l.k==='d')) s.push(KIND[w.k]+'有電梯，單價通常比'+KIND[l.k]+'高');
     if(w.k==='d'&&l.k!=='d') s.push('透天含土地，單價算起來比較高');
     if(w.a<l.a*.7) s.push('坪數小，總價低，單價反而容易高');

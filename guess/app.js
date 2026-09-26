@@ -32,9 +32,8 @@
   function ask(){
     var d=qs[idx];
     $('guNo').textContent=idx+1; $('guDeal').innerHTML=card(d);
-    // 滑桿起點：用這一區這一型態的平均單價×坪數，給一個不會太離譜、也不會洩題的起點
-    var same=deals.filter(function(x){return x.town===d.town&&x.k===d.k}), avg=same.reduce(function(s,x){return s+x.u},0)/(same.length||1);
-    setGuess(Math.round(avg*d.a/10)*10||800);
+    setGuess(Math.round((400+Math.random()*1200)/10)*10);   // 滑桿起點隨機，不給提示
+    $('guBar').style.transform='scaleX('+idx/N+')';
     $('guWhy').textContent=''; $('guWhy').className='gm-why'; $('guNextRow').hidden=true;
     $('guSubmit').disabled=false; $('guRange').disabled=$('guNum').disabled=false; locked=false;
   }
@@ -42,7 +41,7 @@
     e.preventDefault(); if(locked) return;
     var g=RT.num($('guNum').value); if(!g) return; locked=true;
     var d=qs[idx], p=pts(g,d.p), err=Math.round((g/d.p-1)*100);
-    score+=p; log.push({d:d,g:g,p:p}); $('guScore').textContent=score;
+    score+=p; log.push({d:d,g:g,p:p}); $('guScore').textContent=score; $('guBar').style.transform='scaleX('+(idx+1)/N+')';
     $('guScore').classList.remove('gm-pop'); void $('guScore').offsetWidth; $('guScore').classList.add('gm-pop');
     $('guDeal').firstChild.classList.add('gm-reveal');
     $('guSubmit').disabled=true; $('guRange').disabled=$('guNum').disabled=true;

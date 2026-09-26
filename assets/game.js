@@ -66,5 +66,8 @@
     if(navigator.share) navigator.share({text:text}).catch(function(){});
     else RT.copy(text,toast,'已複製，貼到 LINE 揪朋友來比。');
   };
+  // 分數列黏在頁首下面：頁首高度手機、電腦不一樣（手機會換成兩行），量實際高度
+  function topbar(){ var t=document.querySelector('.topbar'); if(t) document.documentElement.style.setProperty('--gm-top',Math.round(t.getBoundingClientRect().height)+8+'px'); }
+  topbar(); addEventListener('resize',topbar);
   window.GM=GM;
 })();

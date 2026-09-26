@@ -1,5 +1,5 @@
 /* 10 秒找亮點 */
-.sp-hud{position:sticky;top:72px;z-index:5;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:12px;box-shadow:0 6px 18px rgba(31,58,95,.07)}
+.sp-hud{position:sticky;top:var(--gm-top,72px);z-index:5;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:12px;box-shadow:0 6px 18px rgba(31,58,95,.07)}
 .sp-clock{font-family:var(--round);font-size:30px;font-weight:800;color:var(--navy);min-width:4.2em;font-variant-numeric:tabular-nums}
 .sp-clock small{font-size:15px;font-weight:400;color:var(--muted);margin-left:2px}
 .sp-clock.hurry{color:var(--brick)}
@@ -45,8 +45,8 @@
 
 @media (max-width:760px){
   .sp-board{grid-template-columns:1fr;gap:6px}
-  .sp-pic canvas{max-height:calc(50vh - 60px)}
-  .sp-hud{top:64px;padding:8px 12px;gap:10px}
+  .sp-pic canvas{max-height:calc((100vh - var(--gm-top,97px) - 84px) / 2)}   /* 兩張上下疊，扣掉頁首和分數列剛好一個畫面 */
+  .sp-hud{padding:8px 12px;gap:10px}
   .sp-clock{font-size:24px}
   .sp-how{grid-template-columns:1fr}
   .sp-head b{font-size:34px}
