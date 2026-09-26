@@ -161,7 +161,7 @@ div.gm-deal{cursor:default}
 .ge-tip{font:inherit;font-size:14px;font-weight:700}
 @media (max-width:760px){
   .ge-stage{padding:10px}
-  .ge-map{height:calc(100vh - var(--gm-top,97px) - 190px);min-height:320px}
+  .ge-map{height:calc(100vh - var(--gm-top,97px) - 260px);min-height:300px}   /* 地圖＋確定按鈕要在同一個畫面 */
   .ge-bottom{flex-direction:column;align-items:stretch}
   .ge-bottom .gm-why{text-align:center}
 }

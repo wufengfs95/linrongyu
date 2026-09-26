@@ -1,5 +1,5 @@
 /* 預算內蓋夢想屋：每週一個預算，挑區域、型態、屋齡、房數、車位，用實價登錄中位單價估價。
-   預算內才算數：夢想分數＝各項分數加總＋剩下的錢每 10 萬 1 分。估價表是 build.py 產生的 dream/prices.json */
+   預算內才算數：夢想分數＝各項分數加總＋剩下的錢每 50 萬 1 分。估價表是 build.py 產生的 dream/prices.json */
 (function(){
   var RT=window.RT, GM=window.GM, $=RT.$, esc=RT.esc;
   var BUDGETS=[800,1000,1200,1500];
@@ -55,7 +55,7 @@
       go.disabled=true; go.textContent='先把每一項都選好'; return; }
     if(e.none){ $('drPrice').innerHTML='<p class="dr-hint no">這個組合近一年半成交太少（不到 8 筆），估不準，換一個條件試試</p>';
       bar.style.transform='scaleX(0)'; go.disabled=true; go.textContent='換一個組合'; return; }
-    var over=e.total>budget, left=budget-e.total, bonus=over?0:Math.floor(left/10);
+    var over=e.total>budget, left=budget-e.total, bonus=over?0:Math.floor(left/50);
     bar.style.transform='scaleX('+Math.min(1,e.total/budget)+')'; bar.classList.toggle('over',over);
     $('drPrice').innerHTML='<p class="dr-total'+(over?' no':'')+'">估價 <b>'+RT.comma(e.total)+'</b> 萬'+
       (over?'<span>超出預算 '+RT.comma(-left)+' 萬</span>':'<span>還剩 '+RT.comma(left)+' 萬（+'+bonus+' 分）</span>')+'</p>'+
@@ -66,7 +66,7 @@
 
   function done(){
     var e=estimate(); if(!e||e.none||e.total>budget) return;
-    var bonus=Math.floor((budget-e.total)/10), score=points()+bonus; last=score;
+    var bonus=Math.floor((budget-e.total)/50), score=points()+bonus; last=score;
     var desc=pick.t+'・'+KIND[pick.k]+'・'+opt('g',pick.g)[1]+'・'+pick.r+' 房'+(pick.p==='門口'?'・自家車庫':pick.p?'・'+pick.p+'車位':'');
     var mine=GM.board({game:'dream',score:score,asc:false,unit:' 分',rank:$('drRank'),top:$('drTop')});
     $('drHead').innerHTML='夢想分數 <b>'+score+'</b> 分<small>'+esc(desc)+'・估價 '+RT.comma(e.total)+' 萬'+(mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';

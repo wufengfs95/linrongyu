@@ -4,7 +4,9 @@
   var el = document.getElementById('dealMap');
   if (!el || !window.L) return;
 
-  var map = L.map('dealMap', { zoomControl: true, preferCanvas: true, scrollWheelZoom: false });
+  var map = L.map('dealMap', {
+    zoomControl: true, preferCanvas: true, scrollWheelZoom: false, minZoom: 10
+  }).setView([24.95, 121.22], 13);          // 先給一個中壢的預設視野，避免還沒算好時看到整個台灣
   L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
     maxZoom: 18, attribution: '圖資：國土測繪中心'
   }).addTo(map);
@@ -32,8 +34,13 @@
     bounds = bounds ? bounds.extend(L.latLng(d.pos)) : L.latLngBounds(d.pos, d.pos);
   });
 
-  if (bounds) map.fitBounds(bounds, { padding: [24, 24] });
-  else map.setView([24.95, 121.22], 13);
+  var fit = function () {
+    map.invalidateSize();
+    if (bounds) map.fitBounds(bounds, { padding: [24, 24], maxZoom: 15 });
+  };
+  fit();
+  setTimeout(fit, 250);
+  window.addEventListener('load', fit);
   map.on('click', function () { map.scrollWheelZoom.enable(); });
   map.on('mouseout', function () { map.scrollWheelZoom.disable(); });
 })();

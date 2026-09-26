@@ -101,7 +101,7 @@
     chips($('mAreas'),areas,(h.a||'').split(','));
     chips($('mKinds'),kinds,(h.k||'').split(','));
     if(h.pick&&h.view==='report'){ loadHashIntoForm(h); report(h); return; }
-    if(h.pick||h.n) loadHashIntoForm(h);
+    if(h.pick||h.n||h.hi||h.lo||h.rm||h.pk) loadHashIntoForm(h);   // 夢想屋遊戲會帶預算、房數、車位過來
     run();
   }).catch(function(){ $('mList').innerHTML='<p class="v-warn">物件資料載入失敗，請重新整理頁面。</p>'; });
 

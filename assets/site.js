@@ -29,6 +29,20 @@
     });
   }
 
+  // 買賣流程頁：切換買方／賣方
+  var prBtns=[].slice.call(document.querySelectorAll('.pr-tabs button'));
+  if(prBtns.length){
+    prBtns.forEach(function(b){
+      b.addEventListener('click',function(){
+        var key=b.getAttribute('data-pr');
+        prBtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+        document.querySelectorAll('.pr-pane').forEach(function(p){
+          p.hidden = p.getAttribute('data-pane')!==key;
+        });
+      });
+    });
+  }
+
   // 買方需求配對表單
   var bform=document.getElementById('buyerForm');
   if(bform){
