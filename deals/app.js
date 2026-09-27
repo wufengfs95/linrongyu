@@ -30,7 +30,7 @@
       icon: L.divIcon({ className: 'dm-icon', html: html, iconSize: [74, 30], iconAnchor: [37, 30] })
     }).addTo(marks);
     m.bindPopup('<b>' + (d.community || d.town + d.road) + '</b><br>' +
-      d.ym + '　成交 ' + d.price + ' 萬<br>' + d.town + d.road + '（路段層級）');
+      '成交 ' + d.price + ' 萬<br>' + d.town + d.road + '（路段層級）');
     bounds = bounds ? bounds.extend(L.latLng(d.pos)) : L.latLngBounds(d.pos, d.pos);
   });
 

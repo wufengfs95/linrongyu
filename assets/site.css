@@ -1130,3 +1130,9 @@ section.tq-wrap{padding-block:16px 72px}
   .brand b,.brand-name b{font-size:17px}
   .topbar .nav{font-size:14px;gap:10px}
 }
+
+/* 頁首副標排成一行（字級自動配合畫面寬度） */
+.page-head p.lead-one{max-width:none;white-space:nowrap;font-size:clamp(13px,calc((100vw - 60px) / 42),23px)}
+@media (max-width:760px){
+  .page-head p.lead-one{white-space:normal;font-size:17px}
+}
