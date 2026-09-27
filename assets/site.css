@@ -40,11 +40,14 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;font-family:var(--round)}
 .brand-sign{height:58px;width:auto;flex:none}
+.brand{flex:none}
+.brand b,.brand span,.brand-name{white-space:nowrap}
 .brand-name{display:flex;flex-direction:column;align-items:flex-start;gap:0;line-height:1.15}
 .brand b{font-family:var(--round);font-size:42px;font-weight:400;color:var(--navy);letter-spacing:.04em}
 .brand span{font-family:var(--round);font-size:20px;color:var(--brick);font-weight:400;letter-spacing:.06em}
-.nav{display:flex;gap:26px;font-size:15px;font-weight:500}
-.nav a{text-decoration:none;color:var(--ink)}
+.nav{display:flex;gap:26px;font-size:15px;font-weight:500;min-width:0;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;white-space:nowrap;text-decoration:none;color:var(--ink)}
 .nav a:hover{color:var(--brick)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:inherit;transition:background .2s,color .2s,transform .2s}
 .btn:hover{transform:translateY(-1px)}
@@ -490,7 +493,7 @@ section.sm{padding-block:8px 48px}
 .topinfo a{color:#fff;text-decoration:none;font-weight:700}
 .ti-ic{margin-right:8px;font-size:19px;vertical-align:-2px}
 .topinfo-line{background:var(--line-green);border-radius:999px;padding:4px 16px;font-size:16px}
-.topbar .nav{gap:20px;font-size:22px;font-weight:400;font-family:var(--round)}
+.topbar .nav{gap:clamp(10px,1.25vw,18px);font-size:clamp(15px,1.55vw,20px);font-weight:400;font-family:var(--round)}
 .nav-cta{background:var(--brick)}
 .nav-cta:hover{background:var(--brick-deep)}
 .btn-straw{background:var(--gold);color:var(--ink)}
