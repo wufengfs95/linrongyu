@@ -1063,8 +1063,10 @@ section.tq-wrap{padding-block:16px 72px}
 .buyer-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:start}
 .buyer-how{background:var(--cream);border:1px solid var(--cream-line);border-radius:var(--radius);padding:28px 30px}
 .buyer-how h2{font-size:30px;color:var(--navy);margin:0 0 14px}
-.buyer-how ol{margin:0;padding-left:1.3em;display:grid;gap:16px;font-size:22px;line-height:1.8;color:var(--ink)}
-.buyer-how ol li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:.75em;align-items:baseline}
+.buyer-how ol{margin:0;padding-left:0;list-style:none;counter-reset:bhow;display:grid;gap:16px;font-size:22px;line-height:1.8;color:var(--ink)}
+.buyer-how ol li{display:grid;grid-template-columns:auto auto minmax(0,1fr);column-gap:.45em;align-items:baseline}
+.buyer-how ol li::before{counter-increment:bhow;content:counter(bhow) ".";color:var(--navy);font-weight:700}
+.buyer-how ol li>span{margin-left:.3em}
 .buyer-how ol b{color:var(--navy);white-space:nowrap}
 .buyer-note{margin:20px 0 0;font-size:19px;color:var(--muted);line-height:1.7}
 .buyer-form{background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px rgba(31,58,95,.06)}
