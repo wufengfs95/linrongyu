@@ -266,23 +266,74 @@
     marker=L.marker([lat,lng]).addTo(map).bindTooltip(label||'查詢位置');
   }
 
-  // 先試著直接對到「區＋里」，對不到再用 OpenStreetMap 查地址
+  // 地址正規化：拿掉縣市、全形數字轉半形、去空白
+  function normAddr(q){
+    return (q||'').trim().replace(/\s+/g,'')
+      .replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)})
+      .replace(/^台/,'臺').replace(/^臺?桃園[市縣]/,'');
+  }
+  // 由細到粗的查詢變化：完整 → 去門牌 → 去巷弄 → 去段
+  function addrSteps(s){
+    var m=s.match(/^(..[區鄉鎮市])/), town=m?m[1]:'', rest=town?s.slice(town.length):s, out=[];
+    var add=function(x,tag){ x=(x||'').trim(); if(!x) return;
+      var full=town+x; if(!out.some(function(o){return o.q===full})) out.push({q:full,tag:tag}); };
+    add(rest,'');
+    add(rest.replace(/[-之\d]*\d+號.*$/,''),'路段');
+    add(rest.replace(/\d+巷.*$/,'').replace(/[-之\d]*\d+號.*$/,''),'路段');
+    add(rest.replace(/[一二三四五六七八九十]段.*$/,''),'整條路');
+    return out;
+  }
+  // 先在自己的資料裡找（學校、車站、機能點、里名），找到就不用連外
+  function localHit(s){
+    var pick=null;
+    var scan=function(name,lat,lng,tag){
+      if(pick||!name||name.indexOf(s)<0&&s.indexOf(name)<0) return;
+      if(name.length<2) return;
+      pick={n:name,lat:lat,lng:lng,tag:tag};
+    };
+    (data.schools||[]).forEach(function(o){ if(o.lat) scan(o.n,o.lat,o.lng,LV[o.lv]); });
+    (data.stations||[]).forEach(function(o){ scan(o.n,o.lat,o.lng,'車站'); });
+    (data.poi||[]).forEach(function(p){ scan(p[1],p[2],p[3],(POI[p[0]]||{}).t||''); });
+    return pick;
+  }
+
+  // 先試著直接對到「區＋里」，再找自己的資料，最後用 OpenStreetMap 逐層退位查地址
   function search(q){
     q=(q||'').trim(); if(!q) return;
-    var clean=q.replace(/^桃園市|^桃園縣/,'');
-    var hit=data.villages.filter(function(v){return clean.indexOf(v.v)>=0 && (clean.indexOf(v.t)>=0 || clean.indexOf(v.t.slice(0,2))>=0)})[0]
+    var clean=normAddr(q);
+    var byVill=data.villages.filter(function(v){return clean.indexOf(v.v)>=0 && (clean.indexOf(v.t)>=0 || clean.indexOf(v.t.slice(0,2))>=0)})[0]
       || (data.villages.filter(function(v){return clean.indexOf(v.v)>=0}).length===1 && data.villages.filter(function(v){return clean.indexOf(v.v)>=0})[0]);
-    if(hit){ status(''); select(hit); return; }
+    if(byVill){ status(''); select(byVill); return; }
+
+    var lh=localHit(clean);
+    if(lh){
+      var lv2=villageAt(lh.lat,lh.lng);
+      placeMarker(lh.lat,lh.lng,lh.n);
+      if(lv2){ status('已定位到「'+esc(lh.n)+'」'+(lh.tag?'（'+esc(lh.tag)+'）':'')+'。');
+        select(lv2,{label:lh.n,pt:[lh.lat,lh.lng]}); return; }
+    }
+
+    var steps=addrSteps(clean), i=0;
     status('查詢中…');
-    var url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=tw&accept-language=zh-TW&viewbox=120.95,25.15,121.5,24.58&bounded=1&q='+encodeURIComponent('桃園市 '+clean);
-    fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(res){
-      if(!res.length){ status('找不到這個地址，試試「區＋路名」或直接選行政區和里。'); return; }
-      var lat=+res[0].lat, lng=+res[0].lon, v=villageAt(lat,lng);
-      placeMarker(lat,lng,q);
-      if(!v){ status('這個位置不在桃園市範圍內。'); return; }
-      status('已定位到附近（地址定位可能只到路段，請確認所在的里）。');
-      select(v,{label:'查詢：'+q,pt:[lat,lng]});
-    }).catch(function(){ status('地址查詢暫時無法使用，請直接選行政區和里。'); });
+    var tryNext=function(){
+      if(i>=steps.length){
+        status('查不到「'+esc(q)+'」。可以改打路名（例如「中壢區林森路」），或直接用下面的行政區、里選。');
+        return;
+      }
+      var st=steps[i++];
+      var url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=tw'
+        + '&accept-language=zh-TW&q='+encodeURIComponent('桃園市'+st.q);
+      fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(res){
+        if(!res.length){ setTimeout(tryNext,1100); return; }   // 尊重 OSM 每秒一次的用量規範
+        var lat=+res[0].lat, lng=+res[0].lon, v=villageAt(lat,lng);
+        placeMarker(lat,lng,q);
+        if(!v){ status('這個位置不在桃園市範圍內。'); return; }
+        status(st.tag ? '門牌查不到，已定位到「'+esc(st.q)+'」（'+st.tag+'層級），請確認所在的里。'
+                      : '已定位到「'+esc(st.q)+'」。');
+        select(v,{label:'查詢：'+q,pt:[lat,lng]});
+      }).catch(function(){ status('地址查詢暫時無法使用，請直接選行政區和里。'); });
+    };
+    tryNext();
   }
 
   function init(){

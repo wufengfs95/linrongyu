@@ -61,7 +61,7 @@
       <button type="button" data-mode="trash" aria-pressed="false">🚛 垃圾車</button>
     </div>
     <div class="sm-tabs" data-msec="school" role="group" aria-label="學制"><button type="button" data-lv="es" aria-pressed="true">國小</button><button type="button" data-lv="jh" aria-pressed="false">國中</button></div>
-    <form id="smForm" class="sm-search"><input id="smQ" type="search" placeholder="地址、路名或里名，例如 中壢區林森里" autocomplete="street-address"><button class="btn btn-main" type="submit">查學區</button></form>
+    <form id="smForm" class="sm-search"><input id="smQ" type="search" placeholder="輸入地址，例：中壢區林森路75號" autocomplete="street-address"><button class="btn btn-main" type="submit">查詢</button></form>
     <button id="smLocate" type="button" class="sm-locate">用我目前的位置查</button>
     <div class="sm-pick"><select id="smTown" aria-label="行政區"></select><select id="smVill" aria-label="里"><option value="">選擇里</option></select></div>
     <p id="smStatus" class="sm-status" role="status"></p>
@@ -89,7 +89,7 @@
     </details>
     <div class="sm-toggles" data-msec="school"><span>地圖顯示：</span><label><input type="checkbox" id="smSchools" checked> 學校（含校名）</label><label><input type="checkbox" id="smTra" checked> 台鐵</label><label><input type="checkbox" id="smMrt" checked> 捷運</label><label><input type="checkbox" id="smAir" checked> 機場</label></div>
     <p class="sm-note">學區僅供參考，以桃園市政府教育局公告為準（115 學年度）。地圖以「里」上色，部分里依「鄰」或門牌分校，交界處請再查官方資料。生活機能、車站位置來自 OpenStreetMap，可能有缺漏或已歇業，實際請以現場為準；捷運綠線、機捷 A14／A23 為興建中車站。<br>
-      垃圾車班表沒有經緯度，是用「里」和路名對起來的，部分路線官方沒有標里別，查不到時請用<a href="../trash/">垃圾車時間查詢</a>直接搜路名；遇國定假日會調整。<br>
+      垃圾車班表沒有經緯度，是用「里」和路名對起來的；部分路線官方沒有標里別，查不到時可以改用路名搜尋。遇國定假日會調整。<br>
       資料來源：<a href="https://www.tyc.edu.tw/News.aspx?n=5208&amp;sms=11286" target="_blank" rel="noopener">桃園市政府教育局學區資訊</a>、內政部國土測繪中心村里界圖（115 年 8 月）、<a href="https://route.tyoem.gov.tw/" target="_blank" rel="noopener">桃園市環境管理處清運路線</a>、OpenStreetMap。</p>
   </aside>
   <div id="smMap" class="sm-map" role="application" aria-label="桃園市國中小學區地圖"></div>
@@ -112,6 +112,6 @@
 
 <script src="../assets/site.js?v=b159f045" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="app.js?v=13fc1e71" data-v="1d8e3855" defer></script>
+<script src="app.js?v=351114b6" data-v="1d8e3855" defer></script>
 </body>
 </html>
