@@ -111,7 +111,7 @@
     cross:'<path d="M9.6 2.5h4.8v7.1h7.1v4.8h-7.1v7.1H9.6v-7.1H2.5V9.6h7.1z"/>',
     tree:'<path d="M12 2.2l4.6 6.2h-2.4l4 5.4h-2.6l3.4 4.6H5l3.4-4.6H5.8l4-5.4H7.4z"/><path d="M10.6 18.4h2.8V22h-2.8z"/>'
   };
-  var LINES={tra:{t:'台鐵',c:'#2E6DB4',g:'tra',sq:1},a:{t:'機場捷運',c:'#8246AF',g:'mrt'},g:{t:'捷運綠線',c:'#3E9C35',g:'mrt'}};
+  var LINES={tra:{t:'台鐵',c:'#2E6DB4',g:'tra',sq:1},a:{t:'機捷',c:'#8246AF',g:'mrt'},g:{t:'綠線',c:'#3E9C35',g:'mrt'}};
   var AIR_C='#1F3A5F';
   var POI={su:{t:'超市',c:'#D9822B',g:'cart'},hm:{t:'量販',c:'#D9822B',g:'cart'},dp:{t:'百貨',c:'#D9822B',g:'cart'},
     mk:{t:'市場',c:'#B8622A',g:'stall'},ho:{t:'醫院',c:'#C2413C',g:'cross'},pk:{t:'公園',c:'#2E7D5B',g:'tree'}};
@@ -127,7 +127,7 @@
     return '<span class="sm-st'+(L0.sq?' sq':'')+(build?' build':'')+'" style="--c:'+L0.c+';width:'+size+'px;height:'+size+'px">'+(dot?'':svg(L0.g))+'</span>';
   }
   function airBadge(size){ return '<span class="sm-st sm-air" style="--c:'+AIR_C+';width:'+size+'px;height:'+size+'px">'+svg('air')+'</span>'; }
-  function lineText(ls){ return ls.map(function(l){return LINES[l[0]].t+(l[1]?' '+l[1]:'')+(l[2]?'（興建中）':'')}).join('、'); }
+  function lineText(ls){ return ls.map(function(l){return LINES[l[0]].t+(l[1]?l[1]:'')+(l[2]?'·建中':'')}).join('・'); }
 
   function drawSchools(){
     if(schoolLayer) schoolLayer.remove();
