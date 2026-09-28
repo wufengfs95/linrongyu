@@ -1348,3 +1348,41 @@ section.tq-wrap{padding-block:16px 72px}
   .ps-top b{font-size:22px}
   .ps-check{font-size:16.5px}
 }
+
+/* 買中古屋 6 件事 */
+.c6-tool{background:var(--cream);border:1px solid var(--cream-line);border-radius:14px;padding:22px 24px;margin-bottom:22px}
+.c6-form label{display:block;font-weight:700;font-size:19px;color:var(--navy);margin-bottom:10px}
+.c6-row{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--muted)}
+.c6-row input{width:130px}
+.c6-row b{color:var(--navy)}
+.c6-hint{margin:14px 0 0;font-size:17px;line-height:1.8;color:var(--muted)}
+.c6-age{margin-top:14px;font-size:19px;color:var(--ink)}
+.c6-age b{color:var(--navy);font-size:1.12em}
+.c6-hits{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px}
+.c6-hits li{background:#fff;border:1px solid var(--line);border-left:6px solid var(--line);border-radius:12px;padding:14px 16px}
+.c6-hits li.r1{border-left-color:var(--brick)}
+.c6-hits li.r2{border-left-color:#C8A45C}
+.c6-hits li.r3{border-left-color:var(--navy)}
+.c6-hits b{display:block;font-size:19px;color:var(--navy);margin-bottom:6px}
+.c6-hits p{margin:0;font-size:16.5px;line-height:1.8;color:var(--ink)}
+.c6-go{margin-top:8px !important;color:var(--muted) !important}
+.c6-ok{margin:12px 0 0;font-size:17.5px;line-height:1.8;color:#2E7D5B}
+.c6-note{margin:12px 0 0;font-size:16px;line-height:1.8;color:var(--muted)}
+.c6-intro{font-size:18.5px;line-height:1.9;color:var(--ink);margin:0 0 26px}
+.c6-step{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:16px}
+.c6-no{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;
+  background:var(--navy);color:#fff;font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.c6-body h3{margin:0 0 8px;font-size:25px;color:var(--navy)}
+.c6-lead{margin:0 0 10px;font-size:18px;line-height:1.85;color:var(--ink)}
+.c6-body ul{margin:0;padding-left:1.25em;display:grid;gap:8px;font-size:17.5px;line-height:1.8;color:var(--ink)}
+.c6-body ul b{color:var(--navy)}
+.c6-tip{margin:12px 0 0;padding:11px 14px;background:var(--sky-soft);border-radius:10px;
+  font-size:17px;line-height:1.8;color:var(--ink)}
+@media (max-width:760px){
+  .c6-step{grid-template-columns:1fr;gap:10px;padding:18px}
+  .c6-no{width:42px;height:42px;font-size:19px}
+  .c6-body h3{font-size:21px}
+  .c6-lead,.c6-body ul,.c6-tip{font-size:16px}
+  .c6-intro{font-size:16.5px}
+}
