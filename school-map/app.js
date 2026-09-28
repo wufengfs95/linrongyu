@@ -1,6 +1,9 @@
 (function(){
   var LINE_URL='https://line.me/ti/p/~0973263569';
   var lv='es', data=null, map, layers={}, schoolLayer, stationLayer, selected=null, marker=null;
+  var mode='school', poiLayer=null, trash=null, trashLoading=false;
+  var CATS=['su','hm','dp','mk','ho','pk'];
+  var WEEK='日一二三四五六', TODAY=new Date().getDay();
   var $=function(id){return document.getElementById(id)};
   var LV={es:'國小',jh:'國中'};
 
@@ -91,6 +94,8 @@
     $('smResult').hidden=false;
     $('smTown').value=v.t; fillVillages(v.t); $('smVill').value=String(v.id);
     try{ history.replaceState(null,'','?v='+encodeURIComponent(v.t+v.v)); }catch(e){}
+    if(mode==='trash'){ loadTrash().then(function(){ renderTrash(v,opts.label||$('smQ').value); }); }
+    applyMode();
     if(window.innerWidth<900) $('smResult').scrollIntoView({behavior:'smooth',block:'start'});
   }
 
@@ -294,10 +299,11 @@
       bounds=bounds?bounds.extend(poly.getBounds()):poly.getBounds();
     });
     window.addEventListener('resize',function(){ map.invalidateSize(); });
-    map.on('zoomend',function(){ drawSchools(); drawStations(); });
+    map.on('zoomend',function(){ drawSchools(); drawStations(); drawPoi(); });
+    map.on('moveend',drawPoi);
     $('smTown').innerHTML='<option value="">選擇行政區</option>'+data.towns.map(function(t){return '<option>'+t+'</option>'}).join('');
     $('smCount').textContent=data.schools.filter(function(s){return s.lv===lv}).length;
-    drawSchools(); drawStations();
+    drawSchools(); drawStations(); applyMode();
 
     // 等版面排好（地圖容器有正確尺寸）再縮放，不然會停在很遠的比例
     setTimeout(function(){
@@ -310,6 +316,104 @@
     },60);
   }
 
+
+  // ---- 生活機能圖層：把勾選的分類畫在地圖上（只畫看得到的範圍，避免一次上千個圖示）----
+  function catOn(k){ var el=document.querySelector('[data-cat="'+k+'"]'); return !el||el.checked; }
+  function drawPoi(){
+    if(poiLayer){ poiLayer.remove(); poiLayer=null; }
+    if(mode!=='poi'||!data) return;
+    var z=map.getZoom();
+    if(z<13){ $('smPoiHint').textContent='放大地圖（再放大一點）才會顯示機能點位。'; return; }
+    var b=map.getBounds(), n=0, size=z>=16?26:22;
+    poiLayer=L.layerGroup();
+    (data.poi||[]).forEach(function(p){
+      if(n>=400) return;
+      var k=p[0]; if(!POI[k]||!catOn(k)) return;
+      if(!b.contains([p[2],p[3]])) return;
+      n++;
+      var m=L.marker([p[2],p[3]],{zIndexOffset:800,keyboard:false,icon:L.divIcon({className:'sm-hub',
+        iconSize:[size,size],iconAnchor:[size/2,size/2],tooltipAnchor:[size/2,0],
+        html:'<span class="sm-st sm-poi" style="--c:'+POI[k].c+';width:'+size+'px;height:'+size+'px">'+svg(POI[k].g)+'</span>'})});
+      m.bindTooltip('<b>'+esc(p[1])+'</b><br>'+POI[k].t,{direction:'right',className:'sm-label'});
+      poiLayer.addLayer(m);
+    });
+    poiLayer.addTo(map);
+    $('smPoiHint').textContent='這個範圍顯示 '+n+' 個點'+(n>=400?'（太多了，放大一點看更完整）':'')+'。';
+  }
+
+  // ---- 垃圾車：資料沒有經緯度，用「里」對起來，另外用路名補 ----
+  function cleanVill(s){ s=(s||'').split(',').pop().split('，').pop(); return s.trim(); }
+  function runsToday(d){ return d && d.indexOf(WEEK[TODAY])>=0; }
+  function loadTrash(){
+    if(trash||trashLoading) return Promise.resolve(trash);
+    trashLoading=true;
+    $('smTrash').innerHTML='<p class="sm-status">垃圾車班表載入中…</p>';
+    return fetch('../trash/data.json').then(function(r){return r.json()}).then(function(d){
+      trash=d; trashLoading=false;
+      var idx={};
+      d.towns.forEach(function(t){ t.routes.forEach(function(r){ r.p.forEach(function(p){
+        var key=t.t+'|'+cleanVill(p[3]);
+        (idx[key]=idx[key]||[]).push({t:t.t,r:r,p:p});
+      })})});
+      trash.idx=idx;
+      return trash;
+    }).catch(function(){ trashLoading=false; $('smTrash').innerHTML='<p class="sm-status">班表載入失敗，請重新整理。</p>'; });
+  }
+  function trashRows(v,q){
+    if(!trash) return [];
+    var rows=(trash.idx[v.t+'|'+v.v]||[]).slice();
+    var road=(q||'').replace(/^桃園市/,'').replace(/^.{2}區/,'').replace(/\d+號.*$/,'').trim();
+    if(road.length>=2){
+      var have={};
+      rows.forEach(function(h){ have[h.p[0]]=1 });
+      trash.towns.forEach(function(t){ if(t.t!==v.t) return;
+        t.routes.forEach(function(r){ r.p.forEach(function(p){
+          if(!have[p[0]] && p[0].indexOf(road)>=0) rows.push({t:t.t,r:r,p:p,byRoad:true});
+        })});
+      });
+    }
+    rows.sort(function(a,b){ return (runsToday(b.r.d)?1:0)-(runsToday(a.r.d)?1:0); });
+    return rows;
+  }
+  function renderTrash(v,q){
+    var box=$('smTrash'); if(!box) return;
+    var rows=trashRows(v,q);
+    if(!rows.length){
+      box.innerHTML='<div class="sm-near"><h3>這個里的垃圾車</h3>'
+        + '<p class="sm-empty">班表裡查不到「'+esc(v.t+v.v)+'」的清運點。'
+        + '有些路線沒有標里別，可以到<a href="../trash/">垃圾車時間查詢</a>用路名直接找。</p></div>';
+      return;
+    }
+    var on=rows.filter(function(h){return runsToday(h.r.d)}).length;
+    box.innerHTML='<div class="sm-near sm-trash"><h3>這個里的垃圾車 <small>今天星期'+WEEK[TODAY]
+      + '，'+on+' 個點有收</small></h3><ul class="tq-mini">'
+      + rows.slice(0,40).map(function(h){
+          var rc=h.p[2]==='同'?h.p[1]:h.p[2];
+          return '<li class="'+(runsToday(h.r.d)?'on':'off')+'">'
+            + '<div class="tm-top"><b>'+esc(h.p[0])+'</b>'
+            + '<span class="tm-day">'+(runsToday(h.r.d)?'今天有收':'今天停收')+'</span></div>'
+            + '<div class="tm-time">垃圾車 <b>'+esc(h.p[1]||'—')+'</b>'
+            + (rc&&rc!==h.p[1]?'　資源回收 <b>'+esc(rc)+'</b>':'')+'</div>'
+            + '<div class="tm-sub">'+esc(h.r.n)+'｜收運日 '+esc(h.r.d||'—')
+            + (h.byRoad?'｜<i>依路名比對</i>':'')+'</div></li>';
+        }).join('')
+      + '</ul>'+(rows.length>40?'<p class="sm-empty">還有 '+(rows.length-40)+' 個點，可以到<a href="../trash/">垃圾車時間查詢</a>看完整班表。</p>':'')
+      + '<p class="sm-empty">班表以桃園市環境管理處公告為準，遇國定假日會調整。</p></div>';
+  }
+
+  function applyMode(){
+    document.querySelectorAll('[data-msec]').forEach(function(el){
+      el.hidden = el.getAttribute('data-msec').split(' ').indexOf(mode)<0;
+    });
+    document.querySelectorAll('.sm-modes button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-mode')===mode?'true':'false');
+    });
+    drawPoi();
+    if(mode==='trash'){
+      loadTrash().then(function(){ if(selected!==null) renderTrash(data.villages[selected], $('smQ').value); });
+    }
+  }
+
   // ---- 介面事件 ----
   document.querySelectorAll('.sm-tabs button').forEach(function(b){
     b.addEventListener('click',function(){
@@ -319,6 +423,10 @@
       if(data){ $('smCount').textContent=data.schools.filter(function(s){return s.lv===lv}).length; restyle(); }
     });
   });
+  document.querySelectorAll('.sm-modes button').forEach(function(b){
+    b.addEventListener('click',function(){ mode=b.getAttribute('data-mode'); applyMode(); });
+  });
+  document.querySelectorAll('[data-cat]').forEach(function(el){ el.addEventListener('change',drawPoi); });
   $('smForm').addEventListener('submit',function(e){e.preventDefault(); if(data) search($('smQ').value);});
   $('smLocate').addEventListener('click',function(){
     if(!navigator.geolocation){ status('這個瀏覽器不支援定位。'); return; }
