@@ -176,10 +176,10 @@
   function buildNear(){
     NEAR={school:data.schools.filter(function(s){return s.lat}),
       station:(data.stations||[]).map(function(h){return {n:h.n,lat:h.lat,lng:h.lng,l:h.l}}),
-      shop:[],hosp:[],park:[]};
+      shop:[],mkt:[],hosp:[],park:[]};
     (data.poi||[]).forEach(function(p){
       var o={k:p[0],n:p[1],lat:p[2],lng:p[3]};
-      (o.k==='ho'?NEAR.hosp:o.k==='pk'?NEAR.park:NEAR.shop).push(o);
+      (o.k==='ho'?NEAR.hosp:o.k==='pk'?NEAR.park:o.k==='mk'?NEAR.mkt:NEAR.shop).push(o);
     });
   }
   function dist(la1,ln1,la2,ln2){
@@ -211,13 +211,17 @@
     var st=nearest(NEAR.station,lat,lng,6000,3).map(function(h){
       return {n:h.n,d:h.d,lat:h.lat,lng:h.lng,tag:lineText(h.l).replace('（興建中）','・興建中')};
     });
+    var mktTag=function(n){
+      return /黃昏/.test(n)?'黃昏市場':/夜市/.test(n)?'夜市':/漁/.test(n)?'魚市':/市集/.test(n)?'市集':'市場';
+    };
     var poi=function(list,max,limit){
       return nearest(list,lat,lng,max,limit).map(function(o){
-        return {n:o.n,d:o.d,lat:o.lat,lng:o.lng,k:o.k,tag:POI[o.k].t};
+        return {n:o.n,d:o.d,lat:o.lat,lng:o.lng,k:o.k,tag:o.k==='mk'?mktTag(o.n):POI[o.k].t};
       });
     };
     return [{t:'附近學校',items:sch},{t:'附近車站',items:st},
-      {t:'超市・賣場・市場',items:poi(NEAR.shop,2000,4)},
+      {t:'超市・賣場',items:poi(NEAR.shop,2000,3)},
+      {t:'市場・夜市',items:poi(NEAR.mkt,2500,3)},
       {t:'附近醫院',items:poi(NEAR.hosp,6000,2)},
       {t:'附近公園',items:poi(NEAR.park,1500,3)}];
   }
@@ -328,7 +332,7 @@
         var lat=+res[0].lat, lng=+res[0].lon, v=villageAt(lat,lng);
         placeMarker(lat,lng,q);
         if(!v){ status('這個位置不在桃園市範圍內。'); return; }
-        status(st.tag ? '門牌查不到，已定位到「'+esc(st.q)+'」（'+st.tag+'層級），請確認所在的里。'
+        status(st.tag ? '已定位到「'+esc(st.q)+'」（'+st.tag+'層級），請確認所在的里。'
                       : '已定位到「'+esc(st.q)+'」。');
         select(v,{label:'查詢：'+q,pt:[lat,lng]});
       }).catch(function(){ status('地址查詢暫時無法使用，請直接選行政區和里。'); });
