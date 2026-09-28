@@ -1284,6 +1284,7 @@ section.tq-wrap{padding-block:16px 72px}
 }
 
 /* 三合一地圖：模式切換與機能分類 */
+[data-msec][hidden]{display:none !important}
 .sm-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .sm-modes button{font:inherit;font-size:17px;font-weight:700;padding:11px 6px;border-radius:10px;
   border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;white-space:nowrap}
