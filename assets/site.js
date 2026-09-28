@@ -43,6 +43,32 @@
     });
   }
 
+  // 回到最上面
+  var toTop = document.createElement('button');
+  toTop.type = 'button';
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', '回到最上面');
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">'
+    + '<path d="M12 19V6"/><path d="M5.5 12.5 12 6l6.5 6.5"/></svg>';
+  document.body.appendChild(toTop);
+  var toTopSync = function () {
+    var y = window.scrollY || document.documentElement.scrollTop || 0;
+    if (y > 400) { toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
+  };
+  window.addEventListener('scroll', toTopSync, { passive: true });
+  toTopSync();
+  toTop.addEventListener('click', function () {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  });
+
+  // 頁尾版權年份：起始 2026，之後每年自動變成 2026–今年
+  var fy = document.getElementById('footYear');
+  if (fy) {
+    var startYear = 2026;
+    var nowYear = new Date().getFullYear();
+    fy.textContent = nowYear > startYear ? startYear + '–' + nowYear : String(startYear);
+  }
+
   // 微信：QR 彈窗 + 複製微信號
   var wxM = document.getElementById('wxModal');
   if (wxM) {

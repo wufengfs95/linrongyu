@@ -504,8 +504,9 @@ section.sm{padding-block:8px 48px}
 .v2-hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .v2-eyebrow{display:inline-block;font-size:clamp(20px,2.4vw,30px);font-weight:900;letter-spacing:.06em;color:var(--brick-deep);background:#fff;border:2.5px solid var(--brick);border-radius:999px;padding:8px 24px;box-shadow:0 4px 14px rgba(150,70,42,.12)}
 .v2-hero-text{container-type:inline-size}
-.v2-hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,calc(100cqw / 14.9),50px);line-height:1.25;letter-spacing:.04em;margin:18px 0 16px;color:var(--navy)}
+.v2-hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(24px,calc(100cqw / 17.2),44px);line-height:1.3;letter-spacing:.04em;margin:18px 0 16px;color:var(--navy)}
 .v2-hero h1 em{font-style:normal;color:var(--brick)}
+.v2-hero h1 .h1-name{font-size:2em;line-height:1;display:inline-block;vertical-align:-.06em}
 .v2-lead{font-size:clamp(15px,1.8vw,20px);line-height:1.9;color:var(--ink);max-width:none;white-space:nowrap;margin:0 0 22px}
 .v2-checks{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .v2-checks li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-size:21px;font-weight:700;color:var(--navy);box-shadow:0 2px 8px rgba(31,58,95,.06)}
@@ -681,6 +682,8 @@ section.sm{padding-block:8px 48px}
 .team-note{margin:22px 0 0;font-size:clamp(15px,1.8vw,22px);color:var(--muted);text-align:center;white-space:nowrap}
 .foot-logo{width:44px;height:44px;object-fit:contain;flex:none}
 .foot-lines{min-width:0}
+footer .foot-bottom{display:block;margin-top:18px;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.14);font-size:14.5px;line-height:1.7;color:#93A3B8}
 footer .foot-note{width:100%;margin:10px 0 0;font-size:12.5px;color:#93A3B8}
 
 /* 房屋估價頁 */
@@ -1182,3 +1185,20 @@ section.tq-wrap{padding-block:16px 72px}
   .wx-copy{font-size:18px}
   .wx-tip{font-size:14.5px}
 }
+
+/* 回到最上面 */
+.to-top{position:fixed;right:18px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;
+  width:56px;height:56px;padding:0;border:0;border-radius:50%;background:var(--navy-deep);color:#fff;
+  cursor:pointer;display:grid;place-items:center;box-shadow:0 10px 26px rgba(15,25,40,.32);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .25s,transform .25s,visibility .25s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{filter:brightness(1.18)}
+.to-top:focus-visible{outline:3px solid var(--brick-soft);outline-offset:3px}
+.to-top svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:900px){
+  .to-top{width:48px;height:48px;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .to-top svg{width:22px;height:22px}
+}
+@media print{.to-top{display:none !important}}
