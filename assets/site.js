@@ -43,6 +43,35 @@
     });
   }
 
+  // 微信：QR 彈窗 + 複製微信號
+  var wxM = document.getElementById('wxModal');
+  if (wxM) {
+    var wxOpen = function (e) { if (e) e.preventDefault(); wxM.hidden = false; document.body.style.overflow = 'hidden'; };
+    var wxShut = function () { wxM.hidden = true; document.body.style.overflow = ''; };
+    [].slice.call(document.querySelectorAll('[data-wx]')).forEach(function (a) {
+      a.addEventListener('click', wxOpen);
+    });
+    wxM.addEventListener('click', function (e) { if (e.target === wxM) wxShut(); });
+    var wxX = wxM.querySelector('.wx-x');
+    if (wxX) wxX.addEventListener('click', wxShut);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !wxM.hidden) wxShut(); });
+    var wxC = wxM.querySelector('.wx-copy'), wxI = document.getElementById('wxId');
+    if (wxC && wxI) wxC.addEventListener('click', function () {
+      var id = wxI.textContent.trim(), done = function () {
+        var old = wxC.textContent; wxC.textContent = '已複製 ✓';
+        setTimeout(function () { wxC.textContent = old; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(id).then(done, function () { });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = id; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) { }
+        document.body.removeChild(ta);
+      }
+    });
+  }
+
   // 買方需求配對表單
   var bform=document.getElementById('buyerForm');
   if(bform){

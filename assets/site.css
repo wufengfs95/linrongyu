@@ -606,6 +606,7 @@ section.sm{padding-block:8px 48px}
 .side-fab a:hover{transform:scale(1.08)}
 .sf-book{background:var(--brick)}
 .sf-line{background:#06C755}
+.sf-wx{background:#1AAD19}
 .sf-tel{background:var(--navy)}
 
 @media (max-width:1100px){
@@ -1063,7 +1064,8 @@ section.tq-wrap{padding-block:16px 72px}
 .buyer-how{background:var(--cream);border:1px solid var(--cream-line);border-radius:var(--radius);padding:28px 30px}
 .buyer-how h2{font-size:30px;color:var(--navy);margin:0 0 14px}
 .buyer-how ol{margin:0;padding-left:1.3em;display:grid;gap:16px;font-size:22px;line-height:1.8;color:var(--ink)}
-.buyer-how ol b{color:var(--navy)}
+.buyer-how ol li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:.75em;align-items:baseline}
+.buyer-how ol b{color:var(--navy);white-space:nowrap}
 .buyer-note{margin:20px 0 0;font-size:19px;color:var(--muted);line-height:1.7}
 .buyer-form{background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px rgba(31,58,95,.06)}
 .buyer-form .chips span{border-color:var(--line);color:var(--ink)}
@@ -1148,4 +1150,32 @@ section.tq-wrap{padding-block:16px 72px}
 .page-head p.lead-one{max-width:none;white-space:nowrap;font-size:clamp(13px,calc((100vw - 60px) / 42),23px)}
 @media (max-width:760px){
   .page-head p.lead-one{white-space:normal;font-size:17px}
+}
+
+/* 微信 QR 彈窗 */
+[data-wx][hidden]{display:none !important}
+.btn-wx{background:#1AAD19;color:#fff;border-color:#1AAD19}
+.wx-modal{position:fixed;inset:0;z-index:80;background:rgba(15,25,40,.62);
+  display:grid;place-items:center;padding:20px}
+.wx-modal[hidden]{display:none}
+.wx-card{position:relative;background:#fff;border-radius:20px;padding:34px 34px 28px;
+  text-align:center;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.wx-card h3{margin:0 0 18px;font-size:28px;color:var(--navy)}
+.wx-qr{width:280px;height:280px;max-width:100%;display:block;margin:0 auto;border-radius:12px;
+  border:1px solid var(--line);object-fit:contain;background:#fff}
+.wx-id{margin:18px 0 14px;font-size:22px;color:var(--ink)}
+.wx-id b{font-size:25px;color:var(--navy);letter-spacing:.03em}
+.wx-copy{background:#1AAD19;color:#fff;border:0;border-radius:999px;font:inherit;font-size:20px;
+  font-weight:700;padding:13px 34px;cursor:pointer}
+.wx-copy:hover{filter:brightness(1.08)}
+.wx-tip{margin:16px 0 0;font-size:16px;line-height:1.75;color:var(--muted)}
+.wx-x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:32px;line-height:1;
+  color:var(--muted);cursor:pointer;padding:4px 8px}
+@media (max-width:760px){
+  .wx-card{padding:28px 20px 22px}
+  .wx-card h3{font-size:24px}
+  .wx-qr{width:240px;height:240px}
+  .wx-id{font-size:19px}.wx-id b{font-size:22px}
+  .wx-copy{font-size:18px}
+  .wx-tip{font-size:14.5px}
 }
