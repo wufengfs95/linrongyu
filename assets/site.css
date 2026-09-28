@@ -1251,3 +1251,34 @@ section.tq-wrap{padding-block:16px 72px}
   .g-big{font-size:17px}
   .g-flow,.g-check{font-size:16.5px}
 }
+
+/* 簽約應備文件 */
+.sd-lead{margin:0 0 20px;font-size:19px;line-height:1.85;color:var(--ink)}
+.sd-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.sd-col{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+.sd-col.sd-buy{border-top:5px solid var(--brick)}
+.sd-col.sd-sell{border-top:5px solid var(--navy)}
+.sd-col h3{margin:0 0 4px;font-size:26px;color:var(--navy)}
+.sd-note{margin:0 0 16px;font-size:16px;color:var(--muted)}
+.sd-list{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:sd}
+.sd-list li{position:relative;padding-left:32px}
+.sd-list li::before{counter-increment:sd;content:counter(sd);position:absolute;left:0;top:2px;
+  width:23px;height:23px;border-radius:50%;background:var(--cream);color:var(--navy);
+  font-size:14px;font-weight:800;display:grid;place-items:center}
+.sd-sell .sd-list li::before{background:var(--sky-soft)}
+.sd-list b{display:block;font-size:19px;color:var(--navy);line-height:1.5}
+.sd-list p{margin:4px 0 0;font-size:16.5px;line-height:1.8;color:var(--ink)}
+.sd-common{margin-top:20px;background:var(--cream);border:1px solid var(--cream-line);
+  border-radius:14px;padding:22px 26px}
+.sd-common h3{margin:0 0 12px;font-size:23px;color:var(--navy)}
+.sd-common ul{margin:0;padding-left:1.25em;display:grid;gap:10px;font-size:17.5px;line-height:1.8;color:var(--ink)}
+.sd-common b{color:var(--navy);margin-right:.4em}
+@media (max-width:860px){
+  .sd-grid{grid-template-columns:1fr}
+  .sd-col{padding:20px}
+  .sd-col h3{font-size:22px}
+  .sd-list b{font-size:17.5px}
+  .sd-list p{font-size:15.5px}
+  .sd-lead{font-size:17px}
+  .sd-common ul{font-size:16px}
+}
