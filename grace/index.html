@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>寬限期到期試算：月付會跳多少、續繳轉貸怎麼選｜林容瑜</title>
+<meta name="description" content="免費寬限期到期試算：算出只繳息結束後的月付跳幅，比較續繳、轉貸重拉年期、再延長寬限期三條路的月付與總利息，附轉貸費用明細與回本月數。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/grace/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="寬限期到期試算：月付會跳多少、續繳轉貸怎麼選｜林容瑜">
+<meta property="og:description" content="免費寬限期到期試算：算出只繳息結束後的月付跳幅，比較續繳、轉貸重拉年期、再延長寬限期三條路的月付與總利息，附轉貸費用明細與回本月數。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/grace/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=06243b9e">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "寬限期到期試算", "url": "https://wufengfs95.github.io/linrongyu/grace/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費寬限期到期試算：算出只繳息結束後的月付跳幅，比較續繳、轉貸重拉年期、再延長寬限期三條路的月付與總利息，附轉貸費用明細與回本月數。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../deals/">成交地圖</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 寬限期到期試算</p>
+  <h1>寬限期到期試算</h1>
+  <p class="sm-sub">只繳息的日子結束後，月付會跳多少？輸入貸款餘額、利率、年期和寬限期，馬上算出跳幅，並把「續繳、轉貸重拉年期、再延長寬限期」三條路的月付、總利息、轉貸成本與回本月數一次攤開比較。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="gForm" class="v-form" novalidate>
+      <div class="field"><label for="gBal">貸款餘額（萬）<span class="rt-small">剩多少算多少，看網銀或撥款通知</span></label>
+        <input type="number" id="gBal" inputmode="numeric" placeholder="例：800" value="800"></div>
+      <div class="field"><label for="gRate">目前利率（%）<span class="rt-small">看撥款通知或存摺扣款明細</span></label>
+        <input type="number" id="gRate" inputmode="decimal" step="0.001" value="2.2"></div>
+      <div class="field"><label>貸款總年期</label><div class="v-kinds" id="gYears" role="group"><button type="button" data-v="20" aria-pressed="false">20 年</button><button type="button" data-v="30" aria-pressed="true">30 年</button><button type="button" data-v="40" aria-pressed="false">40 年</button></div></div>
+      <div class="field"><label>寬限期幾年</label><div class="v-kinds" id="gGrace" role="group"><button type="button" data-v="2" aria-pressed="false">2 年</button><button type="button" data-v="3" aria-pressed="true">3 年</button><button type="button" data-v="5" aria-pressed="false">5 年・新青安</button></div></div>
+      <div class="field"><label for="gLeft">距離到期還有幾個月（選填）</label>
+        <input type="number" id="gLeft" inputmode="numeric" placeholder="例：8"></div>
+      <p class="v-hint">如果你在考慮轉貸，下面兩個是「轉去的新條件」</p>
+      <div class="field"><label>轉貸後年期</label><div class="v-kinds" id="gNewY" role="group"><button type="button" data-v="20" aria-pressed="false">20 年</button><button type="button" data-v="30" aria-pressed="true">30 年</button><button type="button" data-v="40" aria-pressed="false">40 年</button></div></div>
+      <div class="field"><label for="gNewR">轉貸後利率（%）</label>
+        <input type="number" id="gNewR" inputmode="decimal" step="0.001" value="2.1"></div>
+    </form>
+    <div id="gResult" class="v-result"></div>
+  </div>
+  <h2 class="v-h2">關於寬限期，最多人搞錯的三件事</h2>
+  <div class="g-three">
+    <div><b>① 不是不用繳，是只繳利息</b><p>本金一毛沒少。到期後，原本要用全部年期攤還的本金，
+      要壓縮在剩下的年期內還完——年期被壓縮，月付才會跳這麼多，常見是直接翻倍以上。</p></div>
+    <div><b>② 一般 2～3 年，新青安最長 5 年</b><p>2023 年前後買房、辦 2～3 年寬限期的人現在陸續到期；
+      新青安 5 年那一批，最早 2028 年 8 月起輪到。越早算出數字，越有時間安排。</p></div>
+    <div><b>③ 到期不是只有「繳」一條路</b><p>續繳、轉貸重拉年期、再延長寬限期，各有代價。
+      先把三條路的數字都攤開，再看家庭收入穩不穩、未來幾年會不會換屋，答案就會自己浮出來。</p></div>
+  </div>
+  <h2 class="v-h2">三個問題，答案自己浮出來</h2>
+  <ol class="g-flow">
+    <li><b>到期後的新月付，佔家庭月收入超過 4 成嗎？</b>
+      <p>沒超過 → <b class="g-ok">咬牙續繳</b>最單純，不用付任何額外費用。超過了 → 看下一題。</p></li>
+    <li><b>未來 5～10 年，你會一直住這間房子嗎？</b>
+      <p>會住很久 → 用上面的轉貸試算算回本月數，回本快就值得比三家。
+        不一定會住 → 別急著付轉貸成本，看下一題。</p></li>
+    <li><b>你知道房子「現在」實際值多少嗎？</b>
+      <p>知道 → 增值的部分是選擇權，換屋或調整都可以先算。
+        不知道 → 先做<a href="../value/">免費房屋估價</a>，知道市值才有資格做上面任何決定。</p></li>
+  </ol>
+  <h2 class="v-h2">打給銀行前，先把這五件事查清楚</h2>
+  <ul class="g-check">
+    <li>寬限期<b>確切到期月份</b>（撥款通知書或網銀貸款明細）</li>
+    <li><b>綁約期過了沒</b>——通常 2～3 年，沒過就轉貸會有提前清償違約金</li>
+    <li>近一年信用卡、貸款<b>有沒有遲繳</b>，有遲繳談判籌碼會少很多</li>
+    <li>先查好<b>其他 2～3 家銀行目前的房貸利率</b>，談的時候要有比價依據</li>
+    <li>想清楚你要的是<b>哪一種</b>：延長寬限期？降利率？還是拉長年期？一次談一個重點</li>
+  </ul>
+  <p class="sm-note">延長寬限期等於本金更晚開始還、總利息更多，它是「爭取時間」不是「省錢」。
+    談成之後那段時間要拿來安排下一步。</p>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>寬限期到期，月付真的會翻倍嗎？</summary><p>很常見。以 800 萬、利率 2.2%、30 年期、寬限 3 年為例，寬限期間只繳息約 14,667 元，到期後要用剩下的 27 年攤還本金，月付跳到約 32,900 元，大約 2.2 倍。年期越短、寬限期越長，跳幅越大。</p></details><details><summary>可以再跟銀行延長寬限期嗎？</summary><p>可以談，但不是一定給。銀行會看你的信用紀錄、繳款狀況和收入。談成了也要知道：延長期間本金完全沒有減少，之後攤還的年期更短、月付跳得更兇，總利息也更多。</p></details><details><summary>轉貸划不划算怎麼看？</summary><p>把轉貸的全部成本（違約金、塗銷設定規費、代書費、鑑價費、火險重投保）加總，除以每月省下來的錢，就是回本月數。回本 12 個月內而且新年期拉長，值得認真比三家；回本超過 24 個月，先跟原銀行談比較實在。</p></details><details><summary>轉貸要準備多久？</summary><p>從送件到撥款大約 3～6 週。建議在寬限期到期前 3 個月就開始問，才有時間比三家、也有籌碼跟原銀行談。</p></details><details><summary>如果真的繳不出來怎麼辦？</summary><p>最不該做的是拖到遲繳。先跟銀行談延期或調整條件，同時把房子現在的行情算出來——知道市值，才知道換屋、調整或處分各是什麼條件。想有人一起把數字攤開，直接 LINE 我。</p></details></div>
+  <p class="sm-note">本試算採本息平均攤還估算，利率固定不變，僅供參考。
+    實際月付金、可否延長寬限期、轉貸條件與費用，以各銀行核定為準。
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=b159f045" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v=""></script>
+<script src="app.js?v=1f95dcbf" data-v="" defer></script>
+</body>
+</html>
