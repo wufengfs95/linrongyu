@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>繼承分配計算機：應繼分、特留分、遺產稅一次算｜林容瑜</title>
+<meta name="description" content="免費繼承試算：輸入家庭成員就算出每個人的應繼分與特留分，並用 115 年度免稅額與扣除額粗估遺產稅。已納入民法第 1223 條刪除兄弟姊妹特留分的修法（116 年 2 月 17 日施行）。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/inherit/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="繼承分配計算機：應繼分、特留分、遺產稅一次算｜林容瑜">
+<meta property="og:description" content="免費繼承試算：輸入家庭成員就算出每個人的應繼分與特留分，並用 115 年度免稅額與扣除額粗估遺產稅。已納入民法第 1223 條刪除兄弟姊妹特留分的修法（116 年 2 月 17 日施行）。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/inherit/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=d2b3b11a">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "繼承分配計算機", "url": "https://wufengfs95.github.io/linrongyu/inherit/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費繼承試算：輸入家庭成員就算出每個人的應繼分與特留分，並用 115 年度免稅額與扣除額粗估遺產稅。已納入民法第 1223 條刪除兄弟姊妹特留分的修法（116 年 2 月 17 日施行）。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../deals/">成交地圖</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 繼承分配計算機</p>
+  <h1>繼承分配計算機</h1>
+  <p class="sm-sub">家裡有誰，點一點就知道每個人依法各拿多少（應繼分）、就算有遺囑也保障得到多少（特留分），以及遺產稅大概要繳多少。已納入民法第 1223 條 116 年 2 月 17 日施行的修法。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="ihForm" class="v-form" novalidate>
+      <div class="field"><label for="ihSpouse">配偶（先生／太太）還在嗎？</label>
+        <select id="ihSpouse"><option value="1">有配偶</option><option value="0">沒有配偶</option></select></div>
+      <div class="field"><label for="ihKid">子女幾人（含養子女）<span class="rt-small">子女已過世但留有孫子女，那一房算 1 人（代位繼承）</span></label><div class="ih-cnt"><button type="button" class="ih-step" data-t="ihKid" data-d="-1" aria-label="減一">−</button><input type="number" id="ihKid" inputmode="numeric" value="0" min="0" max="20"><button type="button" class="ih-step" data-t="ihKid" data-d="1" aria-label="加一">＋</button></div></div>
+      <div class="field"><label for="ihPar">父母還在幾位<span class="rt-small"></span></label><div class="ih-cnt"><button type="button" class="ih-step" data-t="ihPar" data-d="-1" aria-label="減一">−</button><input type="number" id="ihPar" inputmode="numeric" value="0" min="0" max="20"><button type="button" class="ih-step" data-t="ihPar" data-d="1" aria-label="加一">＋</button></div></div>
+      <div class="field"><label for="ihSib">兄弟姊妹幾人<span class="rt-small">前面有子女或父母，兄弟姊妹就輪不到</span></label><div class="ih-cnt"><button type="button" class="ih-step" data-t="ihSib" data-d="-1" aria-label="減一">−</button><input type="number" id="ihSib" inputmode="numeric" value="0" min="0" max="20"><button type="button" class="ih-step" data-t="ihSib" data-d="1" aria-label="加一">＋</button></div></div>
+      <div class="field"><label for="ihGp">祖父母（含外祖父母）還在幾位<span class="rt-small"></span></label><div class="ih-cnt"><button type="button" class="ih-step" data-t="ihGp" data-d="-1" aria-label="減一">−</button><input type="number" id="ihGp" inputmode="numeric" value="0" min="0" max="20"><button type="button" class="ih-step" data-t="ihGp" data-d="1" aria-label="加一">＋</button></div></div>
+      <div class="field"><label for="ihDied">過世日期<span class="rt-small">決定適用哪一版特留分，不是看遺囑日期</span></label>
+        <input type="date" id="ihDied"></div>
+      <div class="field"><label for="ihNet">遺產淨值（萬，選填）<span class="rt-small">不填也能算比例。房子用市價概估就好</span></label>
+        <input type="number" id="ihNet" inputmode="numeric" placeholder="例：2000"></div>
+    </form>
+    <div id="ihResult" class="v-result"></div>
+  </div>
+  <div class="ih-law">
+    <b>民法第 1223 條修法：刪除兄弟姊妹的特留分</b>
+    <p>115 年 8 月 17 日修正公布，自公布後六個月、即 <b>116 年 2 月 17 日</b>起施行。
+      配偶、直系血親卑親屬、父母（各 1/2）與祖父母（1/3）的特留分完全沒有變動。</p>
+    <p><b>用哪一版看「過世那天」，不是看遺囑日期。</b>116 年 2 月 16 日以前過世的，
+      兄弟姊妹的特留分 1/3 還在。另外要注意：刪掉的是「最低保障額度」，不是繼承權——
+      沒有立遺囑的話，兄弟姊妹仍然依法定應繼分繼承。</p>
+  </div>
+  <h2 class="v-h2">繼承順序：前面有人，後面就輪不到</h2>
+  <ol class="ih-order">
+    <li><b>第一順序　直系血親卑親屬</b><span>子女、養子女；子女已過世的，由其子女代位繼承</span></li>
+    <li><b>第二順序　父母</b><span>沒有子女、也沒有孫子女時才輪到</span></li>
+    <li><b>第三順序　兄弟姊妹</b><span>前面兩順序都沒有人時才輪到</span></li>
+    <li><b>第四順序　祖父母</b><span>前面三順序都沒有人時才輪到</span></li>
+  </ol>
+  <p class="ih-note"><b>配偶永遠有一份</b>，而且不佔順序：與子女同繼承時按人數均分；
+    與父母或兄弟姊妹同繼承時拿 1/2；與祖父母同繼承時拿 2/3；四個順序都沒有人時全部由配偶繼承（民法第 1144 條）。</p>
+  <h2 class="v-h2">別錯過的期限</h2>
+  <ul class="ih-dead">
+    <li><b>拋棄繼承：3 個月</b>　知悉得繼承時起 3 個月內向法院聲明，逾期就不能拋棄。</li>
+    <li><b>遺產稅申報：6 個月</b>　被繼承人死亡日起 6 個月內申報，可申請延期 3 個月。</li>
+    <li><b>繼承登記：6 個月</b>　逾期每滿 3 個月按應納登記費罰 1 倍，最高 20 倍。</li>
+  </ul>
+  <h2 class="v-h2">房子繼承完，才是麻煩開始的地方</h2>
+  <div class="ih-real">
+    <div><b>公同共有，一個人不點頭就卡住</b><p>繼承登記做完預設是公同共有。
+      要賣掉得依土地法第 34 條之 1，人數及持分都過半（或持分逾 2/3）才能處分，
+      有人聯絡不上、有人不同意，整件事就停在那裡。</p></div>
+    <div><b>將來要賣，房地合一稅差很大</b><p>繼承取得的房子日後出售，
+      持有期間可以把被繼承人持有的年數併計；105 年 12 月 31 日以前取得的還可能適用舊制。
+      同一間房子，走新制還是舊制、持有幾年，稅差可以到幾百萬。</p></div>
+    <div><b>誰拿房子、誰拿現金，最容易翻臉</b><p>比例算得出來，東西怎麼分是另一回事。
+      房子不能切一半，通常得有人拿房、有人拿錢找補——這一步先講清楚，家人才不會鬧到法院。</p></div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>應繼分和特留分差在哪？</summary><p>應繼分是「沒有遺囑時，依法各拿多少」；特留分是「就算有遺囑，法律保障每個人最少能拿到多少」。被繼承人可以用遺囑自由處分的，只有遺產扣掉全部特留分之後剩下的那一塊。遺囑侵害到特留分時，被侵害的人可以主張扣減。</p></details><details><summary>兄弟姊妹的特留分真的被刪掉了嗎？</summary><p>是。民法第 1223 條 115 年 8 月 17 日修正公布，116 年 2 月 17 日起施行，刪除兄弟姊妹的特留分。但適用哪一版看被繼承人「過世那天」——116 年 2 月 16 日以前過世的仍是舊法。而且刪掉的只是最低保障，沒有立遺囑時兄弟姊妹還是依應繼分繼承。</p></details><details><summary>遺產稅要繳多少？</summary><p>115 年度免稅額 1,333 萬，配偶扣除額 553 萬，直系血親卑親屬每人 56 萬，遺有父母每人 138 萬，喪葬費 138 萬。扣完之後的課稅遺產淨額，5,000 萬以下 10%、5,000 萬到 1 億 15%、超過 1 億 20%。重點是：房子是按公告土地現值＋房屋評定現值計算，通常遠低於市價，很多人以為要繳結果根本免稅。</p></details><details><summary>孫子女有繼承權嗎？</summary><p>有條件的。子女還在世時，孫子女沒有繼承權；子女先於被繼承人死亡或喪失繼承權，才由其子女（孫子女）代位繼承，而且是承接「那一房」原本的份額，不是每個孫子女各算一份。</p></details><details><summary>房子繼承之後想賣掉，會很麻煩嗎？</summary><p>看人數和意見。繼承登記完是公同共有，要處分得依土地法第 34 條之 1 湊到人數與持分都過半。實務上最常卡的是有人在國外、有人聯絡不上、有人不同意價格。這一塊我處理過，可以先把狀況講給我聽，我幫你看要先解哪一關。</p></details></div>
+  <p class="sm-note">本頁依民法第 1138、1141、1144、1223 條與遺產及贈與稅法第 13、17 條計算，僅供初步理解。
+    特留分依 115 年 8 月 17 日修正公布、116 年 2 月 17 日施行之民法第 1223 條；
+    遺產稅金額依財政部公告之 115 年度免稅額與扣除額（自 111 年起未調整）。
+    實際繼承涉及代位繼承、拋棄繼承、生前贈與歸扣、夫妻剩餘財產差額分配請求權等變數，
+    個案認定請洽地政士或律師，稅額以國稅局核定為準。我是房仲，不提供法律意見；
+    需要專業協助時，我可以幫你找到對的人。
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=b159f045" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v=""></script>
+<script src="app.js?v=fd2d1b9c" data-v="" defer></script>
+</body>
+</html>
