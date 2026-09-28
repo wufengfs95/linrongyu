@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>預售屋換約速算：賣方實拿多少、房地合一稅試算｜林容瑜</title>
+<meta name="description" content="免費預售屋換約試算：算出換約利潤、房地合一稅與屋主實拿現金，費用列舉與不列舉（成交價額 3%、上限 30 萬）兩案並排比較，附換約前必查的四件事。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/presale/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="預售屋換約速算：賣方實拿多少、房地合一稅試算｜林容瑜">
+<meta property="og:description" content="免費預售屋換約試算：算出換約利潤、房地合一稅與屋主實拿現金，費用列舉與不列舉（成交價額 3%、上限 30 萬）兩案並排比較，附換約前必查的四件事。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/presale/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=cc93b41e">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "預售屋換約速算", "url": "https://wufengfs95.github.io/linrongyu/presale/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "免費預售屋換約試算：算出換約利潤、房地合一稅與屋主實拿現金，費用列舉與不列舉（成交價額 3%、上限 30 萬）兩案並排比較，附換約前必查的四件事。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../deals/">成交地圖</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../#booking">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 預售屋換約速算</p>
+  <h1>預售屋換約速算</h1>
+  <p class="sm-sub">換約後實際能拿回多少？輸入取得總價、已付款和換約價，自動算出換約利潤、房地合一稅，並把「費用列舉」與「不列舉（成交價額 3%、上限 30 萬）」兩種算法並排比較，直接標出哪個划算。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="psForm" class="v-form" novalidate>
+      <div class="ps-head"><span>金額單位都是<b>萬元</b></span>
+        <button type="button" id="psReset" class="ps-reset">↺ 清空</button></div>
+      <div class="field"><label for="psCost">取得總價<span class="rt-small">當初跟建商簽約的總價</span></label>
+        <input type="number" id="psCost" inputmode="numeric" placeholder="例：1200"></div>
+      <div class="field"><label for="psPaid">已付款累計<span class="rt-small">簽約金＋訂金＋已繳工程款。預售屋通常還沒撥貸款，所以不計貸款</span></label>
+        <input type="number" id="psPaid" inputmode="numeric" placeholder="例：180"></div>
+      <div class="field"><label for="psSell">出售總價（換約價）</label>
+        <input type="number" id="psSell" inputmode="numeric" placeholder="例：1400"></div>
+      <div class="field"><label>持有期間（決定稅率）<span class="rt-small">從跟建商簽約那天算到換約那天</span></label>
+        <div class="v-kinds ps-rates" id="psRate" role="group"><button type="button" data-v="45" aria-pressed="true"><b>45%</b><span>持有 2 年內</span></button><button type="button" data-v="35" aria-pressed="false"><b>35%</b><span>超過 2～5 年</span></button><button type="button" data-v="20" aria-pressed="false"><b>20%</b><span>超過 5～10 年</span></button></div></div>
+      <p class="v-hint">下面是費用設定，可以照你的實際情況改</p>
+      <div class="row2">
+        <div class="field"><label for="psFeeR">服務費率（%）</label>
+          <input type="number" id="psFeeR" inputmode="decimal" step="0.1" value="4"></div>
+        <div class="field"><label for="psReg">實價登錄申報費（萬）</label>
+          <input type="number" id="psReg" inputmode="decimal" step="0.01" value="0.2"></div>
+      </div>
+      <p class="v-hint">履保費固定用「出售總價 × 萬分之三」計算。</p>
+    </form>
+    <div id="psResult" class="v-result"></div>
+  </div>
+  <h2 class="v-h2">預售屋換約的稅，是怎麼算的</h2>
+  <div class="ps-explain">
+    <div><b>① 預售屋也要課房地合一</b><p>2021 年 7 月房地合一 2.0 上路後，
+      預售屋及其坐落基地的換約轉售，明確納入房地合一課稅（所得稅法第 4 條之 4）。
+      不是等交屋才算，簽約換約那一刻就是一次房地交易。</p></div>
+    <div><b>② 收入不是只有賺的那筆</b><p>稅法上的「成交價額」是<b>已付款 ＋ 利潤</b>，
+      成本則是已付款。兩者相減剛好等於利潤，所以真正被課的是差價，
+      但費用的 3% 上限是用整個成交價額去算的。</p></div>
+    <div><b>③ 費用二擇一</b><p>有憑證就列舉（服務費、實價登錄申報費、履保費、廣告費…），
+      沒憑證可按成交價額 3% 計算、上限 30 萬（所得稅法第 14 條之 6）。
+      上面會兩種都算給你看，哪個稅少就用哪個。</p></div>
+    <div><b>④ 稅率看持有期間</b><p>從與建商簽約日算到換約日：2 年內 45%、超過 2～5 年 35%、
+      超過 5～10 年 20%（所得稅法第 14 條之 4）。
+      預售屋沒有自住 10% 優惠，也不能重購退稅——因為你沒有在裡面設籍居住過。</p></div>
+  </div>
+  <h2 class="v-h2">換約前一定要先確認的四件事</h2>
+  <ul class="ps-check">
+    <li><b>建商同意換約嗎？</b>很多預售契約寫明「交屋前不得轉讓」或要收
+      <b>換約手續費</b>（常見為總價 0.1%～1%，或固定幾萬元），簽約書要翻出來看。</li>
+    <li><b>實價登錄要申報。</b>預售屋換約也在實價登錄申報範圍，
+      逾期或申報不實會被處罰，這筆代辦費記得算進成本。</li>
+    <li><b>稅要在 30 天內申報。</b>房地合一稅是「交易日的次日起 30 天內」申報，
+      不是隔年報綜所稅，逾期會被罰。</li>
+    <li><b>賠錢賣也要申報。</b>虧損一樣要在 30 天內申報，
+      申報後的損失可以在往後 3 年內扣抵其他房地交易所得。</li>
+  </ul>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>預售屋換約，稅到底怎麼算？</summary><p>課稅所得＝換約利潤（出售總價 − 取得總價）− 可減除的費用；稅額＝課稅所得 × 稅率。稅率依「與建商簽約日到換約日」的持有期間，2 年內 45%、超過 2～5 年 35%、超過 5～10 年 20%。上面的試算會把列舉與不列舉兩種都算給你比。</p></details><details><summary>已付款要不要算進收入？</summary><p>要。稅法上的成交價額是「已付款 ＋ 利潤」，取得成本則是「已付款」，兩者相減等於利潤。所以真正課到的是差價，但 3% 費用的計算基礎是整個成交價額，已付款愈多、3% 算出來的費用愈高。</p></details><details><summary>列舉和不列舉，怎麼選？</summary><p>哪個算出來的稅少就選哪個，沒有限制。憑證不齊、或利潤不高的時候，通常不列舉（3%、上限 30 萬）比較有利；成交金額大、服務費高的時候，列舉往往勝出。上面兩欄會直接標出哪個划算。</p></details><details><summary>預售屋可以用自住 10% 稅率嗎？</summary><p>不行。自住優惠要求本人或配偶、未成年子女已在該房屋辦竣戶籍登記並實際居住連續滿 6 年，預售屋還沒交屋、不可能設籍，所以用不到 10% 稅率，也不能重購退稅。</p></details><details><summary>建商不讓我換約怎麼辦？</summary><p>先看預售契約怎麼寫。內政部的預售屋買賣定型化契約應記載事項有規範，但各家建商實際條款不同，有的允許但收手續費、有的限制次數。簽約書拍給我，我幫你看條款，也可以陪你去跟建商談。</p></details></div>
+  <p class="sm-note">本試算依所得稅法第 4 條之 4、第 14 條之 4、第 14 條之 6 及房地合一 2.0 規定估算，
+    僅供初步理解。實際申報金額、可減除費用與適用稅率，以稽徵機關核定為準，
+    建議搭配地政士或會計師確認。
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=b159f045" defer></script>
+<script src="../assets/tools.js?v=b0879141" data-v=""></script>
+<script src="app.js?v=f84b10f9" data-v="" defer></script>
+</body>
+</html>
