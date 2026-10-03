@@ -128,7 +128,7 @@
   }
   function airBadge(size){ return '<span class="sm-st sm-air" style="--c:'+AIR_C+';width:'+size+'px;height:'+size+'px">'+svg('air')+'</span>'; }
   var fullW=function(s){return String(s).replace(/[A-Za-z0-9]/g,function(c){return String.fromCharCode(c.charCodeAt(0)+65248)})};
-  function lineText(ls){ return ls.map(function(l){return LINES[l[0]].t+(l[1]?fullW(l[1]):'')+(l[2]?'建置中':'')}).join(''); }
+  function lineText(ls){ return ls.map(function(l){return LINES[l[0]].t+(l[1]?fullW(l[1]):'')+(l[2]?'建置中':'')}).join(' • '); }
 
   function drawSchools(){
     if(schoolLayer) schoolLayer.remove();
