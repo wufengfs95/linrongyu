@@ -103,7 +103,10 @@
   if(bform){
     bform.addEventListener('submit',function(e){
       e.preventDefault();
-      var pick=function(n){var el=bform.querySelector('input[name='+n+']:checked');return el?el.value:''};
+      var pick=function(n){   // 類型、區域是複選，其餘單選；都用同一個函式取值
+        return [].slice.call(bform.querySelectorAll('input[name='+n+']:checked'))
+          .map(function(el){return el.value}).join('、')||'不限';
+      };
       var val=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
       var msg='容瑜你好，我想找房子：\n'+
         '・類型：'+pick('bkind')+'\n'+
