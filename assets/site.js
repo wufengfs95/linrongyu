@@ -251,5 +251,33 @@
         apply();
       });
     });
+
+    // 排序：沒有該項數值的（例如土地沒有建坪）一律排在最後，不管升冪降冪
+    var cards=[].slice.call(grid.querySelectorAll('.card-l'));
+    cards.forEach(function(c,i){ c.dataset.order=i; });
+    var sortSel=document.getElementById('listingSort');
+    if(sortSel){
+      var num=function(c,k){ var v=parseFloat(c.dataset[k]); return isFinite(v)?v:0; };
+      sortSel.addEventListener('change',function(){
+        var v=sortSel.value, arr=cards.slice();
+        if(v){
+          var p=v.split('-'), key=p[0], dir=p[1]==='desc'?-1:1;
+          arr.sort(function(a,b){
+            if(key==='posted'){
+              var pa=a.dataset.posted||'', pb=b.dataset.posted||'';
+              return pa===pb ? num(a,'order')-num(b,'order') : (pa<pb?-1:1)*dir;
+            }
+            var va=num(a,key), vb=num(b,key);
+            if(!va&&!vb) return num(a,'order')-num(b,'order');
+            if(!va) return 1;            // 沒有數值的沉到最後
+            if(!vb) return -1;
+            return va===vb ? num(a,'order')-num(b,'order') : (va-vb)*dir;
+          });
+        } else {
+          arr.sort(function(a,b){ return num(a,'order')-num(b,'order'); });
+        }
+        arr.forEach(function(c){ grid.appendChild(c); });
+      });
+    }
   }
 })();
