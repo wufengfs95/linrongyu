@@ -214,21 +214,47 @@
   if(tgrid){
     var tcount=document.getElementById('toolCount');
     var tbtns=[].slice.call(document.querySelectorAll('.tool-filter .fbtn'));
-    tbtns.forEach(function(b){
-      b.addEventListener('click',function(){
-        var tag=b.getAttribute('data-tag')||'';
-        tbtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var gtabs=[].slice.call(document.querySelectorAll('.tgtabs .tgt'));
+    var secs=[].slice.call(tgrid.querySelectorAll('.tgroup'));
+    var tag='', gnow=(secs[0]||{dataset:{}}).dataset.g||'';
+
+    var apply=function(){
+      var total=0;
+      // 先決定每張卡在目前分類下顯不顯示，再算每個分頁剩幾個
+      secs.forEach(function(sec){
         var n=0;
-        tgrid.querySelectorAll('.v2-tool').forEach(function(c){
+        sec.querySelectorAll('.v2-tool').forEach(function(c){
           var ok=!tag||(c.getAttribute('data-tags')||'').split(' ').indexOf(tag)>=0;
           c.hidden=!ok; if(ok) n++;
         });
-        tgrid.querySelectorAll('.tgroup').forEach(function(sec){   // 整區都被篩掉就連標題一起收起來
-          sec.hidden=![].slice.call(sec.querySelectorAll('.v2-tool')).some(function(c){return !c.hidden});
-        });
-        if(tcount) tcount.textContent='共 '+n+' 個工具';
+        sec.dataset.n=n; total+=n;
+      });
+      // 分頁按鈕：沒工具的整顆收起來
+      var avail=[];
+      gtabs.forEach(function(b){
+        var sec=secs.filter(function(s){return s.dataset.g===b.dataset.gt})[0];
+        var n=sec?+sec.dataset.n:0;
+        b.hidden=!n;
+        var num=b.querySelector('.tgt-n'); if(num) num.textContent=n;
+        if(n) avail.push(b.dataset.gt);
+      });
+      if(avail.indexOf(gnow)<0) gnow=avail[0]||'';
+      gtabs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.gt===gnow?'true':'false')});
+      secs.forEach(function(sec){ sec.hidden = sec.dataset.g!==gnow || !+sec.dataset.n; });
+      if(tcount) tcount.textContent=total?'共 '+total+' 個工具':'這個分類目前沒有工具';
+    };
+
+    tbtns.forEach(function(b){
+      b.addEventListener('click',function(){
+        tag=b.getAttribute('data-tag')||'';
+        tbtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+        apply();
       });
     });
+    gtabs.forEach(function(b){
+      b.addEventListener('click',function(){ gnow=b.dataset.gt; apply(); });
+    });
+    apply();
   }
 
   // 物件列表篩選

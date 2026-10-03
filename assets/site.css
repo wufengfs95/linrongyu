@@ -1543,7 +1543,20 @@ section.tq-wrap{padding-block:16px 72px}
 /* 免費工具：分區 */
 .tgroups{display:grid;gap:30px}
 .tgroup[hidden]{display:none !important}
-.tg-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 16px;
-  padding-bottom:10px;border-bottom:2px solid var(--cream-line);font-size:26px;color:var(--navy)}
-.tg-h small{font-size:17px;font-weight:400;color:var(--muted)}
-@media (max-width:760px){ .tg-h{font-size:21px} .tg-h small{font-size:15px} }
+
+/* 免費工具：分頁 */
+.tgtabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tgt{display:inline-flex;align-items:center;gap:9px;font:inherit;font-size:19px;font-weight:700;
+  padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;
+  color:var(--navy);cursor:pointer;transition:all .15s}
+.tgt:hover{border-color:var(--brick-soft)}
+.tgt[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.tgt[hidden]{display:none !important}
+.tgt-n{font-style:normal;font-size:14.5px;font-weight:700;min-width:22px;height:22px;padding:0 6px;
+  border-radius:999px;background:var(--cream);color:var(--navy);display:grid;place-items:center}
+.tgt[aria-pressed="true"] .tgt-n{background:rgba(255,255,255,.22);color:#fff}
+.tg-sub{margin:0 0 14px;font-size:18px;color:var(--muted)}
+@media (max-width:760px){
+  .tgt{font-size:16px;padding:10px 16px;gap:7px}
+  .tg-sub{font-size:16px}
+}
