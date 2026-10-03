@@ -1535,8 +1535,8 @@ section.tq-wrap{padding-block:16px 72px}
 }
 
 /* 三合一地圖副標：排一行 */
-.sm-top .wrap{container-type:inline-size}
-.sm-sub.one{max-width:none;white-space:nowrap;font-size:clamp(12px,calc(100cqw / 56),22px)}
+.sm-page .sm-top .wrap{container-type:inline-size;max-width:1440px}
+.sm-sub.one{max-width:none;white-space:nowrap;font-size:clamp(12px,calc(100cqw / 55),27px)}
 @media (max-width:860px){ .sm-sub.one{white-space:normal;font-size:16.5px} }
 
 /* 免費工具：分區 */
