@@ -220,6 +220,9 @@
           var ok=!tag||(c.getAttribute('data-tags')||'').split(' ').indexOf(tag)>=0;
           c.hidden=!ok; if(ok) n++;
         });
+        tgrid.querySelectorAll('.tgroup').forEach(function(sec){   // 整區都被篩掉就連標題一起收起來
+          sec.hidden=![].slice.call(sec.querySelectorAll('.v2-tool')).some(function(c){return !c.hidden});
+        });
         if(tcount) tcount.textContent='共 '+n+' 個工具';
       });
     });
