@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>桃園房屋估價・建議開價｜實價登錄估價、謄本估價、競品分析、社區成交｜林容瑜</title>
+<meta name="description" content="免費桃園房屋估價四合一：輸入坪數屋齡算合理價格區間、上傳建物謄本自動判讀並建議開價、比對在售競品、追蹤社區每季成交走勢。資料來自內政部實價登錄。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/price/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="桃園房屋估價・建議開價｜實價登錄估價、謄本估價、競品分析、社區成交｜林容瑜">
+<meta property="og:description" content="免費桃園房屋估價四合一：輸入坪數屋齡算合理價格區間、上傳建物謄本自動判讀並建議開價、比對在售競品、追蹤社區每季成交走勢。資料來自內政部實價登錄。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/price/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=73878b88">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "桃園房屋估價・建議開價", "url": "https://wufengfs95.github.io/linrongyu/price/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "桃園房屋估價四合一：輸入條件估價、上傳謄本自動判讀、委託競品分析、社區成交追蹤，全部依內政部實價登錄成交資料計算。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 房屋估價</p>
+  <h1>桃園房屋估價・建議開價</h1>
+  <p class="sm-sub">四個估價工具合在一頁：自己輸入條件估、上傳謄本自動判讀、比對在售競品、追蹤社區成交。全部用內政部實價登錄的真實成交價，免費、免留電話。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="ptabs" role="group" aria-label="估價工具"><button type="button" class="ptb" data-pt="value" aria-pressed="true">房屋估價</button><button type="button" class="ptb" data-pt="deed" aria-pressed="false">謄本估價</button><button type="button" class="ptb" data-pt="compete" aria-pressed="false">委託競品分析</button><button type="button" class="ptb" data-pt="community" aria-pressed="false">社區成交追蹤</button></div>
+  <p class="pt-sub" data-pt="value">輸入行政區、坪數、屋齡、樓層，用實價登錄算出合理價格區間，也能驗有沒有買貴。</p><p class="pt-sub" data-pt="deed" hidden>上傳建物謄本 PDF，自動判讀坪數、公設、車位、屋齡與抵押，算出預估成交價與建議開價。</p><p class="pt-sub" data-pt="compete" hidden>屋主想開的價貴不貴？比對同社區成交加上附近在售競品，產生可以直接傳給屋主的說明。</p><p class="pt-sub" data-pt="community" hidden>選一個社區，近三年每一筆成交與每季單價走勢一次看完，加入追蹤還會標出新成交。</p>
+  <div class="ppane" data-p="value">
+  <div class="v-grid">
+    <form id="vForm" class="v-form" novalidate>
+      <h2>我的房子</h2>
+      <div class="field">
+        <span class="v-label">房屋類型</span>
+        <div class="v-kinds" id="vKinds" role="group" aria-label="房屋類型">
+          <button type="button" data-k="a" aria-pressed="true">住宅大樓</button>
+          <button type="button" data-k="b" aria-pressed="false">華廈</button>
+          <button type="button" data-k="c" aria-pressed="false">公寓</button>
+          <button type="button" data-k="d" aria-pressed="false">透天厝</button>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="vTown">行政區</label><select id="vTown"><option value="">載入中…</option></select></div>
+        <div class="field"><label for="vRoad">路段（選填，填了比較準）</label><input type="text" id="vRoad" list="vRoadList" autocomplete="off" placeholder="先選行政區"><datalist id="vRoadList"></datalist></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="vArea">權狀坪數（不含車位）</label><input type="number" id="vArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
+        <div class="field"><label for="vAge">屋齡（年）</label><input type="number" id="vAge" inputmode="numeric" step="1" placeholder="例：12"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="vFloor">所在樓層</label><input type="number" id="vFloor" inputmode="numeric" step="1" placeholder="例：7"></div>
+        <div class="field"><label for="vTops">總樓層（選填）</label><input type="number" id="vTops" inputmode="numeric" step="1" placeholder="例：14"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="vPark">車位</label><select id="vPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+        <div class="field"><label for="vPaid">已經買了？填成交價（萬）</label><input type="number" id="vPaid" inputmode="numeric" step="1" placeholder="選填，可驗有沒有買貴"></div>
+      </div>
+      <button type="submit" class="btn btn-main v-submit">立即免費估價</button>
+      <p id="vStatus" class="v-status" role="status"></p>
+      <p class="v-hint">一樓店面、工業宅、地上權、預售屋線上估不準，這類物件<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">加 LINE 找我實勘</a>最準。</p>
+    </form>
+    <div id="vResult" class="v-result"><div class="v-empty">
+      <b>估價會出現在這裡</b>
+      <p>填好左邊的資料按「立即免費估價」，就會看到：<br>・合理總價區間與每坪單價<br>・比對到的實際成交（時間、坪數、樓層、單價）<br>・已經買了的話，順便看有沒有買貴</p>
+      <p class="v-empty-note">資料是內政部實價登錄的桃園市住宅成交，近三年、每季更新。</p>
+    </div></div>
+  </div>
+
+  <h2 class="v-h2">桃園各區行情速查<small>近一年成交中位單價（萬元／坪，不含車位）</small></h2>
+  <div id="vQuick" class="v-quick"></div>
+
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq">
+    <details open><summary>你們是怎麼估的？</summary>
+      <p>就是「找鄰居的成交價來比」，分三步：</p>
+      <p><b>① 找鄰居</b>：先找同一條路、最近真的成交、坪數和屋齡跟你家差不多的房子；同路段不夠就往整個行政區找。用的是內政部實價登錄的真實成交價，不是網路開價。</p>
+      <p><b>② 調到同一個基準</b>：每筆成交的時間、樓層都不一樣，系統會依各區每季的成交中位數調整時間價差，再依樓層（頂樓、四樓、二樓、一樓）微調，把鄰居的價格換算成「跟你家一樣的條件」。</p>
+      <p><b>③ 取中間值給區間</b>：把調整後的價格取中位數，再抓合理區間，而不是給一個假裝很準的數字。比對到哪幾筆、各是多少，結果裡都看得到。</p>
+    </details>
+    <details><summary>車位怎麼算？</summary><p>車位會單獨算。系統用該行政區實價登錄的車位成交中位數（平面／機械分開算）加到總價裡，所以坪數欄位請填<b>不含車位</b>的權狀坪數。</p></details>
+    <details><summary>線上估價準嗎？</summary><p>比對樣本夠多（25 筆以上）時，抓到的區間通常很接近實際成交帶；樣本少的時候可信度會標「中」或「低」。但屋況、裝潢、景觀、格局、有沒有漏水、產權是否單純，這些線上都看不到，最後還是要現場看過才準。</p></details>
+    <details><summary>怎麼知道我有沒有買貴？</summary><p>在「已經買了？填成交價」填入你的成交總價（含車位），系統會跟估價區間比對，告訴你是偏高、合理還是買得不錯，並算出跟中位數的價差百分比。</p></details>
+    <details><summary>哪些房子估不準？</summary><p>一樓店面、有增建或露台、工業住宅、地上權、預售屋、透天（土地坪數和面寬差異大）、剛整理過的裝潢屋，這幾類線上估價誤差大，建議直接找我看過再估。</p></details>
+    <details><summary>資料多久更新一次？</summary><p>內政部每季公布一次實價登錄批次資料，目前用到 <b id="vUpdated">—</b>，共 <b id="vTotal">—</b> 筆桃園市住宅成交紀錄（近三年）。</p></details>
+  </div>
+  <p class="sm-note">本結果是依內政部實價登錄成交資料自動統計的參考價，非不動產估價師法所稱之估價報告；實際價格受屋況、裝潢、格局與市場條件影響。<br>
+    資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>（政府資料開放授權）。</p>
+  </div>
+  <div class="ppane" data-p="deed" hidden>
+  <div class="v-grid">
+    <div class="v-form d-side">
+      <h2>① 上傳謄本</h2>
+      <label id="dDrop" class="d-drop" for="dFile">
+        <input id="dFile" type="file" accept="application/pdf,.pdf">
+        <b>點這裡選擇謄本 PDF</b><span>或把檔案拖進來</span><small id="dFileName"></small>
+      </label>
+      <p class="v-hint">🔒 謄本只在你的瀏覽器裡讀取，<b>不會上傳</b>到任何伺服器。支援電傳謄本、地政事務所謄本的 PDF；拍照或掃描的圖片讀不到文字。</p>
+      <details class="d-paste"><summary>沒有 PDF？貼上謄本文字</summary>
+        <textarea id="dPaste" rows="6" placeholder="把謄本全文複製貼上（建物標示部、所有權部、他項權利部）"></textarea>
+        <button type="button" id="dPasteGo" class="btn btn-ghost">讀取文字</button>
+      </details>
+      <p id="dStatus" class="v-status" role="status"></p>
+
+      <form id="dForm" class="d-check" novalidate>
+        <h2>② 確認資料</h2>
+        <p class="v-hint">讀到的資料會自動填進來，讀錯可以直接改，再按「重新估價」。</p>
+        <div class="field">
+          <span class="v-label">房屋類型</span>
+          <div class="v-kinds" id="dKinds" role="group" aria-label="房屋類型">
+            <button type="button" data-k="a" aria-pressed="true">住宅大樓</button>
+            <button type="button" data-k="b" aria-pressed="false">華廈</button>
+            <button type="button" data-k="c" aria-pressed="false">公寓</button>
+            <button type="button" data-k="d" aria-pressed="false">透天厝</button>
+          </div>
+        </div>
+        <div class="row3">
+          <div class="field"><label for="dTown">行政區</label><select id="dTown"><option value="">載入中…</option></select></div>
+          <div class="field"><label for="dRoad">路段</label><input type="text" id="dRoad" autocomplete="off"></div>
+          <div class="field"><label for="dLane">巷</label><input type="number" id="dLane" inputmode="numeric" placeholder="無"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dHouse">房屋坪數（不含車位）</label><input type="number" id="dHouse" inputmode="decimal" step="0.01"></div>
+          <div class="field"><label for="dBuilt">完工年（民國）</label><input type="number" id="dBuilt" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dFloor">樓層</label><input type="number" id="dFloor" inputmode="numeric"></div>
+          <div class="field"><label for="dTops">總樓層</label><input type="number" id="dTops" inputmode="numeric"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dPark">車位</label><select id="dPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+          <div class="field"><label for="dParkP">車位坪數</label><input type="number" id="dParkP" inputmode="decimal" step="0.01"></div>
+        </div>
+        <h2>③ 現場條件</h2>
+        <div class="row2">
+          <div class="field"><label for="dCond">屋況</label><select id="dCond">
+            <option value="5">新裝潢、精裝（+5%）</option><option value="2">整理得不錯（+2%）</option>
+            <option value="0" selected>一般</option><option value="-5">老舊需整理（−5%）</option><option value="-10">漏水、壁癌、瑕疵（−10%）</option></select></div>
+          <div class="field"><label for="dView">景觀採光</label><select id="dView">
+            <option value="3">景觀戶、邊間（+3%）</option><option value="0" selected>一般</option><option value="-3">採光差、面嫌惡設施（−3%）</option></select></div>
+        </div>
+        <div class="field"><label for="dNego">議價空間 <b id="dNegoV">7%</b></label>
+          <input type="range" id="dNego" min="3" max="12" step="1" value="7">
+          <span class="v-hint">中壢、平鎮的大樓一般 5～8%，公寓、透天、屋況差 8～12%。</span></div>
+        <button type="submit" class="btn btn-main v-submit">重新估價</button>
+      </form>
+    </div>
+    <div id="dResult" class="v-result"><div class="v-empty">
+      <b>估價結果會出現在這裡</b>
+      <p>上傳謄本後會自動算出：<br>・建議開價（快速成交／標準／試水溫三種）與底價<br>・預估成交價區間與基準單價<br>・謄本判讀：公設比、持有年數、房地合一稅率、抵押與推估購入價<br>・比對到的同社區實價登錄成交<br>・可以直接傳給屋主的開價說法</p>
+      <p class="v-empty-note">行情資料：內政部實價登錄桃園市住宅成交，近三年，目前更新到 <b id="dUpdated">—</b>。</p>
+    </div></div>
+  </div>
+
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq">
+    <details open><summary>怎麼找到「同社區」的成交？</summary><p>實價登錄只公布到門牌區段，所以用「同一條路＋同一條巷＋完工年份相差 1 年內＋同型態」判斷是同一個社區。同社區近三年有 3 筆以上成交就用同社區行情；不夠的話，改用同路段、屋齡坪數相近的成交，再不夠就擴大到全區。</p></details>
+    <details><summary>車位沒拆價的成交怎麼辦？</summary><p>很多社區的實價登錄車位沒有拆開填價格，一般估價會直接丟掉。這裡會保留同社區這類成交，用同社區有拆價的車位（沒有就用行政區車位中位數）把車位價和車位坪數扣掉，再換算房屋單價，表格裡會標 *。</p></details>
+    <details><summary>開價跟底價怎麼抓？</summary><p>標準開價 = 預估成交價 ×（1＋議價空間），個位數調成 8；剛好超過 1,000、1,500、2,000 萬這種搜尋門檻一點點的，會壓回門檻下面（例如 1,998 萬），買方用價格篩選時才看得到。底價建議抓在預估成交價附近。</p></details>
+    <details><summary>推估購入價準嗎？</summary><p>只在「買賣取得」而且買入同時有銀行設定抵押時才會算：銀行設定金額通常是貸款的 1.2 倍、貸款成數 7～8 成，所以只是推估區間，當作了解屋主心理價的參考。</p></details>
+    <details><summary>哪些謄本讀不到？</summary><p>拍照、掃描成圖片的謄本沒有文字可讀，請改用電傳謄本 PDF 或貼上文字。透天厝、一樓店面、土地謄本線上估價誤差大，結果只能參考。</p></details>
+  </div>
+  <p class="sm-note">本結果依謄本與內政部實價登錄成交資料自動統計，供參考，非不動產估價師法所稱之估價報告。<br>
+    資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>（政府資料開放授權）。</p>
+  </div>
+  <div class="ppane" data-p="compete" hidden>
+  <div class="v-grid">
+    <form id="cForm" class="v-form" novalidate>
+      <h2>屋主的房子</h2>
+      <div class="field"><span class="v-label">房屋類型</span>
+        <div class="v-kinds" id="cKinds" role="group" aria-label="房屋類型">
+          <button type="button" data-k="a" aria-pressed="true">住宅大樓</button><button type="button" data-k="b" aria-pressed="false">華廈</button>
+          <button type="button" data-k="c" aria-pressed="false">公寓</button><button type="button" data-k="d" aria-pressed="false">透天厝</button>
+        </div></div>
+      <div class="row3">
+        <div class="field"><label for="cTown">行政區</label><select id="cTown"><option value="">載入中…</option></select></div>
+        <div class="field"><label for="cRoad">路段</label><input type="text" id="cRoad" list="cRoadList" autocomplete="off"><datalist id="cRoadList"></datalist></div>
+        <div class="field"><label for="cLane">巷</label><input type="number" id="cLane" inputmode="numeric" placeholder="無"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cBuilt">完工年（民國）</label><input type="number" id="cBuilt" inputmode="numeric" placeholder="例：103"></div>
+        <div class="field"><label for="cArea">房屋坪數（不含車位）</label><input type="number" id="cArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cFloor">樓層</label><input type="number" id="cFloor" inputmode="numeric"></div>
+        <div class="field"><label for="cTops">總樓層</label><input type="number" id="cTops" inputmode="numeric"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cPark">車位</label><select id="cPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+        <div class="field"><label for="cAsk">屋主想開價（萬，含車位）</label><input type="number" id="cAsk" inputmode="numeric" placeholder="選填"></div>
+      </div>
+      <h2>附近在售的競品<small class="rt-small">從 591、樂屋網抄開價和坪數，選填</small></h2>
+      <div id="cComps"></div>
+      <button type="button" class="btn btn-ghost" id="cAdd">＋ 再加一間競品</button>
+      <button type="submit" class="btn btn-main v-submit">產生競品分析</button>
+    </form>
+    <div id="cResult" class="v-result"><div class="v-empty">
+      <b>分析結果會出現在這裡</b>
+      <p>會自動整理：<br>・同社區（或同路段）實價登錄成交行情<br>・屋主開價在成交和在售競品裡的落點<br>・預估成交價與建議開價<br>・一段可以直接傳給屋主的「屋主溝通版」說明，也能產生分享連結</p>
+      <p class="v-empty-note">行情資料：內政部實價登錄桃園市住宅成交，近三年，目前更新到 <b id="cUpdated">—</b>。</p>
+    </div></div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼不能直接貼 591 網址？</summary><p>591 等房屋網站不開放其他網站讀取他們的資料，網頁工具沒辦法自動抓。所以「在售競品」請自己抄開價和坪數；「成交行情」則是自動從內政部實價登錄抓，這也是屋主最能接受的依據。</p></details><details><summary>同社區怎麼判斷？</summary><p>實價登錄只公布到門牌區段，所以用「同一條路＋同一條巷＋完工年份相差 1 年內＋同型態」判斷是同一個社區。同社區近三年不到 3 筆成交，會改用同路段、屋齡坪數相近的成交，再不夠才擴大到全區。</p></details><details><summary>建議開價怎麼算？</summary><p>預估成交價＝成交中位單價 × 坪數＋車位行情，建議開價抓預估成交價再加 5～8%，保留正常議價空間。屋主開價比行情高 15% 以上，通常會變成同區最貴的一間，帶看量會明顯變少。</p></details></div>
+  <p class="sm-note">本分析依內政部實價登錄成交資料自動統計，非不動產估價師法所稱之估價報告。資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>。</p>
+  </div>
+  <div class="ppane" data-p="community" hidden>
+  <div id="kWatchList" class="rt-watch"></div>
+  <div class="v-grid">
+    <form id="kForm" class="v-form" novalidate>
+      <h2>選一個社區</h2>
+      <div class="row2">
+        <div class="field"><label for="kTown">行政區</label><select id="kTown"><option value="">載入中…</option></select></div>
+        <div class="field"><label for="kRoad">路段</label><input type="text" id="kRoad" list="kRoadList" autocomplete="off"><datalist id="kRoadList"></datalist></div>
+      </div>
+      <button type="submit" class="btn btn-main v-submit">找這條路上的社區</button>
+      <div id="kGroups"></div>
+    </form>
+    <div id="kResult" class="v-result"><div class="v-empty">
+      <b>社區成交會出現在這裡</b>
+      <p>選好行政區和路段，點一個社區，就會看到：<br>・近三年每一筆成交（季別、樓層、坪數、單價）<br>・每季中位單價走勢、近一年漲跌<br>・加入追蹤清單後，下次打開會標出「新成交」</p>
+      <p class="v-empty-note">資料：內政部實價登錄桃園市住宅成交，目前更新到 <b id="kUpdated">—</b>。</p>
+    </div></div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>屋主問「我這棟最近成交多少」，怎麼查最快？</summary><p>選行政區、打路段，就會列出這條路上近三年有成交的社區（依巷弄和完工年分組），點進去就是這個社區每一筆成交和每季走勢，不用再到內政部網站一筆一筆查。</p></details><details><summary>新成交會通知我嗎？</summary><p>按「加入我的追蹤清單」，清單會存在你這支手機或電腦，實價登錄更新後打開這一頁，就會標出上次看過之後的新成交。想要有新成交就收到 LINE 通知，按「有新成交請容瑜 LINE 我」，我會幫你盯。</p></details><details><summary>為什麼看不到門牌和日期？</summary><p>內政部公開資料只提供門牌區段，這裡再把資料整理到「季」，保護交易當事人的隱私，也避免被誤認為特定住戶的交易。</p></details></div>
+  <p class="sm-note">資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>（政府資料開放授權），每季更新。</p>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=326e6b1d" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v="61cb4491"></script>
+<script>
+/* 分頁切換：點開哪一個才載入那個工具的程式，沒點到的不會白白下載、也不會重複打資料 */
+(function(){
+  var SRC={"value": ["../value/app.js?v=f3e9a8a6"], "deed": ["https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js", "../deed/app.js?v=5450ea1e"], "compete": ["../compete/app.js?v=15683f46"], "community": ["../community/app.js?v=2b8abc4f"]}, V="61cb4491";
+  var done={}, tabs=[].slice.call(document.querySelectorAll(".ptb"));
+  var panes=[].slice.call(document.querySelectorAll(".ppane"));
+  var subs=[].slice.call(document.querySelectorAll(".pt-sub"));
+  function load(k){
+    if(done[k]||!SRC[k]) return; done[k]=1;
+    SRC[k].forEach(function(u){
+      var s=document.createElement("script");
+      s.async=false;                               // 照加入順序執行，pdf.js 才會早於 deed/app.js
+      if(u.indexOf("app.js")>=0) s.setAttribute("data-v",V);
+      s.src=u; document.body.appendChild(s);
+    });
+  }
+  function show(k,push){
+    tabs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.pt===k?"true":"false")});
+    panes.forEach(function(p){p.hidden=p.dataset.p!==k});
+    subs.forEach(function(p){p.hidden=p.dataset.pt!==k});
+    load(k);
+    if(push){ try{history.replaceState(null,"","#"+k)}catch(e){} }
+  }
+  tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.pt,1)})});
+  var h=(location.hash||"").replace(/^#/,"");
+  show(SRC[h]?h:"value",0);        // 帶參數的分享網址（含 =）不去動它，直接開第一個分頁
+})();
+</script>
+</body>
+</html>

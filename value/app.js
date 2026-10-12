@@ -5,7 +5,10 @@
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var KN={a:'住宅大樓',b:'華廈',c:'公寓',d:'透天厝'};
-  var ver=(document.querySelector('script[data-v]')||{getAttribute:function(){return ''}}).getAttribute('data-v');
+  var me=document.currentScript||document.querySelector('script[data-v]')||{getAttribute:function(){return ''},src:''};
+  var ver=me.getAttribute('data-v')||'';
+  var base=(me.src||'').replace(/[?#].*$/,'');
+  var DATA=base.replace(/app\.js$/,'data/')||'data/';
   var qs=function(p){return p?('?v='+p):''};
 
   function money(v){ return v>=10000?(v/10000).toFixed(2)+' 億':Math.round(v)+' 萬'; }
@@ -32,7 +35,7 @@
 
   function loadTown(t){
     if(towns[t]) return Promise.resolve(towns[t]);
-    return fetch('data/'+encodeURIComponent(t)+'.json'+qs(ver)).then(function(r){return r.json()}).then(function(d){
+    return fetch(DATA+encodeURIComponent(t)+'.json'+qs(ver)).then(function(r){return r.json()}).then(function(d){
       towns[t]=d; return d;
     });
   }
@@ -162,10 +165,10 @@
   }
 
   // ---- 介面 ----
-  document.querySelectorAll('.v-kinds button').forEach(function(b){
+  document.querySelectorAll('#vKinds button').forEach(function(b){
     b.addEventListener('click',function(){
       kind=b.getAttribute('data-k');
-      document.querySelectorAll('.v-kinds button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      document.querySelectorAll('#vKinds button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
     });
   });
   $('vTown').addEventListener('change',function(){
@@ -183,7 +186,7 @@
     try{ navigator.clipboard.writeText(msg).then(function(){open(true)},function(){open(false)}); }catch(err){ open(false); }
   });
 
-  fetch('data/meta.json'+qs(ver)).then(function(r){return r.json()}).then(function(m){
+  fetch(DATA+'meta.json'+qs(ver)).then(function(r){return r.json()}).then(function(m){
     meta=m;
     var ts=Object.keys(m.towns).filter(function(t){return m.towns[t].n>=200}).sort();
     $('vTown').innerHTML='<option value="">選擇行政區</option>'+ts.map(function(t){return '<option>'+t+'</option>'}).join('');

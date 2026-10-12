@@ -24,9 +24,11 @@
   // ---- 實價登錄資料（跟房屋估價共用 value/data） ----
   // 每筆：[路段序, 型態, 年, 季, 單價, 坪數, 樓層, 總樓層, 屋齡, 巷, 完工年, 車位價(萬), 車位坪, 車位未拆價]
   RT.KN={a:'住宅大樓',b:'華廈',c:'公寓',d:'透天厝'};
-  var ver=(document.querySelector('script[data-v]')||{getAttribute:function(){return ''}}).getAttribute('data-v');
+  var me=document.currentScript||document.querySelector('script[data-v]')||{getAttribute:function(){return ''},src:''};
+  var ver=me.getAttribute('data-v')||'';
+  var base=(me.src||'').replace(/[?#].*$/,'');
   var towns={}, meta=null;
-  RT.dataRoot='../value/data/';
+  RT.dataRoot=base.replace(/assets\/tools\.js$/,'value/data/')||'../value/data/';
   RT.meta=function(){
     if(meta) return Promise.resolve(meta);
     return fetch(RT.dataRoot+'meta.json'+(ver?'?v='+ver:'')).then(function(r){return r.json()}).then(function(m){meta=m;return m});

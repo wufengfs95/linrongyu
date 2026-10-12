@@ -7,9 +7,11 @@
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var KN={a:'住宅大樓',b:'華廈',c:'公寓',d:'透天厝'};
-  var ver=(document.querySelector('script[data-v]')||{getAttribute:function(){return ''}}).getAttribute('data-v');
+  var me=document.currentScript||document.querySelector('script[data-v]')||{getAttribute:function(){return ''},src:''};
+  var ver=me.getAttribute('data-v')||'';
+  var base=(me.src||'').replace(/[?#].*$/,'');
   var qs=function(p){return p?('?v='+p):''};
-  var DATA='../value/data/';
+  var DATA=base.replace(/deed\/app\.js$/,'value/data/')||'../value/data/';
 
   function money(v){ return v>=10000?(v/10000).toFixed(2)+' 億':Math.round(v).toLocaleString()+' 萬'; }
   function median(a){ if(!a.length) return null; var b=a.slice().sort(function(x,y){return x-y}); var m=b.length>>1;

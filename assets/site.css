@@ -1560,3 +1560,22 @@ section.tq-wrap{padding-block:16px 72px}
   .tgt{font-size:18px;padding:11px 18px;gap:8px}
   .tg-sub{font-size:17.5px}
 }
+
+/* 估價四合一：分頁 */
+.ptabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.ptb{font:inherit;font-size:21px;font-weight:700;padding:12px 24px;border-radius:999px;
+  border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;transition:all .15s}
+.ptb:hover{border-color:var(--brick-soft)}
+.ptb[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.pt-sub{margin:0 0 22px;font-size:19px;line-height:1.75;color:var(--muted)}
+.pt-sub[hidden],.ppane[hidden]{display:none !important}
+/* 競品分析、社區追蹤原本套在 body.rt-page 上的字級，改成只套自己那一頁 */
+.ppane[data-p="compete"] .v-form .field label,
+.ppane[data-p="community"] .v-form .field label{font-size:19.5px}
+.ppane[data-p="compete"] .v-form h2,
+.ppane[data-p="community"] .v-form h2{margin-top:6px}
+@media (max-width:760px){
+  .ptabs{gap:8px}
+  .ptb{font-size:17px;padding:10px 16px}
+  .pt-sub{font-size:17px;margin-bottom:18px}
+}
