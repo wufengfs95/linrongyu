@@ -71,6 +71,7 @@
   function preview() {
     var need = $('bkName').value.trim() && $('bkTel').value.trim();
     $('bkGo').disabled = !need;
+    if (!API) $('bkGo').textContent = '複製並開啟 LINE 送出';
     $('bkPre').textContent = message();
     $('bkWhy').textContent = need ? '' : '姓名和電話填了才能送出。';
   }
@@ -90,10 +91,63 @@
   document.querySelectorAll('.bk-form input[type=radio], .bk-form input[type=checkbox]')
     .forEach(function (i) { i.addEventListener('change', preview); });
 
+  // 後端網址（Google Apps Script）。沒設定就退回原本「複製後開 LINE 貼上」的流程
+  var API = ($('bkForm').getAttribute('data-api') || '').trim();
+
+  function payload() {
+    var ttl = document.querySelector('input[name="bkTitle"]:checked');
+    var way = document.querySelector('input[name="bkWay"]:checked');
+    var urg = document.querySelector('input[name="bkUrg"]:checked');
+    return {
+      date: picked.date || '', time: picked.time || '',
+      way: way ? way.value : '', name: $('bkName').value.trim(),
+      title: ttl ? ttl.value : '', tel: $('bkTel').value.trim(),
+      need: chipVals('bkNeed'), urg: urg ? urg.value : '',
+      note: $('bkNote').value.trim(), hp: $('bkHp').value
+    };
+  }
+
+  function fallback(why) {
+    $('bkGo').hidden = true;
+    $('bkLine').hidden = false;
+    $('bkToast').textContent = why + '改用 LINE 傳給我，一樣會收到。';
+  }
+
+  function sent() {
+    $('bkGo').hidden = true;
+    $('bkLine').hidden = true;
+    $('bkToast').textContent = '';
+    $('bkDone').hidden = false;
+    $('bkDone').scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
+  function send() {
+    var go = $('bkGo');
+    go.disabled = true;
+    $('bkToast').textContent = '送出中…';
+    // 不要自己帶 Content-Type。帶了 application/json 瀏覽器會先發 OPTIONS 預檢，
+    // 而 Apps Script 不處理 OPTIONS，預檢一失敗整個請求就被擋掉。
+    // 不帶的話瀏覽器自動用 text/plain，屬於安全清單、不會預檢。
+    fetch(API, { method: 'POST', body: JSON.stringify(payload()) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok) throw new Error((d && d.msg) || 'fail');
+        sent();
+      })
+      .catch(function () {
+        go.disabled = false;
+        fallback('網路送出沒成功，');
+      });
+  }
+
+  $('bkLine').addEventListener('click', function () {
+    RT.line(message(), $('bkToast'));
+  });
+
   $('bkForm').addEventListener('submit', function (e) {
     e.preventDefault();
     if ($('bkGo').disabled) return;
-    RT.line(message(), $('bkToast'));
+    if (API) send(); else RT.line(message(), $('bkToast'));
   });
 
   drawDays(); drawTimes(); preview();

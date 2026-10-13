@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=73878b88">
+<link rel="stylesheet" href="../assets/site.css?v=d957e03d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "線上預約諮詢", "url": "https://wufengfs95.github.io/linrongyu/book/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "線上預約林容瑜：選時段、留需求，買房賣房、免費估價、看屋、房貸試算都可以談，中壢平鎮在地服務，諮詢全程免費。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page">
@@ -52,7 +52,9 @@
 </section>
 <section class="v-wrap">
 <div class="wrap">
-  <form id="bkForm" class="bk-form" novalidate>
+  <form id="bkForm" class="bk-form" data-api="" novalidate>
+    <input type="text" id="bkHp" name="bkHp" tabindex="-1" autocomplete="off" aria-hidden="true"
+           style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <section class="bk-sec"><h2><i>1</i>選個方便的時段</h2>
       <div id="bkDays" class="bk-days"></div>
       <div id="bkTimes" class="bk-slots"></div>
@@ -82,12 +84,19 @@
     </section>
 
     <section class="bk-sec bk-send"><h2><i>5</i>送出</h2>
-      <p class="bk-lab">會幫你複製這段，LINE 開啟後貼上送出就好：</p>
+      <p class="bk-lab">這是會送給我的內容，確認一下：</p>
       <pre id="bkPre" class="bk-pre"></pre>
-      <button type="submit" id="bkGo" class="btn btn-line bk-go">複製並開啟 LINE 送出</button>
+      <button type="submit" id="bkGo" class="btn btn-main bk-go">送出預約</button>
+      <button type="button" id="bkLine" class="btn btn-line bk-go" hidden>改用 LINE 傳給我</button>
       <p class="bk-why" id="bkWhy"></p>
       <p class="v-note" id="bkToast"></p>
-      <p class="bk-or">不想用 LINE？直接打給我：<a class="bk-tel" href="tel:+886973263569">📲 0973-263-569</a></p>
+      <div id="bkDone" class="bk-done" hidden>
+        <b>✅ 收到了，我會盡快回覆你確認時間</b>
+        <p>急的話直接打 <a class="bk-tel" href="tel:+886973263569">0973-263-569</a>，或加我 LINE 先聊。</p>
+        <a class="btn btn-line" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">加容瑜的 LINE</a>
+      </div>
+      <p class="bk-or">不想線上送？直接打給我：<a class="bk-tel" href="tel:+886973263569">📲 0973-263-569</a></p>
+      <p class="bk-priv">送出後只會進到我的行事曆和 LINE，不會給第三方。</p>
     </section>
   </form>
   <div class="bk-note">
@@ -97,7 +106,7 @@
     <p>諮詢、估價、看屋<b>全程免費</b>，不會因為聊過就有壓力。</p>
   </div>
   <p class="sm-note">你填的內容只會用來聯絡與準備資料，不會轉給別人，也不會拿去做行銷名單。
-    所有欄位都在你的裝置上組成訊息，這個頁面不會把資料送到任何伺服器。
+    送出後只會進到容瑜本人的行事曆和 LINE，沒有第三方平台、也不會存成行銷名單。
 </div>
 </section>
 </main>
@@ -117,6 +126,6 @@
 
 <script src="../assets/site.js?v=326e6b1d" defer></script>
 <script src="../assets/tools.js?v=abe24088" data-v=""></script>
-<script src="app.js?v=9bb5e2ac" data-v="" defer></script>
+<script src="app.js?v=6a018466" data-v="" defer></script>
 </body>
 </html>

@@ -1579,3 +1579,15 @@ section.tq-wrap{padding-block:16px 72px}
   .ptb{font-size:17px;padding:10px 16px}
   .pt-sub{font-size:17px;margin-bottom:18px}
 }
+
+/* 線上預約：送出結果 */
+.bk-done{margin:16px 0 0;padding:20px 22px;border-radius:14px;
+  background:var(--cream);border:1.5px solid var(--cream-line)}
+.bk-done[hidden]{display:none !important}
+.bk-done b{display:block;font-size:22px;color:var(--navy);margin-bottom:8px}
+.bk-done p{margin:0 0 14px;font-size:18px;line-height:1.75;color:var(--muted)}
+.bk-priv{margin:14px 0 0;font-size:16px;line-height:1.7;color:var(--muted)}
+#bkLine[hidden],#bkGo[hidden]{display:none !important}
+@media (max-width:760px){
+  .bk-done b{font-size:19px} .bk-done p{font-size:16.5px} .bk-priv{font-size:15px}
+}
