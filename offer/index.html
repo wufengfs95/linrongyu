@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=8ebd24e8">
+<link rel="stylesheet" href="../assets/site.css?v=d6364f8f">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "出價試算：出多少、準備多少、月付多少", "url": "https://wufengfs95.github.io/linrongyu/offer/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入各家銀行估價與貸款成數，依出價級距算出可貸金額、頭期款加 2% 服務費要準備的現金，以及新青安（青安 3.0）與一般首購的每月月付。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -54,21 +54,25 @@
 <div class="wrap">
   <div class="v-grid of-grid">
     <form id="oForm" class="v-form" novalidate>
+     <div class="of-col">
       <h2>銀行估價</h2>
       <p class="v-hint">預設三列是範例，換成銀行回覆的估價（萬）和成數（%）。可貸 = 估價 × 成數。</p>
       <div id="oBanks" class="of-banks"></div>
       <button type="button" class="btn of-add" id="oAdd">＋ 再加一家銀行</button>
       <div class="field"><label for="oPick">表格用哪一家算</label><select id="oPick"></select></div>
       <label class="rt-check"><input type="checkbox" id="oLower" checked> 出價低於估價時，用出價算（銀行通常兩者取低）</label>
+     </div>
+     <div class="of-col">
       <h2>出價範圍</h2>
       <div class="row3"><div class="field"><label for="oFrom">從（萬）</label><input type="number" id="oFrom" inputmode="decimal" step="1" value="730"></div><div class="field"><label for="oTo">到（萬）</label><input type="number" id="oTo" inputmode="decimal" step="1" value="800"></div><div class="field"><label for="oStep">每次加（萬）</label><input type="number" id="oStep" inputmode="decimal" step="1" value="10"></div></div>
-      <div class="row2"><div class="field"><label for="oFee">服務費 %</label><input type="number" id="oFee" inputmode="decimal" step="0.1" value="2"></div><div class="field"><label for="oOther">其他費用（萬）<span class="rt-small">代書、契稅、規費等，可不填</span></label><input type="number" id="oOther" inputmode="decimal" step="1" value="0"></div></div>
+      <div class="row2"><div class="field"><label for="oFee">服務費（%）</label><input type="number" id="oFee" inputmode="decimal" step="0.1" value="2"></div><div class="field"><label for="oOther">其他費用（萬）<span class="rt-small">代書、契稅、規費等，可不填</span></label><input type="number" id="oOther" inputmode="decimal" step="1" value="0"></div></div>
       <h2>新青安（青安 3.0）</h2>
-      <div class="row3"><div class="field"><label for="oQaRate">利率 %</label><input type="number" id="oQaRate" inputmode="decimal" step="0.001" value="1.775"></div><div class="field"><label for="oQaYears">年限</label><input type="number" id="oQaYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oQaGrace">寬限年數</label><input type="number" id="oQaGrace" inputmode="decimal" step="1" value="0"></div></div>
+      <div class="row3"><div class="field"><label for="oQaRate">利率（%）</label><input type="number" id="oQaRate" inputmode="decimal" step="0.001" value="1.775"></div><div class="field"><label for="oQaYears">年限（年）</label><input type="number" id="oQaYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oQaGrace">寬限（年）</label><input type="number" id="oQaGrace" inputmode="decimal" step="1" value="0"></div></div>
       <h2>一般首購</h2>
       <div class="field"><label for="oRates">帶入銀行利率<span class="rt-small" id="oRatesNote"></span></label>
         <select id="oRates" data-v="0183175c"><option value="">讀取中…</option></select></div>
-      <div class="row3"><div class="field"><label for="oFgRate">利率 %</label><input type="number" id="oFgRate" inputmode="decimal" step="0.001" value="2.5"></div><div class="field"><label for="oFgYears">年限</label><input type="number" id="oFgYears" inputmode="decimal" step="1" value="30"></div><div class="field"><label for="oFgGrace">寬限年數</label><input type="number" id="oFgGrace" inputmode="decimal" step="1" value="0"></div></div>
+      <div class="row3"><div class="field"><label for="oFgRate">利率（%）</label><input type="number" id="oFgRate" inputmode="decimal" step="0.001" value="2.5"></div><div class="field"><label for="oFgYears">年限（年）</label><input type="number" id="oFgYears" inputmode="decimal" step="1" value="30"></div><div class="field"><label for="oFgGrace">寬限（年）</label><input type="number" id="oFgGrace" inputmode="decimal" step="1" value="0"></div></div>
+     </div>
     </form>
     <div id="oResult" class="v-result"></div>
   </div>
@@ -94,7 +98,7 @@
 <a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
 
 <script src="../assets/site.js?v=326e6b1d" defer></script>
-<script src="../assets/tools.js?v=abe24088" data-v="ec5b9999"></script>
-<script src="app.js?v=ec5b9999" data-v="ec5b9999" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v="8d59cfb7"></script>
+<script src="app.js?v=8d59cfb7" data-v="8d59cfb7" defer></script>
 </body>
 </html>

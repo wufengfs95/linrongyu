@@ -1594,8 +1594,9 @@ section.tq-wrap{padding-block:16px 72px}
 
 /* ---- 出價試算 /offer/ ---- */
 .of-banks{display:grid;gap:10px}
-.of-grid{grid-template-columns:minmax(0,460px) minmax(0,1fr)}
-@media (max-width:1180px){.of-grid{grid-template-columns:minmax(0,1fr)}.of-grid .v-form{max-width:640px}}
+.of-grid{grid-template-columns:minmax(0,1fr)}
+.of-col{display:grid;gap:14px;align-content:start;min-width:0}
+@media (min-width:900px){.of-grid form.v-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}}
 .of-bank .field label{white-space:nowrap}
 .of-grid .v-form,.of-grid .v-form>*,.of-bank>*{min-width:0}
 .of-grid .v-form{grid-template-columns:minmax(0,1fr)}
@@ -1621,6 +1622,7 @@ section.tq-wrap{padding-block:16px 72px}
 .of-table tbody tr:hover td{background:#fff}
 .of-table tbody tr:focus-visible{outline:2px solid var(--brick-soft);outline-offset:-2px}
 .of-table td small{display:block;font-size:14.5px;color:var(--muted);font-weight:400}
+.of-u{font-style:normal;font-size:.78em;font-weight:400;margin-left:2px;opacity:.75}
 .of-cash{font-weight:700;color:var(--navy)}
 .of-qa{color:#2E7D5B;font-weight:700}
 .of-fg{color:var(--brick);font-weight:700}

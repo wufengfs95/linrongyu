@@ -38,8 +38,8 @@
     $('oBanks').innerHTML = banks.map(function (b, i) {
       return '<div class="of-bank" data-i="' + i + '">'
         + '<div class="field of-name"><label for="obn' + i + '">銀行</label><input type="text" id="obn' + i + '" data-k="name" value="' + esc(b.name) + '"></div>'
-        + '<div class="field"><label for="obv' + i + '">估價</label><input type="number" id="obv' + i + '" data-k="val" inputmode="decimal" value="' + (b.val || '') + '"></div>'
-        + '<div class="field"><label for="obr' + i + '">成數%</label><input type="number" id="obr' + i + '" data-k="ratio" inputmode="decimal" value="' + (b.ratio || '') + '"></div>'
+        + '<div class="field"><label for="obv' + i + '">估價（萬）</label><input type="number" id="obv' + i + '" data-k="val" inputmode="decimal" value="' + (b.val || '') + '"></div>'
+        + '<div class="field"><label for="obr' + i + '">成數（%）</label><input type="number" id="obr' + i + '" data-k="ratio" inputmode="decimal" value="' + (b.ratio || '') + '"></div>'
         + '<div class="of-out"><span>可貸</span><b id="obo' + i + '">' + w1(loanOf(b)) + ' 萬</b></div>'
         + '<button type="button" class="rt-x" data-del="' + i + '" aria-label="刪除' + esc(b.name) + '"' + (banks.length < 2 ? ' disabled' : '') + '>×</button>'
         + '</div>';
@@ -110,13 +110,14 @@
     var qaG = num('oQaGrace'), fgG = num('oFgGrace');
     var head = '<p class="of-basis">依 <b>' + esc(b.name) + '</b> 估價 ' + w1(b.val) + ' 萬、貸 ' + w1(b.ratio) + '%（可貸 ' + w1(loanOf(b)) + ' 萬）'
       + ($('oLower').checked ? '，出價低於估價時用出價算' : '') + '</p>';
+    var u = function (v, t) { return v + '<i class="of-u">' + t + '</i>'; };
     var tb = out.map(function (x) {
       return '<tr class="' + (picked === x.p ? 'rt-on' : '') + '" data-p="' + x.p + '" tabindex="0">'
-        + '<td><b>' + w1(x.p) + '</b></td><td>' + w1(x.loan) + '</td><td>' + w1(x.down) + '</td><td>' + w1(x.fee) + '</td>'
-        + (x.other ? '<td>' + w1(x.other) + '</td>' : '<td>—</td>')
-        + '<td class="of-cash">' + w1(x.cash) + '</td>'
-        + '<td class="of-qa">' + comma(Math.round(x.qa)) + (x.qaG ? '<small>寬限 ' + comma(Math.round(x.qaG)) + '</small>' : '') + '</td>'
-        + '<td class="of-fg">' + comma(Math.round(x.fg)) + (x.fgG ? '<small>寬限 ' + comma(Math.round(x.fgG)) + '</small>' : '') + '</td></tr>';
+        + '<td><b>' + u(w1(x.p), '萬') + '</b></td><td>' + u(w1(x.loan), '萬') + '</td><td>' + u(w1(x.down), '萬') + '</td><td>' + u(w1(x.fee), '萬') + '</td>'
+        + (x.other ? '<td>' + u(w1(x.other), '萬') + '</td>' : '<td>—</td>')
+        + '<td class="of-cash">' + u(w1(x.cash), '萬') + '</td>'
+        + '<td class="of-qa">' + u(comma(Math.round(x.qa)), '元') + (x.qaG ? '<small>寬限 ' + comma(Math.round(x.qaG)) + ' 元</small>' : '') + '</td>'
+        + '<td class="of-fg">' + u(comma(Math.round(x.fg)), '元') + (x.fgG ? '<small>寬限 ' + comma(Math.round(x.fgG)) + ' 元</small>' : '') + '</td></tr>';
     }).join('');
     var notes = [];
     if (out.some(function (x) { return x.over; })) notes.push('可貸超過新青安額度 ' + comma(QA.cap) + ' 萬，超過的部分用首購利率另計，已加進新青安月付。');
@@ -125,7 +126,7 @@
     $('oResult').innerHTML = head
       + '<div class="v-table-wrap"><table class="v-table of-table"><thead><tr><th>出價</th><th>可貸</th><th>頭期款</th><th>服務費</th><th>其他</th><th>要準備</th><th>新青安月付</th><th>首購月付</th></tr></thead>'
       + '<tbody>' + tb + '</tbody></table></div>'
-      + '<p class="v-hint">金額單位：出價到要準備是「萬」，月付是「元」。點一列可以只挑那個出價產生文字。</p>'
+      + '<p class="v-hint">點一列可以只挑那個出價產生文字。</p>'
       + (notes.length ? '<ul class="rt-list of-notes">' + notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '')
       + '<h3 class="rt-h3">傳給買方的文字</h3>'
       + '<textarea class="rt-talk" id="oMsg" rows="9" aria-label="給買方的試算文字">' + esc(msg(b, out)) + '</textarea>'
