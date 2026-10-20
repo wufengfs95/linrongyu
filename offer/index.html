@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=ba714476">
+<link rel="stylesheet" href="../assets/site.css?v=2a9a050b">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "出價試算：出多少、準備多少、月付多少", "url": "https://wufengfs95.github.io/linrongyu/offer/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入各家銀行估價與貸款成數，依出價級距算出可貸金額、頭期款加 2% 服務費要準備的現金，以及新青安（青安 3.0）與一般首購的每月月付。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -66,6 +66,9 @@
       <h2>出價範圍</h2>
       <div class="row3"><div class="field"><label for="oFrom">從（萬）</label><input type="number" id="oFrom" inputmode="decimal" step="1" value="730"></div><div class="field"><label for="oTo">到（萬）</label><input type="number" id="oTo" inputmode="decimal" step="1" value="800"></div><div class="field"><label for="oStep">每次加（萬）</label><input type="number" id="oStep" inputmode="decimal" step="1" value="10"></div></div>
       <div class="row2"><div class="field"><label for="oFee">服務費（%）</label><input type="number" id="oFee" inputmode="decimal" step="0.1" value="2"></div><div class="field"><label for="oOther">其他費用（萬）<span class="rt-small">代書、契稅、規費等，可不填</span></label><input type="number" id="oOther" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>車位拆算<small class="of-opt">選填，有車位才填</small></h2>
+      <div class="row3"><div class="field"><label for="oArea">權狀總坪數（含車位）</label><input type="number" id="oArea" inputmode="decimal" step="0.01" value=""></div><div class="field"><label for="oParkA">車位坪數</label><input type="number" id="oParkA" inputmode="decimal" step="0.01" value=""></div><div class="field"><label for="oParkP">車位價格（萬）</label><input type="number" id="oParkP" inputmode="decimal" step="1" value=""></div></div>
+      <p class="v-hint">填了之後，表格會多一欄「扣掉車位後的房屋單價」，比價才準。</p>
       <h2>新青安（青安 3.0）</h2>
       <div class="row3"><div class="field"><label for="oQaRate">利率（%）</label><input type="number" id="oQaRate" inputmode="decimal" step="0.001" value="1.775"></div><div class="field"><label for="oQaYears">年限（年）</label><input type="number" id="oQaYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oQaGrace">寬限（年）</label><input type="number" id="oQaGrace" inputmode="decimal" step="1" value="0"></div></div>
       <h2>一般首購</h2>
@@ -86,7 +89,7 @@
     <tr><td>承辦銀行<small class="of-sub">（八大行庫）</small></td><td>臺灣銀行、土地銀行、合作金庫、第一銀行、華南銀行、彰化銀行、兆豐銀行、臺灣企銀</td></tr>
   </tbody></table></div>
   <h2 class="v-h2">常見問題</h2>
-  <div class="v-faq"><details open><summary>為什麼出價超過估價，月付就不會變？</summary><p>銀行是用估價（和成交價取低）乘上成數來決定能貸多少。出價超過估價之後，能貸的金額就固定了，多出價的每一塊錢都要自己準備，所以要準備的現金一直增加，月付反而不變。</p></details><details><summary>要準備的錢包含哪些？</summary><p>這裡算的是頭期款（出價減掉可貸金額）加上仲介服務費。另外還有代書費、契稅、印花稅、規費、火險地震險、銀行開辦費等，可以在「其他費用」填一個總數，一般中古屋大約抓 10～20 萬。</p></details><details><summary>新青安和一般首購差在哪？</summary><p>新青安（青安 3.0）是政府補貼的首購貸款，前 3 年利率 1.775%、最長 40 年、可以有 5 年寬限期，額度一般 1,000 萬；要符合首購、年齡、所得等資格。不符合資格就是銀行的一般首購房貸，利率依銀行和個人條件核定，年限多半 30 年。重點整理在上面的表格。</p></details><details><summary>估價和成數要去哪裡問？</summary><p>出價前請仲介幫你向銀行送估，各家銀行回覆的估價和成數常常不一樣，把每一家都填進來比，就知道哪家貸得最多。想請我幫你問，直接 LINE 我。</p></details></div>
+  <div class="v-faq"><details open><summary>為什麼出價超過估價，月付就不會變？</summary><p>銀行是用估價（和成交價取低）乘上成數來決定能貸多少。出價超過估價之後，能貸的金額就固定了，多出價的每一塊錢都要自己準備，所以要準備的現金一直增加，月付反而不變。</p></details><details><summary>要準備的錢包含哪些？</summary><p>這裡算的是頭期款（出價減掉可貸金額）加上仲介服務費。另外還有代書費、契稅、印花稅、規費、火險地震險、銀行開辦費等，可以在「其他費用」填一個總數，一般中古屋大約抓 10～20 萬。</p></details><details><summary>新青安和一般首購差在哪？</summary><p>新青安（青安 3.0）是政府補貼的首購貸款，前 3 年利率 1.775%、最長 40 年、可以有 5 年寬限期，額度一般 1,000 萬；要符合首購、年齡、所得等資格。不符合資格就是銀行的一般首購房貸，利率依銀行和個人條件核定，年限多半 30 年。重點整理在上面的表格。</p></details><details><summary>車位為什麼要拆開算？</summary><p>實價登錄和廣告上的單價，常常是把車位的價格和坪數一起算進去。車位一坪的價格比房子低很多，混在一起會讓單價看起來比較便宜。扣掉車位價格和車位坪數，算出房子本身一坪多少，跟附近成交比才公平。</p></details><details><summary>估價和成數要去哪裡問？</summary><p>出價前請仲介幫你向銀行送估，各家銀行回覆的估價和成數常常不一樣，把每一家都填進來比，就知道哪家貸得最多。想請我幫你問，直接 LINE 我。</p></details></div>
   <p class="sm-note">新青安依<a href="https://www.nta.gov.tw/singlehtml/108" target="_blank" rel="noopener">財政部國庫署青安 3.0 貸款原則</a>，前 3 年 1.775%，第 4 年起每年加半碼、第 7 年起約 2.275%，表格用前 3 年利率試算。
     一般首購利率清單與<a href="../dti/">收支比試算</a>共用，來源為各公股銀行官網與中央銀行，每季更新。月付以本息平均攤還計算，實際成數、利率以銀行核貸為準。</p>
 </div>
@@ -107,7 +110,7 @@
 <a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
 
 <script src="../assets/site.js?v=326e6b1d" defer></script>
-<script src="../assets/tools.js?v=abe24088" data-v="ce40fe66"></script>
-<script src="app.js?v=ce40fe66" data-v="ce40fe66" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v="d7d4424b"></script>
+<script src="app.js?v=d7d4424b" data-v="d7d4424b" defer></script>
 </body>
 </html>

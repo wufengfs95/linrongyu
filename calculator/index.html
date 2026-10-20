@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>容瑜房產計算機｜房地合一稅・房貸・買賣雜費・坪數車位一次算</title>
-<meta name="keywords" content="房產計算機,房地合一稅試算,房貸試算,購屋能力試算,買賣雜費,坪數換算,車位拆算,賣方實拿,豪宅稅,房產計算機,容瑜房產計算機" />
+<meta name="keywords" content="房產計算機,房地合一稅試算,房貸試算,購屋能力試算,買賣雜費,賣方實拿,豪宅稅,房產計算機,容瑜房產計算機" />
 <meta name="author" content="林容瑜" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
 <meta name="twitter:card" content="summary" />
@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;800&display=swap" />
 
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"容瑜房產計算機","url":"https://wufengfs95.github.io/linrongyu/calculator/","provider":{"@type":"RealEstateAgent","name":"林容瑜","url":"https://wufengfs95.github.io/linrongyu/","telephone":"+886-973-263-569","areaServed":["桃園市中壢區","桃園市平鎮區"]},"applicationCategory":"FinanceApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"zh-Hant","description":"八合一房產試算工具，包含房地合一稅、購屋能力評估、房貸月付金、買賣雜費、坪數換算、車位拆算、賣方實拿速算與豪宅稅，所有欄位即時連動並可列印成 PDF。","featureList":["房地合一稅試算","購屋能力評估","房貸月付金試算","買賣雜費估算","坪數單位換算","車位價格拆算","賣方實拿速算","豪宅稅判定"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"賣房子除了房地合一稅還要付什麼？","acceptedAnswer":{"@type":"Answer","text":"賣方常見的支出包含仲介服務費（市場常見為成交價的 4%）、地政士代書費、履約保證費、實價登錄申報費，以及土地增值稅；若有貸款還要計算清償與塗銷費用。把這些一起扣掉，才是實際拿到手的金額。"}},{"@type":"Question","name":"房地合一稅的稅率怎麼看？","acceptedAnswer":{"@type":"Answer","text":"依持有期間分級：持有 2 年以內 45%、超過 2 年未滿 5 年 35%、超過 5 年未滿 10 年 20%、超過 10 年 15%。自住房地符合條件者另有免稅額與 10% 優惠稅率。實際稅額仍以國稅局核定為準。"}},{"@type":"Question","name":"車位為什麼一定要拆開算？","acceptedAnswer":{"@type":"Answer","text":"車位坪數與單價和房屋本體差很多，若把車位價格混在總價裡去除以總坪數，算出來的每坪單價會失真，拿去跟實價登錄比對就是比假的。比價前要先把車位價格與坪數拆出來。"}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"容瑜房產計算機","url":"https://wufengfs95.github.io/linrongyu/calculator/","provider":{"@type":"RealEstateAgent","name":"林容瑜","url":"https://wufengfs95.github.io/linrongyu/","telephone":"+886-973-263-569","areaServed":["桃園市中壢區","桃園市平鎮區"]},"applicationCategory":"FinanceApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"zh-Hant","description":"六合一房產試算工具，包含房地合一稅、購屋能力評估、房貸月付金、買賣雜費、賣方實拿速算與豪宅稅，所有欄位即時連動並可列印成 PDF。","featureList":["房地合一稅試算","購屋能力評估","房貸月付金試算","買賣雜費估算","賣方實拿速算","豪宅稅判定"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"賣房子除了房地合一稅還要付什麼？","acceptedAnswer":{"@type":"Answer","text":"賣方常見的支出包含仲介服務費（市場常見為成交價的 4%）、地政士代書費、履約保證費、實價登錄申報費，以及土地增值稅；若有貸款還要計算清償與塗銷費用。把這些一起扣掉，才是實際拿到手的金額。"}},{"@type":"Question","name":"房地合一稅的稅率怎麼看？","acceptedAnswer":{"@type":"Answer","text":"依持有期間分級：持有 2 年以內 45%、超過 2 年未滿 5 年 35%、超過 5 年未滿 10 年 20%、超過 10 年 15%。自住房地符合條件者另有免稅額與 10% 優惠稅率。實際稅額仍以國稅局核定為準。"}},{"@type":"Question","name":"車位為什麼一定要拆開算？","acceptedAnswer":{"@type":"Answer","text":"車位坪數與單價和房屋本體差很多，若把車位價格混在總價裡去除以總坪數，算出來的每坪單價會失真，拿去跟實價登錄比對就是比假的。比價前要先把車位價格與坪數拆出來。"}}]}]}</script>
 <style>
   :root {
     /* 配色：深藍 #1F3A5F ＋ 奶茶 #F5F0EB ＋ 磚紅 #B85C38 */
@@ -814,8 +814,6 @@
   <button class="tab" data-tab="afford" onclick="switchTab('afford')">💼 購屋能力</button>
   <button class="tab" data-tab="loan" onclick="switchTab('loan')">🏠 房貸試算</button>
   <button class="tab" data-tab="fees" onclick="switchTab('fees')">💵 買賣雜費</button>
-  <button class="tab" data-tab="area" onclick="switchTab('area')">⇄ 坪數換算</button>
-  <button class="tab" data-tab="park" onclick="switchTab('park')">🚗 車位拆算</button>
   <button class="tab active" data-tab="seller" onclick="switchTab('seller')">💰 賣方實拿速算</button>
   <button class="tab" data-tab="luxury" onclick="switchTab('luxury')">🏰 豪宅稅</button>
 </div>
@@ -1246,70 +1244,6 @@
       <b>書狀費用</b>：每張 80 元<br>
       <b>其他成本</b>：銀行徵信、開辦、手續費、產險費（火災地震險）<br>
       <span style="display:block; margin-top:6px; text-align:right; color:#999;">* 公部門費用依實際稅單金額為主<br>* 代書收費依代書事務所為主</span>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ========== TAB: 坪數換算 ========== -->
-<div class="tab-pane" data-pane="area">
-<div class="card">
-  <h2 class="card-title">坪數換算</h2>
-  <p class="card-sub">坪 ⇄ 平方公尺</p>
-
-  <div style="background:#FAF3EA; border:1px solid var(--gold-light); border-radius:10px; padding:14px 18px; margin-bottom:18px; text-align:center;">
-    <div style="font-weight:700; color:var(--gold-deep); margin-bottom:6px;">換算公式</div>
-    <div style="font-size:18px;">1 坪 = 3.30579 平方公尺<br>1 平方公尺 = 0.3025 坪</div>
-  </div>
-
-  <div class="grid-2">
-    <div class="field">
-      <label>坪數</label>
-      <input type="number" id="ar_ping" step="0.0001" placeholder="0" oninput="calcArea('ping')" />
-    </div>
-    <div class="field">
-      <label>平方公尺 (m²)</label>
-      <input type="number" id="ar_m2" step="0.0001" placeholder="0" oninput="calcArea('m2')" />
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ========== TAB: 車位拆算 ========== -->
-<div class="tab-pane" data-pane="park">
-<div class="card">
-  <h2 class="card-title">車位拆算</h2>
-  <p class="card-sub">實價登錄或廣告傳單常包含車位價格與坪數，此功能可計算出「扣除車位後的真實房屋單價」</p>
-
-  <div class="section">
-    <div class="grid-2">
-      <div class="field">
-        <label>房屋總價（含車位）<span class="hint">萬</span></label>
-        <input type="number" id="pk_total" step="0.01" placeholder="例如: 2500" oninput="calcPark()" />
-      </div>
-      <div class="field">
-        <label>權狀總坪數（含車位）<span class="hint">坪</span></label>
-        <input type="number" id="pk_area" step="0.01" placeholder="例如: 50" oninput="calcPark()" />
-      </div>
-      <div class="field">
-        <label>車位價格 <span class="hint">萬</span></label>
-        <input type="number" id="pk_parkPrice" step="0.01" placeholder="例如: 200" oninput="calcPark()" />
-      </div>
-      <div class="field">
-        <label>車位坪數 <span class="hint">坪</span></label>
-        <input type="number" id="pk_parkArea" step="0.01" placeholder="例如: 10" oninput="calcPark()" />
-      </div>
-    </div>
-  </div>
-
-  <div class="result-panel">
-    <div class="result-box big">
-      <div class="label">扣除車位後的真實房屋單價</div>
-      <div class="value"><span id="pk_unit">—</span><span class="unit">萬/坪</span></div>
-    </div>
-    <div class="detail" style="margin-top:14px;">
-      <div class="detail-row"><span class="name">房屋價格（扣車位）</span><span class="num"><span id="pk_housePrice">—</span> 萬</span></div>
-      <div class="detail-row"><span class="name">房屋坪數（扣車位）</span><span class="num"><span id="pk_houseArea">—</span> 坪</span></div>
     </div>
   </div>
 </div>
@@ -2271,40 +2205,6 @@ function calcFees() {
   document.getElementById('fe_total_out').textContent = fmt(sum, 0);
 }
 
-// ============ 坪數換算 ============
-function calcArea(src) {
-  const PING_TO_M2 = 3.30579;
-  if (src === 'ping') {
-    const ping = v('ar_ping');
-    const m2 = ping * PING_TO_M2;
-    document.getElementById('ar_m2').value = ping > 0 ? m2.toFixed(4) : '';
-  } else {
-    const m2 = v('ar_m2');
-    const ping = m2 / PING_TO_M2;
-    document.getElementById('ar_ping').value = m2 > 0 ? ping.toFixed(4) : '';
-  }
-}
-
-// ============ 車位拆算 ============
-function calcPark() {
-  const total = v('pk_total');
-  const area = v('pk_area');
-  const parkP = v('pk_parkPrice');
-  const parkA = v('pk_parkArea');
-
-  if (total <= 0 || area <= 0) {
-    ['pk_unit', 'pk_housePrice', 'pk_houseArea'].forEach(id => document.getElementById(id).textContent = '—');
-    return;
-  }
-  const houseP = total - parkP;
-  const houseA = area - parkA;
-  const unit = houseA > 0 ? houseP / houseA : 0;
-
-  document.getElementById('pk_unit').textContent = fmt(unit);
-  document.getElementById('pk_housePrice').textContent = fmt(houseP);
-  document.getElementById('pk_houseArea').textContent = fmt(houseA);
-}
-
 // 初始化買賣雜費
 calcFees();
 
@@ -2531,7 +2431,7 @@ function printForClient() {
 (function(){
   try{
     var only = new URLSearchParams(location.search).get('only');
-    var valid = ['capgain','afford','loan','fees','area','park','seller','luxury'];
+    var valid = ['capgain','afford','loan','fees','seller','luxury'];
     if (only && valid.indexOf(only) >= 0){
       if (typeof switchTab === 'function') switchTab(only);
       document.querySelectorAll('.tab').forEach(function(b){
@@ -2555,7 +2455,7 @@ function printForClient() {
     var tab = q.get('tab'), amt = parseFloat(q.get('amt'));
     if (!tab || q.get('only') || !document.querySelector('.tab[data-tab="' + tab + '"]')) return;
     switchTab(tab);
-    var mainField = { seller:'sellTotal', capgain:'cg_sell', loan:'ln_amt', fees:'fe_total', park:'pk_total', luxury:'lx_price' };
+    var mainField = { seller:'sellTotal', capgain:'cg_sell', loan:'ln_amt', fees:'fe_total', luxury:'lx_price' };
     if (mainField[tab] && amt > 0){
       var el = document.getElementById(mainField[tab]);
       el.value = amt;

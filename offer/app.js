@@ -10,7 +10,7 @@
     { name: '銀行 B', val: 740, ratio: 80 },
     { name: '銀行 C', val: 735, ratio: 85 }
   ];
-  var FIELDS = ['oFrom', 'oTo', 'oStep', 'oFee', 'oOther', 'oQaRate', 'oQaYears', 'oQaGrace', 'oFgRate', 'oFgYears', 'oFgGrace'];
+  var FIELDS = ['oFrom', 'oTo', 'oStep', 'oFee', 'oOther', 'oQaRate', 'oQaYears', 'oQaGrace', 'oFgRate', 'oFgYears', 'oFgGrace', 'oArea', 'oParkA', 'oParkP'];
 
   var saved = RT.store.get(KEY, null);
   var banks = saved && saved.banks && saved.banks.length ? saved.banks : EXAMPLE.map(function (b) { return Object.assign({}, b); });
@@ -89,7 +89,9 @@
       var fee = p * num('oFee') / 100, other = num('oOther');
       var qaLoan = Math.min(loan, QA.cap), rest = loan - qaLoan;
       var restPay = rest > 0 ? RT.pmt(rest * 1e4, fgR, (fgY - fgG) * 12) : 0;
+      var houseA = num('oArea') - num('oParkA');
       out.push({
+        unit: num('oArea') > 0 && houseA > 0 ? (p - num('oParkP')) / houseA : null,
         p: p, loan: loan, down: p - loan, fee: fee, other: other, cash: p - loan + fee + other,
         qa: RT.pmt(qaLoan * 1e4, qaR, (qaY - qaG) * 12) + restPay,
         fg: RT.pmt(loan * 1e4, fgR, (fgY - fgG) * 12),
@@ -108,8 +110,10 @@
       save(); return;
     }
     var qaG = num('oQaGrace'), fgG = num('oFgGrace');
+    var hasUnit = out[0].unit != null;
     var head = '<p class="of-basis">依 <b>' + esc(b.name) + '</b> 估價 ' + w1(b.val) + ' 萬、貸 ' + w1(b.ratio) + '%（可貸 ' + w1(loanOf(b)) + ' 萬）'
-      + ($('oLower').checked ? '，出價低於估價時用出價算' : '') + '</p>';
+      + ($('oLower').checked ? '，出價低於估價時用出價算' : '') + '</p>'
+      + (hasUnit ? '<p class="of-basis">車位拆算：權狀 ' + w1(num('oArea')) + ' 坪，扣車位 ' + w1(num('oParkA')) + ' 坪、' + w1(num('oParkP')) + ' 萬，房屋 ' + w1(num('oArea') - num('oParkA')) + ' 坪</p>' : '');
     var u = function (v, t) { return v + '<i class="of-u">' + t + '</i>'; };
     var tb = out.map(function (x) {
       return '<tr class="' + (picked === x.p ? 'rt-on' : '') + '" data-p="' + x.p + '" tabindex="0">'
@@ -117,14 +121,15 @@
         + (x.other ? '<td>' + u(w1(x.other), '萬') + '</td>' : '<td>—</td>')
         + '<td class="of-cash">' + u(w1(x.cash), '萬') + '</td>'
         + '<td class="of-qa">' + u(comma(Math.round(x.qa)), '元') + (x.qaG ? '<small>寬限 ' + comma(Math.round(x.qaG)) + ' 元</small>' : '') + '</td>'
-        + '<td class="of-fg">' + u(comma(Math.round(x.fg)), '元') + (x.fgG ? '<small>寬限 ' + comma(Math.round(x.fgG)) + ' 元</small>' : '') + '</td></tr>';
+        + '<td class="of-fg">' + u(comma(Math.round(x.fg)), '元') + (x.fgG ? '<small>寬限 ' + comma(Math.round(x.fgG)) + ' 元</small>' : '') + '</td>'
+        + (hasUnit ? '<td class="of-unit">' + u(comma(x.unit, 1), '萬/坪') + '</td>' : '') + '</tr>';
     }).join('');
     var notes = [];
     if (out.some(function (x) { return x.over; })) notes.push('可貸超過新青安 3.0 額度 ' + comma(QA.cap) + ' 萬，超過的部分用首購利率另計，已加進新青安 3.0 月付。');
     if (out.some(function (x) { return x.p > b.val; })) notes.push('出價超過估價後，銀行能貸的錢不會再變多，多出來的都是自備款。');
     if (qaG > 0 || fgG > 0) notes.push('「寬限」是寬限期內只繳利息的金額，寬限期結束後月付為上面的數字。');
     $('oResult').innerHTML = head
-      + '<div class="v-table-wrap"><table class="v-table of-table"><thead><tr><th>出價</th><th>可貸</th><th>頭期款</th><th>服務費</th><th>其他</th><th>要準備</th><th>新青安 3.0 月付</th><th>首購月付</th></tr></thead>'
+      + '<div class="v-table-wrap"><table class="v-table of-table"><thead><tr><th>出價</th><th>可貸</th><th>頭期款</th><th>服務費</th><th>其他</th><th>要準備</th><th>新青安 3.0 月付</th><th>首購月付</th>' + (hasUnit ? '<th>房屋單價<br><small>扣車位</small></th>' : '') + '</tr></thead>'
       + '<tbody>' + tb + '</tbody></table></div>'
       + '<p class="v-hint">點一列可以只挑那個出價產生文字。</p>'
       + (notes.length ? '<ul class="rt-list of-notes">' + notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '')
@@ -142,6 +147,7 @@
     list.forEach(function (x) {
       t += '\n▍出價 ' + w1(x.p) + ' 萬\n・可貸約 ' + w1(x.loan) + ' 萬\n・頭期款 ' + w1(x.down) + ' 萬＋服務費 ' + w1(x.fee) + ' 萬'
         + (x.other ? '＋其他 ' + w1(x.other) + ' 萬' : '') + '\n・要準備約 ' + w1(x.cash) + ' 萬\n'
+        + (x.unit != null ? '・扣車位房屋單價約 ' + comma(x.unit, 1) + ' 萬/坪\n' : '')
         + '・月付：新青安 3.0 約 ' + comma(Math.round(x.qa)) + ' 元／首購約 ' + comma(Math.round(x.fg)) + ' 元\n';
     });
     return t + '\n※新青安 3.0 利率 ' + num('oQaRate') + '%、' + num('oQaYears') + ' 年；首購 ' + num('oFgRate') + '%、' + num('oFgYears')
