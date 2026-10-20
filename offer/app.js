@@ -2,7 +2,7 @@
 (function () {
   var $ = RT.$, num = RT.val, esc = RT.esc, comma = RT.comma;
 
-  // 新青安 3.0：前 3 年一段式 1.775%、最長 40 年、額度一般 1,000 萬（財政部國庫署公告，2026-09-29 核對；變動時跟 youth-loan/app.js 一起改）
+  // 新青安 3.0：前 3 年一段式 1.775%、最長 40 年、額度一般 1,000 萬（財政部國庫署公告，2026-09-29 核對；變動時也要改 build.py 出價試算頁的「青安 3.0 重點整理」表）
   var QA = { rate: 1.775, years: 40, cap: 1000 };
   var KEY = 'rt-offer';
   var EXAMPLE = [

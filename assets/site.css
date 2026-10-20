@@ -1633,3 +1633,4 @@ section.tq-wrap{padding-block:16px 72px}
   .of-grid .row3 .field:first-child{grid-column:auto}
   .of-grid .v-form{padding:18px 14px}
 }
+.rt-facts .of-sub{display:block;font-size:.85em;font-weight:400;color:var(--muted)}

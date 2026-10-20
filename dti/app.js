@@ -110,7 +110,7 @@
     // 利率比較
     html+='<details class="v-samples"><summary>換個利率差多少？（貸 '+RT.wan(o.loan)+'、'+o.years+' 年）</summary><div class="v-table-wrap"><table class="v-table"><thead><tr><th>利率</th><th>方案</th><th>月付</th><th>收支比</th></tr></thead><tbody>'+
       RATES.map(function(r){ var dd=dtiWith(o,{rate:r[0]}); return '<tr'+(r[0]===o.rate?' class="rt-on"':'')+'><td>'+r[0]+'%</td><td>'+esc(r[1])+'</td><td>'+RT.yuan(RT.pmt(o.loan*10000,r[0],o.n))+'</td><td class="dt-'+TIERS[tierOf(dd)][2]+'">'+dd.toFixed(1)+'%</td></tr>'; }).join('')+
-      '</tbody></table></div><p class="v-note">利率每升 0.5%，收支比大約升 2～3 個百分點，送件前最好預留空間。新青安逐年利率請用<a href="../youth-loan/">新青安試算</a>。</p></details>';
+      '</tbody></table></div><p class="v-note">利率每升 0.5%，收支比大約升 2～3 個百分點，送件前最好預留空間。新青安 3.0 的額度、利率與月付請看<a href="../offer/">出價試算</a>。</p></details>';
     if(caseNote) html+='<div class="v-judge v-ok"><b>容瑜的建議</b>'+esc(caseNote)+'</div>';
     var msg='容瑜你好，我用了收支比試算：'+(mode===2?'夫妻合併、':'')+'認列收入 '+RT.comma(Math.round(o.income))+' 元、每月負債 '+RT.comma(o.debt)+' 元，想買 '+RT.wan(o.price)+'、貸 '+o.ratio+'%，收支比 '+(isFinite(d)?d.toFixed(1):'?')+'%（'+T[1]+'）。想請你幫我看看怎麼安排。';
     html+='<a class="btn btn-line v-cta" href="'+RT.LINE_URL+'" target="_blank" rel="noopener" data-rt-line="'+esc(msg)+'" data-toast="dtiToast">LINE 請容瑜幫我看</a><p class="toast" id="dtiToast" role="status"></p>'+
