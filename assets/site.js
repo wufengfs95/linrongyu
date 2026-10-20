@@ -1,6 +1,12 @@
 (function(){
   var LINE_URL='https://line.me/ti/p/~0973263569';
 
+  // 數字欄位不跟著滑鼠滾輪變動（使用者要求：只能手動輸入，免得滾動頁面時誤改數字）
+  document.addEventListener('wheel',function(e){
+    var t=e.target;
+    if(t&&t.tagName==='INPUT'&&t.type==='number'&&document.activeElement===t) t.blur();
+  },{passive:true,capture:true});
+
   // 先把訊息複製起來，再開 LINE（個人 LINE 無法預填訊息，只能請客人貼上）
   function copyThenOpenLine(msg,toast){
     var done=function(ok){

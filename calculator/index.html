@@ -2391,5 +2391,12 @@ function printForClient() {
   </p>
   <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #E8CAA4;font-size:22px;color:#9aa1ab">容瑜房產計算機</p>
 </div>
+<script>
+// 數字欄位不跟著滑鼠滾輪變動（使用者要求：只能手動輸入，免得滾動頁面時誤改數字）
+document.addEventListener('wheel',function(e){
+  var t=e.target;
+  if(t&&t.tagName==='INPUT'&&t.type==='number'&&document.activeElement===t) t.blur();
+},{passive:true,capture:true});
+</script>
 </body>
 </html>
