@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>出價試算：可貸金額、自備款、新青安與首購月付｜林容瑜</title>
+<meta name="description" content="輸入各家銀行估價與貸款成數，依出價級距算出可貸金額、頭期款加 2% 服務費要準備的現金，以及新青安（青安 3.0）與一般首購的每月月付。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/offer/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="出價試算：可貸金額、自備款、新青安與首購月付｜林容瑜">
+<meta property="og:description" content="輸入各家銀行估價與貸款成數，依出價級距算出可貸金額、頭期款加 2% 服務費要準備的現金，以及新青安（青安 3.0）與一般首購的每月月付。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/offer/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=d5919352">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "出價試算：出多少、準備多少、月付多少", "url": "https://wufengfs95.github.io/linrongyu/offer/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "輸入各家銀行估價與貸款成數，依出價級距算出可貸金額、頭期款加 2% 服務費要準備的現金，以及新青安（青安 3.0）與一般首購的每月月付。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 出價試算</p>
+  <h1>出價試算：出多少、準備多少、月付多少</h1>
+  <p class="sm-sub">把各家銀行的估價和成數填進來，從 730 萬、740 萬一路往上，每個出價可以貸多少、頭期款加服務費要準備多少現金、新青安和首購每月各繳多少，一張表看完。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid of-grid">
+    <form id="oForm" class="v-form" novalidate>
+      <h2>銀行估價</h2>
+      <p class="v-hint">預設三列是範例，換成銀行回覆的估價（萬）和成數（%）。可貸 = 估價 × 成數。</p>
+      <div id="oBanks" class="of-banks"></div>
+      <button type="button" class="btn of-add" id="oAdd">＋ 再加一家銀行</button>
+      <div class="field"><label for="oPick">表格用哪一家算</label><select id="oPick"></select></div>
+      <label class="rt-check"><input type="checkbox" id="oLower" checked> 出價低於估價時，用出價算（銀行通常兩者取低）</label>
+      <h2>出價範圍</h2>
+      <div class="row3"><div class="field"><label for="oFrom">從（萬）</label><input type="number" id="oFrom" inputmode="decimal" step="1" value="730"></div><div class="field"><label for="oTo">到（萬）</label><input type="number" id="oTo" inputmode="decimal" step="1" value="800"></div><div class="field"><label for="oStep">每次加（萬）</label><input type="number" id="oStep" inputmode="decimal" step="1" value="10"></div></div>
+      <div class="row2"><div class="field"><label for="oFee">服務費 %</label><input type="number" id="oFee" inputmode="decimal" step="0.1" value="2"></div><div class="field"><label for="oOther">其他費用（萬）<span class="rt-small">代書、契稅、規費等，可不填</span></label><input type="number" id="oOther" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>新青安（青安 3.0）</h2>
+      <div class="row3"><div class="field"><label for="oQaRate">利率 %</label><input type="number" id="oQaRate" inputmode="decimal" step="0.001" value="1.775"></div><div class="field"><label for="oQaYears">年限</label><input type="number" id="oQaYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oQaGrace">寬限年數</label><input type="number" id="oQaGrace" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>一般首購</h2>
+      <div class="field"><label for="oRates">帶入銀行利率<span class="rt-small" id="oRatesNote"></span></label>
+        <select id="oRates" data-v="0183175c"><option value="">讀取中…</option></select></div>
+      <div class="row3"><div class="field"><label for="oFgRate">利率 %</label><input type="number" id="oFgRate" inputmode="decimal" step="0.001" value="2.5"></div><div class="field"><label for="oFgYears">年限</label><input type="number" id="oFgYears" inputmode="decimal" step="1" value="30"></div><div class="field"><label for="oFgGrace">寬限年數</label><input type="number" id="oFgGrace" inputmode="decimal" step="1" value="0"></div></div>
+    </form>
+    <div id="oResult" class="v-result"></div>
+  </div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼出價超過估價，月付就不會變？</summary><p>銀行是用估價（和成交價取低）乘上成數來決定能貸多少。出價超過估價之後，能貸的金額就固定了，多出價的每一塊錢都要自己準備，所以要準備的現金一直增加，月付反而不變。</p></details><details><summary>要準備的錢包含哪些？</summary><p>這裡算的是頭期款（出價減掉可貸金額）加上仲介服務費。另外還有代書費、契稅、印花稅、規費、火險地震險、銀行開辦費等，可以在「其他費用」填一個總數，一般中古屋大約抓 10～20 萬。</p></details><details><summary>新青安和一般首購差在哪？</summary><p>新青安（青安 3.0）是政府補貼的首購貸款，前 3 年利率 1.775%、最長 40 年、可以有 5 年寬限期，額度一般 1,000 萬；要符合首購、年齡、所得等資格。不符合資格就是銀行的一般首購房貸，利率依銀行和個人條件核定，年限多半 30 年。詳細可以看<a href="../youth-loan/">新青安試算</a>。</p></details><details><summary>估價和成數要去哪裡問？</summary><p>出價前請仲介幫你向銀行送估，各家銀行回覆的估價和成數常常不一樣，把每一家都填進來比，就知道哪家貸得最多。想請我幫你問，直接 LINE 我。</p></details></div>
+  <p class="sm-note">新青安依<a href="https://www.nta.gov.tw/singlehtml/108" target="_blank" rel="noopener">財政部國庫署青安 3.0 貸款原則</a>，前 3 年 1.775%，第 4 年起每年加半碼、第 7 年起約 2.275%，表格用前 3 年利率試算。
+    一般首購利率清單與<a href="../dti/">收支比試算</a>共用，來源為各公股銀行官網與中央銀行，每季更新。月付以本息平均攤還計算，實際成數、利率以銀行核貸為準。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=326e6b1d" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v="ec5b9999"></script>
+<script src="app.js?v=ec5b9999" data-v="ec5b9999" defer></script>
+</body>
+</html>
