@@ -104,7 +104,7 @@
   function calc() {
     var r = rows(), b = r.b, out = r.out;
     if (!b || !b.val || !b.ratio || !out.length) {
-      $('oResult').innerHTML = '<div class="v-empty"><b>結果會出現在這裡</b><p>填至少一家銀行的估價和成數，再填出價範圍，就會列出每個出價：<br>・可以貸多少<br>・頭期款＋服務費，總共要準備多少現金<br>・新青安、一般首購每月各繳多少</p></div>';
+      $('oResult').innerHTML = '<div class="v-empty"><b>結果會出現在這裡</b><p>填至少一家銀行的估價和成數，再填出價範圍，就會列出每個出價：<br>・可以貸多少<br>・頭期款＋服務費，總共要準備多少現金<br>・新青安 3.0、一般首購每月各繳多少</p></div>';
       save(); return;
     }
     var qaG = num('oQaGrace'), fgG = num('oFgGrace');
@@ -120,11 +120,11 @@
         + '<td class="of-fg">' + u(comma(Math.round(x.fg)), '元') + (x.fgG ? '<small>寬限 ' + comma(Math.round(x.fgG)) + ' 元</small>' : '') + '</td></tr>';
     }).join('');
     var notes = [];
-    if (out.some(function (x) { return x.over; })) notes.push('可貸超過新青安額度 ' + comma(QA.cap) + ' 萬，超過的部分用首購利率另計，已加進新青安月付。');
+    if (out.some(function (x) { return x.over; })) notes.push('可貸超過新青安 3.0 額度 ' + comma(QA.cap) + ' 萬，超過的部分用首購利率另計，已加進新青安 3.0 月付。');
     if (out.some(function (x) { return x.p > b.val; })) notes.push('出價超過估價後，銀行能貸的錢不會再變多，多出來的都是自備款。');
     if (qaG > 0 || fgG > 0) notes.push('「寬限」是寬限期內只繳利息的金額，寬限期結束後月付為上面的數字。');
     $('oResult').innerHTML = head
-      + '<div class="v-table-wrap"><table class="v-table of-table"><thead><tr><th>出價</th><th>可貸</th><th>頭期款</th><th>服務費</th><th>其他</th><th>要準備</th><th>新青安月付</th><th>首購月付</th></tr></thead>'
+      + '<div class="v-table-wrap"><table class="v-table of-table"><thead><tr><th>出價</th><th>可貸</th><th>頭期款</th><th>服務費</th><th>其他</th><th>要準備</th><th>新青安 3.0 月付</th><th>首購月付</th></tr></thead>'
       + '<tbody>' + tb + '</tbody></table></div>'
       + '<p class="v-hint">點一列可以只挑那個出價產生文字。</p>'
       + (notes.length ? '<ul class="rt-list of-notes">' + notes.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '')
@@ -142,9 +142,9 @@
     list.forEach(function (x) {
       t += '\n▍出價 ' + w1(x.p) + ' 萬\n・可貸約 ' + w1(x.loan) + ' 萬\n・頭期款 ' + w1(x.down) + ' 萬＋服務費 ' + w1(x.fee) + ' 萬'
         + (x.other ? '＋其他 ' + w1(x.other) + ' 萬' : '') + '\n・要準備約 ' + w1(x.cash) + ' 萬\n'
-        + '・月付：新青安約 ' + comma(Math.round(x.qa)) + ' 元／首購約 ' + comma(Math.round(x.fg)) + ' 元\n';
+        + '・月付：新青安 3.0 約 ' + comma(Math.round(x.qa)) + ' 元／首購約 ' + comma(Math.round(x.fg)) + ' 元\n';
     });
-    return t + '\n※新青安 ' + num('oQaRate') + '%、' + num('oQaYears') + ' 年；首購 ' + num('oFgRate') + '%、' + num('oFgYears')
+    return t + '\n※新青安 3.0 利率 ' + num('oQaRate') + '%、' + num('oQaYears') + ' 年；首購 ' + num('oFgRate') + '%、' + num('oFgYears')
       + ' 年，本息平均攤還。實際成數與利率以銀行核貸為準。';
   }
 
