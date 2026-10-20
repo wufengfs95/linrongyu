@@ -1594,7 +1594,7 @@ section.tq-wrap{padding-block:16px 72px}
 
 /* ---- 出價試算 /offer/ ---- */
 .of-banks{display:grid;gap:10px}
-.of-grid{grid-template-columns:minmax(0,400px) minmax(0,1fr)}
+.of-grid{grid-template-columns:minmax(0,460px) minmax(0,1fr)}
 @media (max-width:1180px){.of-grid{grid-template-columns:minmax(0,1fr)}.of-grid .v-form{max-width:640px}}
 .of-bank .field label{white-space:nowrap}
 .of-grid .v-form,.of-grid .v-form>*,.of-bank>*{min-width:0}
@@ -1603,10 +1603,14 @@ section.tq-wrap{padding-block:16px 72px}
 .of-grid .row2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .of-grid .row3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .of-grid select{min-width:0;max-width:100%;text-overflow:ellipsis}
-.of-bank{display:grid;grid-template-columns:1.3fr 1fr .8fr 1fr auto;gap:8px;align-items:end;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.of-bank{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;grid-template-areas:'n n n x' 'v r o o';gap:8px 10px;align-items:end;padding-bottom:10px;border-bottom:1px dashed var(--line)}
 .of-bank .field label{font-size:16px!important}
 .of-bank input{font-size:18px!important;padding:9px 10px!important}
-.of-bank .rt-x{margin-bottom:6px}
+.of-bank .rt-x{margin-bottom:6px;grid-area:x}
+.of-bank .of-name{grid-area:n}.of-bank .field:nth-child(2){grid-area:v}.of-bank .field:nth-child(3){grid-area:r}.of-bank .of-out{grid-area:o}
+.of-grid input[type=number]{-moz-appearance:textfield;appearance:textfield}
+.of-grid input[type=number]::-webkit-inner-spin-button,.of-grid input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.of-grid .row2 input,.of-grid .row3 input{padding:11px 10px}
 .of-out{display:grid;gap:2px;padding-bottom:8px}
 .of-out span{font-size:16px;color:var(--muted);font-weight:700}
 .of-out b{font-size:19px;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -1622,9 +1626,6 @@ section.tq-wrap{padding-block:16px 72px}
 .of-fg{color:var(--brick);font-weight:700}
 .of-notes{font-size:17px;color:var(--muted)}
 @media (max-width:560px){
-  .of-bank{grid-template-columns:1fr 1fr auto}
-  .of-bank .of-name{grid-column:1/-1}
-  .of-bank .of-out{grid-column:1/3}
   .of-grid .row3 .field:first-child{grid-column:auto}
   .of-grid .v-form{padding:18px 14px}
 }
