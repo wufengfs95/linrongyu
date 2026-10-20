@@ -1637,3 +1637,9 @@ section.tq-wrap{padding-block:16px 72px}
 .of-opt{font-size:15px;font-weight:400;color:var(--muted);margin-left:8px}
 .of-unit{color:var(--navy);font-weight:700}
 .of-table th small{font-weight:400;font-size:.85em}
+.of-lock{display:flex;justify-content:center;margin:8px 0 32px}
+.of-lockform{width:100%;max-width:440px}
+.of-lockform input[type=password]{font:inherit;font-size:20px;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%;box-sizing:border-box}
+.of-lockform input[type=password]:focus{border-color:var(--brick-soft);outline:none;box-shadow:0 0 0 3px rgba(184,92,56,.18)}
+.of-lockform .btn{width:100%}
+.of-pwmsg{margin:0;min-height:1.4em;font-size:17px;color:var(--brick)}
