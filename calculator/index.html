@@ -799,6 +799,11 @@
 <meta property="og:description" content="賣房到底能拿回多少、買房總共要準備多少？房地合一稅、土地增值稅、仲介費、代書費、契稅印花稅，一頁全部算完。容瑜房產計算機提供的免費房產試算工具。">
 <meta property="og:url" content="https://wufengfs95.github.io/linrongyu/calculator/">
 <meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/profile.jpg">
+<style>
+.calc-crumbs{max-width:1100px;margin:14px auto 0;padding:0 max(16px,env(safe-area-inset-left,0px));font-size:18px;color:#6B6B6B}
+.calc-crumbs a{color:#B85C38;text-decoration:none}
+.calc-crumbs a:hover{text-decoration:underline}
+</style>
 </head>
 <body class="toolpage">
 
@@ -807,6 +812,7 @@
   <span>容瑜房產計算機</span>
   <a class="home-link" href="../">回林容瑜首頁 →</a>
 </div>
+<p class="calc-crumbs" id="calcCrumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › <span id="calcCrumbName">房產計算機</span></p>
 
 <!-- Tab navigation (僅展示，這份檔案只專注賣方實拿) -->
 <div class="tabs">
@@ -1168,7 +1174,7 @@
 <div class="tab-pane" data-pane="fees">
 <div class="card">
   <h2 class="card-title">買賣雜費</h2>
-  <p class="card-sub">買方 / 賣方雜費試算</p>
+  <p class="card-sub">買方 / 賣方雜費「區間」試算：代書、規費這些每家收費不同，所以只算大概落在多少到多少</p>
 
   <div class="section">
     <div class="field">
@@ -1179,30 +1185,42 @@
     <div style="margin-top:14px;">
       <label style="font-size:22px; font-weight:600; color:var(--ink-soft); display:block; margin-bottom:6px;">您的身分</label>
       <div class="seg">
-        <button class="seg-btn active" onclick="setFeRole('buyer')">買方 (Buyer)</button>
-        <button class="seg-btn" onclick="setFeRole('seller')">賣方 (Seller)</button>
+        <button class="seg-btn active" onclick="setFeRole('buyer')">買方（買到房）</button>
+        <button class="seg-btn" onclick="setFeRole('seller')">賣方（賣掉房）</button>
       </div>
+    </div>
+
+    <div class="field" id="fe_deedWrap" style="margin-top:14px;">
+      <label>房屋評定現值（契價）<span class="hint">萬，選填，看房屋稅單</span></label>
+      <input type="number" id="fe_deed" step="0.01" placeholder="不知道可以不填" oninput="calcFees()" />
+    </div>
+    <div class="field" id="fe_eraWrap" style="margin-top:14px; display:none;">
+      <label>房子是什麼時候買的？</label>
+      <select id="fe_era" onchange="calcFees()" style="font:inherit; font-size:20px; padding:10px 12px; border-radius:8px; border:1.5px solid var(--line, #ddd);">
+        <option value="new">105 年 1 月 1 日以後取得（土增稅＋房地合一稅）</option>
+        <option value="old">105 年 1 月 1 日以前取得（土增稅＋財產交易所得稅）</option>
+      </select>
+    </div>
+    <label style="display:flex; align-items:center; gap:8px; margin-top:14px; font-size:21px; cursor:pointer;">
+      <input type="checkbox" id="fe_loan" checked onchange="calcFees()" style="width:20px; height:20px;" />
+      <span id="fe_loanText">有辦房貸（要設定銀行抵押權）</span>
+    </label>
+    <div class="field" style="margin-top:14px;">
+      <label>建物、土地額外增加幾筆？<span class="hint">筆，一般 0，每多一筆加收 2,000～3,000 元</span></label>
+      <input type="number" id="fe_extra" step="1" min="0" value="0" oninput="calcFees()" />
     </div>
   </div>
 
   <div class="result-panel">
-    <h3 id="fe_title" style="margin:0 0 14px; font-size:21px; font-weight:700; color:var(--gold-deep);">買方預估雜項費用</h3>
+    <h3 id="fe_title" style="margin:0 0 14px; font-size:21px; font-weight:700; color:var(--gold-deep);">買到房時，需支付的費用</h3>
     <div class="detail" id="fe_detail">
       <!-- 動態填入 -->
     </div>
     <div class="result-box big" style="margin-top:14px;">
-      <div class="label">費用總計</div>
-      <div class="value">$<span id="fe_total_out">—</span></div>
+      <div class="label">費用合計大約落在</div>
+      <div class="value" style="font-size:clamp(26px,5vw,40px);"><span id="fe_total_out">—</span></div>
     </div>
-    <div id="fe_note" style="margin-top:14px; padding:12px 14px; background:#FAF3EA; border-radius:8px; font-size:21px; color:var(--ink-soft); line-height:1.7;">
-      <b style="color:var(--gold-deep);">【政府規費與其他成本說明】</b><br>
-      <b>契稅</b>：房屋評定現值 × 6%<br>
-      <b>印花稅</b>：公定契約書上之房地總價 × 0.1%<br>
-      <b>地政登記規費</b>：(土地申報地價總額 + 房屋評定現值) × 0.1%<br>
-      <b>書狀費用</b>：每張 80 元<br>
-      <b>其他成本</b>：銀行徵信、開辦、手續費、產險費（火災地震險）<br>
-      <span style="display:block; margin-top:6px; text-align:right; color:#999;">* 公部門費用依實際稅單金額為主<br>* 代書收費依代書事務所為主</span>
-    </div>
+    <div id="fe_note" style="margin-top:14px; padding:12px 14px; background:#FAF3EA; border-radius:8px; font-size:21px; color:var(--ink-soft); line-height:1.7;"></div>
   </div>
 </div>
 </div>
@@ -2058,7 +2076,8 @@ function calcAfford() {
   document.getElementById('af_monthly').textContent = fmt(monthly, 0);
 }
 
-// ============ 買賣雜費 ============
+// ============ 買賣雜費（區間試算）============
+// 依「不動產買賣雙方應繳費用一欄表」：代書、規費每家收費不同，只算區間、不給單一金額
 let feRole = 'buyer';
 
 function setFeRole(role) {
@@ -2066,60 +2085,75 @@ function setFeRole(role) {
   document.querySelectorAll('[data-pane="fees"] .seg-btn').forEach((b, i) => {
     b.classList.toggle('active', (role === 'buyer' && i === 0) || (role === 'seller' && i === 1));
   });
+  document.getElementById('fe_deedWrap').style.display = role === 'buyer' ? '' : 'none';
+  document.getElementById('fe_eraWrap').style.display = role === 'seller' ? '' : 'none';
+  document.getElementById('fe_loanText').textContent = role === 'buyer'
+    ? '有辦房貸（要設定銀行抵押權）' : '房子還有房貸（要塗銷銀行抵押權）';
   calcFees();
 }
 
 function calcFees() {
   const total = v('fe_total') * 10000; // 元
   const detail = document.getElementById('fe_detail');
-  const title = document.getElementById('fe_title');
+  const out = document.getElementById('fe_total_out');
+  const note = document.getElementById('fe_note');
+  const buyer = feRole === 'buyer';
+  document.getElementById('fe_title').textContent = buyer ? '買到房時，需支付的費用' : '賣掉房時，需支付的費用';
 
   if (total <= 0) {
     detail.innerHTML = '<div class="detail-row" style="color:#999;">請輸入成交總價</div>';
-    document.getElementById('fe_total_out').textContent = '—';
+    out.textContent = '—';
+    note.innerHTML = '';
     return;
   }
 
-  const escrow = total * 0.0003; // 履保萬3
-
-  let items = [];
-  if (feRole === 'buyer') {
-    title.textContent = '買方預估雜項費用';
-    const service = total * 0.02;
-    items = [
-      ['仲介服務費 (2%)', service],
-      ['預估代書費', 14000],
-      ['潤筆費', 1000],
-      ['履保費用 (萬分之3)', escrow],
-      ['實價登錄代辦費', 2000],
-      ['抵押權設定代書費', 6000],
-    ];
+  const loan = document.getElementById('fe_loan').checked;
+  const extra = Math.max(0, Math.floor(v('fe_extra')));
+  const deed = v('fe_deed') * 10000;
+  // [項目, 說明, 下限, 上限]；下限、上限是 null 的只列說明，不算進合計
+  const items = [];
+  if (buyer) {
+    items.push(['房仲服務費', '成交價的 2%', total * 0.02, total * 0.02]);
+    items.push(['契稅', deed > 0 ? '房屋評定現值 × 6%' : '房屋稅單核定契價的 6%（填契價才會算）',
+      deed > 0 ? deed * 0.06 : null, deed > 0 ? deed * 0.06 : null]);
+    items.push(['印花稅、地政規費代辦費', '通常幾千元', 1000, 9000]);
+    items.push(['建物（土地）過戶代辦費', '每筆約 6,000～9,000 元', 6000, 9000]);
+    items.push(['代書簽約撰寫費', '約 2,000 元', 2000, 2000]);
+    items.push(['履約保證費', '成交價的 0.03%', total * 0.0003, total * 0.0003]);
+    if (loan) items.push(['銀行抵押權設定費', '約 6,000～9,000 元', 6000, 9000]);
+    items.push(['實價登錄代辦費', '約 1,500～2,000 元', 1500, 2000]);
   } else {
-    title.textContent = '賣方預估雜項費用';
-    const service = total * 0.04;
-    items = [
-      ['仲介服務費 (4%)', service],
-      ['潤筆費', 1000],
-      ['履保費用 (萬分之3)', escrow],
-      ['實價登錄代辦費', 2000],
-      ['塗銷費 + 稅籍資料', 6000],
-      ['土增稅', '依稅單為主'],
-      ['房地合一稅', '請至「房地合一」試算'],
-    ];
-  }
-
-  let html = '';
-  let sum = 0;
-  items.forEach(([name, val]) => {
-    if (typeof val === 'number') {
-      sum += val;
-      html += `<div class="detail-row"><span class="name">${name}</span><span class="num">$${fmt(val, 0)}</span></div>`;
+    const era = document.getElementById('fe_era').value;
+    items.push(['房仲服務費', '成交價的 4%', total * 0.04, total * 0.04]);
+    if (era === 'old') {
+      items.push(['土增稅＋財產交易所得稅', '105 年以前取得：依稅單金額', null, null]);
     } else {
-      html += `<div class="detail-row"><span class="name">${name}</span><span class="num" style="color:#999; font-weight:500;">${val}</span></div>`;
+      items.push(['土增稅＋房地合一稅', '105 年以後取得：依稅單，房地合一稅可到「房地合一」分頁試算', null, null]);
+      items.push(['房地合一稅代申報費', '每筆約 5,000～8,000 元', 5000, 8000]);
     }
+    items.push(['代書簽約撰寫費', '約 2,000 元', 2000, 2000]);
+    items.push(['履約保證費', '成交價的 0.03%', total * 0.0003, total * 0.0003]);
+    if (loan) items.push(['銀行抵押權塗銷費', '約 2,000～5,000 元', 2000, 5000]);
+    items.push(['實價登錄代辦費', '約 1,500～2,000 元', 1500, 2000]);
+  }
+  if (extra > 0) items.push(['建物、土地額外增加 ' + extra + ' 筆', '每筆加收 2,000～3,000 元', 2000 * extra, 3000 * extra]);
+
+  const r100 = (x, up) => (up ? Math.ceil(x / 100 - 1e-6) : Math.floor(x / 100 + 1e-6)) * 100;
+  const range = (lo, hi) => lo === hi ? '約 ' + fmt(Math.round(lo / 100) * 100, 0) + ' 元'
+    : fmt(r100(lo, false), 0) + '～' + fmt(r100(hi, true), 0) + ' 元';
+  let lo = 0, hi = 0, html = '';
+  items.forEach(([name, desc, a, b]) => {
+    const has = a != null;
+    if (has) { lo += a; hi += b; }
+    html += `<div class="detail-row"><span class="name">${name}<br><small style="color:#999; font-weight:400;">${desc}</small></span>`
+      + `<span class="num"${has ? '' : ' style="color:#999; font-weight:500;"'}>${has ? range(a, b) : '依稅單'}</span></div>`;
   });
   detail.innerHTML = html;
-  document.getElementById('fe_total_out').textContent = fmt(sum, 0);
+  const w = x => (x / 10000).toFixed(1).replace(/\.0$/, '');
+  out.textContent = '約 ' + w(r100(lo, false)) + '～' + w(r100(hi, true)) + ' 萬';
+  note.innerHTML = '<b style="color:var(--gold-deep);">【說明】</b><br>'
+    + '以上是區間估算，代書費、規費依各事務所與實際稅單為準；標「依稅單」的項目沒有算進合計。<br>'
+    + (buyer ? '另外還有銀行開辦費、火險地震險等貸款相關費用，依銀行規定。' : '土地增值稅、房地合一稅金額差很多，簽約前可以先請代書試算。');
 }
 
 // 初始化買賣雜費
@@ -2361,6 +2395,8 @@ function printForClient() {
       var hd = document.querySelector('.header');
       if (hd){ hd.style.display = 'none'; }          // 網站上面已經有選單，這條標題列是多餘的
       document.body.classList.add('solo-tool');
+      var NAMES = { capgain:'房地合一稅', afford:'購屋能力', fees:'買賣雜費', seller:'賣方實拿', luxury:'豪宅稅' };
+      var cn = document.getElementById('calcCrumbName'); if (cn) cn.textContent = NAMES[only];
     }
   }catch(e){}
 })();
