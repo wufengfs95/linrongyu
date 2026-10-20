@@ -1643,3 +1643,10 @@ section.tq-wrap{padding-block:16px 72px}
 .of-lockform input[type=password]:focus{border-color:var(--brick-soft);outline:none;box-shadow:0 0 0 3px rgba(184,92,56,.18)}
 .of-lockform .btn{width:100%}
 .of-pwmsg{margin:0;min-height:1.4em;font-size:17px;color:var(--brick)}
+.of-l2{display:block}
+.of-grid .row3 .field{align-content:end}
+.of-gov{display:grid;gap:12px;padding:14px;border:1.5px dashed var(--cream-line);border-radius:12px;background:var(--cream)}
+.of-govt{margin:0;font-weight:700;color:var(--navy)}
+.of-govtab td{font-size:16px}
+.of-gv{color:var(--navy);font-weight:700}
+.v-quick.rt-facts td:first-child,.of-govtab td:first-child{white-space:nowrap!important;width:1%;padding-right:16px}
