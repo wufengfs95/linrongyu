@@ -123,7 +123,7 @@
     if(S.sideN) tips.push('💻 兼差、接案收入銀行通常只認列 7 成，要有報稅或固定入帳紀錄。');
     tips.push('🧮 自備款抓「房價 × 2 成＋稅費雜支約 4%」，收支比最好在 55% 以下，過 60% 銀行就會很嚴。');
     $('lfExtra').innerHTML+='<div class="gm-review">'+tips.map(function(t){return '<div>'+esc(t)+'</div>'}).join('')+'</div>';
-    $('lfCta').innerHTML='用你<b>真實的收入</b>算一次：<a href="../dti/">收支比試算 →</a>　<a href="../offer/">出價試算 →</a><br>不知道自己能買多少？<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>，幫你算自備款和能買的價位。';
+    $('lfCta').innerHTML='用你<b>真實的收入</b>算一次：<a href="../offer/">出價試算 →</a><br>不知道自己能買多少？<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>，幫你算自備款和能買的價位。';
     $('lfResult').hidden=false;
     setTimeout(function(){ $('lfResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }
