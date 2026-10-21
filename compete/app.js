@@ -1,22 +1,39 @@
 /* 委託物件競品分析：屋主的房子＋想開的價 → 同社區／同路段實價登錄成交＋手動輸入的在售競品 → 開價落點、建議開價、屋主溝通版 */
 (function(){
   var RT=window.RT, $=RT.$, esc=RT.esc;
-  var meta=null, kind='a', PARK_AREA=10;   // 在售競品含車位時，車位坪數先抓 10 坪
-  var BOOKMARKLET="javascript:(function(){var P=function(t){var m,b=0,re=/([\\d,]+(?:\\.\\d+)?)\\s*(億|萬)/g;while(m=re.exec(t)){var v=parseFloat(m[1].replace(/,/g,''));if(m[2]==='億')v*=1e4;if(v>b)b=v}return Math.round(b)};var A=function(t){var m=t.match(/權狀[^\\d]{0,4}([\\d.]+)\\s*坪/)||t.match(/([\\d.]+)\\s*坪/);return m?parseFloat(m[1]):0};var ok=function(e){if(e.children.length>12)return false;var t=e.innerText||'';return !!t&&t.length<=300&&/萬/.test(t)&&/坪/.test(t)};var all=[].filter.call(document.querySelectorAll('div,li,article,section,a'),ok);var leaf=all.filter(function(e){return !all.some(function(o){return o!==e&&e.contains(o)})});var seen={},out=[];leaf.forEach(function(e){var t=e.innerText.replace(/\\s+/g,' ').trim();var p=P(t),a=A(t);if(!(p>=100&&p<=5e4)||!(a>=3&&a<=500))return;var u=p/a;if(!(u>=3&&u<=200))return;var k=/車位/.test(t)&&!/無車位/.test(t)?1:0;var key=p+'_'+a;if(seen[key])return;seen[key]=1;out.push([p,a,k,t.split(' ')[0].slice(0,14).replace(/[|~]/g,' ')].join('~'))});if(!out.length){alert('這一頁沒有抓到物件。請在「搜尋結果列表」頁按，並先往下捲讓物件載入出來。');return}var u='__URL__#__TAB__c='+encodeURIComponent(out.slice(0,25).join('|'));if(!window.open(u,'_blank'))location.href=u})()";
+  var meta=null, kind='a';
+  // 車位坪數：車格本身只有 4.16 坪（建築技術規則 60 條 2.5×5.5m），權狀上多出來的是車道分攤。
+  // 這組數字對得上不動產估價師公會第十號公報的經驗值，也對得上她自己實價登錄的中位數
+  // （中壢平面 9.63、機械 4.86 坪）
+  var PARK_AREA={'平面':10,'機械':5};
+  // 車位產權型態 → 要不要扣價、要不要從權狀坪數扣坪
+  var PK={'0':{t:'無車位',price:0,area:0},
+          '1':{t:'車位有獨立坪數',price:1,area:1},
+          '2':{t:'車位含在公設',price:1,area:1,est:1},
+          '3':{t:'無產權／約定專用',price:0,area:0,note:'權狀坪不含車位'},
+          '9':{t:'車位狀況待確認',price:0,area:0,ask:1}};
+  var BOOKMARKLET="javascript:(function(){var P=function(t){var m,b=0,re=/([\\d,]+(?:\\.\\d+)?)\\s*(億|萬)/g;while(m=re.exec(t)){var v=parseFloat(m[1].replace(/,/g,''));if(m[2]==='億')v*=1e4;if(v>b)b=v}return Math.round(b)};var A=function(t){var m=t.match(/權狀[^\\d]{0,4}([\\d.]+)\\s*坪/)||t.match(/([\\d.]+)\\s*坪/);return m?parseFloat(m[1]):0};var ok=function(e){if(e.children.length>12)return false;var t=e.innerText||'';return !!t&&t.length<=300&&/萬/.test(t)&&/坪/.test(t)};var all=[].filter.call(document.querySelectorAll('div,li,article,section,a'),ok);var leaf=all.filter(function(e){return !all.some(function(o){return o!==e&&e.contains(o)})});var seen={},out=[];leaf.forEach(function(e){var t=e.innerText.replace(/\\s+/g,' ').trim();var p=P(t),a=A(t);if(!(p>=100&&p<=5e4)||!(a>=3&&a<=500))return;var u=p/a;if(!(u>=3&&u<=200))return;var k=/車位/.test(t)&&!/無車位/.test(t)?9:0;var key=p+'_'+a;if(seen[key])return;seen[key]=1;out.push([p,a,k,t.split(' ')[0].slice(0,14).replace(/[|~]/g,' ')].join('~'))});if(!out.length){alert('這一頁沒有抓到物件。請在「搜尋結果列表」頁按，並先往下捲讓物件載入出來。');return}var u='__URL__#__TAB__c='+encodeURIComponent(out.slice(0,25).join('|'));if(!window.open(u,'_blank'))location.href=u})()";
 
   function compRow(v){
     v=v||{};
     var div=document.createElement('div'); div.className='rt-comp';
+    div.setAttribute('data-pt',v.pt||'平面');
     div.innerHTML='<input type="number" inputmode="numeric" placeholder="開價（萬）" aria-label="競品開價（萬）" data-f="p" value="'+esc(v.p||'')+'">'+
       '<input type="number" inputmode="decimal" step="0.1" placeholder="權狀坪數" aria-label="競品權狀坪數" data-f="a" value="'+esc(v.a||'')+'">'+
-      '<select aria-label="競品車位" data-f="k"><option value="">無車位</option><option value="1"'+(v.k?' selected':'')+'>有車位</option></select>'+
+      '<select aria-label="競品車位" data-f="k">'+
+        ['0','1','2','3','9'].map(function(c){
+          return '<option value="'+c+'"'+(String(v.k||'0')===c?' selected':'')+'>'+PK[c].t+'</option>';
+        }).join('')+'</select>'+
+      '<input type="number" inputmode="decimal" step="0.1" placeholder="車位坪" aria-label="競品車位坪數" data-f="pa" value="'+esc(v.pa||'')+'">'+
       '<input type="text" placeholder="樓層／備註（選填）" aria-label="競品備註" data-f="n" value="'+esc(v.n||'')+'">'+
       '<button type="button" class="rt-x" aria-label="刪除這筆">×</button>';
     $('cComps').appendChild(div);
   }
   function comps(){
     return [].map.call($('cComps').querySelectorAll('.rt-comp'),function(d){
-      var o={}; d.querySelectorAll('[data-f]').forEach(function(i){o[i.getAttribute('data-f')]=i.value.trim()}); return o;
+      var o={}; d.querySelectorAll('[data-f]').forEach(function(i){o[i.getAttribute('data-f')]=i.value.trim()});
+      o.pt=d.getAttribute('data-pt')||'平面';
+      return o;
     }).filter(function(o){return RT.num(o.p)>0&&RT.num(o.a)>0});
   }
   function input(){
@@ -75,7 +92,17 @@
       var parkV=inp.park?(meta.towns[inp.town].park[inp.park]||(inp.park==='平面'?150:90)):0;
       var deal=mid*inp.area+parkV, listLo=Math.round(deal*1.05/10)*10-2, listHi=Math.round(deal*1.08/10)*10+8;
       var mine=inp.ask?(inp.ask-parkV)/inp.area:0;
-      var cs=inp.comps.map(function(c){ var a=RT.num(c.a)-(c.k?PARK_AREA:0), p=RT.num(c.p)-(c.k?parkV||120:0); return {u:p/a,p:RT.num(c.p),a:RT.num(c.a),k:c.k,n:c.n}; }).filter(function(c){return c.u>0&&isFinite(c.u)});
+      // 車位行情用她自己實價登錄算出來的分區中位數，不要寫死
+      var tp=(meta.towns[inp.town]||{}).park||{};
+      var cs=inp.comps.map(function(c){
+        var rule=PK[String(c.k||'0')]||PK['0'];
+        var pt=(c.pt==='機械')?'機械':'平面';
+        var pv=rule.price?(tp[pt]||tp['平面']||150):0;
+        var pa=rule.area?(RT.num(c.pa)||PARK_AREA[pt]):0;
+        var a=RT.num(c.a)-pa, p=RT.num(c.p)-pv;
+        return {u:p/a,p:RT.num(c.p),a:RT.num(c.a),k:String(c.k||'0'),n:c.n,
+                pv:pv,pa:pa,est:!!rule.est,ask:!!rule.ask};
+      }).filter(function(c){return c.u>0&&isFinite(c.u)&&c.a>c.pa+5});
       var pos=mine?us.filter(function(u){return u<mine}).length/us.length*100:0;
       var html='<div class="v-price"><span>預估成交價（'+esc(got.scope)+'）</span><b>'+RT.wan(deal)+'</b>'+
         '<span class="v-unit">成交中位單價 <b>'+mid.toFixed(1)+' 萬/坪</b>（行情區間 '+lo.toFixed(1)+'～'+hi.toFixed(1)+'）'+(parkV?'＋車位約 '+parkV+' 萬':'')+'</span></div>'+
@@ -97,9 +124,28 @@
       html+='<details class="v-samples" open><summary>比對的成交（最近 '+recent.length+' 筆）</summary><div class="v-table-wrap"><table class="v-table"><thead><tr><th>成交</th><th>位置</th><th>樓層</th><th>坪數</th><th>單價</th><th>房屋總價</th></tr></thead><tbody>'+
         recent.map(function(x){return '<tr><td>'+x.y+' Q'+x.q+'</td><td>'+esc(x.road+(x.lane?x.lane+'巷':''))+'</td><td>'+(x.f||'-')+'/'+(x.tf||'-')+'</td><td>'+x.a.toFixed(1)+'</td><td>'+x.raw.toFixed(1)+'</td><td>'+RT.comma(x.raw*x.a)+' 萬</td></tr>'}).join('')+
         '</tbody></table></div>'+(got.community?'':'<p class="v-note">非同社區的成交已依行政區每季行情校正到最新一季。</p>')+'</details>';
-      if(cs.length) html+='<details class="v-samples" open><summary>在售競品</summary><div class="v-table-wrap"><table class="v-table"><thead><tr><th>備註</th><th>車位</th><th>開價</th><th>坪數</th><th>換算單價</th></tr></thead><tbody>'+
-        cs.sort(function(a,b){return a.u-b.u}).map(function(c){return '<tr><td>'+esc(c.n||'-')+'</td><td>'+(c.k?'有':'無')+'</td><td>'+RT.comma(c.p)+' 萬</td><td>'+c.a+'</td><td>'+c.u.toFixed(1)+'</td></tr>'}).join('')+
-        '</tbody></table></div><p class="v-note">有車位的競品已扣掉估計車位價（'+(parkV||120)+' 萬）和車位坪數（約 '+PARK_AREA+' 坪），再換算房屋單價。</p></details>';
+      // 車位基準一樣的才放在一起比。「無產權車位」權狀坪本來就不含車位、
+      // 書籤抓回來的又看不出含不含，這兩種單價基準不同，混在一起取中位數會歪
+      var ctab=function(list,title,note,open){
+        if(!list.length) return '';
+        return '<details class="v-samples"'+(open?' open':'')+'><summary>'+title+'（'+list.length+' 間）</summary>'+
+          '<div class="v-table-wrap"><table class="v-table"><thead><tr><th>備註</th><th>車位</th><th>開價</th><th>權狀坪</th><th>換算單價</th></tr></thead><tbody>'+
+          list.slice().sort(function(a,b){return a.u-b.u}).map(function(c){
+            return '<tr><td>'+esc(c.n||'-')+'</td><td>'+PK[c.k].t+(c.est?'<small>（坪數估計）</small>':'')+'</td><td>'+
+              RT.comma(c.p)+' 萬</td><td>'+c.a+'</td><td>'+c.u.toFixed(1)+'</td></tr>';
+          }).join('')+'</tbody></table></div><p class="v-note">'+note+'</p></details>';
+      };
+      var solid=cs.filter(function(c){return !c.ask&&c.k!=='3'});
+      var loose=cs.filter(function(c){return c.ask||c.k==='3'});
+      html+=ctab(solid,'在售競品・已換算成不含車位的房屋單價',
+        '車位價用'+inp.town+'實價登錄的車位成交中位數（平面 '+(tp['平面']||'—')+' 萬、機械 '+(tp['機械']||'—')+
+        ' 萬）扣除；車位坪數有填就用填的，沒填用平面 10 坪、機械 5 坪估。標「坪數估計」的是車位含在公設、'+
+        '沒有獨立登記坪數，數字是推估的，跟屋主說明時要講清楚。',1);
+      html+=ctab(loose,'在售競品・車位基準不同，單獨看',
+        '這一組<b>沒有</b>扣車位，所以單價不能跟上面那組直接比。'+
+        '「無產權／約定專用」的車位不在權狀坪數裡，扣了會把單價算高三成；'+
+        '「待確認」是書籤從 591 抓回來的，591 的列表沒有車位欄位，看不出坪數含不含車位，'+
+        '請你確認後在上面把車位欄位改掉，它就會併進上面那組。');
       // 屋主溝通版
       var talk='【'+(inp.road||inp.town)+(inp.lane?inp.lane+'巷':'')+' 行情分析】\n'+
         '我把'+got.scope+'近期的實價登錄都拉出來比過了，共 '+deals.length+' 筆，成交單價大多落在 '+lo.toFixed(1)+'～'+hi.toFixed(1)+' 萬/坪，中位數 '+mid.toFixed(1)+' 萬。\n'+
@@ -116,7 +162,7 @@
       $('cCopy').onclick=function(){ RT.copy($('cTalk').value,$('cToast'),'已複製，可以直接貼給屋主。'); };
       $('cShare').onclick=function(){
         var h={k:inp.kind,t:inp.town,r:inp.road,l:inp.lane||'',b:inp.built||'',a:inp.area,f:inp.floor||'',tf:inp.tops||'',pk:inp.park,ask:inp.ask||'',
-               c:inp.comps.map(function(c){return [c.p,c.a,c.k?1:0,c.n.replace(/[|~]/g,' ')].join('~')}).join('|')};
+               c:inp.comps.map(function(c){return [c.p,c.a,c.k||'0',c.n.replace(/[|~]/g,' '),c.pa||'',c.pt||''].join('~')}).join('|')};
         history.replaceState(null,'',RT.hashUrl(h)); RT.copy(location.href,$('cToast'),'已複製分析連結，打開就會直接看到這份分析。');
       };
     });
@@ -152,7 +198,8 @@
   }
   $('cMine').addEventListener('click', function(){
     mineHit.forEach(function(r){
-      compRow({ p: r.p, a: r.at, k: !!(r.pk && r.pk !== '無'), n: '自家 ' + (r.c || '') });
+      compRow({ p: r.p, a: r.at, k: String(r.pk2 == null ? 9 : r.pk2), pa: r.pa || '',
+                pt: r.pt || '平面', n: '自家 ' + (r.c || '') });
     });
     blank();                       // 清掉沒填的空列
     this.hidden = true;
@@ -197,12 +244,13 @@
     }
     // 競品要獨立處理：書籤只會帶 c=，不會帶屋主資料（h.t），不能綁在上面那個 if 裡面
     var got=(h.c||'').split('|').filter(Boolean);
-    got.forEach(function(s){ var p=s.split('~'); compRow({p:p[0],a:p[1],k:p[2]==='1',n:p[3]}); });
+    got.forEach(function(s){ var p=s.split('~');
+      compRow({p:p[0],a:p[1],k:p[2]==='1'?'1':(p[2]||'0'),n:p[3],pa:p[4]||'',pt:p[5]||'平面'}); });
     if(h.t) calc();
     else if(got.length){
       $('cStatus').textContent='已經帶入 '+got.length+' 間在售競品。填好上面屋主的房子，就可以產生分析。';
       $('cComps').scrollIntoView({block:'center',behavior:'smooth'});
     }
-    if(!$('cComps').children.length){ compRow(); compRow(); }
+    // 預設不放空白列：競品走自動帶入，要手打再按「＋ 手動加一間」
   });
 })();
