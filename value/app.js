@@ -105,7 +105,10 @@
   }
 
   function render(inp,res){
-    var park=meta.towns[inp.town].park||{}, parkPrice=inp.park?(park[inp.park]||0):0;
+    // 車位行情用在地實際成交行情，不用實價登錄中位數（會被新建案拉高）
+    var isNew=inp.age!=null&&inp.age<=5;
+    var PARK_PRICE={'平面':isNew?200:140,'機械':80};
+    var parkPrice=inp.park?(PARK_PRICE[inp.park]||0):0;
     var lo=res.lo*inp.area, hi=res.hi*inp.area, mid=res.mid*inp.area;
     var totalLo=lo+parkPrice, totalHi=hi+parkPrice;
     var msg='容瑜你好，我用網站估價：'+inp.town+(inp.roadName?' '+inp.roadName:'')+'，'+KN[inp.kind]+

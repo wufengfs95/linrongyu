@@ -19,6 +19,10 @@
   // 這組數字對得上不動產估價師公會第十號公報的經驗值，也對得上她自己實價登錄的中位數
   // （中壢平面 9.63、機械 4.86 坪）
   var PARK_AREA={'平面':10,'機械':5};
+  // 車位行情（容瑜提供的中壢、平鎮在地行情，比實價登錄中位數貼近實際成交）
+  // 實價登錄的中位數會被新建案拉高，所以一般中古屋另外抓
+  var PARK_PRICE={'平面':140,'機械':80,'平面新':200};   // 平面一般抓 130～150，取中間值 140
+  var NEW_YEAR=110;                                   // 完工年民國 110 年以後當新建案
   // 車位產權型態 → 要不要扣價、要不要從權狀坪數扣坪
   var PK={'0':{t:'無車位',price:0,area:0},
           '1':{t:'車位有獨立坪數',price:1,area:1},
@@ -196,11 +200,12 @@
       var deal=mid*inp.area+parkV, listLo=Math.round(deal*1.05/10)*10-2, listHi=Math.round(deal*1.08/10)*10+8;
       var mine=inp.ask?(inp.ask-parkV)/inp.area:0;
       // 車位行情用她自己實價登錄算出來的分區中位數，不要寫死
-      var tp=(meta.towns[inp.town]||{}).park||{};
+      var isNew=inp.built&&inp.built>=NEW_YEAR;
+      var tp={'平面':isNew?PARK_PRICE['平面新']:PARK_PRICE['平面'],'機械':PARK_PRICE['機械']};
       var cs=inp.comps.map(function(c){
         var rule=PK[String(c.k||'0')]||PK['0'];
         var pt=(c.pt==='機械')?'機械':'平面';
-        var pv=rule.price?(tp[pt]||tp['平面']||150):0;
+        var pv=rule.price?(tp[pt]||tp['平面']):0;
         var pa=rule.area?(RT.num(c.pa)||PARK_AREA[pt]):0;
         var a=RT.num(c.a)-pa, p=RT.num(c.p)-pv;
         return {u:p/a,p:RT.num(c.p),a:RT.num(c.a),k:String(c.k||'0'),n:c.n,
@@ -241,7 +246,7 @@
       var solid=cs.filter(function(c){return !c.ask&&c.k!=='3'});
       var loose=cs.filter(function(c){return c.ask||c.k==='3'});
       html+=ctab(solid,'在售競品・已換算成不含車位的房屋單價',
-        '車位價用'+inp.town+'實價登錄的車位成交中位數（平面 '+(tp['平面']||'—')+' 萬、機械 '+(tp['機械']||'—')+
+        '車位價用在地行情（平面 '+tp['平面']+' 萬'+(isNew?'，新建案':'，一般中古屋 130～150 萬')+'、機械 '+tp['機械']+
         ' 萬）扣除；車位坪數有填就用填的，沒填用平面 10 坪、機械 5 坪估。標「坪數估計」的是車位含在公設、'+
         '沒有獨立登記坪數，數字是推估的，跟屋主說明時要講清楚。',1);
       html+=ctab(loose,'在售競品・車位基準不同，單獨看',
