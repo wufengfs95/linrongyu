@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>賣方實拿速算：扣完稅費貸款，實際拿多少｜林容瑜</title>
+<meta name="description" content="賣房實拿試算：自動判定持有期間與房地合一稅率，連同土增稅、服務費、代書費、履保費與剩餘貸款一起扣，算出屋主實拿，並可反推開價。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/seller/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="賣方實拿速算：扣完稅費貸款，實際拿多少｜林容瑜">
+<meta property="og:description" content="賣房實拿試算：自動判定持有期間與房地合一稅率，連同土增稅、服務費、代書費、履保費與剩餘貸款一起扣，算出屋主實拿，並可反推開價。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/seller/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=5f07b64d">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "賣方實拿速算", "url": "https://wufengfs95.github.io/linrongyu/seller/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "賣房實拿試算：自動判定持有期間與房地合一稅率，連同土增稅、服務費、代書費、履保費與剩餘貸款一起扣，算出屋主實拿，並可反推開價。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 賣方實拿</p>
+  <h1>賣方實拿速算</h1>
+  <p class="sm-sub">房地合一稅、土增稅、服務費、剩餘貸款一起扣，算出屋主實際拿多少。也可以反過來填「想拿多少」，反推總價該掛多少。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid sl-grid">
+    <form id="slForm" class="v-form" novalidate>
+      <h2>基礎資訊</h2>
+      <div class="row3">
+        <div class="field"><label for="totalArea">總坪數<span class="rt-small">含車位</span></label>
+          <input type="number" id="totalArea" inputmode="decimal" step="0.01" placeholder="例：50.23" oninput="recalc()"></div>
+        <div class="field"><label for="parkArea">車位坪數</label>
+          <input type="number" id="parkArea" inputmode="decimal" step="0.01" placeholder="例：22.16" oninput="recalc()"></div>
+        <div class="field"><label for="parkPrice">車位價格<span class="rt-small">萬</span></label>
+          <input type="number" id="parkPrice" inputmode="decimal" step="0.01" placeholder="例：180" oninput="recalc()"></div>
+      </div>
+
+      <h2>取得資訊<small class="rt-small">算房地合一稅用</small></h2>
+      <div class="row2">
+        <div class="field"><label for="buyPrice">房屋取得價格<span class="rt-small">萬・屋主當年買多少</span></label>
+          <input type="number" id="buyPrice" inputmode="decimal" step="0.01" placeholder="例：1052" oninput="recalc()"></div>
+        <div class="field"><label for="buyCost">取得相關成本<span class="rt-small">萬・仲介、契稅、印花、代書</span></label>
+          <input type="number" id="buyCost" inputmode="decimal" step="0.01" placeholder="例：13" oninput="recalc()"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="prevY">前次移轉日期<span class="rt-small">民國年</span></label>
+          <div class="sl-date">
+            <select id="prevY" onchange="onDateChange('prev')"><option value="">年</option></select>
+            <select id="prevM" onchange="onDateChange('prev')"><option value="">月</option></select>
+            <select id="prevD" onchange="recalc()"><option value="">日</option></select>
+          </div></div>
+        <div class="field"><label for="currY">本次預計交易日期<span class="rt-small">民國年</span></label>
+          <div class="sl-date">
+            <select id="currY" onchange="onDateChange('curr')"><option value="">年</option></select>
+            <select id="currM" onchange="onDateChange('curr')"><option value="">月</option></select>
+            <select id="currD" onchange="recalc()"><option value="">日</option></select>
+          </div></div>
+      </div>
+      <label class="rt-check"><input type="checkbox" id="selfUseChk" onchange="toggleSelfUse()">
+        <span>自用住宅滿 6 年優惠<small class="rt-small">免稅額 400 萬、超過部分 10% 稅率</small></span></label>
+      <p class="sl-info" id="holdInfo">填好兩個日期，就會自動判定持有期間與稅率</p>
+
+      <h2>查稅單後填入</h2>
+      <div class="row3">
+        <div class="field"><label for="landTax">土增稅<span class="rt-small">萬・依稅單</span></label>
+          <input type="number" id="landTax" inputmode="decimal" step="0.01" placeholder="例：1.6" oninput="recalc()"></div>
+        <div class="field"><label for="landGain">土地漲價總數額<span class="rt-small">萬・土增稅單上有，可抵房地合一稅</span></label>
+          <input type="number" id="landGain" inputmode="decimal" step="0.01" placeholder="例：8" oninput="recalc()"></div>
+        <div class="field"><label for="loan">剩餘貸款餘額<span class="rt-small">萬・要還銀行的</span></label>
+          <input type="number" id="loan" inputmode="decimal" step="0.01" placeholder="例：840" oninput="recalc()"></div>
+      </div>
+
+      <h2>服務費<small class="rt-small">會從實拿扣掉</small></h2>
+      <div class="v-kinds" id="svcSeg" role="group" aria-label="服務費計算方式">
+        <button type="button" class="active" aria-pressed="true" onclick="setSvcMode('p4')">預設 4%</button>
+        <button type="button" aria-pressed="false" onclick="setSvcMode('manual')">手動輸入</button>
+      </div>
+      <div id="svcManualWrap" style="display:none">
+        <div class="field"><label for="svcManual">服務費金額<span class="rt-small">萬</span></label>
+          <input type="number" id="svcManual" inputmode="decimal" step="0.01" placeholder="實付 20 萬就填 20" oninput="recalc()"></div>
+      </div>
+      <p class="sl-info" id="svcInfo">服務費 ＝ 成交總價 × 4%</p>
+
+      <h2>房地合一可認列移轉費用<small class="rt-small">抵稅用，不是真的支出</small></h2>
+      <div class="v-kinds" id="moveSeg" role="group" aria-label="可認列移轉費用">
+        <button type="button" class="active" aria-pressed="true" onclick="setMoveMode('same')">同服務費</button>
+        <button type="button" aria-pressed="false" onclick="setMoveMode('manual')">手動輸入</button>
+        <button type="button" aria-pressed="false" onclick="setMoveMode('cap3')">3%・上限 30 萬</button>
+      </div>
+      <div id="moveManualWrap" style="display:none">
+        <div class="field"><label for="moveManual">可認列移轉費用<span class="rt-small">萬</span></label>
+          <input type="number" id="moveManual" inputmode="decimal" step="0.01" placeholder="直接輸入可認列金額" oninput="recalc()"></div>
+      </div>
+      <p class="sl-info" id="moveInfo">可認列移轉費用 ＝ 同服務費金額</p>
+
+      <h2>想賣的價格<small class="rt-small">填總價或單價，另一欄自動算</small></h2>
+      <div class="row2">
+        <div class="field"><label for="sellTotal">想賣的總價<span class="rt-small">萬</span></label>
+          <input type="number" id="sellTotal" inputmode="decimal" step="0.01" placeholder="例：1585" oninput="onSellTotalInput()"></div>
+        <div class="field"><label for="sellUnit">房屋單價<span class="rt-small">萬/坪・已扣車位</span></label>
+          <input type="number" id="sellUnit" inputmode="decimal" step="0.01" placeholder="例：50.05" oninput="onSellUnitInput()"></div>
+      </div>
+      <p class="sl-info" id="unitInfo">填了之後會顯示「房屋價格 ÷ 房屋坪數」</p>
+      <button type="button" class="btn btn-ghost" onclick="resetAll()">↻ 全部清除</button>
+    </form>
+
+    <div class="v-result">
+      <div class="sl-cards">
+        <div class="sl-card"><span>房屋單價（談價用）</span><strong><span id="r_unit">—</span> 萬/坪</strong></div>
+        <div class="sl-card"><span>房地合一稅</span><strong><span id="r_tax">—</span> 萬</strong></div>
+      </div>
+      <div class="v-big"><span>屋主實拿（扣掉全部費用、稅、貸款）</span><strong><span id="r_net">—</span> 萬</strong></div>
+
+      <div class="v-table-wrap"><table class="v-table fe-table"><tbody>
+        <tr><td><b>代書費（潤筆）</b></td><td class="fe-n"><span id="d_run">0.10</span> 萬</td></tr>
+        <tr><td><b>實價登錄費</b></td><td class="fe-n"><span id="d_reg">0.20</span> 萬</td></tr>
+        <tr><td><b>履保費</b><small>成交價 × 萬分之三</small></td><td class="fe-n"><span id="d_esc">—</span> 萬</td></tr>
+        <tr><td><b id="d_svc_label">服務費（成交價 × 4%）</b></td><td class="fe-n"><span id="d_svc">—</span> 萬</td></tr>
+        <tr><td><b>塗銷費＋稅籍資料</b></td><td class="fe-n"><span id="d_clr">0.60</span> 萬</td></tr>
+        <tr><td><b>土增稅</b></td><td class="fe-n"><span id="d_land">—</span> 萬</td></tr>
+        <tr><td><b>房地合一稅</b></td><td class="fe-n"><span id="d_houseTax">—</span> 萬</td></tr>
+        <tr><td><b>剩餘貸款</b></td><td class="fe-n"><span id="d_loan">—</span> 萬</td></tr>
+        <tr class="sl-sum"><td><b>合計扣除</b></td><td class="fe-n"><span id="d_sum">—</span> 萬</td></tr>
+      </tbody></table></div>
+
+      <div class="sl-formula" id="formulaBlock" style="display:none">
+        <div class="sl-fitem" id="formulaTaxItem" style="display:none">
+          <div class="fl">房地合一稅</div>
+          <div class="fx">（賣出 <b id="f_sell">—</b> 萬 − 取得成本 <b id="f_buy">—</b> 萬
+            − 取得費用 <b id="f_buyCost">—</b> 萬 − 移轉費用 <b id="f_move">—</b> 萬<span id="f_landPart"></span><span id="f_selfPart"></span>）
+            × 稅率 <b id="f_rate">—</b>% ＝ <b class="res" id="f_taxResult">—</b> 萬</div>
+        </div>
+        <div class="sl-fitem">
+          <div class="fl">屋主實拿</div>
+          <div class="fx">賣出總價 <b id="f_sell2">—</b> 萬 − 合計扣除 <b id="f_deduct">—</b> 萬
+            ＝ <b class="res" id="f_net2">—</b> 萬</div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-main sl-print" onclick="printForClient()">🖨️ 列印／存 PDF 給客戶</button>
+      <p class="v-hint">輸出一張乾淨的「賣方實拿試算表」，含實拿金額、費用明細與你的聯絡方式。</p>
+
+      <div class="sl-rev">
+        <h3>🔄 反推：屋主說「我要拿 ___ 萬」</h3>
+        <p>填屋主想實拿的金額，反推總價與單價該掛多少（上面其他欄位要先填好）</p>
+        <input type="number" id="targetNet" inputmode="decimal" step="0.01" placeholder="例：屋主想拿 600 萬" oninput="reverseCalc()">
+        <div id="reverseOut" style="display:none">
+          <div class="r"><span>應掛總價</span><b><span id="rv_total">—</span> 萬</b></div>
+          <div class="r"><span>等同單價</span><b><span id="rv_unit">—</span> 萬/坪</b></div>
+          <p class="n" id="rv_note">　</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="printReport">
+  <div class="pr-head">
+    <img class="pr-logo" id="pr_logo" alt="" />
+    <div class="pr-brand">容瑜房產計算機<small>賣方實拿試算表</small></div>
+    <div class="pr-date">製表日期：<span id="pr_date"></span></div>
+  </div>
+
+  <div class="pr-hero">
+    <div class="pr-hero-label">屋主實拿（已扣除全部費用、稅金與貸款後）</div>
+    <div class="pr-hero-val"><span id="pr_net">—</span><span class="u">萬</span></div>
+  </div>
+
+  <div class="pr-cards">
+    <div class="pr-card"><div class="k">想賣總價</div><div class="v"><span id="pr_total">—</span><small>萬</small></div></div>
+    <div class="pr-card"><div class="k">房屋單價</div><div class="v"><span id="pr_unit">—</span><small>萬/坪</small></div></div>
+    <div class="pr-card"><div class="k">房地合一稅</div><div class="v"><span id="pr_tax">—</span><small>萬</small></div></div>
+  </div>
+
+  <div class="pr-sec">
+    <h3>物件資訊</h3>
+    <table class="pr-table">
+      <tr><td>總坪數（含車位）</td><td class="n"><span id="pr_area">—</span> 坪</td></tr>
+      <tr><td>車位坪數</td><td class="n"><span id="pr_parkArea">—</span> 坪</td></tr>
+      <tr><td>車位價格</td><td class="n"><span id="pr_parkPrice">—</span> 萬</td></tr>
+    </table>
+  </div>
+
+  <div class="pr-sec">
+    <h3>費用與扣除明細</h3>
+    <table class="pr-table">
+      <tr><td>代書費（潤筆）</td><td class="n"><span id="pr_run">—</span> 萬</td></tr>
+      <tr><td>實價登錄費</td><td class="n"><span id="pr_reg">—</span> 萬</td></tr>
+      <tr><td>履保費（成交價 × 萬分之三）</td><td class="n"><span id="pr_esc">—</span> 萬</td></tr>
+      <tr><td><span id="pr_svc_label">服務費</span></td><td class="n"><span id="pr_svc">—</span> 萬</td></tr>
+      <tr><td>塗銷費 + 稅籍資料</td><td class="n"><span id="pr_clr">—</span> 萬</td></tr>
+      <tr><td>土增稅</td><td class="n"><span id="pr_land">—</span> 萬</td></tr>
+      <tr><td>房地合一稅</td><td class="n"><span id="pr_htax">—</span> 萬</td></tr>
+      <tr><td>剩餘貸款（清償銀行）</td><td class="n"><span id="pr_loan">—</span> 萬</td></tr>
+      <tr class="sum"><td>合計扣除</td><td class="n"><span id="pr_sum">—</span> 萬</td></tr>
+    </table>
+  </div>
+
+  <div class="pr-sec">
+    <h3>計算公式</h3>
+    <div class="pr-formula" id="pr_formula_tax">
+      <div class="fl">房地合一稅</div>
+      <div class="fx">
+        （賣出 <b id="pf_sell">—</b> 萬 − 取得成本 <b id="pf_buy">—</b> 萬
+        − 取得費用 <b id="pf_buyCost">—</b> 萬 − 移轉費用 <b id="pf_move">—</b> 萬<span id="pf_land"></span><span id="pf_self"></span>）
+        × 稅率 <b id="pf_rate">—</b>% ＝ <b class="res" id="pf_tax">—</b> 萬
+      </div>
+    </div>
+    <div class="pr-formula">
+      <div class="fl">屋主實拿</div>
+      <div class="fx">
+        賣出總價 <b id="pf_sell2">—</b> 萬 − 合計扣除 <b id="pf_deduct">—</b> 萬
+        ＝ <b class="res" id="pf_net">—</b> 萬
+      </div>
+    </div>
+  </div>
+
+  <div class="pr-note">
+    ※ 本表為費用概算與實拿試算，僅供參考；實際金額以各項稅單、銀行清償餘額與最終成交條件為準。<br>
+    ※ 房地合一稅依持有期間與自用住宅條件試算，實際稅額以國稅局核定為準。
+  </div>
+
+  <div class="pr-foot">
+    <div class="who">容瑜房產計算機</div>
+    <div class="contact">LINE／電話：<b>0973-263-569</b></div>
+  </div>
+</div>
+<h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>房地合一稅怎麼算出來的？</summary><p>課稅所得＝賣出價 −取得成本 −取得費用 −可認列移轉費用 −土地漲價總數額，再乘上持有期間對應的稅率（2 年內 45%、2～5 年 35%、5～10 年 20%、超過 10 年 15%）。自用住宅滿 6 年可以先扣 400 萬免稅額，超過的部分只課 10%。填好兩個日期，持有期間與稅率會自動判定。</p></details><details><summary>「可認列移轉費用」跟服務費差在哪？</summary><p>服務費是你真的要付出去的錢，會從實拿扣掉；可認列移轉費用是算稅時可以從稅基扣掉的金額，抵稅用，不是真的支出。兩個金額常常一樣，但性質不同，所以分開填。沒有單據的話，可以用法定上限「成交價 3%、最多 30 萬」。</p></details><details><summary>土地漲價總數額去哪裡找？</summary><p>土地增值稅單上面就有。它可以從房地合一稅的稅基扣掉，金額不小，不填會把稅算得太高。還沒拿到稅單就先留空，拿到再補。</p></details><details><summary>反推實拿是做什麼的？</summary><p>屋主常常直接說「我要拿到 600 萬」。填進去就會反推總價和單價要掛多少才拿得到，不用自己一直試數字。</p></details></div>  <p class="sm-note">本試算為參考值，稅額以國稅局核定為準；代書費、規費依各地政士事務所收費標準；土地增值稅與土地漲價總數額請以稅單金額填入。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=75f4cda3" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v=""></script>
+<script src="app.js?v=add19d23" data-v="" defer></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>豪宅稅試算：高價住宅賣掉實拿剩多少｜林容瑜</title>
+<meta name="description" content="舊制高價住宅（豪宅）賣方實拿試算：依謄本算出房地比與豪宅稅，連同服務費、土地增值稅、代書費與履保費一起扣，並可反推應開的售價。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/luxury/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="豪宅稅試算：高價住宅賣掉實拿剩多少｜林容瑜">
+<meta property="og:description" content="舊制高價住宅（豪宅）賣方實拿試算：依謄本算出房地比與豪宅稅，連同服務費、土地增值稅、代書費與履保費一起扣，並可反推應開的售價。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/luxury/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=5f07b64d">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "豪宅稅・賣方實拿", "url": "https://wufengfs95.github.io/linrongyu/luxury/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "舊制高價住宅（豪宅）賣方實拿試算：依謄本算出房地比與豪宅稅，連同服務費、土地增值稅、代書費與履保費一起扣，並可反推應開的售價。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 豪宅稅</p>
+  <h1>豪宅稅・賣方實拿</h1>
+  <p class="sm-sub">舊制高價住宅賣掉實際拿多少。依謄本的房屋評定現值與土地公告現值算出房地比，再連同服務費、土增稅與雜費一起扣。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="lxForm" class="v-form" novalidate>
+      <h2>出售價格</h2>
+      <div class="field"><label for="lx_price">屋主預計出售價格<span class="rt-small">萬</span></label>
+        <input type="number" id="lx_price" inputmode="decimal" step="0.01" placeholder="例：8000" oninput="calcLuxury()"></div>
+
+      <h2>土地公告現值<small class="rt-small">謄本抄進來，三格填完自動相乘</small></h2>
+      <div class="row3">
+        <div class="field"><label for="lx_landArea">土地面積<span class="rt-small">平方公尺</span></label>
+          <input type="number" id="lx_landArea" inputmode="decimal" step="0.01" placeholder="例：120.5" oninput="calcLuxury()"></div>
+        <div class="field"><label for="lx_landUnit">公告土地現值<span class="rt-small">元／m²</span></label>
+          <input type="number" id="lx_landUnit" inputmode="numeric" step="1" placeholder="例：85000" oninput="calcLuxury()"></div>
+        <div class="field"><label for="lx_landShare">權利範圍<span class="rt-small">幾分之幾</span></label>
+          <input type="text" id="lx_landShare" placeholder="例：1/1 或 7/1000" oninput="calcLuxury()"></div>
+      </div>
+      <p class="sl-info" id="lx_landInfo">土地公告現值 ＝ 面積 × 每 m² 現值 × 權利範圍。多筆土地請各自加總後填入。</p>
+
+      <h2>房屋評定現值</h2>
+      <div class="field"><label for="lx_houseVal">房屋評定現值<span class="rt-small">元・謄本上的房屋現值</span></label>
+        <input type="number" id="lx_houseVal" inputmode="numeric" step="1" placeholder="例：1250000" oninput="calcLuxury()"></div>
+      <p class="sl-info" id="lx_ratioInfo">房地比 ＝ 房屋評定現值 ÷（房屋評定現值 ＋ 土地公告現值）</p>
+
+      <h2>服務費<small class="rt-small">會從實拿扣掉</small></h2>
+      <div class="v-kinds" id="lxSvcSeg" role="group" aria-label="服務費計算方式">
+        <button type="button" class="active" aria-pressed="true" onclick="setLxSvc('p4')">預設 4%</button>
+        <button type="button" aria-pressed="false" onclick="setLxSvc('manual')">手動輸入</button>
+      </div>
+      <div id="lxSvcManualWrap" style="display:none">
+        <div class="field"><label for="lx_svcManual">服務費金額<span class="rt-small">萬</span></label>
+          <input type="number" id="lx_svcManual" inputmode="decimal" step="0.01" placeholder="實付 200 萬就填 200" oninput="calcLuxury()"></div>
+      </div>
+      <p class="sl-info" id="lx_svcInfo">服務費 ＝ 出售價格 × 4%</p>
+
+      <h2>土地增值稅<small class="rt-small">依稅單填入</small></h2>
+      <div class="field"><label for="lx_landTax">土地增值稅<span class="rt-small">萬</span></label>
+        <input type="number" id="lx_landTax" inputmode="decimal" step="0.01" placeholder="例：50" oninput="calcLuxury()"></div>
+      <p class="v-hint">代書費、實價登錄費、履保費、塗銷費會自動帶進明細，不用手動填。</p>
+      <button type="button" class="btn btn-ghost" onclick="resetLuxury()">↻ 全部清除</button>
+    </form>
+
+    <div class="v-result">
+      <div class="sl-cards">
+        <div class="sl-card"><span>房地比</span><strong><span id="lx_r_ratio">—</span> %</strong></div>
+        <div class="sl-card"><span>豪宅稅</span><strong><span id="lx_r_tax">—</span> 萬</strong></div>
+      </div>
+      <div class="v-big"><span>屋主實拿（扣豪宅稅、服務費、土增稅、雜費）</span><strong><span id="lx_r_net">—</span> 萬</strong></div>
+
+      <div class="v-table-wrap"><table class="v-table fe-table"><tbody>
+        <tr><td><b>出售價格</b></td><td class="fe-n"><span id="lx_d_price">—</span> 萬</td></tr>
+        <tr><td><b>豪宅稅</b><small>售價 × 房地比 × 20%</small></td><td class="fe-n"><span id="lx_d_tax">—</span> 萬</td></tr>
+        <tr><td><b id="lx_d_svc_label">服務費（售價 × 4%）</b></td><td class="fe-n"><span id="lx_d_svc">—</span> 萬</td></tr>
+        <tr><td><b>土地增值稅</b></td><td class="fe-n"><span id="lx_d_landTax">—</span> 萬</td></tr>
+        <tr><td><b>代書費（潤筆）</b></td><td class="fe-n"><span id="lx_d_run">—</span> 萬</td></tr>
+        <tr><td><b>實價登錄費</b></td><td class="fe-n"><span id="lx_d_reg">—</span> 萬</td></tr>
+        <tr><td><b>履保費</b><small>售價 × 萬分之三</small></td><td class="fe-n"><span id="lx_d_esc">—</span> 萬</td></tr>
+        <tr><td><b>塗銷費＋稅籍資料</b></td><td class="fe-n"><span id="lx_d_clr">—</span> 萬</td></tr>
+        <tr class="sl-sum"><td><b>合計扣除</b></td><td class="fe-n"><span id="lx_d_sum">—</span> 萬</td></tr>
+      </tbody></table></div>
+
+      <div class="sl-rev">
+        <h3>🔄 反推：屋主說「我要拿 ___ 萬」</h3>
+        <p>填屋主想實拿的金額，反推出售價要開多少（房地比、土增稅要先填好）</p>
+        <input type="number" id="lx_targetNet" inputmode="decimal" step="0.01" placeholder="例：屋主想拿 6000 萬" oninput="reverseLuxury()">
+        <div id="lx_reverseOut" style="display:none">
+          <div class="r"><span>應開出售價</span><b><span id="lx_rv_total">—</span> 萬</b></div>
+          <p class="n" id="lx_rv_note">　</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>豪宅稅是什麼？誰要繳？</summary><p>這裡講的是舊制（105 年 1 月 1 日以前取得）高價住宅的財產交易所得稅。賣掉時如果拿不出實際取得成本，國稅局會用「售價 × 房地比 × 一定比率」推計所得來課稅。105 年以後取得的房子走房地合一，請改用「賣方實拿」。</p></details><details><summary>房地比怎麼算？</summary><p>房地比 ＝ 房屋評定現值 ÷（房屋評定現值 ＋ 土地公告現值）。兩個數字謄本上都有：房屋評定現值看建物謄本；土地公告現值用「土地面積 × 每平方公尺公告現值 × 權利範圍」算。多筆土地要各自算完再加總。</p></details><details><summary>權利範圍那格怎麼填？</summary><p>照謄本上寫的填，像 1/1、1/2、7/1000 都可以直接打進去，系統會自動換算成小數。</p></details><details><summary>土地增值稅為什麼要自己填？</summary><p>土增稅要看前次移轉現值、持有年數、有沒有自用稅率，沒辦法只用售價估出來。請以土地增值稅單上的金額填入，還沒拿到稅單就先空著。</p></details></div>  <p class="sm-note">本試算為參考值，實際稅額以國稅局核定為準。高價住宅的認定標準與推計比率各年度、各地區不同，簽約前請與稅務人員或代書確認。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=75f4cda3" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v=""></script>
+<script src="app.js?v=33418c26" data-v="" defer></script>
+</body>
+</html>
