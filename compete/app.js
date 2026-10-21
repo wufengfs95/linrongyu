@@ -112,6 +112,62 @@
     return {rows:[],scope:'',community:false};
   }
 
+
+  // ── 客戶版表格 ────────────────────────────────────────
+  // 她的流程：先一鍵產生預覽看過，確定 OK 才列印。所以這裡只產生畫面，不自動開列印。
+  function makeReport(inp,got,deals,cs,r){
+    var band = !r.mine ? null
+      : (function(g){
+          return g>15 ? {k:'high', t:'明顯高於行情', c:'這個價格會變成比較基準裡最貴的一間，買方多半直接略過。'}
+               : g>8  ? {k:'over', t:'略高於行情',   c:'在合理議價空間的上緣，可以試水溫 2～4 週，沒帶看就要調整。'}
+               : g>=-3? {k:'fit',  t:'符合行情',     c:'開在行情附近，保留了正常議價空間，是好賣的價格。'}
+               :        {k:'low',  t:'低於行情',     c:'會很快成交，但可能少賺，建議再確認一次。'};
+        })((r.mine/r.mid-1)*100);
+
+    var now=new Date();
+    var d=now.getFullYear()-1911+' 年 '+(now.getMonth()+1)+' 月 '+now.getDate()+' 日';
+    var kn=(meta.kindName&&meta.kindName[inp.kind])||(xmeta&&xmeta.kindName&&xmeta.kindName[inp.kind])||'';
+    var where=inp.town+(inp.road?' '+inp.road:'')+(inp.lane?inp.lane+'巷':'');
+
+    var rows=function(list){
+      return list.slice().sort(function(a,b){return a.u-b.u}).map(function(c){
+        return '<tr><td>'+esc(c.n||'—')+'</td><td>'+PK[c.k].t+'</td><td class="n">'+RT.comma(c.p)+'</td>'+
+               '<td class="n">'+c.a+'</td><td class="n">'+c.u.toFixed(1)+'</td></tr>';
+      }).join('');
+    };
+    var solid=cs.filter(function(c){return !c.ask&&c.k!=='3'});
+
+    var recent=deals.slice().sort(function(a,b){return b.y-a.y||b.q-a.q}).slice(0,10);
+
+    $('cReport').innerHTML=
+      '<div class="cr-head"><div><b>委託物件行情分析</b><small>'+esc(where)+(kn?'・'+esc(kn):'')+'　'+inp.area+' 坪</small></div>'+
+        '<div class="cr-date">'+d+'</div></div>'+
+      (band?'<div class="cr-band cr-'+band.k+'"><span>屋主開價 '+RT.wan(inp.ask)+'</span><b>'+band.t+'</b>'+
+        '<p>'+esc(band.c)+'</p></div>':'')+
+      '<div class="cr-cards">'+
+        '<div><span>成交中位單價</span><b>'+r.mid.toFixed(1)+' 萬/坪</b></div>'+
+        '<div><span>預估成交價</span><b>'+RT.wan(r.deal)+'</b></div>'+
+        '<div><span>建議開價</span><b>'+r.listLo+'～'+r.listHi+' 萬</b></div>'+
+      '</div>'+
+      '<div class="cr-sec"><h3>行情依據</h3><p>'+esc(got.scope)+'，共 '+deals.length+' 筆實價登錄成交，'+
+        '單價落在 '+r.lo.toFixed(1)+'～'+r.hi.toFixed(1)+' 萬/坪。'+
+        (r.mine?'屋主開價換算房屋單價 '+r.mine.toFixed(1)+' 萬/坪，比 '+r.pos.toFixed(0)+'% 的成交還貴。':'')+'</p>'+
+        '<table class="cr-tab"><thead><tr><th>成交</th><th>位置</th><th>樓層</th><th>坪數</th><th>單價</th></tr></thead><tbody>'+
+        recent.map(function(x){return '<tr><td>'+x.y+' Q'+x.q+'</td><td>'+esc(x.road+(x.lane?x.lane+'巷':''))+'</td>'+
+          '<td class="n">'+(x.f||'—')+(x.tf?'/'+x.tf:'')+'</td><td class="n">'+x.a.toFixed(1)+'</td>'+
+          '<td class="n">'+x.raw.toFixed(1)+'</td></tr>'}).join('')+'</tbody></table></div>'+
+      (solid.length?'<div class="cr-sec"><h3>附近在售的競品</h3>'+
+        '<table class="cr-tab"><thead><tr><th>物件</th><th>車位</th><th>開價(萬)</th><th>權狀坪</th><th>單價</th></tr></thead>'+
+        '<tbody>'+rows(solid)+'</tbody></table>'+
+        '<p class="cr-note">單價皆已換算成不含車位的房屋單價，基準一致才能互相比較。</p></div>':'')+
+      '<div class="cr-foot"><p>資料來源：內政部不動產交易實價查詢服務網（'+esc(meta.updated||'')+'）。'+
+        '本分析為依成交資料自動統計的參考值，非不動產估價師之估價報告；屋況、景觀、樓層、裝潢均會影響實際成交價。</p>'+
+        '<p class="cr-me"><b>有巢氏房屋　中壢環中加盟店　林容瑜</b>　0973-263-569</p></div>';
+
+    $('cReportWrap').hidden=false;
+    $('cReportWrap').scrollIntoView({block:'start',behavior:'smooth'});
+  }
+
   function strip(deals,mine,cs,lo,hi){
     var all=deals.map(function(x){return x.u}).concat(cs.map(function(c){return c.u})); if(mine) all.push(mine);
     var min=Math.min.apply(null,all)*.95, max=Math.max.apply(null,all)*1.05, W=640;
@@ -203,10 +259,14 @@
         '資料來源：內政部實價登錄（'+meta.updated+'）。有巢氏房屋 中壢環中加盟店 林容瑜 0973-263-569';
       html+='<h3 class="rt-h3">屋主溝通版</h3><textarea class="rt-talk" id="cTalk" rows="9">'+esc(talk)+'</textarea>'+
         '<div class="rt-actions"><button type="button" class="btn" id="cCopy">複製文字</button><button type="button" class="btn btn-ghost" id="cShare">複製分析連結</button>'+
+        '<button type="button" class="btn btn-main" id="cMake">📄 產生客戶版表格</button>'+
         '<a class="btn btn-line" href="'+RT.LINE_URL+'" target="_blank" rel="noopener" data-rt-line="'+esc(talk)+'" data-toast="cToast">LINE 請容瑜實際評估</a></div><p class="toast" id="cToast" role="status"></p>'+
         '<p class="v-disclaimer">本分析依內政部實價登錄成交資料自動統計，非不動產估價師的估價報告；屋況、景觀、樓層、裝潢會影響實際價格。</p>';
       $('cResult').innerHTML=html;
       $('cCopy').onclick=function(){ RT.copy($('cTalk').value,$('cToast'),'已複製，可以直接貼給屋主。'); };
+      // 客戶版表格：先在畫面上產生預覽，確認沒問題再按列印
+      $('cMake').onclick=function(){ makeReport(inp,got,deals,cs,{mid:mid,lo:lo,hi:hi,deal:deal,mine:mine,
+        listLo:listLo,listHi:listHi,parkV:parkV,verdict:verdict,pos:pos}); };
       $('cShare').onclick=function(){
         var h={k:inp.kind,t:inp.town,r:inp.road,l:inp.lane||'',b:inp.built||'',a:inp.area,f:inp.floor||'',tf:inp.tops||'',pk:inp.park,ask:inp.ask||'',
                c:inp.comps.map(function(c){return [c.p,c.a,c.k||'0',c.n.replace(/[|~]/g,' '),c.pa||'',c.pt||''].join('~')}).join('|')};
@@ -315,3 +375,9 @@
     // 預設不放空白列：競品走自動帶入，要手打再按「＋ 手動加一間」
   });
 })();
+
+// 客戶版表格的列印與關閉（表格本身是先產生預覽，確認後才按列印）
+document.addEventListener('click',function(e){
+  if(e.target.id==='cPrint') window.print();
+  if(e.target.id==='cClose') document.getElementById('cReportWrap').hidden=true;
+});

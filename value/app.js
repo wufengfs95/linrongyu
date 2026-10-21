@@ -110,13 +110,23 @@
     var totalLo=lo+parkPrice, totalHi=hi+parkPrice;
     var msg='容瑜你好，我用網站估價：'+inp.town+(inp.roadName?' '+inp.roadName:'')+'，'+KN[inp.kind]+
       ' '+inp.area+' 坪'+(inp.floor?'・'+inp.floor+'樓':'')+(inp.age!=null?'・屋齡 '+inp.age+' 年':'')+
-      (inp.park?'・'+inp.park+'車位':'')+'，估出來是 '+money(totalLo)+'～'+money(totalHi)+'，想請你幫我看實際行情。';
+      (inp.park?'・'+inp.park+'車位':'')+'，估出來是 '+money(totalLo)+'～'+money(totalHi)+'，想請你幫我看實際行情、以及要開多少比較好。';
     var html='<div class="v-out">'+
       '<div class="v-price"><span>估計總價區間</span><b>'+money(totalLo)+' ～ '+money(totalHi)+'</b>'+
       '<span class="v-unit">每坪約 '+res.lo.toFixed(1)+'～'+res.hi.toFixed(1)+' 萬（中位 '+res.mid.toFixed(1)+' 萬）'+
       (parkPrice?'；另含'+inp.park+'車位 '+parkPrice+' 萬':'')+'</span></div>'+
       '<div class="v-meta"><span>比對 <b>'+res.n+'</b> 筆成交</span><span>範圍：'+esc(res.scope)+'・'+res.level.label+'</span>'+
       '<span>可信度：<b class="v-conf v-conf-'+(res.conf==='高'?'hi':res.conf==='中'?'mid':'low')+'">'+res.conf+'</b></span></div>';
+
+    // 真的要賣的話，開價建議（跟「委託競品分析」同一套算法：預估成交價加 5～8% 議價空間，
+    // 個位數修到 8，剛好超過搜尋門檻一點點的壓回門檻下面）
+    var deal=mid+parkPrice;
+    var askLo=Math.round(deal*1.05/10)*10-2, askHi=Math.round(deal*1.08/10)*10+8;
+    var gate=[1000,1500,2000,2500,3000,4000,5000];
+    gate.forEach(function(g){ if(askHi>g&&askHi<=g*1.03) askHi=g-2; });
+    html+='<div class="v-ask"><span>真的要賣，建議開價</span><b>'+money(askLo)+' ～ '+money(askHi)+'</b>'+
+      '<p>開在這個範圍，留得住議價空間，也不會變成同區最貴的那一間。'+
+      '開超過 '+money(Math.round(deal*1.15))+'（比行情高 15%）通常帶看量會明顯變少。</p></div>';
     if(inp.paid){
       var d=(inp.paid-mid-parkPrice)/(mid+parkPrice)*100;
       var cls=inp.paid>totalHi?'bad':inp.paid<totalLo?'good':'ok';

@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=5f07b64d">
+<link rel="stylesheet" href="../assets/site.css?v=52229f51">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "委託物件競品分析", "url": "https://wufengfs95.github.io/linrongyu/compete/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "賣房開價參考：比對桃園市同社區、同路段實價登錄成交與在售競品，算出屋主開價的落點、預估成交價、建議開價，並產生屋主溝通版說明。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -112,6 +112,15 @@
       <p class="v-empty-note">行情資料：內政部實價登錄桃園市住宅成交，近三年，目前更新到 <b id="cUpdated">—</b>。</p>
     </div></div>
   </div>
+  <div id="cReportWrap" class="cr-wrap" hidden>
+    <div class="cr-bar">
+      <b>客戶版表格・預覽</b>
+      <span>確認沒問題再按列印</span>
+      <button type="button" class="btn btn-main" id="cPrint">🖨️ 列印／存 PDF</button>
+      <button type="button" class="btn btn-ghost" id="cClose">關閉</button>
+    </div>
+    <div id="cReport"></div>
+  </div>
   <h2 class="v-h2">常見問題</h2>
   <div class="v-faq"><details open><summary>在售競品要怎麼帶進來，不用自己打？</summary><p>兩個方法。<b>一、自家案件</b>：選好行政區，上面會出現「加入我在○○區的 N 間在售案件」，按一下就全部帶進來。<b>二、抓競品書籤</b>：第一次先把「🔍 抓競品」拖到瀏覽器書籤列；之後在 591、樂屋網、信義、永慶的搜尋結果頁，點一下那顆書籤，那一頁上所有物件的開價和坪數就會自動帶回這裡。書籤是讀你螢幕上已經打開的那一頁，等於幫你複製貼上，不是去爬對方網站。</p></details><details><summary>為什麼不是一鍵就自動抓全部？</summary><p>591 這些房屋網站沒有開放的資料介面，也擋程式自動連線，所以沒有任何網站能幫你在背景自動抓他們的在售資料。能做到的極限就是上面那顆書籤：你人已經在那一頁了，它幫你把數字搬過來。至於「成交行情」是自動從內政部實價登錄抓的，不受影響，那也是屋主最能接受的依據。</p></details><details><summary>同社區怎麼判斷？</summary><p>實價登錄只公布到門牌區段，所以用「同一條路＋同一條巷＋完工年份相差 1 年內＋同型態」判斷是同一個社區。同社區近三年不到 3 筆成交，會改用同路段、屋齡坪數相近的成交，再不夠才擴大到全區。</p></details><details><summary>建議開價怎麼算？</summary><p>預估成交價＝成交中位單價 × 坪數＋車位行情，建議開價抓預估成交價再加 5～8%，保留正常議價空間。屋主開價比行情高 15% 以上，通常會變成同區最貴的一間，帶看量會明顯變少。</p></details></div>
   <p class="sm-note">本分析依內政部實價登錄成交資料自動統計，非不動產估價師法所稱之估價報告。資料來源：<a href="https://plvr.land.moi.gov.tw/DownloadOpenData" target="_blank" rel="noopener">內政部不動產交易實價查詢服務網</a>。</p>
@@ -134,6 +143,6 @@
 
 <script src="../assets/site.js?v=75f4cda3" defer></script>
 <script src="../assets/tools.js?v=abe24088" data-v="61cb4491"></script>
-<script src="app.js?v=148e0e08" data-v="61cb4491" defer></script>
+<script src="app.js?v=88917350" data-v="61cb4491" defer></script>
 </body>
 </html>
