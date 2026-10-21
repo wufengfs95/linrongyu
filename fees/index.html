@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>買賣雜費試算：買方賣方各要準備多少｜林容瑜</title>
+<meta name="description" content="買房賣房的雜費一次算清楚：房仲服務費、契稅、代書費、地政規費、履約保證費、抵押權設定與塗銷，逐項列出並算出合計區間。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/fees/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="買賣雜費試算：買方賣方各要準備多少｜林容瑜">
+<meta property="og:description" content="買房賣房的雜費一次算清楚：房仲服務費、契稅、代書費、地政規費、履約保證費、抵押權設定與塗銷，逐項列出並算出合計區間。">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/fees/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=ab0a8286">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "買賣雜費試算", "url": "https://wufengfs95.github.io/linrongyu/fees/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "買房賣房的雜費一次算清楚：房仲服務費、契稅、代書費、地政規費、履約保證費、抵押權設定與塗銷，逐項列出並算出合計區間。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">買方配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 買賣雜費</p>
+  <h1>買賣雜費試算</h1>
+  <p class="sm-sub">買方、賣方的雜費逐項列出來，算出合計大約落在多少到多少。代書費、規費這些每家收費不同，所以給區間不給單一數字。</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid">
+    <form id="feForm" class="v-form" novalidate>
+      <h2>成交資訊</h2>
+      <div class="field"><label for="feTotal">成交總價<span class="rt-small">萬</span></label>
+        <input type="number" id="feTotal" inputmode="decimal" step="0.01" placeholder="例：1300"></div>
+      <div class="field"><span class="v-label">你的身分</span>
+        <div class="v-kinds" id="feRole" role="group" aria-label="你的身分">
+          <button type="button" data-r="buyer" aria-pressed="true">買方（買到房）</button>
+          <button type="button" data-r="seller" aria-pressed="false">賣方（賣掉房）</button>
+        </div></div>
+      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）<span class="rt-small">萬，選填，看房屋稅單</span></label>
+        <input type="number" id="feDeed" inputmode="decimal" step="0.01" placeholder="不知道可以不填"></div>
+      <div class="field" id="feEraWrap" hidden><label for="feEra">房子是什麼時候買的？</label>
+        <select id="feEra">
+          <option value="new">105 年 1 月 1 日以後取得（土增稅＋房地合一稅）</option>
+          <option value="old">105 年 1 月 1 日以前取得（土增稅＋財產交易所得稅）</option>
+        </select></div>
+      <label class="rt-check"><input type="checkbox" id="feLoan" checked>
+        <span id="feLoanText">有辦房貸（要設定銀行抵押權）</span></label>
+      <div class="field"><label for="feExtra">建物、土地額外增加幾筆？<span class="rt-small">一般 0，每多一筆加收 2,000～3,000 元</span></label>
+        <input type="number" id="feExtra" inputmode="numeric" step="1" min="0" value="0"></div>
+    </form>
+    <div id="feResult" class="v-result"></div>
+  </div>
+<h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼是區間，不是一個數字？</summary><p>代書費、地政規費、過戶代辦這些，每家事務所收費都不一樣，差個幾千元很正常。所以這裡算的是「大概落在多少到多少」，實際金額以你配合的代書報價與稅單為準。</p></details><details><summary>買方和賣方各要付什麼？</summary><p>最大一筆都是房仲服務費：買方上限 2%、賣方上限 4%，實際比例簽約前就會談定。買方多了契稅、過戶代辦、抵押權設定；賣方多了土增稅、房地合一稅、抵押權塗銷。履約保證費是雙方各付成交價的 0.03%。</p></details><details><summary>契稅怎麼算？</summary><p>契稅是「房屋評定現值 × 6%」，不是用成交價算。房屋評定現值看房屋稅單，通常遠低於市價，所以契稅比大家想像的少很多。填了契價這裡才會幫你算。</p></details><details><summary>標「依稅單」的為什麼不算進合計？</summary><p>土地增值稅和房地合一稅要看持有期間、前次移轉現值、有沒有自用稅率，金額可以差到幾十萬甚至幾百萬，沒辦法只用成交價估出來。那兩筆請直接問代書，或用「賣方實拿」試算。</p></details></div>  <p class="sm-note">本試算是依市場常見收費區間估算的參考值，不是報價；實際金額以各地政士事務所收費、地政規費與稅捐稽徵機關核定為準。</p>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.</div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=75f4cda3" defer></script>
+<script src="../assets/tools.js?v=abe24088" data-v=""></script>
+<script src="app.js?v=2cdb02f7" data-v="" defer></script>
+</body>
+</html>
