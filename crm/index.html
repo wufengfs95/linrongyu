@@ -16,7 +16,9 @@ body{background:var(--bg);color:var(--ink);font:20px/1.7 "Huninn",system-ui,-app
 main{width:100%;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;text-align:center}
 h1{margin:0 0 6px;color:var(--navy);font-size:30px;letter-spacing:.06em}
 p{margin:0 0 20px;color:var(--muted);font-size:17px}
-a.go{display:flex;align-items:center;justify-content:center;min-height:60px;background:var(--brick);color:#fff;text-decoration:none;border-radius:14px;font-size:22px;letter-spacing:.06em}
+input{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:20px;margin-bottom:12px;background:#fff}
+input:focus{outline:none;border-color:var(--navy)}
+.go{width:100%;border:0;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;min-height:60px;background:var(--brick);color:#fff;text-decoration:none;border-radius:14px;font-size:22px;letter-spacing:.06em}
 a.alt{display:block;margin-top:12px;color:var(--navy);font-size:16px}
 ul{text-align:left;color:var(--muted);font-size:15px;line-height:1.7;margin:22px 0 0;padding-left:1.2em}
 </style>
@@ -25,12 +27,19 @@ ul{text-align:left;color:var(--muted);font-size:15px;line-height:1.7;margin:22px
 <main>
   <h1>客戶追蹤</h1>
   <p>請輸入密碼</p>
-  <a class="go" href="http://100.93.92.16:8778/">進入追蹤系統</a>
+  <form method="post" action="http://100.93.92.16:8778/login" autocomplete="off" id="f">
+    <input type="password" name="pw" id="pw" placeholder="密碼" autocomplete="off" data-lpignore="true" autocapitalize="off" spellcheck="false" required autofocus>
+    <button class="go" type="submit">進入追蹤系統</button>
+  </form>
   <ul>
     <li>這台手機／電腦要先開啟 ＊＊＊</li>
     <li>金頭腦要思考，才不會固化</li>
     <li>無字天書，此網頁沒有任何足跡</li>
   </ul>
 </main>
+<script>
+// 送出後清空欄位，不留下密碼
+document.getElementById("f").addEventListener("submit", () => setTimeout(() => { document.getElementById("pw").value = ""; }, 0));
+</script>
 </body>
 </html>
