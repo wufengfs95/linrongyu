@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F3A5F">
+<title>客戶追蹤（自用）</title>
+<!-- 自用入口：這頁不放任何客戶資料，只連到容瑜電腦上的追蹤網站（要 Tailscale＋登入密碼）。 -->
+<style>
+@font-face{font-family:"Huninn";src:url("../assets/fonts/huninn-subset.woff2") format("woff2");font-display:swap}
+:root{--navy:#1F3A5F;--milk:#F5F0EB;--brick:#B85C38;--ink:#2D2D2D;--bg:#FAFAF8;--line:#E4DDD5;--muted:#6B6B6B}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:20px/1.7 "Huninn",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+main{width:100%;max-width:440px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 24px;text-align:center}
+h1{margin:0 0 6px;color:var(--navy);font-size:30px;letter-spacing:.06em}
+p{margin:0 0 20px;color:var(--muted);font-size:17px}
+a.go{display:flex;align-items:center;justify-content:center;min-height:60px;background:var(--brick);color:#fff;text-decoration:none;border-radius:14px;font-size:22px;letter-spacing:.06em}
+a.alt{display:block;margin-top:12px;color:var(--navy);font-size:16px}
+ul{text-align:left;color:var(--muted);font-size:15px;line-height:1.7;margin:22px 0 0;padding-left:1.2em}
+</style>
+</head>
+<body>
+<main>
+  <h1>客戶追蹤</h1>
+  <p>容瑜自用・需輸入密碼</p>
+  <a class="go" href="http://100.93.92.16:8778/">進入客戶追蹤</a>
+  <a class="alt" href="http://rongyulin:8778/">打不開？試試備用網址</a>
+  <ul>
+    <li>這台手機／電腦要先開啟 Tailscale。</li>
+    <li>辦公室那台電腦要開機，網站才連得到。</li>
+    <li>客戶資料都在電腦上，這個網頁沒有存任何資料。</li>
+  </ul>
+</main>
+</body>
+</html>
