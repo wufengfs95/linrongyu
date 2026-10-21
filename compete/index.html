@@ -54,27 +54,43 @@
 <div class="wrap">
   <div class="v-grid">
     <form id="cForm" class="v-form" novalidate>
-      <h2>屋主的房子</h2>
-      <div class="field"><span class="v-label">房屋類型</span>
-        <div class="v-kinds" id="cKinds" role="group" aria-label="房屋類型">
-          <button type="button" data-k="a" aria-pressed="true">住宅大樓</button><button type="button" data-k="b" aria-pressed="false">華廈</button>
-          <button type="button" data-k="c" aria-pressed="false">公寓</button><button type="button" data-k="d" aria-pressed="false">透天厝</button>
-        </div></div>
+      <h2 id="cH1">屋主的房子</h2>
+      <div class="field"><span class="v-label">物件類型</span>
+        <select id="cKind2" aria-label="物件類型">
+          <optgroup label="住宅">
+            <option value="a" selected>電梯大樓</option><option value="b">華廈</option>
+            <option value="c">公寓</option><option value="d">透天厝／別墅</option>
+          </optgroup>
+          <optgroup label="商用、工業">
+            <option value="s">店面</option><option value="o">辦公</option><option value="f">廠房</option>
+          </optgroup>
+          <optgroup label="都市計畫內土地">
+            <option value="L1">建地（住宅區）</option><option value="L2">商業區土地</option>
+            <option value="L3">工業區土地</option><option value="L4">都計農地（農業區）</option>
+            <option value="L9">道路用地、保護區等</option>
+          </optgroup>
+          <optgroup label="非都市土地">
+            <option value="N1">甲種建築用地</option><option value="N2">乙種建築用地</option>
+            <option value="N3">丙種建築用地</option><option value="N4">丁種建築用地（工業地）</option>
+            <option value="N5">都計外農地（農牧用地）</option>
+            <option value="N9">林業、交通、水利等</option>
+          </optgroup>
+        </select></div>
       <div class="row3">
         <div class="field"><label for="cTown">行政區</label><select id="cTown"><option value="">載入中…</option></select></div>
         <div class="field"><label for="cRoad">路段</label><input type="text" id="cRoad" list="cRoadList" autocomplete="off"><datalist id="cRoadList"></datalist></div>
         <div class="field"><label for="cLane">巷</label><input type="number" id="cLane" inputmode="numeric" placeholder="無"></div>
       </div>
       <div class="row2">
-        <div class="field"><label for="cBuilt">完工年（民國）</label><input type="number" id="cBuilt" inputmode="numeric" placeholder="例：103"></div>
-        <div class="field"><label for="cArea">房屋坪數（不含車位）</label><input type="number" id="cArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
+        <div class="field bldonly"><label for="cBuilt">完工年（民國）</label><input type="number" id="cBuilt" inputmode="numeric" placeholder="例：103"></div>
+        <div class="field"><label for="cArea"><span id="cAreaLab">房屋坪數（不含車位）</span></label><input type="number" id="cArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
       </div>
       <div class="row2">
-        <div class="field"><label for="cFloor">樓層</label><input type="number" id="cFloor" inputmode="numeric"></div>
-        <div class="field"><label for="cTops">總樓層</label><input type="number" id="cTops" inputmode="numeric"></div>
+        <div class="field bldonly"><label for="cFloor">樓層</label><input type="number" id="cFloor" inputmode="numeric"></div>
+        <div class="field bldonly"><label for="cTops">總樓層</label><input type="number" id="cTops" inputmode="numeric"></div>
       </div>
       <div class="row2">
-        <div class="field"><label for="cPark">車位</label><select id="cPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
+        <div class="field bldonly"><label for="cPark">車位</label><select id="cPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
         <div class="field"><label for="cAsk">屋主想開價（萬，含車位）</label><input type="number" id="cAsk" inputmode="numeric" placeholder="選填"></div>
       </div>
       <h2>附近在售的競品<small class="rt-small">不用自己打，用下面兩個方法帶進來</small></h2>
@@ -118,6 +134,6 @@
 
 <script src="../assets/site.js?v=75f4cda3" defer></script>
 <script src="../assets/tools.js?v=abe24088" data-v="61cb4491"></script>
-<script src="app.js?v=c4d03435" data-v="61cb4491" defer></script>
+<script src="app.js?v=148e0e08" data-v="61cb4491" defer></script>
 </body>
 </html>

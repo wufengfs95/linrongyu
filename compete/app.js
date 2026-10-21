@@ -2,6 +2,19 @@
 (function(){
   var RT=window.RT, $=RT.$, esc=RT.esc;
   var meta=null, kind='a';
+  var xmeta=null, xcache={};                 // 非住宅與土地走另一份資料（extra_data.py 產的 x-*.json）
+  var isX=function(k){ return 'abcd'.indexOf(k)<0; };
+  var isLand=function(k){ return k.charAt(0)==='L'||k.charAt(0)==='N'; };
+  function xMeta(){
+    if(xmeta) return Promise.resolve(xmeta);
+    return fetch(RT.dataRoot+'x-meta.json').then(function(r){return r.json()}).then(function(m){xmeta=m;return m});
+  }
+  function xTown(t){
+    if(xcache[t]) return Promise.resolve(xcache[t]);
+    return fetch(RT.dataRoot+'x-'+encodeURIComponent(t)+'.json')
+      .then(function(r){ if(!r.ok) throw new Error('no town'); return r.json(); })
+      .then(function(d){ xcache[t]=d; return d; });
+  }
   // 車位坪數：車格本身只有 4.16 坪（建築技術規則 60 條 2.5×5.5m），權狀上多出來的是車道分攤。
   // 這組數字對得上不動產估價師公會第十號公報的經驗值，也對得上她自己實價登錄的中位數
   // （中壢平面 9.63、機械 4.86 坪）
@@ -69,6 +82,36 @@
     return {rows:[],scope:'',community:false};
   }
 
+  function findDealsX(inp,d){
+    var ri=(function(){ var t=(inp.road||'').trim(); if(!t) return -1;
+      var i=d.roads.indexOf(t); if(i>=0) return i;
+      for(var k=0;k<d.roads.length;k++){ if(d.roads[k].indexOf(t)===0||t.indexOf(d.roads[k])===0) return k; }
+      return -1; })();
+    var last=xmeta.seasons[xmeta.seasons.length-1], ly=+last.slice(0,3), lq=+last.slice(4);
+    // x 資料沒有時間指數，單價不做時間校正，所以用「近幾季」控制可比性
+    var map=function(r){ return {u:r[4], raw:r[4], y:r[2], q:r[3], a:r[5], f:0, tf:0, by:0,
+                                 road:d.roads[r[0]]||'', lane:0}; };
+    var near=function(r,roadOnly,seasons,areaTol){
+      if(r[1]!==inp.kind) return false;
+      if(roadOnly&&r[0]!==ri) return false;
+      if((ly-r[2])*4+(lq-r[3])>seasons) return false;
+      if(inp.area&&areaTol&&Math.abs(r[5]-inp.area)/inp.area>areaTol) return false;
+      return true;
+    };
+    var nm=(xmeta.kindName||{})[inp.kind]||'同類型';
+    var tries=[[true,8,.4,'同路段（'+inp.road+'）近 2 年、坪數相近的'+nm],
+               [true,12,.7,'同路段（'+inp.road+'）近 3 年的'+nm],
+               [false,6,.4,inp.town+'近 1.5 年、坪數相近的'+nm],
+               [false,12,.7,inp.town+'近 3 年的'+nm],
+               [false,12,0,inp.town+'近 3 年全部的'+nm]];
+    for(var i=0;i<tries.length;i++){
+      var t=tries[i]; if(t[0]&&ri<0) continue;
+      var rs=d.rows.filter(function(r){return near(r,t[0],t[1],t[2])});
+      if(rs.length>=5) return {rows:rs.map(map), scope:t[3], community:false};
+    }
+    return {rows:[],scope:'',community:false};
+  }
+
   function strip(deals,mine,cs,lo,hi){
     var all=deals.map(function(x){return x.u}).concat(cs.map(function(c){return c.u})); if(mine) all.push(mine);
     var min=Math.min.apply(null,all)*.95, max=Math.max.apply(null,all)*1.05, W=640;
@@ -85,8 +128,12 @@
   function calc(){
     var inp=input();
     if(!inp.town||!inp.area){ $('cResult').innerHTML='<div class="v-empty"><b>先填行政區和坪數</b><p>路段、巷、完工年都填，才找得到同社區的成交。</p></div>'; return; }
-    RT.town(inp.town).then(function(d){
-      var got=findDeals(inp,d), deals=got.rows;
+    var load=isX(inp.kind)
+      ? xMeta().then(function(){ return xTown(inp.town); }).then(function(d){ return {d:d,x:true}; })
+      : RT.town(inp.town).then(function(d){ return {d:d,x:false}; });
+    load.then(function(w){
+      var d=w.d;
+      var got=w.x?findDealsX(inp,d):findDeals(inp,d), deals=got.rows;
       if(!deals.length){ $('cResult').innerHTML='<p class="v-warn">找不到夠多的相近成交，請確認路段名稱，或放寬條件（不填完工年）。</p>'; return; }
       var us=deals.map(function(x){return x.u}), mid=RT.median(us), lo=RT.quantile(us,.25), hi=RT.quantile(us,.75);
       var parkV=inp.park?(meta.towns[inp.town].park[inp.park]||(inp.park==='平面'?150:90)):0;
@@ -168,11 +215,24 @@
     });
   }
 
-  function setKind(k){ kind=k; document.querySelectorAll('#cKinds button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-k')===k?'true':'false')}); }
-  document.querySelectorAll('#cKinds button').forEach(function(b){ b.addEventListener('click',function(){ setKind(b.getAttribute('data-k')); }); });
+  function setKind(k){
+    kind=k; $('cKind2').value=k;
+    var land=isLand(k);
+    // 土地沒有屋齡、樓層、車位可填
+    document.querySelectorAll('.bldonly').forEach(function(e){ e.hidden=land; });
+    $('cAreaLab').textContent=land?'土地坪數':'房屋坪數（不含車位）';
+    $('cH1').textContent=land?'屋主的土地':'屋主的房子';
+    var mine=$('cMine'); if(mine) mine.hidden=true;
+  }
+  $('cKind2').addEventListener('change',function(){
+    setKind(this.value); suggestMine();
+    $('cTown').dispatchEvent(new Event('change'));
+  });
   $('cTown').addEventListener('change',function(){
     var t=this.value; if(!t) return;
-    RT.town(t).then(function(d){ $('cRoadList').innerHTML=d.roads.map(function(r){return '<option value="'+esc(r)+'">'}).join(''); $('cRoad').placeholder='例：'+d.roads.slice(0,2).join('、'); });
+    var fill=function(d){ $('cRoadList').innerHTML=d.roads.map(function(r){return '<option value="'+esc(r)+'">'}).join('');
+      $('cRoad').placeholder='例：'+d.roads.slice(0,2).join('、'); };
+    (isX(kind)?xMeta().then(function(){return xTown(t)}):RT.town(t)).then(fill).catch(function(){});
   });
   // ── 自動帶入①：我自己在賣的同區案件 ──────────────────
   var mineRows = null, mineHit = [];
@@ -185,8 +245,9 @@
     var btn = $('cMine'), town = $('cTown').value, road = $('cRoad').value.trim();
     if (!town) { btn.hidden = true; return; }
     loadMine().then(function(rows){
+      var wantLand = isLand(kind);
       mineHit = rows.filter(function(r){
-        return !r.land && r.area === town && r.p > 0 && r.at > 0;   // 土地、農地不拿來比房子
+        return !!r.land === wantLand && r.area === town && r.p > 0 && r.at > 0;
       }).sort(function(a, b){                                        // 同路段的排前面
         var x = road && a.road && a.road.indexOf(road) >= 0 ? 0 : 1;
         var y = road && b.road && b.road.indexOf(road) >= 0 ? 0 : 1;
