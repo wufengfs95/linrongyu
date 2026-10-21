@@ -1651,3 +1651,19 @@ section.tq-wrap{padding-block:16px 72px}
 .of-gv{color:var(--navy);font-weight:700}
 .v-quick.rt-facts td:first-child,.of-govtab td:first-child{white-space:nowrap!important;width:1%;padding-right:16px}
 .of-grid .row2 .field{align-content:end}
+
+/* 競品分析：自動帶入 */
+.cmp-auto{margin:0 0 14px;padding:16px 18px;border-radius:12px;
+  background:var(--cream);border:1.5px solid var(--cream-line)}
+.cmp-mine{display:block;width:100%;margin:0 0 12px}
+.cmp-mine[hidden]{display:none !important}
+.cmp-bm{margin:0;font-size:17px;line-height:1.85;color:var(--muted)}
+.cmp-bm small{display:inline-block;margin-top:4px;font-size:15.5px;line-height:1.7}
+.cmp-drag{display:inline-block;padding:5px 14px;margin:0 2px;border-radius:999px;
+  background:var(--navy);color:#fff;font-weight:700;text-decoration:none;cursor:grab}
+.cmp-drag:hover{background:var(--brick)}
+@media (max-width:760px){
+  .cmp-auto{padding:14px}
+  .cmp-bm{font-size:15.5px} .cmp-bm small{font-size:14.5px}
+}
+.cmp-status{margin:10px 0 0;font-size:17px;font-weight:700;color:var(--brick)}

@@ -2,6 +2,7 @@
 (function(){
   var RT=window.RT, $=RT.$, esc=RT.esc;
   var meta=null, kind='a', PARK_AREA=10;   // 在售競品含車位時，車位坪數先抓 10 坪
+  var BOOKMARKLET="javascript:(function(){var P=function(t){var m,b=0,re=/([\\d,]+(?:\\.\\d+)?)\\s*(億|萬)/g;while(m=re.exec(t)){var v=parseFloat(m[1].replace(/,/g,''));if(m[2]==='億')v*=1e4;if(v>b)b=v}return Math.round(b)};var A=function(t){var m=t.match(/權狀[^\\d]{0,4}([\\d.]+)\\s*坪/)||t.match(/([\\d.]+)\\s*坪/);return m?parseFloat(m[1]):0};var ok=function(e){if(e.children.length>12)return false;var t=e.innerText||'';return !!t&&t.length<=300&&/萬/.test(t)&&/坪/.test(t)};var all=[].filter.call(document.querySelectorAll('div,li,article,section,a'),ok);var leaf=all.filter(function(e){return !all.some(function(o){return o!==e&&e.contains(o)})});var seen={},out=[];leaf.forEach(function(e){var t=e.innerText.replace(/\\s+/g,' ').trim();var p=P(t),a=A(t);if(!(p>=100&&p<=5e4)||!(a>=3&&a<=500))return;var u=p/a;if(!(u>=3&&u<=200))return;var k=/車位/.test(t)&&!/無車位/.test(t)?1:0;var key=p+'_'+a;if(seen[key])return;seen[key]=1;out.push([p,a,k,t.split(' ')[0].slice(0,14).replace(/[|~]/g,' ')].join('~'))});if(!out.length){alert('這一頁沒有抓到物件。請在「搜尋結果列表」頁按，並先往下捲讓物件載入出來。');return}var u='__URL__#__TAB__c='+encodeURIComponent(out.slice(0,25).join('|'));if(!window.open(u,'_blank'))location.href=u})()";
 
   function compRow(v){
     v=v||{};
@@ -127,6 +128,60 @@
     var t=this.value; if(!t) return;
     RT.town(t).then(function(d){ $('cRoadList').innerHTML=d.roads.map(function(r){return '<option value="'+esc(r)+'">'}).join(''); $('cRoad').placeholder='例：'+d.roads.slice(0,2).join('、'); });
   });
+  // ── 自動帶入①：我自己在賣的同區案件 ──────────────────
+  var mineRows = null, mineHit = [];
+  function loadMine(){
+    if (mineRows) return Promise.resolve(mineRows);
+    return fetch('../match/listings.json').then(function(r){return r.json()})
+      .then(function(d){ mineRows = d; return d; });
+  }
+  function suggestMine(){
+    var btn = $('cMine'), town = $('cTown').value, road = $('cRoad').value.trim();
+    if (!town) { btn.hidden = true; return; }
+    loadMine().then(function(rows){
+      mineHit = rows.filter(function(r){
+        return !r.land && r.area === town && r.p > 0 && r.at > 0;   // 土地、農地不拿來比房子
+      }).sort(function(a, b){                                        // 同路段的排前面
+        var x = road && a.road && a.road.indexOf(road) >= 0 ? 0 : 1;
+        var y = road && b.road && b.road.indexOf(road) >= 0 ? 0 : 1;
+        return x - y;
+      });
+      btn.hidden = !mineHit.length;
+      btn.textContent = '＋ 加入我在 ' + town + ' 的 ' + mineHit.length + ' 間在售案件';
+    }).catch(function(){ btn.hidden = true; });
+  }
+  $('cMine').addEventListener('click', function(){
+    mineHit.forEach(function(r){
+      compRow({ p: r.p, a: r.at, k: !!(r.pk && r.pk !== '無'), n: '自家 ' + (r.c || '') });
+    });
+    blank();                       // 清掉沒填的空列
+    this.hidden = true;
+  });
+
+  // 沒填東西的空白列，自動帶入之後就不留著佔版面
+  function blank(){
+    [].forEach.call($('cComps').querySelectorAll('.rt-comp'), function(d){
+      var empty = true;
+      d.querySelectorAll('[data-f]').forEach(function(i){ if (i.value.trim()) empty = false; });
+      if (empty) d.remove();
+    });
+  }
+
+  // ── 自動帶入②：「抓競品」書籤 ────────────────────────
+  // 在她自己的瀏覽器、她已經打開的那一頁上讀資料，等同幫她複製貼上，
+  // 不是伺服器去爬 591，所以沒有 CORS、擋機器人或條款的問題。
+  var base = location.href.split('#')[0];
+  var tab = location.pathname.indexOf('/price/') >= 0 ? 'compete&' : '';
+  $('cBookmark').setAttribute('href',
+    BOOKMARKLET.replace('__URL__', base).replace('__TAB__', tab));
+  $('cBookmark').addEventListener('click', function(e){
+    e.preventDefault();
+    alert('這顆是「書籤」，不是按鈕。\n\n請用滑鼠把它拖到瀏覽器上方的書籤列（只要做一次）。\n之後在 591 等網站的搜尋結果頁點一下它，那一頁的物件就會自動帶回來。');
+  });
+
+  $('cTown').addEventListener('change', suggestMine);
+  $('cRoad').addEventListener('change', suggestMine);
+
   $('cAdd').addEventListener('click',function(){ compRow(); });
   $('cComps').addEventListener('click',function(e){ var x=e.target.closest('.rt-x'); if(x) x.parentNode.remove(); });
   $('cForm').addEventListener('submit',function(e){ e.preventDefault(); calc(); if(window.innerWidth<900) $('cResult').scrollIntoView({behavior:'smooth'}); });
@@ -139,8 +194,14 @@
     if(h.t){
       setKind(h.k||'a'); $('cRoad').value=h.r||''; $('cLane').value=h.l||''; $('cBuilt').value=h.b||''; $('cArea').value=h.a||'';
       $('cFloor').value=h.f||''; $('cTops').value=h.tf||''; $('cPark').value=h.pk||''; $('cAsk').value=h.ask||'';
-      (h.c||'').split('|').filter(Boolean).forEach(function(s){ var p=s.split('~'); compRow({p:p[0],a:p[1],k:p[2]==='1',n:p[3]}); });
-      calc();
+    }
+    // 競品要獨立處理：書籤只會帶 c=，不會帶屋主資料（h.t），不能綁在上面那個 if 裡面
+    var got=(h.c||'').split('|').filter(Boolean);
+    got.forEach(function(s){ var p=s.split('~'); compRow({p:p[0],a:p[1],k:p[2]==='1',n:p[3]}); });
+    if(h.t) calc();
+    else if(got.length){
+      $('cStatus').textContent='已經帶入 '+got.length+' 間在售競品。填好上面屋主的房子，就可以產生分析。';
+      $('cComps').scrollIntoView({block:'center',behavior:'smooth'});
     }
     if(!$('cComps').children.length){ compRow(); compRow(); }
   });
