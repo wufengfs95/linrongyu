@@ -134,12 +134,13 @@
           + '，可以直接用門牌地址反查地號。<br>'
           + '⚠️ 電梯大樓的土地常橫跨<b>好幾個地號</b>，每個地號的公告現值和持分都不一樣，'
           + '要逐筆查、逐筆算再加總。只抓一個地號會嚴重低估。', 1),
-        L('⚠️ 前次移轉現值 ← 謄本上沒有，這是唯一的卡關點',
-          '謄本只有<b>當期</b>公告土地現值，沒有上次移轉時的。最快的路：'
+        L('前次移轉現值（元／㎡）',
+          '土地謄本「<b>所有權部</b>」就有，跟〈原規定地價〉並列在該所有權人那一欄。'
+          + '有些謄本版面會寫成「前次移轉現值（年月）」，括號裡就是前次移轉年月，一併抄下來。<br>'
+          + '謄本調不到或看不懂的話，'
           + A('https://www.land.tycg.gov.tw/chaspx/SQry1.aspx/517', '桃園市地政局・地價資料查詢（含增值稅試算）')
-          + '，選行政區＋段＋地號，輸入屋主身分證字號＋驗證碼，系統會自動帶出前次移轉現值、物價指數、'
-          + '持有年限並<b>直接把土增稅算出來</b>。要屋主本人的身分證字號，所以請屋主自己操作或授權。'
-          + '退路是翻屋主上次買進時的「土地增值稅繳款書」。', 1),
+          + ' 選行政區＋段＋地號，輸入屋主身分證字號＋驗證碼，會自動帶出前次移轉現值、物價指數、'
+          + '持有年限並<b>直接把土增稅算出來</b>，可以拿來跟自己算的對一次。', 1),
         L('公告土地現值（元／㎡）',
           '土地謄本「標示部」就有。或免費線上查（免身分證、免驗證碼）：'
           + A('https://www.land.tycg.gov.tw/chaspx/SQry1.aspx/517', '桃園市地政局地價資料查詢')
@@ -258,12 +259,66 @@
     return isFinite(n) && n > 0 ? (n > 1 ? 1 : n) : 1;
   }
 
+  // 物價指數：主計總處「各年月為基期之消費者物價總指數－稅務專用」整張表，
+  // 由 fees/cpi.json 載入（民國 48 年起逐月）。填了原因發生年月就自動帶入。
+  var CPI = null;
+  fetch('cpi.json').then(function (r) { return r.json(); }).then(function (d) {
+    CPI = d;
+    var n = $('ltCpiNote'); if (n) n.textContent = '資料版本：' + d.ver;
+    fillCpi();
+  }).catch(function () {});
+
+  function fillCpi() {
+    if (!CPI) return;
+    var y = RT.val('ltY'), m = RT.val('ltM');
+    var box = $('ltCpi'), note = $('ltCpiAuto');
+    if (!(y > 0) || !(m >= 1 && m <= 12)) { note.textContent = ''; return; }
+    var v = (CPI.idx[y] || {})[m];
+    if (v == null) {
+      note.textContent = '這個年月查不到指數，請自己去主計總處的表上對。';
+      note.className = 'lt-bad';
+      return;
+    }
+    if (box.value === '' || box.dataset.auto === '1') {   // 她自己改過就不要再覆蓋
+      box.value = v; box.dataset.auto = '1';
+    }
+    note.textContent = '已帶入民國 ' + y + ' 年 ' + m + ' 月的指數 ' + v + '％'
+      + (v < 100 ? '（低於 100%，依規定以 100% 計）' : '');
+    note.className = 'lt-ok';
+    landTax();
+  }
+  $('ltCpi').addEventListener('input', function () { this.dataset.auto = '0'; });
+
+  // 原因發生日期（民國年／月）→ 持有到今天幾年。土增稅的長期持有減徵看這個。
+  function heldYears() {
+    var y = RT.val('ltY'), m = RT.val('ltM') || 1;
+    var out = $('ltYrOut');
+    if (!(y > 0) || m < 1 || m > 12) { out.textContent = '—'; out.className = ''; return 0; }
+    var now = new Date();
+    var yr = (now.getFullYear() - 1911 - y) + (now.getMonth() + 1 - m) / 12;
+    if (yr < 0) { out.textContent = '日期在未來'; out.className = 'lt-bad'; return 0; }
+    var cut = yr > 40 ? '減徵 40%' : yr > 30 ? '減徵 30%' : yr > 20 ? '減徵 20%' : '未滿 20 年，無減徵';
+    out.textContent = '持有 ' + yr.toFixed(2) + ' 年・' + cut;
+    out.className = 'lt-ok';
+    return yr;
+  }
+
   function landTax() {
     var box = $('feLandBox');
     if (box.hidden) return;
-    var area = RT.val('ltArea'), sh = share($('ltShare').value), yr = RT.val('ltYears');
+    var area = RT.val('ltArea'), sh = share($('ltShare').value), yr = heldYears();
     var now = RT.val('ltNow'), prev = RT.val('ltPrev'), cpi = RT.val('ltCpi'), imp = RT.val('ltImp');
+    var credit = RT.val('ltCredit');
     $('ltUrbanWrap').hidden = !$('ltSelf').checked;
+    // 繼承來的土地：原地價與起算日都看「繼承開始日」，不是被繼承人當年買的那天。
+    // 這是最常算錯的一條，錯了會算出天文數字。
+    var inh = $('ltInherit').checked;
+    $('ltPrevWhere').innerHTML = inh
+      ? '<b>繼承開始日（被繼承人過世那天）的當期公告現值</b>，不是被繼承人當年的買價'
+      : '謄本・所有權部〈前次移轉現值〉';
+    $('ltYWhere').innerHTML = inh
+      ? '填<b>繼承開始日</b>（被繼承人過世的年月）'
+      : '謄本・所有權部〈原因發生日期〉推算';
 
     if (!(area > 0 && now > 0 && prev > 0)) {
       $('ltOut').innerHTML = '土地面積、本次公告土地現值、前次移轉現值這三格填了就會算。';
@@ -306,19 +361,28 @@
     }
     var cut = yr > 40 ? '40 年以上減徵 40%' : yr > 30 ? '超過 30 年減徵 30%'
             : yr > 20 ? '超過 20 年減徵 20%' : '持有未滿 20 年，無減徵';
+    // 增繳地價稅可以抵繳，但上限是應納土增稅的 5%（土地稅法 31 條第 3 項）
+    var used = 0;
+    if (credit > 0) { used = Math.min(credit, tax * 0.05); tax -= used; }
     $('ltOut').innerHTML =
       '<b class="lt-big">土增稅約 ' + RT.comma(Math.round(Math.max(0, tax))) + ' 元</b>'
+      + (used > 0 ? '<br>已扣掉可抵繳的 ' + RT.comma(Math.round(used)) + ' 元'
+          + (credit > used ? '（你填 ' + RT.comma(credit) + ' 元，但上限是應納稅額的 5%）' : '') : '')
       + '<br>漲價總數額 ' + RT.comma(Math.round(gain)) + ' 元・漲價 ' + (ratio * 100).toFixed(0)
       + '%（第 ' + lv + ' 級）・' + cut
       + (cpi && cpi < 100 ? '<br>你填的指數 ' + cpi + '% 低於 100%，依規定以 100% 計。' : '')
       + '<br>' + note
+      + (inh ? '<br><small>繼承取得：前次移轉現值要用繼承開始日的當期公告現值，持有期間也從那天起算。'
+             + '（繼承移轉本身免徵土增稅，這裡算的是你現在要賣掉這一次。）</small>' : '')
       + '<br><small>這是估算值，實際以稅捐稽徵機關核定的稅單為準。自用住宅 10% 要另外申請並符合要件。</small>';
   }
 
-  ['ltArea','ltShare','ltYears','ltNow','ltPrev','ltCpi','ltImp'].forEach(function (id) {
+  ['ltArea','ltShare','ltY','ltM','ltNow','ltPrev','ltCpi','ltImp','ltCredit'].forEach(function (id) {
     $(id).addEventListener('input', landTax);
   });
+  ['ltY','ltM'].forEach(function (id) { $(id).addEventListener('input', fillCpi); });
   $('ltSelf').addEventListener('change', landTax);
+  $('ltInherit').addEventListener('change', landTax);
   $('ltUrban').addEventListener('change', landTax);
 
   document.querySelectorAll('#feRole button').forEach(function (b) {

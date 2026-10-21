@@ -1901,3 +1901,15 @@ footer .foot-crm a:hover{color:#fff}
 .bk-sec[hidden],.of-col[hidden],.v-grid[hidden]{display:none !important}
 
 .lt-big{display:block;font-size:24px;color:var(--brick);margin-bottom:4px;font-variant-numeric:tabular-nums}
+
+/* 土增稅欄位：第二行小字寫出處 */
+small.lt-where{display:block;margin-top:3px;font-size:14.5px;font-weight:400;line-height:1.5;color:var(--muted);letter-spacing:0}
+
+.lt-ym{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center}
+.lt-ym span{grid-column:1/-1;font-size:15px;color:var(--muted)}
+.lt-ym span.lt-ok{color:var(--brick);font-weight:700}
+.lt-ym span.lt-bad{color:#C0462F;font-weight:700}
+
+.lt-auto{display:block;margin-top:5px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+.lt-auto.lt-ok{color:var(--brick);font-weight:700}
+.lt-auto.lt-bad{color:#C0462F;font-weight:700}
