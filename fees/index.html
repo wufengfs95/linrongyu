@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=212709d9">
+<link rel="stylesheet" href="../assets/site.css?v=27b4a217">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "買賣雜費試算", "url": "https://wufengfs95.github.io/linrongyu/fees/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "買房賣房的雜費一次算清楚：房仲服務費、契稅、代書費、地政規費、履約保證費、抵押權設定與塗銷，逐項列出並算出合計區間。", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -62,13 +62,44 @@
           <button type="button" data-r="buyer" aria-pressed="true">買方（買到房）</button>
           <button type="button" data-r="seller" aria-pressed="false">賣方（賣掉房）</button>
         </div></div>
-      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）<span class="rt-small">萬，選填，看房屋稅單</span></label>
-        <input type="number" id="feDeed" inputmode="decimal" step="0.01" placeholder="不知道可以不填"></div>
+      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）</label>
+        <input type="number" id="feDeed" inputmode="decimal" step="0.01" placeholder="單位：萬，不知道可以不填"></div>
       <div class="field" id="feEraWrap" hidden><label for="feEra">房子是什麼時候買的？</label>
         <select id="feEra">
           <option value="new">105 年 1 月 1 日以後取得（土增稅＋房地合一稅）</option>
           <option value="old">105 年 1 月 1 日以前取得（土增稅＋財產交易所得稅）</option>
         </select></div>
+      <div id="feLandBox" hidden>
+        <h2>土增稅試算<small class="rt-small">選填，填了就幫你算</small></h2>
+        <p class="sl-info">數字大多在<b>土地謄本</b>上。「前次移轉現值」謄本沒有，下面有教去哪查。
+          多個地號請各自算完再加總。</p>
+        <div class="row3">
+          <div class="field"><label for="ltArea">土地面積<span class="rt-small">平方公尺・謄本標示部</span></label>
+            <input type="number" id="ltArea" inputmode="decimal" step="0.01" placeholder="例：120.5"></div>
+          <div class="field"><label for="ltShare">權利範圍<span class="rt-small">謄本所有權部</span></label>
+            <input type="text" id="ltShare" placeholder="例：1/1 或 125/10000"></div>
+          <div class="field"><label for="ltYears">持有年數<span class="rt-small">影響長期減徵</span></label>
+            <input type="number" id="ltYears" inputmode="numeric" step="1" placeholder="例：15"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="ltNow">本次公告土地現值<span class="rt-small">元／㎡・謄本標示部</span></label>
+            <input type="number" id="ltNow" inputmode="numeric" step="1" placeholder="例：85000"></div>
+          <div class="field"><label for="ltPrev">前次移轉現值<span class="rt-small">元／㎡・謄本沒有，見下方</span></label>
+            <input type="number" id="ltPrev" inputmode="numeric" step="1" placeholder="例：32000"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="ltCpi">物價指數<span class="rt-small">%・主計總處稅務專用表</span></label>
+            <input type="number" id="ltCpi" inputmode="decimal" step="0.1" placeholder="例：112.8"></div>
+          <div class="field"><label for="ltImp">改良土地費用<span class="rt-small">元・選填，可扣</span></label>
+            <input type="number" id="ltImp" inputmode="numeric" step="1" placeholder="工程受益費、重劃費"></div>
+        </div>
+        <label class="rt-check"><input type="checkbox" id="ltSelf">
+          <span>適用自用住宅 10% 優惠<small class="rt-small">設籍、無出租營業，且一生一次還沒用掉</small></span></label>
+        <div class="field" id="ltUrbanWrap" hidden><label for="ltUrban">土地類型<span class="rt-small">決定自用的面積上限</span></label>
+          <select id="ltUrban"><option value="u">都市土地（一生一次 300 ㎡）</option>
+            <option value="n">非都市土地（一生一次 700 ㎡）</option></select></div>
+        <p class="sl-info" id="ltOut">填上面的欄位就會算出來。</p>
+      </div>
       <label class="rt-check"><input type="checkbox" id="feLoan" checked>
         <span id="feLoanText">有辦房貸（要設定銀行抵押權）</span></label>
       <div class="field"><label for="feExtra">建物、土地額外增加幾筆？<span class="rt-small">一般 0，每多一筆加收 2,000～3,000 元</span></label>
@@ -98,6 +129,6 @@
 
 <script src="../assets/site.js?v=75f4cda3" defer></script>
 <script src="../assets/tools.js?v=abe24088" data-v=""></script>
-<script src="app.js?v=aed01c28" data-v="" defer></script>
+<script src="app.js?v=0e632cbb" data-v="" defer></script>
 </body>
 </html>

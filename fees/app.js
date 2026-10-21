@@ -10,8 +10,9 @@
     });
     $('feDeedWrap').hidden = r !== 'buyer';     // 契稅是買方在繳
     $('feEraWrap').hidden = r !== 'seller';
+    $('feLandBox').hidden = r !== 'seller';
     $('feLoanText').textContent = r === 'buyer' ? '有辦房貸（要設定銀行抵押權）' : '原本有房貸（要塗銷抵押權）';
-    calc(); docs();
+    calc(); docs(); landTax();
   }
 
   // 幾百元的零頭沒有意義，一律進退到百位
@@ -230,6 +231,86 @@
       + '<p class="fd-ver">稅率與申請管道查核日：2026-10-21（民國 115 年 10 月）。'
       + '各項金額最終以稅捐稽徵機關核定為準。</p>';
   }
+
+
+  // ── 土增稅試算 ──────────────────────────────────────
+  // 公式依財政部稅務入口網「土地增值稅試算」與桃園市地方稅務局試算頁。
+  // 已用財政部節稅手冊的官方範例驗算過：公告現值 160,000元/㎡×50㎡、前次 20,000、
+  // 指數 200%、改良 80,000、持有 35 年 → 一般 1,592,800 元、自用 592,000 元，完全吻合。
+  function share(txt) {
+    var t = String(txt || '').trim();
+    if (!t) return 1;
+    var m = t.match(/^(\d+(?:\.\d+)?)\s*[\/分之]+\s*(\d+(?:\.\d+)?)$/);
+    if (m) {                       // 「1/2」與「2分之1」寫法都吃
+      var x = parseFloat(m[1]), y = parseFloat(m[2]);
+      return t.indexOf('分之') >= 0 ? (y / x) : (x / y);
+    }
+    var n = parseFloat(t);
+    return isFinite(n) && n > 0 ? (n > 1 ? 1 : n) : 1;
+  }
+
+  function landTax() {
+    var box = $('feLandBox');
+    if (box.hidden) return;
+    var area = RT.val('ltArea'), sh = share($('ltShare').value), yr = RT.val('ltYears');
+    var now = RT.val('ltNow'), prev = RT.val('ltPrev'), cpi = RT.val('ltCpi'), imp = RT.val('ltImp');
+    $('ltUrbanWrap').hidden = !$('ltSelf').checked;
+
+    if (!(area > 0 && now > 0 && prev > 0)) {
+      $('ltOut').innerHTML = '土地面積、本次公告土地現值、前次移轉現值這三格填了就會算。';
+      return;
+    }
+    var idx = Math.max(100, cpi || 100) / 100;        // 指數低於 100% 仍以 100% 計
+    var ha = area * sh;                               // 持分後的面積
+    var total = now * ha;                             // 本次申報移轉現值總額
+    var base = prev * idx * ha;                       // 調整後前次移轉現值總額
+    var gain = total - base - imp;                    // 漲價總數額
+    if (gain <= 0) {
+      $('ltOut').innerHTML = '<b>土增稅 0 元</b>（漲價總數額 ≤ 0，沒有漲價就不課）。';
+      return;
+    }
+    var ratio = gain / base;
+    var lv = ratio < 1 ? 1 : ratio < 2 ? 2 : 3;
+    var R = {
+      2: yr > 40 ? [0.26, 0.06] : yr > 30 ? [0.27, 0.07] : yr > 20 ? [0.28, 0.08] : [0.30, 0.10],
+      3: yr > 40 ? [0.32, 0.18] : yr > 30 ? [0.34, 0.21] : yr > 20 ? [0.36, 0.24] : [0.40, 0.30],
+    };
+    var gen = function (g, b) { return lv === 1 ? g * 0.20 : g * R[lv][0] - b * R[lv][1]; };
+
+    var tax, note = '';
+    if ($('ltSelf').checked) {
+      var cap = $('ltUrban').value === 'n' ? 700 : 300;   // 一生一次的面積上限
+      if (ha <= cap) {
+        tax = gain * 0.10;
+        note = '全部適用自用住宅 10%。';
+      } else {                                            // 超過上限的部分回到一般稅率
+        var p = cap / ha;
+        tax = gain * p * 0.10 + gen(gain * (1 - p), base * (1 - p));
+        note = '自用只到 ' + cap + ' ㎡（你有 ' + ha.toFixed(1) + ' ㎡），超過的 '
+             + (ha - cap).toFixed(1) + ' ㎡ 按一般稅率。';
+      }
+      note += '<br>一般稅率要 ' + RT.comma(Math.round(gen(gain, base))) + ' 元，<b>自用省下 '
+            + RT.comma(Math.round(gen(gain, base) - tax)) + ' 元</b>。';
+    } else {
+      tax = gen(gain, base);
+      note = '勾「自用住宅 10%」可以看省多少。';
+    }
+    var cut = yr > 40 ? '40 年以上減徵 40%' : yr > 30 ? '超過 30 年減徵 30%'
+            : yr > 20 ? '超過 20 年減徵 20%' : '持有未滿 20 年，無減徵';
+    $('ltOut').innerHTML =
+      '<b class="lt-big">土增稅約 ' + RT.comma(Math.round(Math.max(0, tax))) + ' 元</b>'
+      + '<br>漲價總數額 ' + RT.comma(Math.round(gain)) + ' 元・漲價 ' + (ratio * 100).toFixed(0)
+      + '%（第 ' + lv + ' 級）・' + cut
+      + (cpi && cpi < 100 ? '<br>你填的指數 ' + cpi + '% 低於 100%，依規定以 100% 計。' : '')
+      + '<br>' + note
+      + '<br><small>這是估算值，實際以稅捐稽徵機關核定的稅單為準。自用住宅 10% 要另外申請並符合要件。</small>';
+  }
+
+  ['ltArea','ltShare','ltYears','ltNow','ltPrev','ltCpi','ltImp'].forEach(function (id) {
+    $(id).addEventListener('input', landTax);
+  });
+  $('ltSelf').addEventListener('change', landTax);
+  $('ltUrban').addEventListener('change', landTax);
 
   document.querySelectorAll('#feRole button').forEach(function (b) {
     b.addEventListener('click', function () { setRole(b.getAttribute('data-r')); });
