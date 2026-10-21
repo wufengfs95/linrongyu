@@ -1890,3 +1890,5 @@ section.tq-wrap{padding-block:16px 72px}
   .fd-list b{font-size:16.5px} .fd-list span{font-size:15px}
   .fd-tool{margin:4px 14px 13px;font-size:15.5px}
 }
+footer .foot-crm a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor}
+footer .foot-crm a:hover{color:#fff}
