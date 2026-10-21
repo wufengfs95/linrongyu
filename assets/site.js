@@ -109,9 +109,14 @@
   if(bform){
     bform.addEventListener('submit',function(e){
       e.preventDefault();
-      var pick=function(n){   // 類型、區域是複選，其餘單選；都用同一個函式取值
+      var pick=function(n){   // 現在全部是下拉式選單，類型與區域可以複選
+        var el=bform.querySelector('[name='+n+']');
+        if(!el) return '不限';
+        if(el.tagName==='SELECT'){
+          return [].slice.call(el.selectedOptions).map(function(o){return o.value}).join('、')||'不限';
+        }
         return [].slice.call(bform.querySelectorAll('input[name='+n+']:checked'))
-          .map(function(el){return el.value}).join('、')||'不限';
+          .map(function(x){return x.value}).join('、')||'不限';
       };
       var val=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
       var msg='容瑜你好，我想找房子：\n'+
