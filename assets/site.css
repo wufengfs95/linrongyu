@@ -1634,7 +1634,7 @@ section.tq-wrap{padding-block:16px 72px}
   .of-grid .row3 .field:first-child{grid-column:auto}
   .of-grid .v-form{padding:18px 14px}
 }
-.rt-facts .of-sub{display:block;font-size:.85em;font-weight:400;color:var(--muted)}
+.rt-facts .of-sub{display:block;margin-left:-.5em;font-size:.85em;font-weight:400;color:var(--muted)}
 .of-opt{font-size:15px;font-weight:400;color:var(--muted);margin-left:8px}
 .of-unit{color:var(--navy);font-weight:700}
 .of-table th small{font-weight:400;font-size:.85em}
