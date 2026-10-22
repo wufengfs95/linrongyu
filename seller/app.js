@@ -414,7 +414,7 @@ function resetAll() {
   ['prevY','prevM','prevD','currY','currM','currD'].forEach(id => {
     document.getElementById(id).value = '';
   });
-  document.querySelectorAll('input.linked').forEach(el => el.classList.remove('linked'));
+  document.getElementById('slForm').querySelectorAll('input.linked').forEach(el => el.classList.remove('linked'));
   selfUse = false;
   document.getElementById('selfUseSwitch').classList.remove('on');
   document.getElementById('reverseOut').style.display = 'none';
@@ -493,9 +493,11 @@ function onDateChange(prefix) {
 }
 
 // 擋掉滑鼠滾輪改數值：滑鼠在數字欄位上滾動時，只捲動頁面、不改數字
+// 只管自己表單裡的數字欄位，不要接管同一頁其他工具的
 document.addEventListener('wheel', function(e) {
   const el = e.target;
-  if (el && el.tagName === 'INPUT' && el.type === 'number' && document.activeElement === el) {
+  if (el && el.tagName === 'INPUT' && el.type === 'number' && document.activeElement === el
+      && el.closest('#slForm')) {
     el.blur();
   }
 }, { passive: true });
@@ -579,17 +581,7 @@ function printForClient() {
   document.getElementById('pf_deduct').textContent = txt('f_deduct');
   document.getElementById('pf_net').textContent    = txt('f_net2');
 
-  window.print();
+  RT.printReport();      // 只印 #printReport，不會把整頁印成白紙
 }
 
 
-// 初始化（照舊版 HTML 最下面那段 inline script）
-(function init() {
-  populateSelects();
-  var today = new Date();
-  document.getElementById('currY').value = today.getFullYear() - 1911;
-  document.getElementById('currM').value = today.getMonth() + 1;
-  onDateChange('curr');                       // 觸發「日」的重建
-  document.getElementById('currD').value = today.getDate();
-  recalc();
-})();

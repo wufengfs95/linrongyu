@@ -79,5 +79,15 @@
     get:function(k,d){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
     set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
   };
+  // 只印「客戶報表」那一塊：按下去才在 <body> 掛 rt-print，印完拿掉。
+  // 以前這段 CSS 是無條件全站生效的，結果任何一頁按 Ctrl+P 都印出白紙。
+  RT.printReport=function(){
+    var b=document.body;
+    b.classList.add('rt-print');
+    var off=function(){ b.classList.remove('rt-print'); window.removeEventListener('afterprint',off); };
+    window.addEventListener('afterprint',off);
+    window.print();
+    setTimeout(off,1000);
+  };
   window.RT=RT;
 })();

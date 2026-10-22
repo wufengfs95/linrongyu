@@ -383,6 +383,6 @@
 
 // 客戶版表格的列印與關閉（表格本身是先產生預覽，確認後才按列印）
 document.addEventListener('click',function(e){
-  if(e.target.id==='cPrint') window.print();
+  if(e.target.id==='cPrint') RT.printReport();
   if(e.target.id==='cClose') document.getElementById('cReportWrap').hidden=true;
 });

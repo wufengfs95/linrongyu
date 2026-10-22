@@ -1730,10 +1730,13 @@ section.tq-wrap{padding-block:16px 72px}
     @page { size: A4; margin: 14mm; }
     body { background: #fff !important; padding: 0 !important; }
     /* 報表是包在 <main> 裡的，不能用 body > * 去藏，不然會連報表一起藏掉。
-       改用 visibility：整頁隱形，再把報表和它的子孫設回可見。 */
-    body * { visibility: hidden !important; }
-    #printReport, #printReport *, #cReport, #cReport * { visibility: visible !important; }
-    #printReport, #cReport {
+       改用 visibility：整頁隱形，再把報表和它的子孫設回可見。
+       只在按了「列印報表」按鈕（RT.printReport 會掛上 body.rt-print）時才生效，
+       不然像謄本估價、買中古屋 6 件事這些沒有報表的頁，按 Ctrl+P 會印出一張白紙。 */
+    body.rt-print * { visibility: hidden !important; }
+    body.rt-print #printReport, body.rt-print #printReport *,
+    body.rt-print #cReport, body.rt-print #cReport * { visibility: visible !important; }
+    body.rt-print #printReport, body.rt-print #cReport {
       display: block !important; position: absolute !important;
       left: 0; top: 0; width: 100%; margin: 0; border: 0; box-shadow: none;
     }
@@ -1998,10 +2001,7 @@ small.lt-where{display:block;margin-top:5px;font-size:14.5px;font-weight:400;lin
   .ya-list b{font-size:16.5px} .ya-list span{font-size:14.5px}
 }
 /* 我要買房／我要賣房 分頁列（2026-10-22） */
-.toolset{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 14px}
-.toolset[hidden]{display:none}
-.toolset .ts-name{font-family:var(--round);font-weight:400;color:var(--brick);font-size:17px;margin-right:4px}
-.toolset .tsl{display:inline-flex;align-items:center;padding:7px 16px;border-radius:999px;border:1.5px solid var(--cream-line);background:#fff;color:var(--navy);text-decoration:none;font-size:16px;font-weight:700;white-space:nowrap}
-.toolset .tsl:hover{border-color:var(--navy)}
-.toolset .tsl[aria-current="page"]{background:var(--navy);border-color:var(--navy);color:#fff}
-@media (max-width:640px){.toolset .tsl{padding:6px 12px;font-size:15px}.toolset .ts-name{width:100%}}
+/* 單獨開某個工具頁時，提醒它也在合併頁裡（原本橫跨多頁的連結列已經改成真的分頁） */
+.ts-back{margin:6px 0 2px;font-size:16.5px}
+.ts-back a{color:var(--brick);text-decoration:none;font-weight:700}
+.ts-back a:hover{text-decoration:underline}

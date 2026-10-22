@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我要買房：出價試算、買方雜費、新青安資格、寬限期、中古屋 6 件事｜林容瑜</title>
+<meta name="description" content="出價多少、雜費要準備多少、貸款符不符合資格、寬限期到期月付跳多少，買房會用到的都在這一頁">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/buy/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="我要買房：出價試算、買方雜費、新青安資格、寬限期、中古屋 6 件事｜林容瑜">
+<meta property="og:description" content="出價多少、雜費要準備多少、貸款符不符合資格、寬限期到期月付跳多少，買房會用到的都在這一頁">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/buy/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=a8356c4e">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "我要買房", "url": "https://wufengfs95.github.io/linrongyu/buy/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "出價多少、雜費要準備多少、貸款符不符合資格、寬限期到期月付跳多少，買房會用到的都在這一頁", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">需求配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 我要買房</p>
+  <h1>我要買房</h1>
+  <p class="sm-sub">出價多少、雜費要準備多少、貸款符不符合資格、寬限期到期月付跳多少，買房會用到的都在這一頁</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="ptabs" role="group" aria-label="我要買房"><button type="button" class="ptb" data-pt="offer" aria-pressed="true">出價試算</button><button type="button" class="ptb" data-pt="fees" aria-pressed="false">買方雜費</button><button type="button" class="ptb" data-pt="youth" aria-pressed="false">新青安資格</button><button type="button" class="ptb" data-pt="grace" aria-pressed="false">寬限期試算</button><button type="button" class="ptb" data-pt="check6" aria-pressed="false">中古屋 6 件事</button></div>
+  <p class="pt-sub" data-pt="offer">填各家銀行的估價與成數，算出每個出價要準備多少現金，新青安、一般首購、軍公教利率的月付一次比</p><p class="pt-sub" data-pt="fees" hidden>服務費、契稅、代書費、規費、履保、抵押權設定逐項列出來，算出合計大約落在多少到多少</p><p class="pt-sub" data-pt="youth" hidden>年齡、所得、名下有沒有房、房價上限、建物用途逐項檢查，符合就算出可貸額度、自備款和月付</p><p class="pt-sub" data-pt="grace" hidden>只繳息的日子結束後月付會跳多少，續繳、轉貸、再延長三條路的數字擺在一起比</p><p class="pt-sub" data-pt="check6" hidden>屋齡風險對照、謄本、不動產說明書、漏水紀錄、管委會的帳、行情比對，帶看前先查完</p>
+  <div class="ppane" data-p="offer">
+  <div class="v-grid of-grid">
+    <form id="oForm" class="v-form" novalidate>
+     <div class="of-col">
+      <h2>銀行估價</h2>
+      <div id="oBanks" class="of-banks"></div>
+      <button type="button" class="btn of-add" id="oAdd">＋ 再加一家銀行</button>
+      <div class="field"><label for="oPick">表格用哪一家算</label><select id="oPick"></select></div>
+      <label class="rt-check"><input type="checkbox" id="oLower" checked> 出價低於估價時，用出價算（銀行通常兩者取低）</label>
+      <h2>出價範圍</h2>
+      <div class="row3"><div class="field"><label for="oFrom">從（萬）</label><input type="number" id="oFrom" inputmode="decimal" step="1" value="" placeholder="例：730"></div><div class="field"><label for="oTo">到（萬）</label><input type="number" id="oTo" inputmode="decimal" step="1" value="" placeholder="例：800"></div><div class="field"><label for="oStep">每次加（萬）</label><input type="number" id="oStep" inputmode="decimal" step="1" value="10"></div></div>
+      <div class="row2"><div class="field"><label for="oFee">服務費（%）</label><input type="number" id="oFee" inputmode="decimal" step="0.1" value="2"></div><div class="field"><label for="oOther">其他費用（萬）<span class="rt-small">代書、契稅、規費等，可不填</span></label><input type="number" id="oOther" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>車位拆算<small class="of-opt">選填，有車位才填</small></h2>
+      <div class="row3"><div class="field"><label for="oArea">權狀總坪數<span class="of-l2">（含車位）</span></label><input type="number" id="oArea" inputmode="decimal" step="0.01" value=""></div><div class="field"><label for="oParkA">車位坪數</label><input type="number" id="oParkA" inputmode="decimal" step="0.01" value=""></div><div class="field"><label for="oParkP">車位價格（萬）</label><input type="number" id="oParkP" inputmode="decimal" step="1" value=""></div></div>
+      <p class="v-hint">填了之後，表格會多一欄「扣掉車位後的房屋單價」，比價才準</p>
+     </div>
+     <div class="of-col">
+      <h2>新青安3.0</h2>
+      <div class="row3"><div class="field"><label for="oQaRate">利率（%）</label><input type="number" id="oQaRate" inputmode="decimal" step="0.001" value="1.775"></div><div class="field"><label for="oQaYears">年限（年）</label><input type="number" id="oQaYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oQaGrace">寬限（年）</label><input type="number" id="oQaGrace" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>一般首購</h2>
+      <div class="field"><label for="oRates">帶入銀行利率<span class="rt-small" id="oRatesNote"></span></label>
+        <select id="oRates" data-v="0183175c"><option value="">讀取中…</option></select></div>
+      <div class="row3"><div class="field"><label for="oFgRate">利率（%）</label><input type="number" id="oFgRate" inputmode="decimal" step="0.001" value="2.5"></div><div class="field"><label for="oFgYears">年限（年）</label><input type="number" id="oFgYears" inputmode="decimal" step="1" value="30"></div><div class="field"><label for="oFgGrace">寬限（年）</label><input type="number" id="oFgGrace" inputmode="decimal" step="1" value="0"></div></div>
+      <h2>公務員</h2>
+      <label class="rt-check"><input type="checkbox" id="oGov"> 借款人是公務員（公教編制內員工）</label>
+      <div id="oGovBox" class="of-gov" hidden>
+        <p class="of-govt">軍公教利率</p>
+        <table class="v-table rt-facts of-govtab"><tbody>
+          <tr><td>方案</td><td>築巢優利貸（全國公教員工房屋貸款），行政院人事行政總處徵選、<b>臺灣銀行</b>獨家承辦</td></tr>
+          <tr><td>利率</td><td>中華郵政 2 年期定儲機動利率＋0.465%，機動計息，<b>目前 2.185%</b>（首購、非首購相同）</td></tr>
+          <tr><td>年限</td><td>最長 30 年；名下沒有自用住宅、買自住房最長 40 年</td></tr>
+          <tr><td>寬限期</td><td>最長 5 年（臺灣銀行依個案核定）</td></tr>
+          <tr><td>對象</td><td>中央及地方機關、公立學校、公營事業<b>編制內</b>員工（不含約聘僱），公務人員考試錄取受訓人員</td></tr>
+          <tr><td>其他</td><td>不限首購；隨時提前清償不收違約金；辦理期間 114 年 1 月 1 日至 116 年 12 月 31 日</td></tr>
+        </tbody></table>
+        <div class="row3"><div class="field"><label for="oGvRate">利率（%）</label><input type="number" id="oGvRate" inputmode="decimal" step="0.001" value="2.185"></div><div class="field"><label for="oGvYears">年限（年）</label><input type="number" id="oGvYears" inputmode="decimal" step="1" value="40"></div><div class="field"><label for="oGvGrace">寬限（年）</label><input type="number" id="oGvGrace" inputmode="decimal" step="1" value="0"></div></div>
+        <p class="v-hint">勾選後表格會多一欄「公教房貸月付」，新青安 3.0 公務員一樣可以申請，資格符合的話兩個都可以比</p>
+      </div>
+     </div>
+    </form>
+    <div id="oResult" class="v-result"></div>
+  </div>
+  <h2 class="v-h2">新青安 3.0 重點整理<small>2026 年 8 月 1 日起申辦，至 2029 年 7 月 31 日</small></h2>
+  <div class="v-quick rt-facts"><table class="v-table"><tbody>
+    <tr><td>貸款額度</td><td>一般 1,000 萬／新婚（婚後 2 年內）1,200 萬／有未成年子女 1,500 萬</td></tr>
+    <tr><td>房價上限</td><td>台北市 3,500 萬／新北市、新竹縣市 2,500 萬／其他縣市（含桃園）2,000 萬</td></tr>
+    <tr><td>利率</td><td>採「3＋3」補貼：前 3 年 1.775%（內政部住宅基金補貼 1.5 碼＋公股銀行減收半碼，合計 2 碼）；3 年期滿次日起<b>每年少補貼半碼</b>，滿 6 年補貼期滿、回復原貸款利率（目前約 2.275%），機動計息，會隨郵儲利率調整</td></tr>
+    <tr><td>年限、寬限期</td><td>最長 40 年、寬限期最長 5 年、一生限貸一次</td></tr>
+    <tr><td>申請資格</td><td>申貸時未滿 50 歲、本人年所得 200 萬以下、年齡＋貸款年限不超過 80；本人、配偶、未成年子女名下都沒有房子</td></tr>
+    <tr><td>承辦銀行<small class="of-sub">（八大行庫）</small></td><td>臺灣銀行、土地銀行、合作金庫、第一銀行、華南銀行、彰化銀行、兆豐銀行、臺灣企銀</td></tr>
+  </tbody></table></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼出價超過估價，月付就不會變？</summary><p>銀行是用估價（和成交價取低）乘上成數來決定能貸多少，出價超過估價之後，能貸的金額就固定了，多出價的每一塊錢都要自己準備，所以要準備的現金一直增加，月付反而不變</p></details><details><summary>要準備的錢包含哪些？</summary><p>這裡算的是頭期款（出價減掉可貸金額）加上仲介服務費，另外還有代書費、契稅、印花稅、規費、火險地震險、銀行開辦費等，可以在「其他費用」填一個總數，一般中古屋大約抓 10～20 萬</p></details><details><summary>新青安和一般首購差在哪？</summary><p>新青安（青安 3.0）是政府補貼的首購貸款，前 3 年利率 1.775%、最長 40 年、可以有 5 年寬限期，額度一般 1,000 萬；要符合首購、年齡、所得等資格，不符合資格就是銀行的一般首購房貸，利率依銀行和個人條件核定，年限多半 30 年，重點整理在上面的表格</p></details><details><summary>車位為什麼要拆開算？</summary><p>實價登錄和廣告上的單價，常常是把車位的價格和坪數一起算進去，車位一坪的價格比房子低很多，混在一起會讓單價看起來比較便宜，扣掉車位價格和車位坪數，算出房子本身一坪多少，跟附近成交比才公平</p></details><details><summary>估價和成數要去哪裡問？</summary><p>出價前請仲介幫你向銀行送估，各家銀行回覆的估價和成數常常不一樣，把每一家都填進來比，就知道哪家貸得最多，想請我幫你問，直接 LINE 我</p></details></div>
+  <p class="sm-note">新青安依<a href="https://www.nta.gov.tw/singlehtml/108" target="_blank" rel="noopener">財政部國庫署青安 3.0 貸款原則</a>，前 3 年 1.775%，第 4 年起每年加半碼、第 7 年起約 2.275%，表格用前 3 年利率試算，
+    公教房貸依<a href="https://www.dgpa.gov.tw/eserver/information?uid=447&amp;pid=12234" target="_blank" rel="noopener">行政院人事行政總處「114 年至 116 年築巢優利貸」公告與辦理說明</a>整理，2026 年 10 月 20 日核對，
+    一般首購利率清單來源為各公股銀行官網與中央銀行，每季更新，月付以本息平均攤還計算，實際成數、利率以銀行核貸為準</p>
+  </div>
+  <div class="ppane" data-p="fees" hidden>
+  <div class="v-grid fe-grid">
+    <form id="feForm" class="v-form" data-role="buyer" novalidate>
+      <h2>成交資訊</h2>
+      <div class="field"><label for="feTotal">成交總價<span class="rt-small">萬</span></label>
+        <input type="number" id="feTotal" inputmode="decimal" step="0.01" placeholder="例：1300"></div>
+
+      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）</label>
+        <input type="number" id="feDeed" inputmode="decimal" step="0.01" placeholder="例：120 萬，不知道可以不填"></div>
+      <div class="field" id="feEraWrap" hidden><label for="feEra">房子是什麼時候買的？</label>
+        <select id="feEra">
+          <option value="new">105 年 1 月 1 日以後取得（土增稅＋房地合一稅）</option>
+          <option value="old">105 年 1 月 1 日以前取得（土增稅＋財產交易所得稅）</option>
+        </select></div>
+      <div id="feLandBox" hidden>
+        <h2>土增稅試算<small class="rt-small">選填，填了就幫你算</small></h2>
+        <div class="row3">
+          <div class="field"><label for="ltArea">土地面積（平方公尺）<small class="lt-where">謄本・標示部〈面積〉</small></label>
+            <input type="number" id="ltArea" inputmode="decimal" step="0.01" placeholder="例：120.5"></div>
+          <div class="field"><label for="ltShare">權利範圍（持分）<small class="lt-where">謄本・所有權部〈權利範圍〉</small></label>
+            <input type="text" id="ltShare" placeholder="例：1/1 或 125/10000"></div>
+          <div class="field"><label for="ltY">原因發生日期（民國年／月）<small class="lt-where" id="ltYWhere">謄本・所有權部〈原因發生日期〉，填了自動算持有年數</small></label>
+            <div class="lt-ym"><input type="number" id="ltY" inputmode="numeric" step="1" placeholder="年" aria-label="民國年">
+              <input type="number" id="ltM" inputmode="numeric" step="1" min="1" max="12" placeholder="月" aria-label="月">
+              <span id="ltYrOut">—</span></div></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="ltNow">本次公告土地現值（元／平方公尺）<small class="lt-where">謄本・標示部〈公告土地現值〉</small></label>
+            <input type="number" id="ltNow" inputmode="numeric" step="1" placeholder="例：85000"></div>
+          <div class="field"><label for="ltPrev">前次移轉現值（元／平方公尺）<small class="lt-where" id="ltPrevWhere">謄本・所有權部〈前次移轉現值〉</small></label>
+            <input type="number" id="ltPrev" inputmode="numeric" step="1" placeholder="例：32000"></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label for="ltCpi">物價指數（％）<small class="lt-where">填好上面的原因發生年月就自動帶入，<span id="ltCpiNote"></span></small></label>
+            <input type="number" id="ltCpi" inputmode="decimal" step="0.1" placeholder="自動帶入">
+            <small class="lt-auto" id="ltCpiAuto"></small></div>
+          <div class="field"><label for="ltImp">改良土地費用（元）<small class="lt-where">選填・工程受益費、重劃費收據</small></label>
+            <input type="number" id="ltImp" inputmode="numeric" step="1" placeholder="工程受益費、重劃費"></div>
+          <div class="field"><label for="ltCredit">可扣抵稅額（元）<small class="lt-where">選填・持有期間增繳的地價稅，上限為應納土增稅的 5%（土地稅法 31 條）</small></label>
+            <input type="number" id="ltCredit" inputmode="numeric" step="1" placeholder="由稅務局核算，可在申報時請他們一併計算"></div>
+        </div>
+        <label class="rt-check"><input type="checkbox" id="ltInherit">
+          <span>這筆土地是<b>繼承</b>來的<small class="rt-small">算法不一樣，勾了會提示該填什麼</small></span></label>
+        <label class="rt-check"><input type="checkbox" id="ltSelf">
+          <span>適用自用住宅 10% 優惠<small class="rt-small">設籍、無出租營業，且一生一次還沒用掉</small></span></label>
+        <div class="field" id="ltUrbanWrap" hidden><label for="ltUrban">土地類型<span class="rt-small">決定自用的面積上限</span></label>
+          <select id="ltUrban"><option value="u">都市土地（一生一次 300 ㎡）</option>
+            <option value="n">非都市土地（一生一次 700 ㎡）</option></select></div>
+        <p class="sl-info" id="ltOut">填上面的欄位就會算出來</p>
+      </div>
+      <label class="rt-check"><input type="checkbox" id="feLoan" checked>
+        <span id="feLoanText">有辦房貸（要設定銀行抵押權）</span></label>
+      <div class="field"><label for="feExtra">建物、土地額外增加幾筆？<span class="rt-small">一般 0，每多一筆加收 2,000～3,000 元</span></label>
+        <input type="number" id="feExtra" inputmode="numeric" step="1" min="0" value="0"></div>
+    </form>
+    <div id="feResult" class="v-result"></div>
+  </div>
+  <div id="feDocs" class="fd-wrap"></div>
+<h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>為什麼是區間，不是一個數字？</summary><p>代書費、地政規費、過戶代辦這些，每家事務所收費都不一樣，差個幾千元很正常，所以這裡算的是「大概落在多少到多少」，實際金額以你配合的代書報價與稅單為準</p></details><details><summary>買方和賣方各要付什麼？</summary><p>最大一筆都是房仲服務費：買方上限 2%、賣方上限 4%，實際比例簽約前就會談定，買方多了契稅、過戶代辦、抵押權設定；賣方多了土增稅、房地合一稅、抵押權塗銷，履約保證費是雙方各付成交價的 0.03%</p></details><details><summary>契稅怎麼算？</summary><p>契稅是「房屋評定現值 × 6%」，不是用成交價算，房屋評定現值看房屋稅單，通常遠低於市價，所以契稅比大家想像的少很多，填了契價這裡才會幫你算</p></details><details><summary>標「依稅單」的為什麼不算進合計？</summary><p>土地增值稅和房地合一稅要看持有期間、前次移轉現值、有沒有自用稅率，金額可以差到幾十萬甚至幾百萬，沒辦法只用成交價估出來，那兩筆請直接問代書，或用「賣方實拿」試算</p></details></div>  <p class="sm-note">本試算是依市場常見收費區間估算的參考值，不是報價；實際金額以各地政士事務所收費、地政規費與稅捐稽徵機關核定為準</p>
+  </div>
+  <div class="ppane" data-p="youth" hidden>
+  <div class="v-grid ya-grid">
+    <form id="yaForm" class="v-form" novalidate>
+      <h2>買方的條件</h2>
+      <div class="row2">
+        <div class="field"><label for="yaAge">年齡（歲）<small class="lt-where">以向銀行申請那天算，要未滿 50 歲</small></label><input type="number" id="yaAge" inputmode="numeric" step="1" min="18" max="70" placeholder="例：34"></div>
+        <div class="field"><label for="yaIncome">本人年所得（萬元）<small class="lt-where">只看借款人本人，不含配偶，上限 200 萬</small></label><input type="number" id="yaIncome" inputmode="numeric" step="1" min="0" placeholder="例：85"></div>
+      </div>
+      <div class="field"><label for="yaOwn">名下房屋（本人＋配偶＋未成年子女）<small class="lt-where">銀行會調全國財產稅總歸戶財產查詢清單</small></label><select id="yaOwn"><option value="none" selected>三個人名下都沒有房子</option><option value="park">只有車位或靈骨塔位</option><option value="land">只有土地，沒有房屋</option><option value="sold">本來有，已經賣掉或移轉了</option><option value="share">只有持分，沒有完整的一戶</option><option value="inherit">繼承來的公同共有住宅</option><option value="has">有一間以上完整的房子</option></select></div>
+      <div id="yaAreaWrap" hidden>
+        <div class="field"><label for="yaArea">持分換算面積合計（平方公尺）<small class="lt-where">三個人加總，未滿 40 ㎡ 還可以申辦</small></label><input type="number" id="yaArea" inputmode="decimal" step="0.01" min="0" placeholder="例：18.5"></div>
+      </div>
+      <label class="rt-check"><input type="checkbox" id="yaUsed"><span class="ya-ck">112 年 8 月 1 日以後辦過新青安或農安貸款<small>一生限貸一次</small></span></label>
+
+      <h2>看的這間房子</h2>
+      <div class="row2">
+        <div class="field"><label for="yaCity">房子在哪裡<small class="lt-where">房價上限依縣市不同</small></label><select id="yaCity"><option value="other" selected>桃園市（或其他縣市）</option><option value="tp">臺北市</option><option value="nt">新北市</option><option value="hc">新竹縣（市）</option></select></div>
+        <div class="field"><label for="yaPrice">房屋總價（萬元）<small class="lt-where">鑑價與買賣總價「取高」的那個數字</small></label><input type="number" id="yaPrice" inputmode="numeric" step="1" min="0" placeholder="例：1280"></div>
+      </div>
+      <div class="field"><label for="yaUse">建物主要用途<small class="lt-where">看建物謄本「主要用途」欄，要有住、住宅、套房或公寓字樣</small></label><select id="yaUse"><option value="yes" selected>有「住」「住宅」「套房」或「公寓」字樣</option><option value="no">是辦公、商業用、工業用這一類</option><option value="unknown">還不確定，要查謄本</option></select></div>
+      <div class="field"><label for="yaSelf">買來做什麼用<small class="lt-where">核貸時要簽自用住宅使用切結書，銀行貸後會查</small></label><select id="yaSelf"><option value="self" selected>自己住</option><option value="rent">要出租或做生意</option><option value="unknown">還沒決定</option></select></div>
+      <div class="field"><label for="yaReg">所有權登記日<small class="lt-where">看建物謄本的登記日期</small></label><select id="yaReg"><option value="within" selected>已經過戶，登記日在 6 個月內</option><option value="after">還沒過戶，會在核准後 6 個月內登記</option><option value="over">已經過戶，登記日超過 6 個月了</option><option value="unknown">不確定</option></select></div>
+
+      <h2>可以加額度的身分</h2>
+      <label class="rt-check"><input type="checkbox" id="yaWed"><span class="ya-ck">申請日前 2 年內完成結婚登記<small>額度上限 1,200 萬</small></span></label>
+      <label class="rt-check"><input type="checkbox" id="yaKid"><span class="ya-ck">育有未成年子女<small>額度上限 1,500 萬，離婚或單親要同戶籍且有監護權</small></span></label>
+    </form>
+    <div id="yaResult" class="v-result"></div>
+  </div>
+
+  <h2 class="v-h2">新青安 3.0 重點整理<small>115 年 8 月 1 日起的新版，申辦到 118 年 7 月 31 日</small></h2>
+  <div class="v-quick rt-facts"><table class="v-table"><tbody>
+    <tr><td>誰可以辦</td><td>成年以上、<b>申貸時未滿 50 歲</b>，本人年所得 <b>200 萬以下</b>，本人、配偶、未成年子女名下都沒有房子，一生限貸一次</td></tr>
+    <tr><td>房價上限</td><td>臺北市 3,500 萬／新北市、新竹縣市 2,500 萬／<b>其他縣市（含桃園）2,000 萬</b>，用鑑價與買賣總價取高的那個比</td></tr>
+    <tr><td>貸款額度</td><td>一般 1,000 萬／新婚（申請日前 2 年內結婚登記）1,200 萬／育有未成年子女 1,500 萬，最高成數 8 成</td></tr>
+    <tr><td>年限、寬限期</td><td>最長 40 年、含寬限期最長 5 年，<b>申貸年齡加核貸年限不能超過 80</b></td></tr>
+    <tr><td>利率</td><td>前 3 年 1.775%，3 年期滿後每年少補貼半碼（第 4 年 1.9%、第 5 年 2.025%、第 6 年 2.15%），滿 6 年回復約 2.275%，機動計息</td></tr>
+    <tr><td>標的限制</td><td>建物主要用途要有住、住宅、套房或公寓字樣；要自己住，不能出租或營業；登記日在申請日前 6 個月內，或核准後 6 個月內完成登記</td></tr>
+    <tr><td>承辦銀行<small class="of-sub">（八大行庫）</small></td><td>臺灣銀行、土地銀行、合作金庫、第一銀行、華南銀行、彰化銀行、兆豐銀行、臺灣企銀</td></tr>
+  </tbody></table></div>
+
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>我名下有一間房子的持分，還能辦嗎？</summary><p>看面積，本人、配偶、未成年子女的建物持分換算面積合計<b>未滿 40 平方公尺</b>，還是可以申辦，繼承來的公同共有住宅，115 年 8 月 1 日起可以按潛在應有部分計算，要附繼承系統表和除戶資料給銀行</p></details><details><summary>名下只有車位或只有土地呢？</summary><p>都可以，車位和靈骨塔位經銀行依實況審認後視為無自有住宅，名下只有土地沒有建物也可以辦，本來有房子、申請前已經賣掉或移轉的，附登記謄本證明就好</p></details><details><summary>年所得 200 萬是算誰的？</summary><p>只算借款人本人的年所得總額，不含配偶，剛好 200 萬還在範圍內，超過才不行，銀行會請你授權用 MyData 平台或綜所稅各類所得資料清單查，攤販、自營商可以用資金流程或營業資料證明</p></details><details><summary>預售屋可以先辦嗎？</summary><p>不行，還沒取得所有權的預售屋銀行沒辦法受理，也不能先申請保留額度，要等交屋過戶、拿到建物所有權之後再辦，登記日在申請日前 6 個月內都還來得及</p></details><details><summary>一定貸得到 8 成、貸得到最高額度嗎？</summary><p>不一定，8 成和額度上限是「最高」，實際多少銀行會依 5P 原則徵信核定，跟你的收入、信用、物件條件都有關，想先知道大概能貸多少，可以用<a href="#offer" data-pt="offer">出價試算</a>把各家銀行的估價和成數填進去比</p></details><details><summary>買了以後可以出租嗎？</summary><p>不行，核貸時要簽自用住宅使用切結書，分租、整層出租、頂樓加蓋出租都不符合，被查到會從事實發生日起停止利息補貼、追回已經領的部分，並重新核定貸款條件，只有出租屋頂給人裝太陽能、不影響居住空間，才還算自住</p></details><details><summary>夫妻可以各辦一次嗎？</summary><p>新青安的資格是本人、配偶、未成年子女名下都要沒有房子，第一間辦完之後配偶名下就有房了，實務上要跟承辦銀行確認，不要自己假設可以</p></details><details><summary>不符合資格就沒辦法買了嗎？</summary><p>當然不是，不符合就是走銀行的一般首購房貸，利率依銀行和個人條件核定、年限多半 30 年，把各家銀行的條件攤開來比就好，<a href="#offer" data-pt="offer">出價試算</a>可以一次比完，要我幫你問銀行，直接 <a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 我</a></p></details></div>
+  <p class="sm-note">資格條件依<a href="https://www.nta.gov.tw/singlehtml/108" target="_blank" rel="noopener">財政部國庫署「青年安心成家購屋優惠貸款」貸款原則</a>
+    （115 年 7 月 28 日版，115 年 8 月 1 日起適用）與<a href="https://www.nta.gov.tw/singlehtml/109" target="_blank" rel="noopener">公股銀行辦理青年安心成家購屋優惠貸款問與答</a>整理，
+    2026 年 10 月 22 日核對，利率以中華郵政 2 年期定期儲金額度未達 500 萬元機動利率 1.72% 為基準加 0.555%，
+    依撥貸日起的分段補貼計算，郵儲利率調整時會跟著動，
+    本頁為規則快篩，不是銀行的核貸結果，實際資格、成數與額度以承辦銀行核定為準
+  </div>
+  <div class="ppane" data-p="grace" hidden>
+  <div class="v-grid">
+    <form id="gForm" class="v-form" novalidate>
+      <div class="field"><label for="gBal">貸款餘額（萬）<span class="rt-small">剩多少算多少，看網銀或撥款通知</span></label>
+        <input type="number" id="gBal" inputmode="numeric" placeholder="例：800" value="800"></div>
+      <div class="field"><label for="gRate">目前利率（%）<span class="rt-small">看撥款通知或存摺扣款明細</span></label>
+        <input type="number" id="gRate" inputmode="decimal" step="0.001" value="2.2"></div>
+      <div class="field"><label>貸款總年期</label><div class="v-kinds" id="gYears" role="group"><button type="button" data-v="20" aria-pressed="false">20 年</button><button type="button" data-v="30" aria-pressed="true">30 年</button><button type="button" data-v="40" aria-pressed="false">40 年</button></div></div>
+      <div class="field"><label>寬限期幾年</label><div class="v-kinds" id="gGrace" role="group"><button type="button" data-v="2" aria-pressed="false">2 年</button><button type="button" data-v="3" aria-pressed="true">3 年</button><button type="button" data-v="5" aria-pressed="false">5 年・新青安</button></div></div>
+      <div class="field"><label for="gLeft">距離到期還有幾個月（選填）</label>
+        <input type="number" id="gLeft" inputmode="numeric" placeholder="例：8"></div>
+      <p class="v-hint">如果你在考慮轉貸，下面兩個是「轉去的新條件」</p>
+      <div class="field"><label>轉貸後年期</label><div class="v-kinds" id="gNewY" role="group"><button type="button" data-v="20" aria-pressed="false">20 年</button><button type="button" data-v="30" aria-pressed="true">30 年</button><button type="button" data-v="40" aria-pressed="false">40 年</button></div></div>
+      <div class="field"><label for="gNewR">轉貸後利率（%）</label>
+        <input type="number" id="gNewR" inputmode="decimal" step="0.001" value="2.1"></div>
+    </form>
+    <div id="gResult" class="v-result"></div>
+  </div>
+  <h2 class="v-h2">關於寬限期，最多人搞錯的三件事</h2>
+  <div class="g-three">
+    <div><b>① 不是不用繳，是只繳利息</b><p>本金一毛沒少，到期後，原本要用全部年期攤還的本金，
+      要壓縮在剩下的年期內還完——年期被壓縮，月付才會跳這麼多，常見是直接翻倍以上</p></div>
+    <div><b>② 一般 2～3 年，新青安最長 5 年</b><p>2023 年前後買房、辦 2～3 年寬限期的人現在陸續到期；
+      新青安 5 年那一批，最早 2028 年 8 月起輪到，越早算出數字，越有時間安排</p></div>
+    <div><b>③ 到期不是只有「繳」一條路</b><p>續繳、轉貸重拉年期、再延長寬限期，各有代價，
+      先把三條路的數字都攤開，再看家庭收入穩不穩、未來幾年會不會換屋，答案就會自己浮出來</p></div>
+  </div>
+  <h2 class="v-h2">三個問題，答案自己浮出來</h2>
+  <ol class="g-flow">
+    <li><b>到期後的新月付，佔家庭月收入超過 4 成嗎？</b>
+      <p>沒超過 → <b class="g-ok">咬牙續繳</b>最單純，不用付任何額外費用，超過了 → 看下一題</p></li>
+    <li><b>未來 5～10 年，你會一直住這間房子嗎？</b>
+      <p>會住很久 → 用上面的轉貸試算算回本月數，回本快就值得比三家，
+        不一定會住 → 別急著付轉貸成本，看下一題</p></li>
+    <li><b>你知道房子「現在」實際值多少嗎？</b>
+      <p>知道 → 增值的部分是選擇權，換屋或調整都可以先算，
+        不知道 → 先做<a href="../price/">免費房屋估價</a>，知道市值才有資格做上面任何決定</p></li>
+  </ol>
+  <h2 class="v-h2">打給銀行前，先把這五件事查清楚</h2>
+  <ul class="g-check">
+    <li>寬限期<b>確切到期月份</b>（撥款通知書或網銀貸款明細）</li>
+    <li><b>綁約期過了沒</b>——通常 2～3 年，沒過就轉貸會有提前清償違約金</li>
+    <li>近一年信用卡、貸款<b>有沒有遲繳</b>，有遲繳談判籌碼會少很多</li>
+    <li>先查好<b>其他 2～3 家銀行目前的房貸利率</b>，談的時候要有比價依據</li>
+    <li>想清楚你要的是<b>哪一種</b>：延長寬限期？降利率？還是拉長年期？一次談一個重點</li>
+  </ul>
+  <p class="sm-note">延長寬限期等於本金更晚開始還、總利息更多，它是「爭取時間」不是「省錢」，
+    談成之後那段時間要拿來安排下一步</p>
+  <h2 class="v-h2">打電話給銀行，這三句照著講</h2>
+  <div class="g-talk">
+    <div><span>開場：先講事實，不要求情</span>
+      <p>「我的寬限期<b>○月</b>到期，到期後月付會從 <b>○○○</b> 元變成 <b>○○○</b> 元，
+        我想了解行內有沒有<b>延長寬限期或調整年期</b>的方案，」</p></div>
+    <div><span>被打回票：亮出比價</span>
+      <p>「我有查過，<b>○○銀行</b>現在轉貸利率是 <b>○.○○%</b>，
+        我在你們行往來<b>○年</b>、從來沒有遲繳過，希望行內能給我一個留下來的理由，」</p></div>
+    <div><span>收尾：要書面、要期限</span>
+      <p>「麻煩幫我<b>送件評估</b>，大概幾個工作天會有結果？結果請用<b>簡訊或 Email</b> 通知我，」</p></div>
+  </div>
+  <p class="sm-note">銀行最怕的不是你繳不出來，是你把貸款轉走，所以「談」永遠是成本最低的第一步——
+    上面那張轉貸費用表，就是你談判的籌碼，談之前先把本頁最上面的數字算出來，
+    講得出具體金額，對方才知道你是認真的</p>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>寬限期到期，月付真的會翻倍嗎？</summary><p>很常見，以 800 萬、利率 2.2%、30 年期、寬限 3 年為例，寬限期間只繳息約 14,667 元，到期後要用剩下的 27 年攤還本金，月付跳到約 32,900 元，大約 2.2 倍，年期越短、寬限期越長，跳幅越大</p></details><details><summary>可以再跟銀行延長寬限期嗎？</summary><p>可以談，但不是一定給，銀行會看你的信用紀錄、繳款狀況和收入，談成了也要知道：延長期間本金完全沒有減少，之後攤還的年期更短、月付跳得更兇，總利息也更多</p></details><details><summary>轉貸划不划算怎麼看？</summary><p>把轉貸的全部成本（違約金、塗銷設定規費、代書費、鑑價費、火險重投保）加總，除以每月省下來的錢，就是回本月數，回本 12 個月內而且新年期拉長，值得認真比三家；回本超過 24 個月，先跟原銀行談比較實在</p></details><details><summary>轉貸要準備多久？</summary><p>從送件到撥款大約 3～6 週，建議在寬限期到期前 3 個月就開始問，才有時間比三家、也有籌碼跟原銀行談</p></details><details><summary>如果真的繳不出來怎麼辦？</summary><p>最不該做的是拖到遲繳，先跟銀行談延期或調整條件，同時把房子現在的行情算出來——知道市值，才知道換屋、調整或處分各是什麼條件，想有人一起把數字攤開，直接 LINE 我</p></details></div>
+  <p class="sm-note">本試算採本息平均攤還估算，利率固定不變，僅供參考，
+    實際月付金、可否延長寬限期、轉貸條件與費用，以各銀行核定為準
+  </div>
+  <div class="ppane" data-p="check6" hidden>
+  <div class="c6-tool">
+    <form id="c6Form" class="c6-form" novalidate>
+      <label for="c6Year">先查屋齡：建物謄本上的「建築完成日期」是民國幾年？</label>
+      <div class="c6-row"><input type="number" id="c6Year" inputmode="numeric" placeholder="例：78"
+        min="40" max="130"><span>年（今年民國 <b id="c6Now">—</b> 年）</span></div>
+    </form>
+    <div id="c6Result" class="c6-result"></div>
+  </div>
+  <p class="c6-intro">房子最怕的從來不是屋況舊，是那種你肉眼看不出來的東西，
+    但看不到不等於不能知道，只是你不知道要去哪裡查<br>
+    這份清單不是叫你自己去驗房子——中古屋要驗海砂得鑽牆取樣，屋主多半不會答應，
+    這是<b>「該查的六件事」</b>：每一項都有公開管道、有法定文件、有人可以問，
+    房仲該在帶你去看之前就做完，你也該知道他到底做了沒有</p>
+  <section class="c6-step"><div class="c6-no">01</div><div class="c6-body"><h3>先看屋齡，一分鐘篩掉一半的疑慮</h3><p class="c6-lead">建物謄本上有「建築完成日期」，這個年份對照三個風險區間，你馬上知道這間要不要多問幾句，上面的對照器輸入年份就會告訴你</p><ul><li><b>輻射屋</b>：已發現的全部是民國 71～73 年建造，使照核發在 71 年 11 月～75 年 1 月之間，可在核安會系統免費查</li><li><b>海砂屋</b>：民國 87 年 6 月以前，國家標準允許的氯離子含量是現在的兩倍</li><li><b>耐震規範</b>：民國 86 年才有耐震設計規範，921 之後又修過三次</li></ul><p class="c6-tip">屋齡是第一道濾網，不是判決書，同一個年份也有蓋得很紮實的房子——屋齡只決定你要不要多問幾句</p></div></section><section class="c6-step"><div class="c6-no">02</div><div class="c6-body"><h3>謄本要調兩份：建物 ＋ 土地</h3><p class="c6-lead">很多人只看坪數和價格，真正決定「這間能不能順利過戶」的，是謄本上的權利部</p><ul><li>所有權人是不是跟你談的那個人？<b>有沒有共有人沒出面</b></li><li>有沒有<b>查封、假扣押、預告登記</b>？有的話交易風險完全不一樣</li><li>抵押權設定金額多少？（實務上常見設定為貸款金額的 1.2 倍，可以回推原貸款）</li><li>權狀坪數怎麼組成——主建物、附屬建物、共有部分各佔多少</li></ul><p class="c6-tip">「30 坪」不是 30 坪，扣掉公設之後真正能用的空間，兩間同樣 30 坪的房子可能差到 5 坪以上</p></div></section><section class="c6-step"><div class="c6-no">03</div><div class="c6-body"><h3>不動產說明書逐欄看，這是法律給你的保護</h3><p class="c6-lead">海砂、輻射、凶宅、漏水、違建，都是不動產說明書的應記載事項，賣方有據實說明的義務，這份文件不是形式，是你手上最有力的東西</p><ul><li>是否曾發生兇殺、自殺或意外致死情事</li><li>是否為海砂屋、輻射屋</li><li>有無滲漏水情形、是否已修繕、什麼時候修的</li><li>有無增建、違建、頂樓加蓋、夾層</li><li>建物現況與謄本、使用執照是否相符</li></ul><p class="c6-tip">你可以直接問：「這間的不動產說明書，可以先給我看嗎？」——房仲敢不敢第一時間拿給你，就看得出他有沒有做功課</p></div></section><section class="c6-step"><div class="c6-no">04</div><div class="c6-body"><h3>漏水，要用「問」的，不是用聞的</h3><p class="c6-lead">粉刷過、除濕過的房子，你站在裡面聞不出來，但紀錄騙不了人</p><ul><li>管委會有沒有這一戶的<b>漏水、滲水報修紀錄</b></li><li>樓上樓下最近有沒有裝修，或發生過漏水爭議</li><li>外牆、頂樓<b>防水做過沒有</b>？什麼時候做的</li><li>天花板、牆面有沒有「只有一塊特別新」的粉刷痕跡</li></ul><p class="c6-tip">新漆蓋舊痕是最常見的手法，看到某一面牆特別乾淨、其他牆都有歲月感，那面牆就是要問的地方</p></div></section><section class="c6-step"><div class="c6-no">05</div><div class="c6-body"><h3>管委會的帳，比房子本身更容易被忽略</h3><p class="c6-lead">你買的不只是那間房子，還有這棟樓接下來要花的錢，這筆錢不會寫在售價裡</p><ul><li>管理費每坪多少？<b>前屋主有沒有欠繳</b>（欠繳是跟著房子走的）</li><li>修繕基金還剩多少</li><li>近兩年區權會有沒有通過<b>重大修繕</b>——外牆拉皮、電梯汰換、管線更新</li><li>社區有沒有正在進行中的訴訟或糾紛</li></ul><p class="c6-tip">一次外牆拉皮攤下來，一戶十幾萬跑不掉，你在買之前不知道，就是你接</p></div></section><section class="c6-step"><div class="c6-no">06</div><div class="c6-body"><h3>「為什麼便宜」，要問得出答案</h3><p class="c6-lead">便宜不是問題，你問不出為什麼便宜，才是問題，拿實價登錄把同社區近一年的成交攤開比，差距就會自己說話</p><ul><li>同社區、同一棟，近一年成交<b>扣掉車位</b>後每坪多少</li><li>這間跟那些成交差在哪——樓層、座向、格局、屋況</li><li>車位一定要拆開算，混在一起比就是比假的</li><li>價差超出合理範圍的話，賣方說不說得出原因</li></ul><p class="c6-tip">問得出答案的便宜可以買，問不出答案的便宜，先不要碰</p></div></section>
+  <div class="empty one" style="--len:34.6;margin-top:40px"><p>手上已經有在看的物件？地址或連結傳給我，我把該查的查完再跟你講結果</p>
+    <a class="btn btn-line" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">這六件事我幫你查</a></div>
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>這六件事，我自己查得到嗎？</summary><p>大部分可以，謄本可以到任一地政事務所或用「全國地政電子謄本系統」線上調；輻射屋可上核安會的查詢系統或打 0800-076-678；實價登錄上內政部網站免費查，比較需要透過房仲或屋主的是不動產說明書、管委會的報修與修繕紀錄</p></details><details><summary>屋齡落在風險區間，就不能買嗎？</summary><p>不是，落在區間只代表當年的法規標準比較寬鬆，要多查幾項、多問幾句，不代表這間有問題，反過來說，落在安全區間也不代表不用查——漏水、管委會的帳、行情比對一樣要做</p></details><details><summary>海砂屋一定要鑽牆檢測才知道嗎？</summary><p>要百分之百確認是要取樣做氯離子檢測，但中古屋屋主通常不會同意鑽牆，實務上先看不動產說明書怎麼勾（賣方有據實說明義務）、看牆面天花板有沒有混凝土剝落與鋼筋外露、問管委會這棟有沒有類似案例，這三關過了，風險就低很多</p></details><details><summary>不動產說明書賣方沒有據實說明怎麼辦？</summary><p>不動產說明書是法定應記載事項，內容不實賣方與經紀業都要負責，買方可以主張解約或請求損害賠償，所以簽約前務必逐欄看過、當場問清楚，並且留存書面</p></details><details><summary>這份清單可以拿去問別的房仲嗎？</summary><p>可以，本來就是給你用的，你拿著它去問任何一個房仲，都問得出來；問不出來的，你自己心裡就有答案了</p></details></div>
+  <p class="sm-note">本清單為一般查核流程整理，供買方自我檢核使用，
+    輻射屋年份依核能安全委員會公開資訊；氯離子含量標準依 CNS 3090 民國 83 年 7 月 22 日版
+    （鋼筋混凝土 0.6 kg/m³）與民國 87 年 6 月 25 日修訂版（0.3 kg/m³）；
+    耐震規範依內政部「建築物耐震設計規範及解說」（民國 86 年訂定，88、94、100 年修正），
+    個案實際情形仍以主管機關公開資料及該物件不動產說明書所載為準
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.<span class="foot-crm">　|　<a href="../crm/" rel="nofollow">客戶追蹤</a></span></div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=79234c66" defer></script>
+<script src="../assets/tools.js?v=a4191526" data-v="61cb4491"></script>
+<script>
+/* 分頁切換：點開哪一個才載入那個工具的程式，沒點到的不會白白下載 */
+(function(){
+  var SRC={"offer": ["../offer/app.js?v=c1d6af29"], "fees": ["../fees/app.js?v=7f380975"], "youth": ["../youth/app.js?v=94e9086d"], "grace": ["../grace/app.js?v=c09334f4"], "check6": ["../check6/app.js?v=12f22f9b"]}, V="61cb4491";
+  var done={}, panes=[].slice.call(document.querySelectorAll(".ppane"));
+  var KEYS=panes.map(function(p){return p.dataset.p});
+  var tabs=[].slice.call(document.querySelectorAll(".ptb"));
+  var subs=[].slice.call(document.querySelectorAll(".pt-sub"));
+  function load(k){
+    if(done[k]||!SRC[k]) return; done[k]=1;
+    SRC[k].forEach(function(u){
+      var s=document.createElement("script");
+      s.async=false;                                  // 照加入順序執行
+      if(u.indexOf("app.js")>=0) s.setAttribute("data-v",V);
+      s.src=u; document.body.appendChild(s);
+    });
+  }
+  function show(k,push){
+    if(KEYS.indexOf(k)<0) k=KEYS[0];
+    tabs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.pt===k?"true":"false")});
+    panes.forEach(function(p){p.hidden=p.dataset.p!==k});
+    subs.forEach(function(p){p.hidden=p.dataset.pt!==k});
+    load(k);
+    if(push){ try{history.replaceState(null,"","#"+k)}catch(e){} }
+  }
+  // 分頁鈕，以及任何指向同一組其他工具的連結，都改成切分頁，不要整頁跳走。
+  // 建置時就在 HTML 裡的連結已經改成 data-pt，這裡再接住工具執行期才產生的 ../xxx/ 連結。
+  document.addEventListener("click",function(e){
+    var t=e.target.closest?e.target.closest("[data-pt]"):null;
+    if(!t){
+      var a=e.target.closest?e.target.closest("a[href]"):null;
+      if(!a) return;
+      var m=(a.getAttribute("href")||"").match(/^\.\.\/([a-z0-9]+)\/$/);
+      if(!m||KEYS.indexOf(m[1])<0) return;
+      t={dataset:{pt:m[1]}};
+    }
+    e.preventDefault(); show(t.dataset.pt,1);
+    window.scrollTo(0,0);
+  });
+  var h=(location.hash||"").replace(/^#/,"").split("&")[0];
+  show(h,0);
+})();
+</script>
+</body>
+</html>

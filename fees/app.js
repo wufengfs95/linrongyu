@@ -2,6 +2,10 @@
 (function () {
   var RT = window.RT, $ = RT.$, esc = RT.esc;
   var role = 'buyer';
+  // 這份程式也會被「我要買房」「我要賣房」的合併頁載入，網址不一樣，
+  // 所以資料檔的位置要從 script 自己的網址推，不能寫死相對路徑
+  var me = document.currentScript || document.querySelector('script[src*="fees/app.js"]') || { src: '' };
+  var HERE = (me.src || '').replace(/[?#].*$/, '').replace(/app\.js$/, '') || '';
 
   function setRole(r) {
     role = r;
@@ -189,7 +193,7 @@
         L('本次的仲介服務費收據',
           '算「可認列移轉費用」用，沒有單據的話可以用法定上限：成交價 3%、最多 30 萬'),
       ],
-      tool: ['https://wufengfs95.github.io/linrongyu/seller/', '用「賣方實拿」把房地合一稅算出來'],
+      tool: ['../seller/', '用「賣方實拿」把房地合一稅算出來'],
     },
 
     oldEra: {
@@ -262,7 +266,7 @@
   // 物價指數：主計總處「各年月為基期之消費者物價總指數－稅務專用」整張表，
   // 由 fees/cpi.json 載入（民國 48 年起逐月）。填了原因發生年月就自動帶入。
   var CPI = null;
-  fetch('cpi.json').then(function (r) { return r.json(); }).then(function (d) {
+  fetch(HERE + 'cpi.json').then(function (r) { return r.json(); }).then(function (d) {
     CPI = d;
     var n = $('ltCpiNote'); if (n) n.textContent = '資料版本：' + d.ver;
     fillCpi();
@@ -388,12 +392,18 @@
   document.querySelectorAll('#feRole button').forEach(function (b) {
     b.addEventListener('click', function () { setRole(b.getAttribute('data-r')); });
   });
+  // 合併頁（我要買房／我要賣房）會在表單上標 data-role 鎖死身分，沒有切換鈕、也不理網址
+  var lockRole = $('feForm').getAttribute('data-role');
   ['feTotal', 'feDeed', 'feExtra'].forEach(function (id) { $(id).addEventListener('input', calc); });
   $('feEra').addEventListener('change', function(){ calc(); docs(); });
   $('feLoan').addEventListener('change', calc);
 
-  // 從「我要賣房」點進來是 #seller，「我要買房」是 #buyer
-  function fromHash() { setRole(location.hash === '#seller' ? 'seller' : 'buyer'); }
-  window.addEventListener('hashchange', fromHash);
-  fromHash();
+  if (lockRole) {
+    setRole(lockRole);
+  } else {
+    // 單獨開 /fees/ 的時候，從「我要賣房」點進來是 #seller，「我要買房」是 #buyer
+    var fromHash = function () { setRole(location.hash === '#seller' ? 'seller' : 'buyer'); };
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
 })();
