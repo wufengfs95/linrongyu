@@ -109,26 +109,29 @@
   if(bform){
     bform.addEventListener('submit',function(e){
       e.preventDefault();
-      var pick=function(n){   // 現在全部是下拉式選單，類型與區域可以複選
-        var el=bform.querySelector('[name='+n+']');
-        if(!el) return '不限';
-        if(el.tagName==='SELECT'){
-          return [].slice.call(el.selectedOptions).map(function(o){return o.value}).join('、')||'不限';
-        }
-        return [].slice.call(bform.querySelectorAll('input[name='+n+']:checked'))
-          .map(function(x){return x.value}).join('、')||'不限';
-      };
       var val=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
-      var msg='容瑜你好，我想找房子：\n'+
-        '・類型：'+pick('bkind')+'\n'+
-        '・區域：'+pick('barea')+'\n'+
-        '・房數：'+pick('broom')+'\n'+
-        '・總價：'+pick('bbudget')+'\n'+
-        '・時程：'+pick('bwhen')+'\n'+
-        '・稱呼：'+(val('by-name')||'（未填）')+'\n'+
-        '・方便聯絡：'+val('by-contact')+
-        (val('by-note')?'\n・其他條件：'+val('by-note'):'');
-      copyThenOpenLine(msg,document.getElementById('by-toast'));
+      // 只寫有填的，沒選的就不要出現在訊息裡，屋主看了才清楚
+      var L=['容瑜你好，我想找房子：'];
+      var rng=function(label,a,b,unit){
+        var x=val(a), y=val(b);
+        if(!x&&!y) return;
+        L.push('・'+label+'：'+(x&&y?x+'～'+y+' '+unit:x?x+' '+unit+'以上':y+' '+unit+'以下'));
+      };
+      rng('總價','bbudget','bbudget2','萬');
+      rng('坪數','bping','bping2','坪');
+      rng('樓層','bfloor','bfloor2','樓');
+      // 每一組條件（fieldset[data-q]）自己報自己的名字，之後加條件這裡不用改
+      [].slice.call(bform.querySelectorAll('fieldset[data-q]')).forEach(function(fs){
+        var v=[].slice.call(fs.querySelectorAll('input:checked'))
+          .map(function(x){return x.value}).filter(Boolean);
+        if(v.length) L.push('・'+fs.getAttribute('data-q')+'：'+v.join('、'));
+      });
+      if(val('bschool')) L.push('・指定學區：'+val('bschool'));
+      L.push('・時程：'+val('bwhen'));
+      L.push('・稱呼：'+(val('by-name')||'（未填）'));
+      L.push('・方便聯絡：'+val('by-contact'));
+      if(val('by-note')) L.push('・其他條件：'+val('by-note'));
+      copyThenOpenLine(L.join('\n'),document.getElementById('by-toast'));
     });
   }
 
