@@ -1,5 +1,5 @@
 /* 猜價王：一筆桃園實價登錄成交，猜房屋總價（不含車位），5 題一局。
-   每題分數：誤差 0% 得 100 分，誤差 50% 以上 0 分，中間線性。題庫同「誰比較貴」：game/deals.json */
+   每題分數：誤差 0% 得 100 分，誤差 50% 以上 0 分，中間線性，題庫同「誰比較貴」：game/deals.json */
 (function(){
   var RT=window.RT, GM=window.GM, $=RT.$, esc=RT.esc;
   var KIND={a:'電梯大樓',b:'華廈',c:'公寓',d:'透天厝'};
@@ -59,7 +59,7 @@
       (mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';
     $('guExtra').innerHTML='<ul class="gm-rounds">'+log.map(function(x){
       return '<li><span>'+esc(x.d.town)+' '+esc(x.d.road)+'・'+KIND[x.d.k]+'</span><span>猜 '+RT.comma(x.g)+'／實際 <b>'+RT.comma(x.d.p)+'</b> 萬</span></li>'}).join('')+'</ul>';
-    $('guCta').innerHTML='想知道<b>你家</b>現在值多少？<a href="../value/">房屋估價 →</a> 或上傳謄本用 <a href="../deed/">謄本估價 →</a><br>要更準的，<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>幫你拉同社區成交。';
+    $('guCta').innerHTML='想知道<b>你家</b>現在值多少？<a href="../value/">房屋估價 →</a> 或上傳謄本用 <a href="../deed/">謄本估價 →</a><br>要更準的，<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>幫你拉同社區成交';
     $('guResult').hidden=false;
     setTimeout(function(){ $('guResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }

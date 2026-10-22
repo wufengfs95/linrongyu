@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;800&display=swap" />
 
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"容瑜房產計算機","url":"https://wufengfs95.github.io/linrongyu/calculator/","provider":{"@type":"RealEstateAgent","name":"林容瑜","url":"https://wufengfs95.github.io/linrongyu/","telephone":"+886-973-263-569","areaServed":["桃園市中壢區","桃園市平鎮區"]},"applicationCategory":"FinanceApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"zh-Hant","description":"五合一房產試算工具，包含房地合一稅、購屋能力評估、買賣雜費、賣方實拿速算與豪宅稅，所有欄位即時連動並可列印成 PDF。","featureList":["房地合一稅試算","購屋能力評估","買賣雜費估算","賣方實拿速算","豪宅稅判定"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"賣房子除了房地合一稅還要付什麼？","acceptedAnswer":{"@type":"Answer","text":"賣方常見的支出包含仲介服務費（市場常見為成交價的 4%）、地政士代書費、履約保證費、實價登錄申報費，以及土地增值稅；若有貸款還要計算清償與塗銷費用。把這些一起扣掉，才是實際拿到手的金額。"}},{"@type":"Question","name":"房地合一稅的稅率怎麼看？","acceptedAnswer":{"@type":"Answer","text":"依持有期間分級：持有 2 年以內 45%、超過 2 年未滿 5 年 35%、超過 5 年未滿 10 年 20%、超過 10 年 15%。自住房地符合條件者另有免稅額與 10% 優惠稅率。實際稅額仍以國稅局核定為準。"}},{"@type":"Question","name":"車位為什麼一定要拆開算？","acceptedAnswer":{"@type":"Answer","text":"車位坪數與單價和房屋本體差很多，若把車位價格混在總價裡去除以總坪數，算出來的每坪單價會失真，拿去跟實價登錄比對就是比假的。比價前要先把車位價格與坪數拆出來。"}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"容瑜房產計算機","url":"https://wufengfs95.github.io/linrongyu/calculator/","provider":{"@type":"RealEstateAgent","name":"林容瑜","url":"https://wufengfs95.github.io/linrongyu/","telephone":"+886-973-263-569","areaServed":["桃園市中壢區","桃園市平鎮區"]},"applicationCategory":"FinanceApplication","operatingSystem":"Web","isAccessibleForFree":true,"inLanguage":"zh-Hant","description":"五合一房產試算工具，包含房地合一稅、購屋能力評估、買賣雜費、賣方實拿速算與豪宅稅，所有欄位即時連動並可列印成 PDF","featureList":["房地合一稅試算","購屋能力評估","買賣雜費估算","賣方實拿速算","豪宅稅判定"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"賣房子除了房地合一稅還要付什麼？","acceptedAnswer":{"@type":"Answer","text":"賣方常見的支出包含仲介服務費（市場常見為成交價的 4%）、地政士代書費、履約保證費、實價登錄申報費，以及土地增值稅；若有貸款還要計算清償與塗銷費用，把這些一起扣掉，才是實際拿到手的金額"}},{"@type":"Question","name":"房地合一稅的稅率怎麼看？","acceptedAnswer":{"@type":"Answer","text":"依持有期間分級：持有 2 年以內 45%、超過 2 年未滿 5 年 35%、超過 5 年未滿 10 年 20%、超過 10 年 15%，自住房地符合條件者另有免稅額與 10% 優惠稅率，實際稅額仍以國稅局核定為準"}},{"@type":"Question","name":"車位為什麼一定要拆開算？","acceptedAnswer":{"@type":"Answer","text":"車位坪數與單價和房屋本體差很多，若把車位價格混在總價裡去除以總坪數，算出來的每坪單價會失真，拿去跟實價登錄比對就是比假的，比價前要先把車位價格與坪數拆出來"}}]}]}</script>
 <style>
   :root {
     /* 配色：深藍 #1F3A5F ＋ 奶茶 #F5F0EB ＋ 磚紅 #B85C38 */
@@ -749,8 +749,8 @@
 
       var body = document.createElement('div');
       body.textContent = isLine
-        ? 'LINE 內建瀏覽器可能讓「登入 / 下載 / 地圖」卡住。點下面按鈕改用外部瀏覽器開啟，操作才會順。'
-        : appName + ' 內建瀏覽器可能讓「登入 / 下載 / 地圖」卡住。請點右上角「⋯」選「以外部瀏覽器開啟」，操作才會順。';
+        ? 'LINE 內建瀏覽器可能讓「登入 / 下載 / 地圖」卡住，點下面按鈕改用外部瀏覽器開啟，操作才會順'
+        : appName + ' 內建瀏覽器可能讓「登入 / 下載 / 地圖」卡住，請點右上角「⋯」選「以外部瀏覽器開啟」，操作才會順';
       wrap.appendChild(body);
 
       if (isLine && escapeUrl) {
@@ -791,12 +791,12 @@
   } catch (e) { /* 提示條掛了也絕不影響頁面本體 */ }
 })();
 </script>
-<meta name="description" content="賣房到底能拿回多少、買房總共要準備多少？房地合一稅、土地增值稅、仲介費、代書費、契稅印花稅，一頁全部算完。容瑜房產計算機提供的免費房產試算工具。">
+<meta name="description" content="賣房到底能拿回多少、買房總共要準備多少？房地合一稅、土地增值稅、仲介費、代書費、契稅印花稅，一頁全部算完，容瑜房產計算機提供的免費房產試算工具">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="容瑜房產計算機">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:title" content="容瑜房產計算機｜買賣房要算的八件事，一頁算完">
-<meta property="og:description" content="賣房到底能拿回多少、買房總共要準備多少？房地合一稅、土地增值稅、仲介費、代書費、契稅印花稅，一頁全部算完。容瑜房產計算機提供的免費房產試算工具。">
+<meta property="og:description" content="賣房到底能拿回多少、買房總共要準備多少？房地合一稅、土地增值稅、仲介費、代書費、契稅印花稅，一頁全部算完，容瑜房產計算機提供的免費房產試算工具">
 <meta property="og:url" content="https://wufengfs95.github.io/linrongyu/calculator/">
 <meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/profile.jpg">
 <style>
@@ -1248,7 +1248,7 @@
   <!-- 土地公告現值（依謄本） -->
   <div class="section yellow">
     <h3 class="section-title">土地公告現值（依謄本）<span class="tag">謄本抄入</span></h3>
-    <p style="font-size:21px; color:var(--ink-soft); margin:-8px 0 12px;">三格填完自動相乘。多筆土地請各自加總後填入</p>
+    <p style="font-size:21px; color:var(--ink-soft); margin:-8px 0 12px;">三格填完自動相乘，多筆土地請各自加總後填入</p>
     <div class="grid-3">
       <div class="field">
         <label>土地面積 <span class="hint">平方公尺</span></label>
@@ -1305,7 +1305,7 @@
       <label>土地增值稅 <span class="hint">萬 · 依稅單</span></label>
       <input type="number" id="lx_landTax" step="0.01" placeholder="例如: 50" oninput="calcLuxury()" />
     </div>
-    <p style="font-size:21px; color:var(--ink-soft); margin:12px 0 0;">代書費（潤筆）、實價登錄、履保費、塗銷費會自動帶入下方明細，不用手動填。</p>
+    <p style="font-size:21px; color:var(--ink-soft); margin:12px 0 0;">代書費（潤筆）、實價登錄、履保費、塗銷費會自動帶入下方明細，不用手動填</p>
   </div>
 
   <!-- 結果 -->
@@ -1429,8 +1429,8 @@
   </div>
 
   <div class="pr-note">
-    ※ 本表為費用概算與實拿試算，僅供參考；實際金額以各項稅單、銀行清償餘額與最終成交條件為準。<br>
-    ※ 房地合一稅依持有期間與自用住宅條件試算，實際稅額以國稅局核定為準。
+    ※ 本表為費用概算與實拿試算，僅供參考；實際金額以各項稅單、銀行清償餘額與最終成交條件為準<br>
+    ※ 房地合一稅依持有期間與自用住宅條件試算，實際稅額以國稅局核定為準
   </div>
 
   <div class="pr-foot">
@@ -2152,8 +2152,8 @@ function calcFees() {
   const w = x => (x / 10000).toFixed(1).replace(/\.0$/, '');
   out.textContent = '約 ' + w(r100(lo, false)) + '～' + w(r100(hi, true)) + ' 萬';
   note.innerHTML = '<b style="color:var(--gold-deep);">【說明】</b><br>'
-    + '以上是區間估算，代書費、規費依各事務所與實際稅單為準；標「依稅單」的項目沒有算進合計。<br>'
-    + (buyer ? '另外還有銀行開辦費、火險地震險等貸款相關費用，依銀行規定。' : '土地增值稅、房地合一稅金額差很多，簽約前可以先請代書試算。');
+    + '以上是區間估算，代書費、規費依各事務所與實際稅單為準；標「依稅單」的項目沒有算進合計<br>'
+    + (buyer ? '另外還有銀行開辦費、火險地震險等貸款相關費用，依銀行規定' : '土地增值稅、房地合一稅金額差很多，簽約前可以先請代書試算');
 }
 
 // 初始化買賣雜費
@@ -2312,7 +2312,7 @@ function printForClient() {
   const val = id => { const e = document.getElementById(id); return (e && e.value !== '') ? e.value : '—'; };
 
   if (txt('r_net') === '—') {
-    alert('請先輸入「想賣的總價」，才能產生給客戶的試算表。');
+    alert('請先輸入「想賣的總價」，才能產生給客戶的試算表');
     return;
   }
 
@@ -2420,7 +2420,7 @@ function printForClient() {
 </script>
 <div style="max-width:720px;margin:44px auto 30px;padding:22px 24px;background:#FAF3EA;border:1px solid #E8CAA4;border-left:5px solid #1F3A5F;border-radius:13px;font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;line-height:1.75;color:#1F2E2F">
   <p style="margin:0 0 10px;font-size:22px;font-weight:800">算完還有卡住的地方？</p>
-  <p style="margin:0 0 14px;font-size:20px;color:#5A6969">每個人的狀況都不一樣，計算機只能算通則。你的情況要怎麼判斷、稅費怎麼抓、貸款怎麼排，直接問我，我一對一幫你看。</p>
+  <p style="margin:0 0 14px;font-size:20px;color:#5A6969">每個人的狀況都不一樣，計算機只能算通則，你的情況要怎麼判斷、稅費怎麼抓、貸款怎麼排，直接問我，我一對一幫你看</p>
   <p style="margin:0">
     <a href="https://line.me/ti/p/~0973263569" style="display:inline-block;background:#06C755;color:#fff;text-decoration:none;font-weight:700;padding:9px 20px;border-radius:999px;margin:4px 8px 4px 0">💬 LINE 問我</a>
     <a href="tel:0973263569" style="display:inline-block;border:1.5px solid #1F3A5F;color:#16293F;text-decoration:none;font-weight:700;padding:8px 18px;border-radius:999px;margin:4px 0">📞 0973-263-569</a>

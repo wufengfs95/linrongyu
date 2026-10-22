@@ -30,7 +30,7 @@
 
   function drawTimes() {
     var box = $('bkTimes');
-    if (!picked.date) { box.innerHTML = '<p class="bk-hint">先選一天，再選時段。</p>'; return; }
+    if (!picked.date) { box.innerHTML = '<p class="bk-hint">先選一天，再選時段</p>'; return; }
     var d = new Date(picked.date + 'T00:00:00');
     var w = d.getDay();
     var list = (w === 0 || w === 6) ? SLOTS.we : SLOTS.wd;
@@ -41,8 +41,8 @@
       return '<button type="button" class="bk-time' + (picked.time === t ? ' on' : '') + '"'
         + (past ? ' disabled' : '') + ' data-t="' + t + '">' + t + '</button>';
     }).join('')
-      + '<p class="bk-hint">時段是我平常方便的時間，送出後我會回覆確認。'
-      + '想約表上沒有的時間，直接在備註寫，我盡量配合。</p>';
+      + '<p class="bk-hint">時段是我平常方便的時間，送出後我會回覆確認'
+      + '想約表上沒有的時間，直接在備註寫，我盡量配合</p>';
   }
 
   function chipVals(name) {
@@ -73,7 +73,7 @@
     $('bkGo').disabled = !need;
     if (!API) $('bkGo').textContent = '複製並開啟 LINE 送出';
     $('bkPre').textContent = message();
-    $('bkWhy').textContent = need ? '' : '姓名和電話填了才能送出。';
+    $('bkWhy').textContent = need ? '' : '姓名和電話填了才能送出';
   }
 
   $('bkDays').addEventListener('click', function (e) {
@@ -110,7 +110,7 @@
   function fallback(why) {
     $('bkGo').hidden = true;
     $('bkLine').hidden = false;
-    $('bkToast').textContent = why + '改用 LINE 傳給我，一樣會收到。';
+    $('bkToast').textContent = why + '改用 LINE 傳給我，一樣會收到';
   }
 
   function sent() {

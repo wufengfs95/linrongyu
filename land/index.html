@@ -85,7 +85,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
       縣市 <select id="county"><option value="H">桃園市</option></select>
       <label><input type="checkbox" id="auto"> 查到就自動開導航</label>
     </div>
-    <p class="hint">段名可以只打前兩個字（大享955）；有「之」號打 955-3 或 955之3。</p>
+    <p class="hint">段名可以只打前兩個字（大享955）；有「之」號打 955-3 或 955之3</p>
   </form>
 
   <div class="card">
@@ -115,7 +115,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
     </div>
     <div id="map"></div>
     <p class="dist" id="dist"></p>
-    <p class="hint">紅框是這筆土地的大約範圍（外框），紅線是地籍線。土地沒臨路時，導航會停在最近的路邊，最後一段要自己走。座標僅供現場找地參考，正式界址以地政事務所鑑界為準。</p>
+    <p class="hint">紅框是這筆土地的大約範圍（外框），紅線是地籍線，土地沒臨路時，導航會停在最近的路邊，最後一段要自己走，座標僅供現場找地參考，正式界址以地政事務所鑑界為準</p>
   </div>
 
   <div class="card hist">
@@ -126,7 +126,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
   <div class="card set">
     <details id="setBox">
       <summary>中繼站設定 <span class="badge" id="proxyState"></span></summary>
-      <p class="hint">國土測繪中心只接受從它自己網站發出的地號查詢，所以要透過你自己的 Google Apps Script 中繼站代查。貼上部署網址（https://script.google.com/macros/s/…/exec）後按儲存。</p>
+      <p class="hint">國土測繪中心只接受從它自己網站發出的地號查詢，所以要透過你自己的 Google Apps Script 中繼站代查，貼上部署網址（https://script.google.com/macros/s/…/exec）後按儲存</p>
       <div class="row">
         <input type="text" id="proxy" placeholder="https://script.google.com/macros/s/…/exec">
         <button type="button" id="saveProxy">儲存</button>
@@ -174,7 +174,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
     if (v && !/^https?:\/\//.test(v)) { say('err', '網址要用 https:// 開頭'); return; }
     store.set('proxy', v);
     showProxyState();
-    say('info', v ? '中繼站已儲存，可以開始查了。' : '已清除，改用預設中繼站。');
+    say('info', v ? '中繼站已儲存，可以開始查了' : '已清除，改用預設中繼站');
   };
 
   // ---------- 訊息 ----------
@@ -216,7 +216,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
       store.set('sect.' + code, { t: Date.now(), towns: towns, sects: sects });
       fillTowns(); say('', '');
     }).catch(function (e) {
-      say('err', '地段清單下載失敗（' + esc(e.message) + '），請確認網路後重新整理。');
+      say('err', '地段清單下載失敗（' + esc(e.message) + '），請確認網路後重新整理');
       throw e;
     });
     return loading;
@@ -287,13 +287,13 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
 
   function search(text) {
     var p = parseQuery(text);
-    if (!p) { say('err', '找不到地號數字。請打「段名＋地號」，例：大享段955'); return; }
+    if (!p) { say('err', '找不到地號數字，請打「段名＋地號」，例：大享段955'); return; }
     if (!p.place) { say('err', '請在地號前面打地段名稱，例：大享段' + esc(p.no)); return; }
     var no8 = landno8(p.no);
     if (!no8) { say('err', '地號格式不對：' + esc(p.no) + '（母號、子號最多各 4 位數）'); return; }
     (loading || loadCounty($('county').value)).then(function () {
       var hits = findSections(p.place);
-      if (!hits.length) { say('err', '找不到「' + esc(p.place) + '」這個地段。可以試著加上區名，或用下方「用選單找地段」。'); return; }
+      if (!hits.length) { say('err', '找不到「' + esc(p.place) + '」這個地段，可以試著加上區名，或用下方「用選單找地段」'); return; }
       if (hits.length === 1) { locate(hits[0], no8); return; }
       say('info', '有 ' + hits.length + ' 個地段符合，請選一個：<div class="choices">' + hits.slice(0, 20).map(function (h, i) {
         return '<button type="button" data-i="' + i + '">' + esc(h.town + '　' + h.name) + '</button>';
@@ -307,7 +307,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
   function locate(sect, no8) {
     var px = proxyUrl();
     if (!px) {
-      say('err', '還沒設定中繼站，請先到頁面最下面的「中繼站設定」貼上網址。');
+      say('err', '還沒設定中繼站，請先到頁面最下面的「中繼站設定」貼上網址');
       $('setBox').open = true; $('setBox').scrollIntoView({ behavior: 'smooth' });
       return;
     }
@@ -315,11 +315,11 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:8px 16px 90px
     say('info', '查詢中：' + esc(label) + '…');
     var url = px + (px.indexOf('?') > -1 ? '&' : '?') + 'office=' + sect.office + '&sect=' + sect.code + '&landno=' + no8;
     fetch(url).then(function (r) { return r.json(); }).then(function (d) {
-      if (!d.ok) { say('err', esc(label) + '：' + esc(d.msg || '查不到') + '<br>請確認地號是否正確（分割、合併後地號可能已經變了）。'); return; }
+      if (!d.ok) { say('err', esc(label) + '：' + esc(d.msg || '查不到') + '<br>請確認地號是否正確（分割、合併後地號可能已經變了）'); return; }
       say('', '');
       show({ label: label, q: sect.town + sect.name + prettyNo(no8), lat: +d.lat, lng: +d.lng, bbox: d.bbox });
     }).catch(function (e) {
-      say('err', '連不上中繼站（' + esc(e.message) + '）。請確認網路，或檢查中繼站網址是否正確。');
+      say('err', '連不上中繼站（' + esc(e.message) + '），請確認網路，或檢查中繼站網址是否正確');
     });
   }
 

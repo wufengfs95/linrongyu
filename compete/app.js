@@ -29,7 +29,7 @@
           '2':{t:'車位含在公設',price:1,area:1,est:1},
           '3':{t:'無產權／約定專用',price:0,area:0,note:'權狀坪不含車位'},
           '9':{t:'車位狀況待確認',price:0,area:0,ask:1}};
-  var BOOKMARKLET="javascript:(function(){var P=function(t){var m,b=0,re=/([\\d,]+(?:\\.\\d+)?)\\s*(億|萬)/g;while(m=re.exec(t)){var v=parseFloat(m[1].replace(/,/g,''));if(m[2]==='億')v*=1e4;if(v>b)b=v}return Math.round(b)};var A=function(t){var m=t.match(/權狀[^\\d]{0,4}([\\d.]+)\\s*坪/)||t.match(/([\\d.]+)\\s*坪/);return m?parseFloat(m[1]):0};var ok=function(e){if(e.children.length>12)return false;var t=e.innerText||'';return !!t&&t.length<=300&&/萬/.test(t)&&/坪/.test(t)};var all=[].filter.call(document.querySelectorAll('div,li,article,section,a'),ok);var leaf=all.filter(function(e){return !all.some(function(o){return o!==e&&e.contains(o)})});var seen={},out=[];leaf.forEach(function(e){var t=e.innerText.replace(/\\s+/g,' ').trim();var p=P(t),a=A(t);if(!(p>=100&&p<=5e4)||!(a>=3&&a<=500))return;var u=p/a;if(!(u>=3&&u<=200))return;var k=/車位/.test(t)&&!/無車位/.test(t)?9:0;var key=p+'_'+a;if(seen[key])return;seen[key]=1;out.push([p,a,k,t.split(' ')[0].slice(0,14).replace(/[|~]/g,' ')].join('~'))});if(!out.length){alert('這一頁沒有抓到物件。請在「搜尋結果列表」頁按，並先往下捲讓物件載入出來。');return}var u='__URL__#__TAB__c='+encodeURIComponent(out.slice(0,25).join('|'));if(!window.open(u,'_blank'))location.href=u})()";
+  var BOOKMARKLET="javascript:(function(){var P=function(t){var m,b=0,re=/([\\d,]+(?:\\.\\d+)?)\\s*(億|萬)/g;while(m=re.exec(t)){var v=parseFloat(m[1].replace(/,/g,''));if(m[2]==='億')v*=1e4;if(v>b)b=v}return Math.round(b)};var A=function(t){var m=t.match(/權狀[^\\d]{0,4}([\\d.]+)\\s*坪/)||t.match(/([\\d.]+)\\s*坪/);return m?parseFloat(m[1]):0};var ok=function(e){if(e.children.length>12)return false;var t=e.innerText||'';return !!t&&t.length<=300&&/萬/.test(t)&&/坪/.test(t)};var all=[].filter.call(document.querySelectorAll('div,li,article,section,a'),ok);var leaf=all.filter(function(e){return !all.some(function(o){return o!==e&&e.contains(o)})});var seen={},out=[];leaf.forEach(function(e){var t=e.innerText.replace(/\\s+/g,' ').trim();var p=P(t),a=A(t);if(!(p>=100&&p<=5e4)||!(a>=3&&a<=500))return;var u=p/a;if(!(u>=3&&u<=200))return;var k=/車位/.test(t)&&!/無車位/.test(t)?9:0;var key=p+'_'+a;if(seen[key])return;seen[key]=1;out.push([p,a,k,t.split(' ')[0].slice(0,14).replace(/[|~]/g,' ')].join('~'))});if(!out.length){alert('這一頁沒有抓到物件，請在「搜尋結果列表」頁按，並先往下捲讓物件載入出來');return}var u='__URL__#__TAB__c='+encodeURIComponent(out.slice(0,25).join('|'));if(!window.open(u,'_blank'))location.href=u})()";
 
   function compRow(v){
     v=v||{};
@@ -122,10 +122,10 @@
   function makeReport(inp,got,deals,cs,r){
     var band = !r.mine ? null
       : (function(g){
-          return g>15 ? {k:'high', t:'明顯高於行情', c:'這個價格會變成比較基準裡最貴的一間，買方多半直接略過。'}
-               : g>8  ? {k:'over', t:'略高於行情',   c:'在合理議價空間的上緣，可以試水溫 2～4 週，沒帶看就要調整。'}
-               : g>=-3? {k:'fit',  t:'符合行情',     c:'開在行情附近，保留了正常議價空間，是好賣的價格。'}
-               :        {k:'low',  t:'低於行情',     c:'會很快成交，但可能少賺，建議再確認一次。'};
+          return g>15 ? {k:'high', t:'明顯高於行情', c:'這個價格會變成比較基準裡最貴的一間，買方多半直接略過'}
+               : g>8  ? {k:'over', t:'略高於行情',   c:'在合理議價空間的上緣，可以試水溫 2～4 週，沒帶看就要調整'}
+               : g>=-3? {k:'fit',  t:'符合行情',     c:'開在行情附近，保留了正常議價空間，是好賣的價格'}
+               :        {k:'low',  t:'低於行情',     c:'會很快成交，但可能少賺，建議再確認一次'};
         })((r.mine/r.mid-1)*100);
 
     var now=new Date();
@@ -154,8 +154,8 @@
         '<div><span>建議開價</span><b>'+r.listLo+'～'+r.listHi+' 萬</b></div>'+
       '</div>'+
       '<div class="cr-sec"><h3>行情依據</h3><p>'+esc(got.scope)+'，共 '+deals.length+' 筆實價登錄成交，'+
-        '單價落在 '+r.lo.toFixed(1)+'～'+r.hi.toFixed(1)+' 萬/坪。'+
-        (r.mine?'屋主開價換算房屋單價 '+r.mine.toFixed(1)+' 萬/坪，比 '+r.pos.toFixed(0)+'% 的成交還貴。':'')+'</p>'+
+        '單價落在 '+r.lo.toFixed(1)+'～'+r.hi.toFixed(1)+' 萬/坪'+
+        (r.mine?'屋主開價換算房屋單價 '+r.mine.toFixed(1)+' 萬/坪，比 '+r.pos.toFixed(0)+'% 的成交還貴':'')+'</p>'+
         '<table class="cr-tab"><thead><tr><th>成交</th><th>位置</th><th>樓層</th><th>坪數</th><th>單價</th></tr></thead><tbody>'+
         recent.map(function(x){return '<tr><td>'+x.y+' Q'+x.q+'</td><td>'+esc(x.road+(x.lane?x.lane+'巷':''))+'</td>'+
           '<td class="n">'+(x.f||'—')+(x.tf?'/'+x.tf:'')+'</td><td class="n">'+x.a.toFixed(1)+'</td>'+
@@ -163,9 +163,9 @@
       (solid.length?'<div class="cr-sec"><h3>附近在售的競品</h3>'+
         '<table class="cr-tab"><thead><tr><th>物件</th><th>車位</th><th>開價(萬)</th><th>權狀坪</th><th>單價</th></tr></thead>'+
         '<tbody>'+rows(solid)+'</tbody></table>'+
-        '<p class="cr-note">單價皆已換算成不含車位的房屋單價，基準一致才能互相比較。</p></div>':'')+
-      '<div class="cr-foot"><p>資料來源：內政部不動產交易實價查詢服務網（'+esc(meta.updated||'')+'）。'+
-        '本分析為依成交資料自動統計的參考值，非不動產估價師之估價報告；屋況、景觀、樓層、裝潢均會影響實際成交價。</p>'+
+        '<p class="cr-note">單價皆已換算成不含車位的房屋單價，基準一致才能互相比較</p></div>':'')+
+      '<div class="cr-foot"><p>資料來源：內政部不動產交易實價查詢服務網（'+esc(meta.updated||'')+'）'+
+        '本分析為依成交資料自動統計的參考值，非不動產估價師之估價報告；屋況、景觀、樓層、裝潢均會影響實際成交價</p>'+
         '<p class="cr-me"><b>有巢氏房屋　中壢環中加盟店　林容瑜</b>　0973-263-569</p></div>';
 
     $('cReportWrap').hidden=false;
@@ -187,14 +187,14 @@
 
   function calc(){
     var inp=input();
-    if(!inp.town||!inp.area){ $('cResult').innerHTML='<div class="v-empty"><b>先填行政區和坪數</b><p>路段、巷、完工年都填，才找得到同社區的成交。</p></div>'; return; }
+    if(!inp.town||!inp.area){ $('cResult').innerHTML='<div class="v-empty"><b>先填行政區和坪數</b><p>路段、巷、完工年都填，才找得到同社區的成交</p></div>'; return; }
     var load=isX(inp.kind)
       ? xMeta().then(function(){ return xTown(inp.town); }).then(function(d){ return {d:d,x:true}; })
       : RT.town(inp.town).then(function(d){ return {d:d,x:false}; });
     load.then(function(w){
       var d=w.d;
       var got=w.x?findDealsX(inp,d):findDeals(inp,d), deals=got.rows;
-      if(!deals.length){ $('cResult').innerHTML='<p class="v-warn">找不到夠多的相近成交，請確認路段名稱，或放寬條件（不填完工年）。</p>'; return; }
+      if(!deals.length){ $('cResult').innerHTML='<p class="v-warn">找不到夠多的相近成交，請確認路段名稱，或放寬條件（不填完工年）</p>'; return; }
       var us=deals.map(function(x){return x.u}), mid=RT.median(us), lo=RT.quantile(us,.25), hi=RT.quantile(us,.75);
       var parkV=inp.park?(meta.towns[inp.town].park[inp.park]||(inp.park==='平面'?150:90)):0;
       var deal=mid*inp.area+parkV, listLo=Math.round(deal*1.05/10)*10-2, listHi=Math.round(deal*1.08/10)*10+8;
@@ -219,19 +219,19 @@
       if(mine){
         var gap=(mine/mid-1)*100, rank=cs.filter(function(c){return c.u<mine}).length+1;
         var cls=gap>15?'v-bad':gap>8?'v-ok':gap<-3?'v-good':'v-ok';
-        verdict=gap>15?'開價比成交行情高 '+gap.toFixed(0)+'%，會變成比較基準裡最貴的一間，買方多半直接略過，帶看量會很少。':
-                gap>8?'開價比成交行情高 '+gap.toFixed(0)+'%，在合理議價空間的上緣，可以試水溫 2～4 週，沒帶看就要調。':
-                gap>=-3?'開價在行情附近（'+RT.pct(gap,0)+'），保留了正常議價空間，是好賣的價格。':
-                '開價比成交行情低 '+(-gap).toFixed(0)+'%，會很快成交，但可能少賺，建議再確認一次。';
+        verdict=gap>15?'開價比成交行情高 '+gap.toFixed(0)+'%，會變成比較基準裡最貴的一間，買方多半直接略過，帶看量會很少':
+                gap>8?'開價比成交行情高 '+gap.toFixed(0)+'%，在合理議價空間的上緣，可以試水溫 2～4 週，沒帶看就要調':
+                gap>=-3?'開價在行情附近（'+RT.pct(gap,0)+'），保留了正常議價空間，是好賣的價格':
+                '開價比成交行情低 '+(-gap).toFixed(0)+'%，會很快成交，但可能少賺，建議再確認一次';
         html+='<div class="v-judge '+cls+'"><b>屋主開價 '+RT.wan(inp.ask)+'（房屋單價 '+mine.toFixed(1)+' 萬/坪）</b>'+esc(verdict)+
-          '<br>比 '+pos.toFixed(0)+'% 的成交還貴'+(cs.length?'；在 '+(cs.length+1)+' 間在售物件裡，單價排第 '+rank+' 便宜':'')+'。</div>';
+          '<br>比 '+pos.toFixed(0)+'% 的成交還貴'+(cs.length?'；在 '+(cs.length+1)+' 間在售物件裡，單價排第 '+rank+' 便宜':'')+'</div>';
       }
       html+=strip(deals,mine,cs,lo,hi);
       // 近期成交表
       var recent=deals.slice().sort(function(a,b){return b.y-a.y||b.q-a.q}).slice(0,12);
       html+='<details class="v-samples" open><summary>比對的成交（最近 '+recent.length+' 筆）</summary><div class="v-table-wrap"><table class="v-table"><thead><tr><th>成交</th><th>位置</th><th>樓層</th><th>坪數</th><th>單價</th><th>房屋總價</th></tr></thead><tbody>'+
         recent.map(function(x){return '<tr><td>'+x.y+' Q'+x.q+'</td><td>'+esc(x.road+(x.lane?x.lane+'巷':''))+'</td><td>'+(x.f||'-')+'/'+(x.tf||'-')+'</td><td>'+x.a.toFixed(1)+'</td><td>'+x.raw.toFixed(1)+'</td><td>'+RT.comma(x.raw*x.a)+' 萬</td></tr>'}).join('')+
-        '</tbody></table></div>'+(got.community?'':'<p class="v-note">非同社區的成交已依行政區每季行情校正到最新一季。</p>')+'</details>';
+        '</tbody></table></div>'+(got.community?'':'<p class="v-note">非同社區的成交已依行政區每季行情校正到最新一季</p>')+'</details>';
       // 車位基準一樣的才放在一起比。「無產權車位」權狀坪本來就不含車位、
       // 書籤抓回來的又看不出含不含，這兩種單價基準不同，混在一起取中位數會歪
       var ctab=function(list,title,note,open){
@@ -247,35 +247,35 @@
       var loose=cs.filter(function(c){return c.ask||c.k==='3'});
       html+=ctab(solid,'在售競品・已換算成不含車位的房屋單價',
         '車位價用在地行情（平面 '+tp['平面']+' 萬'+(isNew?'，新建案':'，一般中古屋 130～150 萬')+'、機械 '+tp['機械']+
-        ' 萬）扣除；車位坪數有填就用填的，沒填用平面 10 坪、機械 5 坪估。標「坪數估計」的是車位含在公設、'+
-        '沒有獨立登記坪數，數字是推估的，跟屋主說明時要講清楚。',1);
+        ' 萬）扣除；車位坪數有填就用填的，沒填用平面 10 坪、機械 5 坪估，標「坪數估計」的是車位含在公設、'+
+        '沒有獨立登記坪數，數字是推估的，跟屋主說明時要講清楚',1);
       html+=ctab(loose,'在售競品・車位基準不同，單獨看',
-        '這一組<b>沒有</b>扣車位，所以單價不能跟上面那組直接比。'+
+        '這一組<b>沒有</b>扣車位，所以單價不能跟上面那組直接比'+
         '「無產權／約定專用」的車位不在權狀坪數裡，扣了會把單價算高三成；'+
         '「待確認」是書籤從 591 抓回來的，591 的列表沒有車位欄位，看不出坪數含不含車位，'+
-        '請你確認後在上面把車位欄位改掉，它就會併進上面那組。');
+        '請你確認後在上面把車位欄位改掉，它就會併進上面那組');
       // 屋主溝通版
       var talk='【'+(inp.road||inp.town)+(inp.lane?inp.lane+'巷':'')+' 行情分析】\n'+
-        '我把'+got.scope+'近期的實價登錄都拉出來比過了，共 '+deals.length+' 筆，成交單價大多落在 '+lo.toFixed(1)+'～'+hi.toFixed(1)+' 萬/坪，中位數 '+mid.toFixed(1)+' 萬。\n'+
-        '以您家 '+inp.area+' 坪'+(parkV?'＋車位':'')+' 來算，合理成交價大約 '+RT.wan(deal)+'。\n'+
-        (cs.length?'目前附近同時在賣的還有 '+cs.length+' 間，開價換算單價 '+Math.min.apply(null,cs.map(function(c){return c.u})).toFixed(1)+'～'+Math.max.apply(null,cs.map(function(c){return c.u})).toFixed(1)+' 萬/坪，買方一定會拿來比。\n':'')+
+        '我把'+got.scope+'近期的實價登錄都拉出來比過了，共 '+deals.length+' 筆，成交單價大多落在 '+lo.toFixed(1)+'～'+hi.toFixed(1)+' 萬/坪，中位數 '+mid.toFixed(1)+' 萬，\n'+
+        '以您家 '+inp.area+' 坪'+(parkV?'＋車位':'')+' 來算，合理成交價大約 '+RT.wan(deal)+'，\n'+
+        (cs.length?'目前附近同時在賣的還有 '+cs.length+' 間，開價換算單價 '+Math.min.apply(null,cs.map(function(c){return c.u})).toFixed(1)+'～'+Math.max.apply(null,cs.map(function(c){return c.u})).toFixed(1)+' 萬/坪，買方一定會拿來比，\n':'')+
         (mine?'您想開的 '+RT.wan(inp.ask)+'，'+verdict+'\n':'')+
-        '我的建議是開 '+listLo+'～'+listHi+' 萬，保留議價空間，也不會被買方的價格篩選擋掉。\n'+
-        '資料來源：內政部實價登錄（'+meta.updated+'）。有巢氏房屋 中壢環中加盟店 林容瑜 0973-263-569';
+        '我的建議是開 '+listLo+'～'+listHi+' 萬，保留議價空間，也不會被買方的價格篩選擋掉，\n'+
+        '資料來源：內政部實價登錄（'+meta.updated+'），有巢氏房屋 中壢環中加盟店 林容瑜 0973-263-569';
       html+='<h3 class="rt-h3">屋主溝通版</h3><textarea class="rt-talk" id="cTalk" rows="9">'+esc(talk)+'</textarea>'+
         '<div class="rt-actions"><button type="button" class="btn" id="cCopy">複製文字</button><button type="button" class="btn btn-ghost" id="cShare">複製分析連結</button>'+
         '<button type="button" class="btn btn-main" id="cMake">📄 產生客戶版表格</button>'+
         '<a class="btn btn-line" href="'+RT.LINE_URL+'" target="_blank" rel="noopener" data-rt-line="'+esc(talk)+'" data-toast="cToast">LINE 請容瑜實際評估</a></div><p class="toast" id="cToast" role="status"></p>'+
-        '<p class="v-disclaimer">本分析依內政部實價登錄成交資料自動統計，非不動產估價師的估價報告；屋況、景觀、樓層、裝潢會影響實際價格。</p>';
+        '<p class="v-disclaimer">本分析依內政部實價登錄成交資料自動統計，非不動產估價師的估價報告；屋況、景觀、樓層、裝潢會影響實際價格</p>';
       $('cResult').innerHTML=html;
-      $('cCopy').onclick=function(){ RT.copy($('cTalk').value,$('cToast'),'已複製，可以直接貼給屋主。'); };
+      $('cCopy').onclick=function(){ RT.copy($('cTalk').value,$('cToast'),'已複製，可以直接貼給屋主'); };
       // 客戶版表格：先在畫面上產生預覽，確認沒問題再按列印
       $('cMake').onclick=function(){ makeReport(inp,got,deals,cs,{mid:mid,lo:lo,hi:hi,deal:deal,mine:mine,
         listLo:listLo,listHi:listHi,parkV:parkV,verdict:verdict,pos:pos}); };
       $('cShare').onclick=function(){
         var h={k:inp.kind,t:inp.town,r:inp.road,l:inp.lane||'',b:inp.built||'',a:inp.area,f:inp.floor||'',tf:inp.tops||'',pk:inp.park,ask:inp.ask||'',
                c:inp.comps.map(function(c){return [c.p,c.a,c.k||'0',c.n.replace(/[|~]/g,' '),c.pa||'',c.pt||''].join('~')}).join('|')};
-        history.replaceState(null,'',RT.hashUrl(h)); RT.copy(location.href,$('cToast'),'已複製分析連結，打開就會直接看到這份分析。');
+        history.replaceState(null,'',RT.hashUrl(h)); RT.copy(location.href,$('cToast'),'已複製分析連結，打開就會直接看到這份分析');
       };
     });
   }
@@ -349,7 +349,7 @@
     BOOKMARKLET.replace('__URL__', base).replace('__TAB__', tab));
   $('cBookmark').addEventListener('click', function(e){
     e.preventDefault();
-    alert('這顆是「書籤」，不是按鈕。\n\n請用滑鼠把它拖到瀏覽器上方的書籤列（只要做一次）。\n之後在 591 等網站的搜尋結果頁點一下它，那一頁的物件就會自動帶回來。');
+    alert('這顆是「書籤」，不是按鈕，\n\n請用滑鼠把它拖到瀏覽器上方的書籤列（只要做一次），\n之後在 591 等網站的搜尋結果頁點一下它，那一頁的物件就會自動帶回來');
   });
 
   $('cTown').addEventListener('change', suggestMine);
@@ -374,7 +374,7 @@
       compRow({p:p[0],a:p[1],k:p[2]==='1'?'1':(p[2]||'0'),n:p[3],pa:p[4]||'',pt:p[5]||'平面'}); });
     if(h.t) calc();
     else if(got.length){
-      $('cStatus').textContent='已經帶入 '+got.length+' 間在售競品。填好上面屋主的房子，就可以產生分析。';
+      $('cStatus').textContent='已經帶入 '+got.length+' 間在售競品，填好上面屋主的房子，就可以產生分析';
       $('cComps').scrollIntoView({block:'center',behavior:'smooth'});
     }
     // 預設不放空白列：競品走自動帶入，要手打再按「＋ 手動加一間」

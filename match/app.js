@@ -47,8 +47,8 @@
     var q=need();
     var list=ALL.map(function(L){return {L:L,sc:score(L,q)}}).sort(function(a,b){return b.sc.s-a.sc.s||a.L.p-b.L.p});
     var good=list.filter(function(x){return x.sc.s>=85}).length;
-    $('mCount').textContent='網站上 '+ALL.length+' 間物件，完全符合 '+good+' 間，已依符合度排序。';
-    $('mList').innerHTML=list.map(function(x){return card(x.L,x.sc,true)}).join('')||'<p>目前沒有上架物件。</p>';
+    $('mCount').textContent='網站上 '+ALL.length+' 間物件，完全符合 '+good+' 間，已依符合度排序';
+    $('mList').innerHTML=list.map(function(x){return card(x.L,x.sc,true)}).join('')||'<p>目前沒有上架物件</p>';
     updatePickBar();
   }
   function updatePickBar(){
@@ -74,7 +74,7 @@
       '<h2>'+(h.n?esc(h.n)+' 的':'')+'專屬物件報告</h2>'+
       '<p class="rt-sub">整理日期 '+esc(h.d||'')+'・共 '+items.length+' 間'+(cond.length?'・條件：'+esc(cond.join('、')):'')+'</p>'+
       (h.note?'<div class="v-judge v-ok"><b>容瑜的話</b>'+esc(h.note)+'</div>':'')+
-      (gone?'<p class="v-warn">報告裡有 '+gone+' 間物件已經成交或下架，所以沒有顯示。想看類似的，直接 LINE 我。</p>':'')+
+      (gone?'<p class="v-warn">報告裡有 '+gone+' 間物件已經成交或下架，所以沒有顯示，想看類似的，直接 LINE 我</p>':'')+
       '<div class="rt-cards">'+items.map(function(L){return card(L,null,false)}).join('')+'</div>'+
       '<div class="rt-actions no-print">'+
         '<button type="button" class="btn" id="mCopy">複製報告連結</button>'+
@@ -82,9 +82,9 @@
         '<a class="btn btn-line" href="'+RT.LINE_URL+'" target="_blank" rel="noopener" data-rt-line="'+esc('容瑜你好，我看了你整理的物件報告，想約時間帶看：'+items.map(function(L){return L.t}).join('、'))+'" data-toast="mToast2">LINE 約帶看</a>'+
         '<a class="btn btn-ghost" href="./">重新配案</a></div>'+
       '<p class="toast" id="mToast2" role="status"></p>'+
-      '<p class="v-disclaimer">物件資訊以現場與產權資料為準；價格可能已調整，帶看前容瑜會再跟你確認最新狀況。聯絡電話 0973-263-569。</p></div>';
+      '<p class="v-disclaimer">物件資訊以現場與產權資料為準；價格可能已調整，帶看前容瑜會再跟你確認最新狀況，聯絡電話 0973-263-569</p></div>';
     $('mTool').hidden=true; $('mReport').hidden=false; document.body.classList.add('rt-reporting');
-    var c=$('mCopy'); if(c) c.addEventListener('click',function(){ RT.copy(location.href,$('mToast2'),'已複製報告連結，可以直接貼給客戶。'); });
+    var c=$('mCopy'); if(c) c.addEventListener('click',function(){ RT.copy(location.href,$('mToast2'),'已複製報告連結，可以直接貼給客戶'); });
   }
 
   function loadHashIntoForm(h){
@@ -103,7 +103,7 @@
     if(h.pick&&h.view==='report'){ loadHashIntoForm(h); report(h); return; }
     if(h.pick||h.n||h.hi||h.lo||h.rm||h.pk) loadHashIntoForm(h);   // 夢想屋遊戲會帶預算、房數、車位過來
     run();
-  }).catch(function(){ $('mList').innerHTML='<p class="v-warn">物件資料載入失敗，請重新整理頁面。</p>'; });
+  }).catch(function(){ $('mList').innerHTML='<p class="v-warn">物件資料載入失敗，請重新整理頁面</p>'; });
 
   document.addEventListener('click',function(e){
     var b=e.target.closest('.rt-chipset button'); if(!b) return;

@@ -1,6 +1,6 @@
 /* 10 秒找亮點：同一張物件照片，右邊（手機是下面）被程式偷改 3 個地方，10 秒內全部點到就過關。
-   照片來自網站上架物件（photos.json 由 build.py 產生），不同處每局隨機產生，所以可以一直重玩。
-   排行榜用房產遊戲室共用的 assets/game.js（GM.board）。 */
+   照片來自網站上架物件（photos.json 由 build.py 產生），不同處每局隨機產生，所以可以一直重玩，
+   排行榜用房產遊戲室共用的 assets/game.js（GM.board）， */
 (function(){
   var RT=window.RT, GM=window.GM, $=RT.$, esc=RT.esc;
   var LIMIT=10, PENALTY=1, N=3, W=720;   // 秒數、點錯扣秒、不同處數量、運算用寬度
@@ -99,7 +99,7 @@
     im.onload=function(){ var R=build(im); if(!R) return tries<6&&prepare(tries+1);
       R.photo=ph; pending=R;
       if(state==='idle') show(); else if(want){ want=false; show(); start(); } };
-    im.onerror=function(){ if(tries<6) prepare(tries+1); else msg('照片載入失敗，請重新整理再試一次。'); };
+    im.onerror=function(){ if(tries<6) prepare(tries+1); else msg('照片載入失敗，請重新整理再試一次'); };
     im.src=ph.src;
   }
   function show(){
@@ -181,5 +181,5 @@
       list.forEach(function(L){ L.i.forEach(function(src){ photos.push({s:L.s,t:L.t,src:'../listings/'+L.s+'/'+src}); }); });
       if(!photos.length) return msg('目前沒有可以玩的照片，過幾天再來看看！');
       prepare(0);
-    }).catch(function(){ msg('照片清單載入失敗，請重新整理再試一次。'); });
+    }).catch(function(){ msg('照片清單載入失敗，請重新整理再試一次'); });
 })();

@@ -1,5 +1,5 @@
 /* 賣方實拿速算 —— 計算邏輯原封不動沿用舊計算機（calculator/index.html），只換掉版面。
-   稅務算式沒有重寫，避免改出錯誤。 */
+   稅務算式沒有重寫，避免改出錯誤， */
 const FIXED = {
   run: 0.1,      // 代書費（潤筆）
   reg: 0.2,      // 實價登錄費
@@ -520,7 +520,7 @@ function printForClient() {
   const val = id => { const e = document.getElementById(id); return (e && e.value !== '') ? e.value : '—'; };
 
   if (txt('r_net') === '—') {
-    alert('請先輸入「想賣的總價」，才能產生給客戶的試算表。');
+    alert('請先輸入「想賣的總價」，才能產生給客戶的試算表');
     return;
   }
 

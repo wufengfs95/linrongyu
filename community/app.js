@@ -24,13 +24,13 @@
     if(!t||!road){ $('kGroups').innerHTML=''; return; }
     RT.town(t).then(function(d){
       var ri=RT.roadIndex(d,road);
-      if(ri<0){ $('kGroups').innerHTML='<p class="v-warn">找不到「'+esc(road)+'」，請從下拉選單選路段（例：'+esc(d.roads.slice(0,3).join('、'))+'）。</p>'; return; }
+      if(ri<0){ $('kGroups').innerHTML='<p class="v-warn">找不到「'+esc(road)+'」，請從下拉選單選路段（例：'+esc(d.roads.slice(0,3).join('、'))+'）</p>'; return; }
       road=d.roads[ri]; $('kRoad').value=road;
       var gs=groups(d,ri);
       $('kGroups').innerHTML=gs.length?'<p class="v-hint">'+esc(road)+' 找到 '+gs.length+' 個社區（近三年有 2 筆以上成交），點一個看成交：</p><div class="rt-glist">'+
         gs.map(function(g){ var last=g.rows.reduce(function(a,r){return sid(r)>sid(a)?r:a});
           return '<button type="button" data-g="'+esc(g.key)+'"><b>'+esc(label(g,road))+'</b><span>'+g.rows.length+' 筆・最近 '+last[2]+' Q'+last[3]+'</span></button>'; }).join('')+'</div>'
-        :'<p class="v-warn">'+esc(road)+' 近三年沒有同社區 2 筆以上的成交。</p>';
+        :'<p class="v-warn">'+esc(road)+' 近三年沒有同社區 2 筆以上的成交</p>';
       $('kGroups').querySelectorAll('[data-g]').forEach(function(b){ b.addEventListener('click',function(){
         show(t,road,gs.filter(function(g){return g.key===b.getAttribute('data-g')})[0]); if(window.innerWidth<900) $('kResult').scrollIntoView({behavior:'smooth'}); }); });
     });
@@ -67,19 +67,19 @@
     var fresh=seen!=null?rows.filter(function(r){return sid(r)>seen}).length:0;
     var sizeBar='<div class="rt-chipset rt-sizes">'+SIZES.map(function(x){ var n=allRows.filter(function(r){return r[5]>=x[2]&&r[5]<x[3]}).length;
       return n?'<button type="button" data-size="'+x[0]+'" aria-pressed="'+(x[0]===size)+'">'+x[1]+'（'+n+'）</button>':''; }).join('')+'</div>';
-    if(!rows.length){ $('kResult').innerHTML=sizeBar+'<p class="v-warn">這個坪數沒有成交。</p>'; bindSize(t,road,g); return; }
+    if(!rows.length){ $('kResult').innerHTML=sizeBar+'<p class="v-warn">這個坪數沒有成交</p>'; bindSize(t,road,g); return; }
     var html='<div class="v-price"><span>'+esc(t)+'</span><b class="rt-title">'+esc(cur.label)+'</b>'+
       '<span class="v-unit">近三年 <b>'+rows.length+'</b> 筆成交・最近一筆 <b>'+rows[0][2]+' 年 Q'+rows[0][3]+'</b>・全部中位 '+all.toFixed(1)+' 萬/坪</span></div>'+sizeBar;
     html+='<div class="rt-kpis"><div><span>近一年中位單價</span><b>'+(m1!=null?m1.toFixed(1)+' 萬':'沒有成交')+'</b><small>'+y1.length+' 筆</small></div>'+
       '<div><span>前一年中位單價</span><b>'+(m0!=null?m0.toFixed(1)+' 萬':'沒有成交')+'</b><small>'+y0.length+' 筆</small></div>'+
       '<div><span>一年漲跌</span><b class="'+(m1&&m0?(m1>=m0?'up':'down'):'')+'">'+(m1&&m0?RT.pct((m1/m0-1)*100):'—')+'</b><small>單價中位數比較</small></div></div>';
-    if(fresh) html+='<div class="v-judge v-good"><b>🔔 上次看過之後，有 '+fresh+' 筆新成交</b>表格裡標「新」的就是。</div>';
+    if(fresh) html+='<div class="v-judge v-good"><b>🔔 上次看過之後，有 '+fresh+' 筆新成交</b>表格裡標「新」的就是</div>';
     html+='<h3 class="rt-h3">每季成交中位單價（萬元／坪，不含車位）</h3>'+chart(rows);
     html+='<div class="v-table-wrap"><table class="v-table"><thead><tr><th>成交</th><th>樓層</th><th>坪數</th><th>單價</th><th>房屋總價</th><th>車位</th></tr></thead><tbody>'+
       rows.map(function(r){ var n=seen!=null&&sid(r)>seen;
         return '<tr'+(n?' class="rt-new"':'')+'><td>'+r[2]+' Q'+r[3]+(n?' <span class="rt-badge">新</span>':'')+'</td><td>'+(r[6]||'-')+'/'+(r[7]||'-')+'</td><td>'+r[5].toFixed(1)+'</td><td>'+r[4].toFixed(1)+'</td><td>'+RT.comma(r[4]*r[5])+' 萬</td><td>'+(r[11]?r[11]+' 萬':'-')+'</td></tr>'; }).join('')+
-      '</tbody></table></div><p class="v-note">實價登錄只公布到季，不公布門牌號碼與日期；房屋總價不含車位。</p>';
-    var msg='容瑜你好，我想追蹤「'+t+cur.label+'」的實價登錄，有新成交的時候麻煩通知我。';
+      '</tbody></table></div><p class="v-note">實價登錄只公布到季，不公布門牌號碼與日期；房屋總價不含車位</p>';
+    var msg='容瑜你好，我想追蹤「'+t+cur.label+'」的實價登錄，有新成交的時候麻煩通知我';
     html+='<div class="rt-actions"><button type="button" class="btn" id="kWatch">'+(w?'✓ 已在追蹤清單（更新為已讀）':'＋ 加入我的追蹤清單')+'</button>'+
       '<a class="btn btn-line" href="'+RT.LINE_URL+'" target="_blank" rel="noopener" data-rt-line="'+esc(msg)+'" data-toast="kToast">有新成交請容瑜 LINE 我</a></div><p class="toast" id="kToast" role="status"></p>';
     $('kResult').innerHTML=html; bindSize(t,road,g);
@@ -87,7 +87,7 @@
       var list=RT.store.get(KEY,[]).filter(function(x){return x.id!==cur.id});
       list.unshift({id:cur.id,t:t,road:road,key:g.key,label:cur.label,seen:Math.max.apply(null,allRows.map(sid)),n:allRows.length});
       var ok=RT.store.set(KEY,list);
-      $('kToast').textContent=ok?'已加入追蹤清單（存在這個瀏覽器）。實價登錄每季更新，下次打開這頁就會標出新成交。':'這個瀏覽器不能存資料（可能是無痕模式），改用 LINE 請我幫你盯。';
+      $('kToast').textContent=ok?'已加入追蹤清單（存在這個瀏覽器），實價登錄每季更新，下次打開這頁就會標出新成交':'這個瀏覽器不能存資料（可能是無痕模式），改用 LINE 請我幫你盯';
       this.textContent='✓ 已在追蹤清單（更新為已讀）'; renderWatch();
     };
   }

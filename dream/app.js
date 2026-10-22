@@ -1,5 +1,5 @@
 /* 預算內蓋夢想屋：每週一個預算，挑區域、型態、屋齡、房數、車位，用實價登錄中位單價估價。
-   預算內才算數：夢想分數＝各項分數加總＋剩下的錢每 50 萬 1 分。估價表是 build.py 產生的 dream/prices.json */
+   預算內才算數：夢想分數＝各項分數加總＋剩下的錢每 50 萬 1 分，估價表是 build.py 產生的 dream/prices.json */
 (function(){
   var RT=window.RT, GM=window.GM, $=RT.$, esc=RT.esc;
   var BUDGETS=[800,1000,1200,1500];
@@ -77,7 +77,7 @@
     $('drExtra').innerHTML=fit.length?'<p class="dr-sub">我正在賣、預算 '+RT.comma(budget)+' 萬以內的房子：</p><div class="dr-list">'+fit.map(function(L){
       return '<a href="../listings/'+esc(L.s)+'/"><img src="../'+esc(L.img)+'" alt="" loading="lazy"><span><b>'+esc(L.t)+'</b>'+esc(L.area)+'・'+esc(L.lay||L.k)+'・<em>'+RT.comma(L.p)+' 萬</em></span></a>'}).join('')+'</div>':'';
     var h={hi:budget,a:pick.t,k:kname,rm:pick.r,pk:pick.p&&pick.p!=='門口'?1:''};
-    $('drCta').innerHTML='想找真的符合條件的房子？<a href="'+esc('../match/'+RT.hashUrl(h).replace(/^[^#]*/,''))+'">用買方配案存下這組條件 →</a><br>或 <a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>，我幫你找實價登錄以外、還沒上網的物件。';
+    $('drCta').innerHTML='想找真的符合條件的房子？<a href="'+esc('../match/'+RT.hashUrl(h).replace(/^[^#]*/,''))+'">用買方配案存下這組條件 →</a><br>或 <a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>，我幫你找實價登錄以外、還沒上網的物件';
     $('drResult').hidden=false;
     setTimeout(function(){ $('drResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }
@@ -96,6 +96,6 @@
   render();
   var v=document.currentScript&&document.currentScript.getAttribute('data-v')||'';
   fetch('prices.json?v='+v).then(function(r){return r.json()}).then(function(d){ P=d; render(); })
-    .catch(function(){ $('drMsg').textContent='估價資料載入失敗，請重新整理。'; });
+    .catch(function(){ $('drMsg').textContent='估價資料載入失敗，請重新整理'; });
   fetch('../match/listings.json').then(function(r){return r.json()}).then(function(d){ listings=d; }).catch(function(){});
 })();

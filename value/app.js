@@ -113,7 +113,7 @@
     var totalLo=lo+parkPrice, totalHi=hi+parkPrice;
     var msg='容瑜你好，我用網站估價：'+inp.town+(inp.roadName?' '+inp.roadName:'')+'，'+KN[inp.kind]+
       ' '+inp.area+' 坪'+(inp.floor?'・'+inp.floor+'樓':'')+(inp.age!=null?'・屋齡 '+inp.age+' 年':'')+
-      (inp.park?'・'+inp.park+'車位':'')+'，估出來是 '+money(totalLo)+'～'+money(totalHi)+'，想請你幫我看實際行情、以及要開多少比較好。';
+      (inp.park?'・'+inp.park+'車位':'')+'，估出來是 '+money(totalLo)+'～'+money(totalHi)+'，想請你幫我看實際行情、以及要開多少比較好';
     var html='<div class="v-out">'+
       '<div class="v-price"><span>估計總價區間</span><b>'+money(totalLo)+' ～ '+money(totalHi)+'</b>'+
       '<span class="v-unit">每坪約 '+res.lo.toFixed(1)+'～'+res.hi.toFixed(1)+' 萬（中位 '+res.mid.toFixed(1)+' 萬）'+
@@ -128,24 +128,24 @@
     var gate=[1000,1500,2000,2500,3000,4000,5000];
     gate.forEach(function(g){ if(askHi>g&&askHi<=g*1.03) askHi=g-2; });
     html+='<div class="v-ask"><span>真的要賣，建議開價</span><b>'+money(askLo)+' ～ '+money(askHi)+'</b>'+
-      '<p>開在這個範圍，留得住議價空間，也不會變成同區最貴的那一間。'+
-      '開超過 '+money(Math.round(deal*1.15))+'（比行情高 15%）通常帶看量會明顯變少。</p></div>';
+      '<p>開在這個範圍，留得住議價空間，也不會變成同區最貴的那一間'+
+      '開超過 '+money(Math.round(deal*1.15))+'（比行情高 15%）通常帶看量會明顯變少</p></div>';
     if(inp.paid){
       var d=(inp.paid-mid-parkPrice)/(mid+parkPrice)*100;
       var cls=inp.paid>totalHi?'bad':inp.paid<totalLo?'good':'ok';
       var word=inp.paid>totalHi?'偏高':inp.paid<totalLo?'買得不錯':'在合理範圍';
       html+='<div class="v-judge v-'+cls+'"><b>買貴鑑定：'+word+'</b><span>你的成交價 '+money(inp.paid)+
-        '，跟估價中位（'+money(mid+parkPrice)+'）差 '+pct(d)+'。</span>'+
-        (cls==='bad'?'<span>價差可能來自裝潢、樓層景觀、車位或屋況，建議讓我看過實際條件再判斷。</span>':'')+'</div>';
+        '，跟估價中位（'+money(mid+parkPrice)+'）差 '+pct(d)+'</span>'+
+        (cls==='bad'?'<span>價差可能來自裝潢、樓層景觀、車位或屋況，建議讓我看過實際條件再判斷</span>':'')+'</div>';
     }
-    if(inp.floor===1) html+='<p class="v-warn">一樓常含店面、庭院或增建，線上估價誤差大，建議找我實際看過再報價。</p>';
-    if(inp.kind==='d') html+='<p class="v-warn">透天厝的土地坪數、面寬、臨路差很多，線上估價僅供參考。</p>';
+    if(inp.floor===1) html+='<p class="v-warn">一樓常含店面、庭院或增建，線上估價誤差大，建議找我實際看過再報價</p>';
+    if(inp.kind==='d') html+='<p class="v-warn">透天厝的土地坪數、面寬、臨路差很多，線上估價僅供參考</p>';
     html+='<details class="v-samples" open><summary>看比對到的成交（'+res.comps.length+' 筆中的最近 10 筆）</summary>'+
-      '<p class="v-note">「校正後」是把成交時間、樓層差異調整到跟你家一樣的條件之後的單價（萬元／坪）。</p>'+
+      '<p class="v-note">「校正後」是把成交時間、樓層差異調整到跟你家一樣的條件之後的單價（萬元／坪）</p>'+
       sampleTable(res.comps)+'</details>'+
       '<a class="btn btn-line v-cta" href="'+LINE_URL+'" target="_blank" rel="noopener" data-line-msg="'+esc(msg)+'" data-toast="vToast">LINE 給容瑜看實際行情</a>'+
       '<p class="toast" id="vToast" role="status"></p>'+
-      '<p class="v-disclaimer">本結果是用內政部實價登錄成交資料自動統計的參考價，不是不動產估價師的估價報告。實際成交價會受屋況、裝潢、景觀、產權與談判影響。</p>'+
+      '<p class="v-disclaimer">本結果是用內政部實價登錄成交資料自動統計的參考價，不是不動產估價師的估價報告，實際成交價會受屋況、裝潢、景觀、產權與談判影響</p>'+
       '</div>';
     $('vResult').innerHTML=html;
     $('vResult').hidden=false;
@@ -158,8 +158,8 @@
     var floor=parseInt($('vFloor').value,10)||0, tops=parseInt($('vTops').value,10)||0;
     var roadText=$('vRoad').value;
     var park=$('vPark').value, paid=parseFloat($('vPaid').value)||0;
-    if(!town){ status('請先選行政區。','err'); return; }
-    if(!area||area<5||area>300){ status('請填權狀坪數（不含車位），例如 32.5。','err'); return; }
+    if(!town){ status('請先選行政區','err'); return; }
+    if(!area||area<5||area>300){ status('請填權狀坪數（不含車位），例如 32.5','err'); return; }
     status('計算中…');
     loadTown(town).then(function(){
       var road=roadIndex(town,roadText), noRoad=road===-2;
@@ -168,13 +168,13 @@
                roadName:road>=0?towns[town].roads[road]:''};
       var res=estimate(inp);
       if(!res){
-        status('這個條件的成交資料太少，估不出可靠區間。可以放寬條件（不指定路段），或直接<a href="'+LINE_URL+'" target="_blank" rel="noopener">加 LINE 請容瑜幫你查</a>。','err');
+        status('這個條件的成交資料太少，估不出可靠區間，可以放寬條件（不指定路段），或直接<a href="'+LINE_URL+'" target="_blank" rel="noopener">加 LINE 請容瑜幫你查</a>','err');
         $('vResult').hidden=true;
         return;
       }
-      status(noRoad?'「'+esc(roadText)+'」在這一區的成交資料裡找不到，已改用全區行情估。':'');
+      status(noRoad?'「'+esc(roadText)+'」在這一區的成交資料裡找不到，已改用全區行情估':'');
       render(inp,res);
-    }).catch(function(){ status('資料載入失敗，請重新整理再試一次。','err'); });
+    }).catch(function(){ status('資料載入失敗，請重新整理再試一次','err'); });
   }
 
   // ---- 介面 ----
@@ -195,7 +195,7 @@
     var ln=e.target.closest('[data-line-msg]'); if(!ln) return;
     e.preventDefault();
     var msg=ln.getAttribute('data-line-msg'), toast=$('vToast');
-    var open=function(ok){ if(toast) toast.textContent=ok?'已複製估價內容，LINE 開啟後貼上送出就好。':''; window.open(LINE_URL,'_blank','noopener'); };
+    var open=function(ok){ if(toast) toast.textContent=ok?'已複製估價內容，LINE 開啟後貼上送出就好':''; window.open(LINE_URL,'_blank','noopener'); };
     try{ navigator.clipboard.writeText(msg).then(function(){open(true)},function(){open(false)}); }catch(err){ open(false); }
   });
 
@@ -212,5 +212,5 @@
         var k=m.towns[t].kinds;
         return '<tr><td>'+t+'</td>'+order.map(function(x){return '<td>'+(k[x]?k[x].m.toFixed(1):'—')+'</td>'}).join('')+'</tr>';
       }).join('')+'</tbody></table>';
-  }).catch(function(){ status('行情資料載入失敗，請重新整理。','err'); });
+  }).catch(function(){ status('行情資料載入失敗，請重新整理','err'); });
 })();

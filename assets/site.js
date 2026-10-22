@@ -287,7 +287,7 @@
         var ok=(!state.area||c.dataset.area===state.area)&&(!state.type||c.dataset.type===state.type)&&inRange(parseFloat(c.dataset.price),state.price);
         c.hidden=!ok; if(ok) n++;
       });
-      if(count) count.textContent=n?'共 '+n+' 間':'沒有符合的物件，換個條件看看，或直接加 LINE 問我。';
+      if(count) count.textContent=n?'共 '+n+' 間':'沒有符合的物件，換個條件看看，或直接加 LINE 問我';
     };
     document.querySelectorAll('.fbtn').forEach(function(b){
       b.addEventListener('click',function(){

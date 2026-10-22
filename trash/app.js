@@ -20,8 +20,8 @@
   // 搜尋：地點名稱或里名
   function search(q){
     q=(q||'').trim().replace(/\s+/g,'');
-    if(!q){ status('請輸入路名、門牌或里名，例如「忠孝路」。','err'); return; }
-    if(q.length<2){ status('至少輸入兩個字。','err'); return; }
+    if(!q){ status('請輸入路名、門牌或里名，例如「忠孝路」','err'); return; }
+    if(q.length<2){ status('至少輸入兩個字','err'); return; }
     var hits=[];
     data.towns.forEach(function(t){
       t.routes.forEach(function(r){
@@ -31,7 +31,7 @@
       });
     });
     if(!hits.length){
-      status('找不到「'+esc(q)+'」。試試只打路名（例如「中華路」），或改用下面的行政區、路線查。','err');
+      status('找不到「'+esc(q)+'」，試試只打路名（例如「中華路」），或改用下面的行政區、路線查','err');
       $('tqResult').innerHTML=''; return;
     }
     hits.sort(function(a,b){ return (runsToday(b.r.d)-runsToday(a.r.d)) || a.t.localeCompare(b.t,'zh-Hant'); });
@@ -93,5 +93,5 @@
     status('');
     var q=new URLSearchParams(location.search).get('q');
     if(q){ $('tqQ').value=q; search(q); }
-  }).catch(function(){ status('班表載入失敗，請重新整理再試一次。','err'); });
+  }).catch(function(){ status('班表載入失敗，請重新整理再試一次','err'); });
 })();

@@ -88,7 +88,7 @@
     d.hasPark=park>0 || /含停車位/.test(common);
     m=t.match(/所有面積\s*:\s*([\d,.]+)\s*平方公尺/);
     d.total=m?num(m[1]):(d.main+d.attach+com);
-    if(!d.main && d.total) d.warn.push('主建物面積讀不到，公設比無法計算。');
+    if(!d.main && d.total) d.warn.push('主建物面積讀不到，公設比無法計算');
     d.mainP=d.main/PING; d.attachP=d.attach/PING; d.commonP=d.common/PING; d.parkP=park/PING; d.totalP=d.total/PING;
     d.houseP=d.totalP-d.parkP;
     d.pubRatio=d.totalP?(d.commonP/(d.totalP-d.parkP))*100:0;
@@ -324,32 +324,32 @@
   function ownerNotes(d){
     var out=[];
     var n=d.ownerCount||d.owners.length;
-    if(n>1) out.push({c:'warn',t:'共 '+n+' 位所有權人（'+d.owners.map(function(o){return esc(o.name)+' '+o.share}).join('、')+'），簽委託、議價都要每一位同意。'});
-    else if(n===1) out.push({c:'ok',t:'單一所有權人（'+esc(d.owners[0].name)+'），產權單純。'});
+    if(n>1) out.push({c:'warn',t:'共 '+n+' 位所有權人（'+d.owners.map(function(o){return esc(o.name)+' '+o.share}).join('、')+'），簽委託、議價都要每一位同意'});
+    else if(n===1) out.push({c:'ok',t:'單一所有權人（'+esc(d.owners[0].name)+'），產權單純'});
     var o=d.owners[0];
     if(o && o.y){
       var yrs=yearsSince(o.y,o.m,o.d), rate, word;
       var oldRule=(o.y<105) && /買賣|拍賣|交換/.test(o.reason);
-      if(/繼承/.test(o.reason)) word='繼承取得：持有期間可以併計被繼承人的持有期間，房地合一稅率要看原本取得的時間。';
-      else if(oldRule) word='民國 105 年前買的，適用舊制（只課財產交易所得、併入綜所稅），稅負通常比較輕。';
+      if(/繼承/.test(o.reason)) word='繼承取得：持有期間可以併計被繼承人的持有期間，房地合一稅率要看原本取得的時間';
+      else if(oldRule) word='民國 105 年前買的，適用舊制（只課財產交易所得、併入綜所稅），稅負通常比較輕';
       else {
         rate=yrs<2?45:yrs<5?35:yrs<10?20:15;
-        word='房地合一稅率約 '+rate+'%'+(yrs<2?'，這時候賣稅很重，屋主開價通常會偏高':yrs<5?'，稅負仍偏重，屋主會想把稅轉嫁到價格':'')+'；若本人自住滿 6 年，可用 10% 優惠稅率（400 萬免稅額）。';
+        word='房地合一稅率約 '+rate+'%'+(yrs<2?'，這時候賣稅很重，屋主開價通常會偏高':yrs<5?'，稅負仍偏重，屋主會想把稅轉嫁到價格':'')+'；若本人自住滿 6 年，可用 10% 優惠稅率（400 萬免稅額）';
       }
-      out.push({c:yrs<2?'bad':yrs<5?'warn':'ok',t:'民國 '+o.y+' 年 '+o.m+' 月以「'+esc(o.reason)+'」取得，持有約 '+yrs.toFixed(1)+' 年。'+word});
+      out.push({c:yrs<2?'bad':yrs<5?'warn':'ok',t:'民國 '+o.y+' 年 '+o.m+' 月以「'+esc(o.reason)+'」取得，持有約 '+yrs.toFixed(1)+' 年'+word});
     }
     if(o && o.addr){
       var same=addrKey(o.addr)&&addrKey(d.addr)&&addrKey(o.addr)===addrKey(d.addr);
-      out.push({c:'info',t:same?'所有權人登記地址就是這一戶，可能自住，直接按門鈴有機會遇到本人。'
-                         :'所有權人地址在「'+esc(o.addr)+'」，跟門牌不同，這戶可能出租或空屋，開發用寄信聯絡比較實際。'});
+      out.push({c:'info',t:same?'所有權人登記地址就是這一戶，可能自住，直接按門鈴有機會遇到本人'
+                         :'所有權人地址在「'+esc(o.addr)+'」，跟門牌不同，這戶可能出租或空屋，開發用寄信聯絡比較實際'});
     }
     // 抵押
     var banks=d.liens.filter(function(l){return l.bank}), priv=d.liens.filter(function(l){return !l.bank && /抵押/.test(l.kind)});
     var sum=d.liens.reduce(function(s,l){return s+(l.amt||0)},0);
-    if(priv.length) out.push({c:'bad',t:'有私人（非金融機構）抵押：'+priv.map(function(l){return esc(l.who)+' '+Math.round(l.amt)+' 萬'}).join('、')+'，可能是民間借貸、資金壓力大，議價空間可能比較大，但要先確認清償狀況。'});
-    if(d.flags.length) out.push({c:'bad',t:'謄本出現「'+d.flags.join('、')+'」字樣，產權有限制，要先處理才能過戶。'});
-    if(!d.liens.length) out.push({c:'ok',t:'沒有設定抵押，屋主沒有房貸壓力，議價可能比較硬。'});
-    else out.push({c:'info',t:'抵押設定合計 '+Math.round(sum)+' 萬（'+d.liens.map(function(l){return l.who}).filter(function(w,i,a){return a.indexOf(w)===i}).map(esc).join('、')+'）。'});
+    if(priv.length) out.push({c:'bad',t:'有私人（非金融機構）抵押：'+priv.map(function(l){return esc(l.who)+' '+Math.round(l.amt)+' 萬'}).join('、')+'，可能是民間借貸、資金壓力大，議價空間可能比較大，但要先確認清償狀況'});
+    if(d.flags.length) out.push({c:'bad',t:'謄本出現「'+d.flags.join('、')+'」字樣，產權有限制，要先處理才能過戶'});
+    if(!d.liens.length) out.push({c:'ok',t:'沒有設定抵押，屋主沒有房貸壓力，議價可能比較硬'});
+    else out.push({c:'info',t:'抵押設定合計 '+Math.round(sum)+' 萬（'+d.liens.map(function(l){return l.who}).filter(function(w,i,a){return a.indexOf(w)===i}).map(esc).join('、')+'）'});
     // 推估購入價
     d.buy=null;
     if(o && /買賣/.test(o.reason) && banks.length){
@@ -357,7 +357,7 @@
       if(first.length){
         var amt=first.reduce(function(s,l){return s+l.amt},0), loan=amt/1.2;
         d.buy={lo:loan/.8, hi:loan/.7, loan:loan, y:o.y};
-        out.push({c:'info',t:'買入時銀行設定 '+Math.round(amt)+' 萬，推估當時貸款約 '+Math.round(loan)+' 萬、購入價約 <b>'+Math.round(d.buy.lo)+'～'+Math.round(d.buy.hi)+' 萬</b>（設定金額通常是貸款 1.2 倍、貸 7～8 成）。屋主心理價常以這個加上漲幅當底線。'});
+        out.push({c:'info',t:'買入時銀行設定 '+Math.round(amt)+' 萬，推估當時貸款約 '+Math.round(loan)+' 萬、購入價約 <b>'+Math.round(d.buy.lo)+'～'+Math.round(d.buy.hi)+' 萬</b>（設定金額通常是貸款 1.2 倍、貸 7～8 成），屋主心理價常以這個加上漲幅當底線'});
       }
     }
     return out;
@@ -388,8 +388,8 @@
       '<div class="d-hero-sub"><span>預估成交 <b>'+money(round10(mid))+'</b>（'+money(round10(lo))+'～'+money(round10(hi))+'）</span><span>建議底價 <b>'+money(floorP)+'</b></span></div></div>'+
       '<div class="v-meta"><span>比對 <b>'+res.comps.length+'</b> 筆成交</span><span>範圍：'+esc(res.scope)+'・'+esc(res.level)+'</span>'+
       '<span>可信度：<b class="v-conf v-conf-'+(res.conf==='高'?'hi':res.conf==='中'?'mid':'low')+'">'+res.conf+'</b></span></div>'+
-      (!res.community && res.sameN?'<p class="v-warn">同社區只找到 '+res.sameN+' 筆成交，太少，改用'+esc(res.scope)+'的行情估。建議再查 591、樂屋網同社區成交補強。</p>':'')+
-      (!res.community && !res.sameN?'<p class="v-warn">實價登錄裡找不到同社區的成交（可能是新社區、門牌對不到，或同社區成交都含特殊交易），改用'+esc(res.scope)+'的行情估，誤差會比較大。</p>':'')+
+      (!res.community && res.sameN?'<p class="v-warn">同社區只找到 '+res.sameN+' 筆成交，太少，改用'+esc(res.scope)+'的行情估，建議再查 591、樂屋網同社區成交補強</p>':'')+
+      (!res.community && !res.sameN?'<p class="v-warn">實價登錄裡找不到同社區的成交（可能是新社區、門牌對不到，或同社區成交都含特殊交易），改用'+esc(res.scope)+'的行情估，誤差會比較大</p>':'')+
 
       '<h3 class="d-h3">開價方案</h3><div class="d-plans">'+
         plan('快速成交',fast,'屋主急售、有資金壓力，想 1～2 個月內賣掉')+
@@ -411,14 +411,14 @@
       (d.warn.length?'<p class="v-warn">'+d.warn.map(esc).join('<br>')+'</p>':'')+
 
       '<details class="v-samples" open><summary>比對到的成交（最近 '+sold.length+' 筆，共 '+res.comps.length+' 筆）</summary>'+
-        '<p class="v-note">單價是萬元／坪、不含車位；「校正後」是把'+(res.community?'樓層':'成交時間、樓層')+'調到跟這戶一樣的條件。標 * 的是實價登錄車位沒拆價，已扣掉估計的車位價和車位坪數。</p>'+tbl+'</details>'+
+        '<p class="v-note">單價是萬元／坪、不含車位；「校正後」是把'+(res.community?'樓層':'成交時間、樓層')+'調到跟這戶一樣的條件，標 * 的是實價登錄車位沒拆價，已扣掉估計的車位價和車位坪數</p>'+tbl+'</details>'+
 
       '<h3 class="d-h3">跟屋主怎麼說</h3><div class="d-pitch" id="dPitch">'+esc(pitch).replace(/\n/g,'<br>')+'</div>'+
       '<div class="d-actions"><button type="button" class="btn btn-main" data-copy="pitch">複製給屋主的說法</button>'+
       '<button type="button" class="btn btn-ghost" data-copy="note">複製成筆記（Obsidian）</button>'+
       '<button type="button" class="btn btn-ghost" onclick="window.print()">列印／存 PDF</button></div>'+
       '<p class="toast" id="dToast" role="status"></p>'+
-      '<p class="v-disclaimer">本結果依謄本與內政部實價登錄成交資料自動統計，供仲介內部參考，不是不動產估價師的估價報告。屋況、裝潢、景觀、格局與產權狀況要現場確認後再調整。</p>'+
+      '<p class="v-disclaimer">本結果依謄本與內政部實價登錄成交資料自動統計，供仲介內部參考，不是不動產估價師的估價報告，屋況、裝潢、景觀、格局與產權狀況要現場確認後再調整</p>'+
       '</div>';
     $('dResult').innerHTML=html; $('dResult').hidden=false;
     $('dResult').scrollIntoView({behavior:'smooth',block:'start'});
@@ -430,9 +430,9 @@
     var L=last; if(!L) return '';
     var r=L.res, near=r.comps.slice(0,3).map(function(c){return c.y+' 年 '+(c.f?c.f+' 樓':'')+'每坪約 '+c.raw.toFixed(1)+' 萬'}).join('、');
     return '我把'+(r.community?'同社區':r.scope)+'最近的實價登錄都拉出來比過了，'+(near?'像是 '+near+'，':'')+
-      '換算成你家這戶的條件，實際成交大概落在 '+Math.round(round10(L.lo))+'～'+Math.round(round10(L.hi))+' 萬。\n'+
-      '我建議先開 '+Math.round(L.std)+' 萬，留一點讓買方談的空間，這個價位在網路上看起來有競爭力，比較容易約到帶看。'+
-      '如果 3～4 週帶看的反應不好，我們再一起看數字調整。';
+      '換算成你家這戶的條件，實際成交大概落在 '+Math.round(round10(L.lo))+'～'+Math.round(round10(L.hi))+' 萬，\n'+
+      '我建議先開 '+Math.round(L.std)+' 萬，留一點讓買方談的空間，這個價位在網路上看起來有競爭力，比較容易約到帶看'+
+      '如果 3～4 週帶看的反應不好，我們再一起看數字調整';
   }
   function noteText(){
     var L=last, d=L.d, r=L.res, n=nowRoc();
@@ -448,44 +448,44 @@
   }
 
   function run(){
-    if(!parsed){ status('請先上傳謄本。','err'); return; }
+    if(!parsed){ status('請先上傳謄本','err'); return; }
     var inp={town:$('dTown').value, road:$('dRoad').value.trim(), lane:parseInt($('dLane').value,10)||0,
              houseP:parseFloat($('dHouse').value)||0, parkP:parseFloat($('dParkP').value)||0,
              floor:parseInt($('dFloor').value,10)||0, tops:parseInt($('dTops').value,10)||0,
              builtY:parseInt($('dBuilt').value,10)||0, parkType:$('dPark').value, kind:getKind()};
     inp.age=inp.builtY?Math.floor(yearsSince(inp.builtY,6,1)):null;
-    if(!inp.town){ status('請選行政區（目前只有桃園市的行情資料）。','err'); return; }
-    if(!inp.houseP||inp.houseP<5){ status('房屋坪數（不含車位）讀不到，請手動填。','err'); return; }
+    if(!inp.town){ status('請選行政區（目前只有桃園市的行情資料）','err'); return; }
+    if(!inp.houseP||inp.houseP<5){ status('房屋坪數（不含車位）讀不到，請手動填','err'); return; }
     status('比對實價登錄中…');
     loadMeta().then(function(){ return loadTown(inp.town); }).then(function(){
       var res=estimate(inp);
-      if(!res){ status('這個條件的成交資料太少，估不出來。可以檢查路段、屋齡、型態是否正確。','err'); return; }
+      if(!res){ status('這個條件的成交資料太少，估不出來，可以檢查路段、屋齡、型態是否正確','err'); return; }
       status('');
       render(parsed,inp,res);
-    }).catch(function(){ status('行情資料載入失敗，請重新整理再試一次。','err'); });
+    }).catch(function(){ status('行情資料載入失敗，請重新整理再試一次','err'); });
   }
 
   function handleText(txt,src){
     var d=parseDeed(txt);
     if(!d.ok){
-      status('這份'+src+'讀不到門牌或面積。如果是拍照或掃描的圖片檔，電腦讀不到文字，請改用電傳謄本 PDF，或把謄本文字貼到下面的框框。','err');
+      status('這份'+src+'讀不到門牌或面積，如果是拍照或掃描的圖片檔，電腦讀不到文字，請改用電傳謄本 PDF，或把謄本文字貼到下面的框框','err');
       return;
     }
     parsed=d;
     loadMeta().then(function(){
       showForm(d);
-      if(d.town && !meta.towns[d.town]){ status('這份謄本在「'+esc(d.town)+'」，目前只有桃園市的行情資料。','err'); return; }
+      if(d.town && !meta.towns[d.town]){ status('這份謄本在「'+esc(d.town)+'」，目前只有桃園市的行情資料','err'); return; }
       run();
-    }).catch(function(){ status('行情資料載入失敗，請重新整理再試一次。','err'); });
+    }).catch(function(){ status('行情資料載入失敗，請重新整理再試一次','err'); });
   }
 
   function handleFile(f){
     if(!f) return;
     $('dFileName').textContent=f.name;
-    if(!/pdf$/i.test(f.type) && !/\.pdf$/i.test(f.name)){ status('目前只支援 PDF（電傳謄本）。圖片檔請把謄本文字貼到下面的框框。','err'); return; }
+    if(!/pdf$/i.test(f.type) && !/\.pdf$/i.test(f.name)){ status('目前只支援 PDF（電傳謄本），圖片檔請把謄本文字貼到下面的框框','err'); return; }
     status('讀取謄本中…（在你的瀏覽器裡處理，不會上傳）');
     f.arrayBuffer().then(pdfText).then(function(t){ handleText(t,'PDF'); })
-      .catch(function(){ status('PDF 讀取失敗，檔案可能有密碼或是掃描圖片。可以把謄本文字貼到下面的框框。','err'); });
+      .catch(function(){ status('PDF 讀取失敗，檔案可能有密碼或是掃描圖片，可以把謄本文字貼到下面的框框','err'); });
   }
 
   // ---------- 事件 ----------
@@ -502,7 +502,7 @@
   $('dResult').addEventListener('click',function(e){
     var b=e.target.closest('[data-copy]'); if(!b) return;
     var txt=b.getAttribute('data-copy')==='pitch'?pitchText():noteText();
-    var done=function(ok){ $('dToast').textContent=ok?'已複製。':'複製失敗，請手動選取。'; };
+    var done=function(ok){ $('dToast').textContent=ok?'已複製':'複製失敗，請手動選取'; };
     try{ navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)}); }catch(err){ done(false); }
   });
   loadMeta().catch(function(){});

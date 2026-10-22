@@ -65,7 +65,7 @@
       + '<div><span>房地合一稅</span><b class="tax">' + w(use.tax) + '</b></div>'
       + '<div><span>屋主淨拿回現金</span><b class="back">' + w(use.back) + '</b></div>'
       + '<div><span>其中實際淨賺</span><b>' + w(use.net) + '</b></div></div>'
-      + (profit < 0 ? '<p class="v-hint">換約價低於取得價，這筆是虧損，沒有房地合一稅（虧損可在三年內扣抵其他房地交易所得）。</p>' : '')
+      + (profit < 0 ? '<p class="v-hint">換約價低於取得價，這筆是虧損，沒有房地合一稅（虧損可在三年內扣抵其他房地交易所得）</p>' : '')
       + '<h3 class="ps-h3">列舉 vs 不列舉 — 點一欄採用</h3>'
       + '<div class="ps-cols">'
       + col('std', '不列舉費用', '成交價額 3%（上限 30 萬）', B)

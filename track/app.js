@@ -1,5 +1,5 @@
 /* 物件追蹤：貼物件網址＋開價存進追蹤清單（這個瀏覽器的 localStorage），之後更新價格會記下歷史，算出累計降幅。
-   網頁沒辦法自己去讀 591、信義、永慶的頁面（對方網站擋跨站讀取），所以價格要自己更新，或 LINE 請容瑜幫忙盯。 */
+   網頁沒辦法自己去讀 591、信義、永慶的頁面（對方網站擋跨站讀取），所以價格要自己更新，或 LINE 請容瑜幫忙盯， */
 (function(){
   var RT=window.RT, $=RT.$, esc=RT.esc, KEY='rt-track';
   var SITES=[[/591\.com\.tw/,'591'],[/sinyi\.com\.tw/,'信義'],[/yungching\.com\.tw/,'永慶'],[/hbhousing\.com\.tw/,'住商'],
@@ -8,13 +8,13 @@
   var today=RT.today;
   function site(u){ for(var i=0;i<SITES.length;i++) if(SITES[i][0].test(u)) return SITES[i][1]; try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return '其他'} }
   function load(){ return RT.store.get(KEY,[]); }
-  function save(list){ if(!RT.store.set(KEY,list)) $('tToast').textContent='這個瀏覽器不能存資料（可能是無痕模式），關掉就會不見。'; }
+  function save(list){ if(!RT.store.set(KEY,list)) $('tToast').textContent='這個瀏覽器不能存資料（可能是無痕模式），關掉就會不見'; }
 
   function render(){
     var list=load();
     var down=list.filter(function(x){return x.h[x.h.length-1].p<x.h[0].p}).length;
     $('tSum').innerHTML=list.length?'追蹤 <b>'+list.length+'</b> 間・降價 <b>'+down+'</b> 間・'+list.filter(function(x){return x.st}).length+' 間已下架／成交':'';
-    if(!list.length){ $('tList').innerHTML='<div class="v-empty"><b>還沒有追蹤的物件</b><p>在左邊貼上物件網址和開價，就會出現在這裡。<br>之後看到降價，按「更新價格」記下來，就會算出累計降了多少。</p></div>'; $('tAsk').hidden=true; return; }
+    if(!list.length){ $('tList').innerHTML='<div class="v-empty"><b>還沒有追蹤的物件</b><p>在左邊貼上物件網址和開價，就會出現在這裡<br>之後看到降價，按「更新價格」記下來，就會算出累計降了多少</p></div>'; $('tAsk').hidden=true; return; }
     $('tAsk').hidden=false;
     $('tList').innerHTML=list.map(function(x,i){
       var first=x.h[0].p, now=x.h[x.h.length-1].p, ch=first?(now/first-1)*100:0;
@@ -38,12 +38,12 @@
   $('tForm').addEventListener('submit',function(e){
     e.preventDefault();
     var u=$('tUrl').value.trim(), p=RT.val('tPrice');
-    if(!/^https?:\/\//.test(u)){ $('tToast').textContent='請貼上完整網址（https:// 開頭）。'; return; }
-    if(!p){ $('tToast').textContent='請填目前開價（萬）。'; return; }
+    if(!/^https?:\/\//.test(u)){ $('tToast').textContent='請貼上完整網址（https:// 開頭）'; return; }
+    if(!p){ $('tToast').textContent='請填目前開價（萬）'; return; }
     var list=load();
-    if(list.some(function(x){return x.u===u})){ $('tToast').textContent='這間已經在追蹤清單裡了。'; return; }
+    if(list.some(function(x){return x.u===u})){ $('tToast').textContent='這間已經在追蹤清單裡了'; return; }
     list.unshift({u:u,t:$('tTitle').value.trim(),a:RT.val('tArea'),n:$('tNote').value.trim(),h:[{d:today(),p:p}],st:''});
-    save(list); this.reset(); $('tToast').textContent='已加入追蹤。'; render();
+    save(list); this.reset(); $('tToast').textContent='已加入追蹤'; render();
     history.replaceState(null,'',location.pathname);
   });
   $('tList').addEventListener('submit',function(e){
@@ -63,12 +63,12 @@
     var list=load(); list.splice(+d.getAttribute('data-del'),1); save(list); render();
   });
   // 備份：換手機或清瀏覽器前，複製備份碼；在新裝置貼上還原
-  $('tExport').addEventListener('click',function(){ RT.copy(JSON.stringify(load()),$('tToast'),'已複製備份碼，存在 LINE 記事本或備忘錄，換手機時貼回來。'); });
+  $('tExport').addEventListener('click',function(){ RT.copy(JSON.stringify(load()),$('tToast'),'已複製備份碼，存在 LINE 記事本或備忘錄，換手機時貼回來'); });
   $('tImport').addEventListener('click',function(){
     var s=prompt('貼上備份碼'); if(!s) return;
     try{ var add=JSON.parse(s), list=load(), have={}; list.forEach(function(x){have[x.u]=1});
-      add.forEach(function(x){ if(x&&/^https?:\/\//.test(x.u)&&x.h&&x.h.length&&!have[x.u]) list.push(x); }); save(list); render(); $('tToast').textContent='已還原。';
-    }catch(err){ $('tToast').textContent='備份碼格式不對。'; }
+      add.forEach(function(x){ if(x&&/^https?:\/\//.test(x.u)&&x.h&&x.h.length&&!have[x.u]) list.push(x); }); save(list); render(); $('tToast').textContent='已還原';
+    }catch(err){ $('tToast').textContent='備份碼格式不對'; }
   });
 
   // 從書籤一鍵加入：…/track/#url=<網址>&t=<標題>

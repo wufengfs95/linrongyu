@@ -53,14 +53,14 @@
 
   // ---- LINE：先複製訊息再開 LINE（個人帳號連結沒辦法預填文字） ----
   RT.line=function(msg,toast){
-    var open=function(ok){ if(toast) toast.textContent=ok?'已複製內容，LINE 開啟後貼上送出就好。':'LINE 開啟後，把想問的事傳給我就好。';
+    var open=function(ok){ if(toast) toast.textContent=ok?'已複製內容，LINE 開啟後貼上送出就好':'LINE 開啟後，把想問的事傳給我就好';
       window.open(LINE_URL,'_blank','noopener'); };
     if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(msg).then(function(){open(true)},function(){open(false)});
     else open(false);
   };
   RT.copy=function(text,toast,done){
-    var ok=function(){ if(toast) toast.textContent=done||'已複製。'; };
-    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,function(){ if(toast) toast.textContent='複製失敗，請長按選取文字自己複製。'; });
+    var ok=function(){ if(toast) toast.textContent=done||'已複製'; };
+    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,function(){ if(toast) toast.textContent='複製失敗，請長按選取文字自己複製'; });
     else { var t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select();
       try{document.execCommand('copy');ok()}catch(e){} t.remove(); }
   };

@@ -58,7 +58,7 @@
   function schoolList(v,level){
     var a=assignOf(v.id,level), groups={}, order=[];
     a.forEach(function(r){ if(!groups[r[0]]){groups[r[0]]=[];order.push(r[0]);} groups[r[0]].push(r); });
-    if(!order.length) return '<p class="sm-empty">查不到，請以官方公告為準。</p>';
+    if(!order.length) return '<p class="sm-empty">查不到，請以官方公告為準</p>';
     return '<ul class="sm-schools">'+order.map(function(sid){
       var s=data.schools[sid], rows=groups[sid];
       var notes=rows.map(function(r){
@@ -80,7 +80,7 @@
     layers[v.id].setStyle({weight:4,color:'#16293F',dashArray:null,opacity:1}).bringToFront();
     if(opts.fit!==false) map.fitBounds(layers[v.id].getBounds(),{maxZoom:16,padding:[30,30]});
     var k=kind(v.id,'es'), kj=kind(v.id,'jh');
-    var tip=(k==='split'||kj==='split')?'<p class="sm-tip">這個里依「鄰」分校或有自由學區，請確認門牌在第幾鄰（戶口名簿或里辦公處可查）。</p>':'';
+    var tip=(k==='split'||kj==='split')?'<p class="sm-tip">這個里依「鄰」分校或有自由學區，請確認門牌在第幾鄰（戶口名簿或里辦公處可查）</p>':'';
     var rm=((data.remarks||{})[v.t]||[]).filter(function(t){return t.indexOf(v.v)>=0});
     var msg='容瑜你好，我想了解'+v.t+v.v+'附近的房子（學區：'+(assignOf(v.id,'es').map(function(r){return data.schools[r[0]].n}).filter(function(x,i,a){return a.indexOf(x)===i}).join('、')||'—')+'）';
     var pt=opts.pt||centroidOf(v), exact=!!opts.pt, groups=NEAR?nearbyGroups(v,pt[0],pt[1]):null;
@@ -314,7 +314,7 @@
     if(lh){
       var lv2=villageAt(lh.lat,lh.lng);
       placeMarker(lh.lat,lh.lng,lh.n);
-      if(lv2){ status('已定位到「'+esc(lh.n)+'」'+(lh.tag?'（'+esc(lh.tag)+'）':'')+'。');
+      if(lv2){ status('已定位到「'+esc(lh.n)+'」'+(lh.tag?'（'+esc(lh.tag)+'）':'')+'');
         select(lv2,{label:lh.n,pt:[lh.lat,lh.lng]}); return; }
     }
 
@@ -322,7 +322,7 @@
     status('查詢中…');
     var tryNext=function(){
       if(i>=steps.length){
-        status('查不到「'+esc(q)+'」。可以改打路名（例如「中壢區林森路」），或直接用下面的行政區、里選。');
+        status('查不到「'+esc(q)+'」，可以改打路名（例如「中壢區林森路」），或直接用下面的行政區、里選');
         return;
       }
       var st=steps[i++];
@@ -332,11 +332,11 @@
         if(!res.length){ setTimeout(tryNext,1100); return; }   // 尊重 OSM 每秒一次的用量規範
         var lat=+res[0].lat, lng=+res[0].lon, v=villageAt(lat,lng);
         placeMarker(lat,lng,q);
-        if(!v){ status('這個位置不在桃園市範圍內。'); return; }
-        status(st.tag ? '已定位到「'+esc(st.q)+'」（'+st.tag+'層級），請確認所在的里。'
-                      : '已定位到「'+esc(st.q)+'」。');
+        if(!v){ status('這個位置不在桃園市範圍內'); return; }
+        status(st.tag ? '已定位到「'+esc(st.q)+'」（'+st.tag+'層級），請確認所在的里'
+                      : '已定位到「'+esc(st.q)+'」');
         select(v,{label:'查詢：'+q,pt:[lat,lng]});
-      }).catch(function(){ status('地址查詢暫時無法使用，請直接選行政區和里。'); });
+      }).catch(function(){ status('地址查詢暫時無法使用，請直接選行政區和里'); });
     };
     tryNext();
   }
@@ -379,7 +379,7 @@
     if(poiLayer){ poiLayer.remove(); poiLayer=null; }
     if(mode!=='poi'||!data) return;
     var z=map.getZoom();
-    if(z<13){ $('smPoiHint').textContent='放大地圖（再放大一點）才會顯示機能點位。'; return; }
+    if(z<13){ $('smPoiHint').textContent='放大地圖（再放大一點）才會顯示機能點位'; return; }
     var b=map.getBounds(), n=0, size=z>=16?26:22;
     poiLayer=L.layerGroup();
     (data.poi||[]).forEach(function(p){
@@ -394,7 +394,7 @@
       poiLayer.addLayer(m);
     });
     poiLayer.addTo(map);
-    $('smPoiHint').textContent='這個範圍顯示 '+n+' 個點'+(n>=400?'（太多了，放大一點看更完整）':'')+'。';
+    $('smPoiHint').textContent='這個範圍顯示 '+n+' 個點'+(n>=400?'（太多了，放大一點看更完整）':'')+'';
   }
 
   // ---- 垃圾車：資料沒有經緯度，用「里」對起來，另外用路名補 ----
@@ -413,7 +413,7 @@
       })})});
       trash.idx=idx;
       return trash;
-    }).catch(function(){ trashLoading=false; $('smTrash').innerHTML='<p class="sm-status">班表載入失敗，請重新整理。</p>'; });
+    }).catch(function(){ trashLoading=false; $('smTrash').innerHTML='<p class="sm-status">班表載入失敗，請重新整理</p>'; });
   }
   function trashRows(v,q){
     if(!trash) return [];
@@ -436,8 +436,8 @@
     var rows=trashRows(v,q);
     if(!rows.length){
       box.innerHTML='<div class="sm-near"><h3>這個里的垃圾車</h3>'
-        + '<p class="sm-empty">班表裡查不到「'+esc(v.t+v.v)+'」的清運點。'
-        + '有些路線沒有標里別，可以到<a href="../trash/">垃圾車時間查詢</a>用路名直接找。</p></div>';
+        + '<p class="sm-empty">班表裡查不到「'+esc(v.t+v.v)+'」的清運點'
+        + '有些路線沒有標里別，可以到<a href="../trash/">垃圾車時間查詢</a>用路名直接找</p></div>';
       return;
     }
     var on=rows.filter(function(h){return runsToday(h.r.d)}).length;
@@ -453,8 +453,8 @@
             + '<div class="tm-sub">'+esc(h.r.n)+'｜收運日 '+esc(h.r.d||'—')
             + (h.byRoad?'｜<i>依路名比對</i>':'')+'</div></li>';
         }).join('')
-      + '</ul>'+(rows.length>40?'<p class="sm-empty">還有 '+(rows.length-40)+' 個點，可以到<a href="../trash/">垃圾車時間查詢</a>看完整班表。</p>':'')
-      + '<p class="sm-empty">班表以桃園市環境管理處公告為準，遇國定假日會調整。</p></div>';
+      + '</ul>'+(rows.length>40?'<p class="sm-empty">還有 '+(rows.length-40)+' 個點，可以到<a href="../trash/">垃圾車時間查詢</a>看完整班表</p>':'')
+      + '<p class="sm-empty">班表以桃園市環境管理處公告為準，遇國定假日會調整</p></div>';
   }
 
   function applyMode(){
@@ -485,14 +485,14 @@
   document.querySelectorAll('[data-cat]').forEach(function(el){ el.addEventListener('change',drawPoi); });
   $('smForm').addEventListener('submit',function(e){e.preventDefault(); if(data) search($('smQ').value);});
   $('smLocate').addEventListener('click',function(){
-    if(!navigator.geolocation){ status('這個瀏覽器不支援定位。'); return; }
+    if(!navigator.geolocation){ status('這個瀏覽器不支援定位'); return; }
     status('定位中…');
     navigator.geolocation.getCurrentPosition(function(p){
       var lat=p.coords.latitude, lng=p.coords.longitude, v=villageAt(lat,lng);
       placeMarker(lat,lng,'你的位置');
-      if(!v){ status('你目前不在桃園市範圍內。'); map.setView([lat,lng],14); return; }
+      if(!v){ status('你目前不在桃園市範圍內'); map.setView([lat,lng],14); return; }
       status(''); select(v,{label:'你目前的位置',pt:[lat,lng]});
-    },function(){ status('無法取得位置，請確認已允許定位。'); },{enableHighAccuracy:true,timeout:10000});
+    },function(){ status('無法取得位置，請確認已允許定位'); },{enableHighAccuracy:true,timeout:10000});
   });
   $('smTown').addEventListener('change',function(){ fillVillages(this.value); });
   $('smVill').addEventListener('change',function(){ var v=data.villages[+this.value]; if(v) select(v); });
@@ -503,7 +503,7 @@
     if(ln){  // 結果卡是動態產生的，自己處理「複製訊息再開 LINE」
       e.preventDefault();
       var msg=ln.getAttribute('data-line-msg'), toast=$('smToast');
-      var open=function(ok){ if(toast) toast.textContent=ok?'已複製訊息，LINE 開啟後貼上送出就好。':''; window.open(LINE_URL,'_blank','noopener'); };
+      var open=function(ok){ if(toast) toast.textContent=ok?'已複製訊息，LINE 開啟後貼上送出就好':''; window.open(LINE_URL,'_blank','noopener'); };
       try{ navigator.clipboard.writeText(msg).then(function(){open(true)},function(){open(false)}); }catch(err){ open(false); }
       return;
     }
@@ -520,5 +520,5 @@
 
   var sv=document.querySelector('script[data-v]'), dv=sv?sv.getAttribute('data-v'):'';  // 資料檔版本號，更新後不會用到舊快取
   fetch('data.json'+(dv?'?v='+dv:'')).then(function(r){return r.json()}).then(function(d){data=d; init();})
-    .catch(function(){ status('地圖資料載入失敗，請重新整理。'); });
+    .catch(function(){ status('地圖資料載入失敗，請重新整理'); });
 })();
