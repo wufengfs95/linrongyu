@@ -392,5 +392,8 @@
   $('feEra').addEventListener('change', function(){ calc(); docs(); });
   $('feLoan').addEventListener('change', calc);
 
-  setRole('buyer');
+  // 從「我要賣房」點進來是 #seller，「我要買房」是 #buyer
+  function fromHash() { setRole(location.hash === '#seller' ? 'seller' : 'buyer'); }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 })();
