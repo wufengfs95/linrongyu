@@ -1675,16 +1675,19 @@ section.tq-wrap{padding-block:16px 72px}
 .v-big{margin:0 0 16px;padding:18px 20px;border-radius:12px;background:var(--navy);color:#fff}
 .v-big span{display:block;font-size:17px;opacity:.85;margin-bottom:4px}
 .v-big strong{display:block;font-size:34px;font-weight:900;letter-spacing:.5px}
-.fe-table td{vertical-align:top;padding:11px 10px}
+/* 買賣雜費的表單欄位最多（土增稅那一區就九格，標題又長），
+   固定 420px 會被壓扁，所以這頁左右各一半 */
+@media (min-width:980px){.fe-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}}
+.fe-table td{vertical-align:top;padding:15px 12px}
 .fe-table td:first-child{width:62%}
 .fe-table td b{display:block;font-size:18px;color:var(--navy);font-weight:700}
-.fe-table td small{display:block;margin-top:2px;font-size:15px;color:var(--muted);line-height:1.55}
+.fe-table td small{display:block;margin-top:5px;font-size:15px;color:var(--muted);line-height:1.7}
 .fe-n{text-align:right;white-space:nowrap;font-size:18px;font-weight:700;
   font-variant-numeric:tabular-nums;color:var(--ink)}
 .fe-na{color:var(--muted);font-weight:500}
 @media (max-width:760px){
   .v-big strong{font-size:27px}
-  .fe-table td{padding:9px 6px}
+  .fe-table td{padding:12px 6px}
   .fe-table td b{font-size:16.5px} .fe-table td small{font-size:14px} .fe-n{font-size:16.5px}
 }
 
@@ -1861,33 +1864,35 @@ section.tq-wrap{padding-block:16px 72px}
 }
 
 /* 買賣雜費：要準備什麼資料 */
-.fd-wrap{margin:28px 0 0}
-.fd-h{margin:0 0 4px;font-size:25px;color:var(--navy)}
-.fd-sub{margin:0 0 16px;font-size:17.5px;line-height:1.75;color:var(--muted)}
-.fd{margin-bottom:12px;border:1.5px solid var(--cream-line);border-radius:12px;
+.fd-wrap{margin:34px 0 0}
+/* 整頁寬一行會塞到六十幾個字，讀起來很累；分隔線留整條，只把文字收到好讀的寬度 */
+.fd-sub,.fd-p,.fd-list>li>b,.fd-list span,.fd-tool,.fd-ver{max-width:46em}
+.fd-h{margin:0 0 8px;font-size:25px;color:var(--navy)}
+.fd-sub{margin:0 0 22px;font-size:17.5px;line-height:1.8;color:var(--muted)}
+.fd{margin-bottom:18px;border:1.5px solid var(--cream-line);border-radius:12px;
   background:#fff;overflow:hidden}
-.fd>summary{padding:15px 18px;font-size:20px;font-weight:700;color:var(--navy);
+.fd>summary{padding:18px 20px;font-size:20px;font-weight:700;color:var(--navy);
   background:var(--cream);cursor:pointer;list-style:none}
 .fd>summary::-webkit-details-marker{display:none}
 .fd>summary::before{content:'▸ ';color:var(--brick)}
 .fd[open]>summary::before{content:'▾ '}
-.fd-p{margin:16px 18px 12px;font-size:17px;line-height:1.85;color:var(--ink)}
-.fd-list{margin:0;padding:0 18px 6px;list-style:none}
-.fd-list li{padding:12px 0 12px 14px;border-top:1px solid var(--cream-line);
+.fd-p{margin:20px 20px 14px;font-size:17px;line-height:1.95;color:var(--ink)}
+.fd-list{margin:0;padding:0 20px 10px;list-style:none}
+.fd-list li{padding:18px 0 18px 15px;border-top:1px solid var(--cream-line);
   border-left:4px solid transparent}
-.fd-list li.fd-must{border-left-color:var(--brick);padding-left:12px;background:#FDFAF5}
-.fd-list>li>b{display:block;font-size:17.5px;color:var(--navy);margin-bottom:4px}
+.fd-list li.fd-must{border-left-color:var(--brick);padding-left:13px;background:#FDFAF5}
+.fd-list>li>b{display:block;font-size:17.5px;line-height:1.55;color:var(--navy);margin-bottom:8px}
 .fd-list span b,.fd-p b{color:var(--navy)}
-.fd-list span{display:block;font-size:16px;line-height:1.8;color:var(--muted)}
+.fd-list span{display:block;font-size:16px;line-height:1.95;color:var(--muted)}
 .fd-list a{color:var(--brick);font-weight:600;word-break:break-all}
-.fd-tool{margin:4px 18px 16px;padding:11px 14px;border-radius:9px;
-  background:var(--cream);font-size:16.5px}
-.fd-ver{margin:10px 0 0;font-size:15px;color:var(--muted)}
+.fd-tool{margin:10px 20px 20px;padding:14px 16px;border-radius:9px;
+  background:var(--cream);font-size:16.5px;line-height:1.7}
+.fd-ver{margin:16px 0 0;line-height:1.7;font-size:15px;color:var(--muted)}
 @media (max-width:760px){
   .fd-h{font-size:21px} .fd-sub{font-size:16px}
   .fd>summary{font-size:17.5px;padding:13px 14px}
-  .fd-p{margin:13px 14px 10px;font-size:16px}
-  .fd-list{padding:0 14px 6px}
+  .fd-p{margin:16px 15px 12px;font-size:16px}
+  .fd-list{padding:0 15px 10px}
   .fd-list b{font-size:16.5px} .fd-list span{font-size:15px}
   .fd-tool{margin:4px 14px 13px;font-size:15.5px}
 }
@@ -1904,14 +1909,23 @@ footer .foot-crm a:hover{color:#fff}
 .lt-big{display:block;font-size:24px;color:var(--brick);margin-bottom:4px;font-variant-numeric:tabular-nums}
 
 /* 土增稅欄位：第二行小字寫出處 */
-small.lt-where{display:block;margin-top:3px;font-size:14.5px;font-weight:400;line-height:1.5;color:var(--muted);letter-spacing:0}
+small.lt-where{display:block;margin-top:5px;font-size:14.5px;font-weight:400;line-height:1.65;color:var(--muted);letter-spacing:0}
+
+/* 土增稅這一區的欄位標題長、底下還有一行出處，固定三欄會被壓到只剩十幾個字寬，
+   所以改成最少 165px 的自動換欄（表單欄 420px 時會排成兩欄），
+   每一組的最後一個欄位（原因發生日期、可扣抵稅額）字最長，獨占一整行 */
+#feLandBox .row2,#feLandBox .row3{grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:18px 16px}
+#feLandBox .row3>.field:last-child{grid-column:1/-1}
+#feLandBox>h2{margin-bottom:4px}
+#feLandBox .rt-check{line-height:1.5;align-items:flex-start}
+#feLandBox .rt-check input{margin-top:3px;flex:none}
 
 .lt-ym{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center}
 .lt-ym span{grid-column:1/-1;font-size:15px;color:var(--muted)}
 .lt-ym span.lt-ok{color:var(--brick);font-weight:700}
 .lt-ym span.lt-bad{color:#C0462F;font-weight:700}
 
-.lt-auto{display:block;margin-top:5px;font-size:14.5px;line-height:1.5;color:var(--muted)}
+.lt-auto{display:block;margin-top:7px;font-size:14.5px;line-height:1.65;color:var(--muted)}
 .lt-auto.lt-ok{color:var(--brick);font-weight:700}
 .lt-auto.lt-bad{color:#C0462F;font-weight:700}
 
