@@ -1267,7 +1267,8 @@ section.tq-wrap{padding-block:16px 72px}
   width:26px;height:26px;border-radius:50%;background:var(--cream);color:var(--navy);
   font-size:15.5px;font-weight:800;display:grid;place-items:center}
 .sd-sell .sd-list li::before{background:var(--sky-soft)}
-.sd-list b{display:block;font-size:22px;color:var(--navy);line-height:1.5}
+.sd-list>li>b{display:block;font-size:22px;color:var(--navy);line-height:1.5}
+.sd-list p b{font-size:inherit;color:var(--navy)}
 .sd-list p{margin:5px 0 0;font-size:19px;line-height:1.8;color:var(--ink)}
 .sd-common{margin-top:20px;background:var(--cream);border:1px solid var(--cream-line);
   border-radius:14px;padding:22px 26px}
@@ -1278,7 +1279,7 @@ section.tq-wrap{padding-block:16px 72px}
   .sd-grid{grid-template-columns:1fr}
   .sd-col{padding:20px}
   .sd-col h3{font-size:25px}
-  .sd-list b{font-size:19.5px}
+  .sd-list>li>b{font-size:19.5px}
   .sd-list p{font-size:17px}
   .sd-lead{font-size:19px}
   .sd-common ul{font-size:18px}
@@ -1921,4 +1922,20 @@ small.lt-where{display:block;margin-top:3px;font-size:14.5px;font-weight:400;lin
 @media (max-width:760px){
   .buyer-grid>.buyer-how ol{grid-template-columns:1fr;font-size:17px}
   .bq-opts{gap:6px 10px}
+}
+
+/* 需求配對：表單內的字級統一，不要大小不一 */
+.buyer-form .field>label,.buyer-form .field>label span,
+.buyer-form .bq legend,.buyer-form .bq-opts label,
+.buyer-form input,.buyer-form select,.buyer-form textarea,
+.buyer-form option,.buyer-form .bq-range span,.buyer-form .bq-range b{font-size:19px}
+.buyer-form .field>label .rt-small{font-size:19px;color:var(--muted)}
+.buyer-how ol,.buyer-how ol b,.buyer-how ol span,.buyer-note{font-size:19px}
+@media (max-width:760px){
+  .buyer-form .field>label,.buyer-form .field>label span,
+  .buyer-form .field>label .rt-small,
+  .buyer-form .bq legend,.buyer-form .bq-opts label,
+  .buyer-form input,.buyer-form select,.buyer-form textarea,
+  .buyer-form option,.buyer-form .bq-range span,.buyer-form .bq-range b,
+  .buyer-how ol,.buyer-how ol b,.buyer-how ol span,.buyer-note{font-size:17px}
 }
