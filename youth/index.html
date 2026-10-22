@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>新青安 3.0 資格快篩：年齡、所得、房價上限一次檢查｜林容瑜</title>
+<meta name="description" content="新青安（青安 3.0）資格檢查工具：115 年 8 月 1 日新制的年齡 50 歲、年所得 200 萬、房價上限、無自有住宅認定逐項檢核，符合就算出可貸額度、自備款與每月月付">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wufengfs95.github.io/linrongyu/youth/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="新青安 3.0 資格快篩：年齡、所得、房價上限一次檢查｜林容瑜">
+<meta property="og:description" content="新青安（青安 3.0）資格檢查工具：115 年 8 月 1 日新制的年齡 50 歲、年所得 200 萬、房價上限、無自有住宅認定逐項檢核，符合就算出可貸額度、自備款與每月月付">
+<meta property="og:url" content="https://wufengfs95.github.io/linrongyu/youth/">
+<meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3A5F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="../assets/site.css?v=00db06b5">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "新青安 3.0，我符合資格嗎？", "url": "https://wufengfs95.github.io/linrongyu/youth/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "新青安（青安 3.0）資格檢查工具：115 年 8 月 1 日新制的年齡 50 歲、年所得 200 萬、房價上限、無自有住宅認定逐項檢核，符合就算出可貸額度、自備款與每月月付", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+</head>
+<body class="rt-page toolpage">
+<div class="topinfo">
+  <div class="wrap">
+    <span><a href="tel:+886973263569"><span class="ti-ic" aria-hidden="true">📲</span>0973-263-569</a><span class="ti-sub">　|　中壢誠實房仲</span></span>
+  </div>
+</div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><img class="brand-sign" src="../images/sign.webp" width="1000" height="286" alt="中壢誠實房仲｜交易安全保障・買賣售後服務"><span class="brand-name"><b>林容瑜</b></span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="../">首頁</a>
+      <a href="../#about">關於我</a>
+      <a href="../listings/">精選物件</a>
+      <a href="../buyer/">需求配對</a>
+      <a href="../process/">買賣流程</a>
+      <a href="../tools/" aria-current="page">免費工具</a>
+      <a href="../book/">預約諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="sm-top">
+<div class="wrap">
+  <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 新青安資格</p>
+  <h1>新青安 3.0，我符合資格嗎？</h1>
+  <p class="sm-sub">年齡、所得、名下有沒有房、房價上限、建物用途——一項一項勾完就知道過不過，符合的話順便算出可以貸多少、月付多少</p>
+</div>
+</section>
+<section class="v-wrap">
+<div class="wrap">
+  <div class="v-grid ya-grid">
+    <form id="yaForm" class="v-form" novalidate>
+      <h2>買方的條件</h2>
+      <div class="row2">
+        <div class="field"><label for="yaAge">年齡（歲）<small class="lt-where">以向銀行申請那天算，要未滿 50 歲</small></label><input type="number" id="yaAge" inputmode="numeric" step="1" min="18" max="70" placeholder="例：34"></div>
+        <div class="field"><label for="yaIncome">本人年所得（萬元）<small class="lt-where">只看借款人本人，不含配偶，上限 200 萬</small></label><input type="number" id="yaIncome" inputmode="numeric" step="1" min="0" placeholder="例：85"></div>
+      </div>
+      <div class="field"><label for="yaOwn">名下房屋（本人＋配偶＋未成年子女）<small class="lt-where">銀行會調全國財產稅總歸戶財產查詢清單</small></label><select id="yaOwn"><option value="none" selected>三個人名下都沒有房子</option><option value="park">只有車位或靈骨塔位</option><option value="land">只有土地，沒有房屋</option><option value="sold">本來有，已經賣掉或移轉了</option><option value="share">只有持分，沒有完整的一戶</option><option value="inherit">繼承來的公同共有住宅</option><option value="has">有一間以上完整的房子</option></select></div>
+      <div id="yaAreaWrap" hidden>
+        <div class="field"><label for="yaArea">持分換算面積合計（平方公尺）<small class="lt-where">三個人加總，未滿 40 ㎡ 還可以申辦</small></label><input type="number" id="yaArea" inputmode="decimal" step="0.01" min="0" placeholder="例：18.5"></div>
+      </div>
+      <label class="rt-check"><input type="checkbox" id="yaUsed"><span class="ya-ck">112 年 8 月 1 日以後辦過新青安或農安貸款<small>一生限貸一次</small></span></label>
+
+      <h2>看的這間房子</h2>
+      <div class="row2">
+        <div class="field"><label for="yaCity">房子在哪裡<small class="lt-where">房價上限依縣市不同</small></label><select id="yaCity"><option value="other" selected>桃園市（或其他縣市）</option><option value="tp">臺北市</option><option value="nt">新北市</option><option value="hc">新竹縣（市）</option></select></div>
+        <div class="field"><label for="yaPrice">房屋總價（萬元）<small class="lt-where">鑑價與買賣總價「取高」的那個數字</small></label><input type="number" id="yaPrice" inputmode="numeric" step="1" min="0" placeholder="例：1280"></div>
+      </div>
+      <div class="field"><label for="yaUse">建物主要用途<small class="lt-where">看建物謄本「主要用途」欄，要有住、住宅、套房或公寓字樣</small></label><select id="yaUse"><option value="yes" selected>有「住」「住宅」「套房」或「公寓」字樣</option><option value="no">是辦公、商業用、工業用這一類</option><option value="unknown">還不確定，要查謄本</option></select></div>
+      <div class="field"><label for="yaSelf">買來做什麼用<small class="lt-where">核貸時要簽自用住宅使用切結書，銀行貸後會查</small></label><select id="yaSelf"><option value="self" selected>自己住</option><option value="rent">要出租或做生意</option><option value="unknown">還沒決定</option></select></div>
+      <div class="field"><label for="yaReg">所有權登記日<small class="lt-where">看建物謄本的登記日期</small></label><select id="yaReg"><option value="within" selected>已經過戶，登記日在 6 個月內</option><option value="after">還沒過戶，會在核准後 6 個月內登記</option><option value="over">已經過戶，登記日超過 6 個月了</option><option value="unknown">不確定</option></select></div>
+
+      <h2>可以加額度的身分</h2>
+      <label class="rt-check"><input type="checkbox" id="yaWed"><span class="ya-ck">申請日前 2 年內完成結婚登記<small>額度上限 1,200 萬</small></span></label>
+      <label class="rt-check"><input type="checkbox" id="yaKid"><span class="ya-ck">育有未成年子女<small>額度上限 1,500 萬，離婚或單親要同戶籍且有監護權</small></span></label>
+    </form>
+    <div id="yaResult" class="v-result"></div>
+  </div>
+
+  <h2 class="v-h2">新青安 3.0 重點整理<small>115 年 8 月 1 日起的新版，申辦到 118 年 7 月 31 日</small></h2>
+  <div class="v-quick rt-facts"><table class="v-table"><tbody>
+    <tr><td>誰可以辦</td><td>成年以上、<b>申貸時未滿 50 歲</b>，本人年所得 <b>200 萬以下</b>，本人、配偶、未成年子女名下都沒有房子，一生限貸一次</td></tr>
+    <tr><td>房價上限</td><td>臺北市 3,500 萬／新北市、新竹縣市 2,500 萬／<b>其他縣市（含桃園）2,000 萬</b>，用鑑價與買賣總價取高的那個比</td></tr>
+    <tr><td>貸款額度</td><td>一般 1,000 萬／新婚（申請日前 2 年內結婚登記）1,200 萬／育有未成年子女 1,500 萬，最高成數 8 成</td></tr>
+    <tr><td>年限、寬限期</td><td>最長 40 年、含寬限期最長 5 年，<b>申貸年齡加核貸年限不能超過 80</b></td></tr>
+    <tr><td>利率</td><td>前 3 年 1.775%，3 年期滿後每年少補貼半碼（第 4 年 1.9%、第 5 年 2.025%、第 6 年 2.15%），滿 6 年回復約 2.275%，機動計息</td></tr>
+    <tr><td>標的限制</td><td>建物主要用途要有住、住宅、套房或公寓字樣；要自己住，不能出租或營業；登記日在申請日前 6 個月內，或核准後 6 個月內完成登記</td></tr>
+    <tr><td>承辦銀行<small class="of-sub">（八大行庫）</small></td><td>臺灣銀行、土地銀行、合作金庫、第一銀行、華南銀行、彰化銀行、兆豐銀行、臺灣企銀</td></tr>
+  </tbody></table></div>
+
+  <h2 class="v-h2">常見問題</h2>
+  <div class="v-faq"><details open><summary>我名下有一間房子的持分，還能辦嗎？</summary><p>看面積，本人、配偶、未成年子女的建物持分換算面積合計<b>未滿 40 平方公尺</b>，還是可以申辦，繼承來的公同共有住宅，115 年 8 月 1 日起可以按潛在應有部分計算，要附繼承系統表和除戶資料給銀行</p></details><details><summary>名下只有車位或只有土地呢？</summary><p>都可以，車位和靈骨塔位經銀行依實況審認後視為無自有住宅，名下只有土地沒有建物也可以辦，本來有房子、申請前已經賣掉或移轉的，附登記謄本證明就好</p></details><details><summary>年所得 200 萬是算誰的？</summary><p>只算借款人本人的年所得總額，不含配偶，剛好 200 萬還在範圍內，超過才不行，銀行會請你授權用 MyData 平台或綜所稅各類所得資料清單查，攤販、自營商可以用資金流程或營業資料證明</p></details><details><summary>預售屋可以先辦嗎？</summary><p>不行，還沒取得所有權的預售屋銀行沒辦法受理，也不能先申請保留額度，要等交屋過戶、拿到建物所有權之後再辦，登記日在申請日前 6 個月內都還來得及</p></details><details><summary>一定貸得到 8 成、貸得到最高額度嗎？</summary><p>不一定，8 成和額度上限是「最高」，實際多少銀行會依 5P 原則徵信核定，跟你的收入、信用、物件條件都有關，想先知道大概能貸多少，可以用<a href="../offer/">出價試算</a>把各家銀行的估價和成數填進去比</p></details><details><summary>買了以後可以出租嗎？</summary><p>不行，核貸時要簽自用住宅使用切結書，分租、整層出租、頂樓加蓋出租都不符合，被查到會從事實發生日起停止利息補貼、追回已經領的部分，並重新核定貸款條件，只有出租屋頂給人裝太陽能、不影響居住空間，才還算自住</p></details><details><summary>夫妻可以各辦一次嗎？</summary><p>新青安的資格是本人、配偶、未成年子女名下都要沒有房子，第一間辦完之後配偶名下就有房了，實務上要跟承辦銀行確認，不要自己假設可以</p></details><details><summary>不符合資格就沒辦法買了嗎？</summary><p>當然不是，不符合就是走銀行的一般首購房貸，利率依銀行和個人條件核定、年限多半 30 年，把各家銀行的條件攤開來比就好，<a href="../offer/">出價試算</a>可以一次比完，要我幫你問銀行，直接 <a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 我</a></p></details></div>
+  <p class="sm-note">資格條件依<a href="https://www.nta.gov.tw/singlehtml/108" target="_blank" rel="noopener">財政部國庫署「青年安心成家購屋優惠貸款」貸款原則</a>
+    （115 年 7 月 28 日版，115 年 8 月 1 日起適用）與<a href="https://www.nta.gov.tw/singlehtml/109" target="_blank" rel="noopener">公股銀行辦理青年安心成家購屋優惠貸款問與答</a>整理，
+    2026 年 10 月 22 日核對，利率以中華郵政 2 年期定期儲金額度未達 500 萬元機動利率 1.72% 為基準加 0.555%，
+    依撥貸日起的分段補貼計算，郵儲利率調整時會跟著動，
+    本頁為規則快篩，不是銀行的核貸結果，實際資格、成數與額度以承辦銀行核定為準
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
+    <div class="foot-lines">
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
+      <div>營業員：林容瑜（110）登字第396419號　|　手機&nbsp;／&nbsp;LINE：<a href="tel:+886973263569">0973-263-569</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.<span class="foot-crm">　|　<a href="../crm/" rel="nofollow">客戶追蹤</a></span></div>
+</footer>
+
+<a class="fab" href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 諮詢</a>
+
+<script src="../assets/site.js?v=79234c66" defer></script>
+<script src="../assets/tools.js?v=94cc0190" data-v=""></script>
+<script src="app.js?v=94e9086d" data-v="" defer></script>
+</body>
+</html>

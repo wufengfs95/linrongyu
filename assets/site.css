@@ -1967,3 +1967,33 @@ small.lt-where{display:block;margin-top:5px;font-size:14.5px;font-weight:400;lin
   .buyer-how ol li>span{font-size:18px}
   .buyer-how h2{font-size:26px}
 }
+
+/* 新青安資格快篩 */
+@media (min-width:980px){.ya-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}}
+.ya-grid .v-form h2{margin-top:10px}
+.ya-grid .v-form h2:first-child{margin-top:0}
+.ya-grid .rt-check{line-height:1.5;align-items:flex-start;font-size:17.5px}
+.ya-grid .rt-check input{margin-top:3px;flex:none}
+.ya-ck{display:block}
+.ya-ck small{display:block;margin-top:3px;font-size:15px;font-weight:400;line-height:1.6;color:var(--muted)}
+.v-big.ya-ok{background:var(--navy)}
+.v-big.ya-no{background:#8C3B28}
+.v-big.ya-ask{background:#7A6A53}
+.ya-list{margin:0;padding:0;list-style:none}
+.ya-list li{padding:15px 2px 15px 14px;border-top:1px solid var(--cream-line);border-left:4px solid transparent}
+.ya-list li:first-child{border-top:0}
+.ya-list li.ya-no{border-left-color:var(--brick);background:#FDF6F3}
+.ya-list li.ya-ask{border-left-color:#B99A5E;background:#FDFAF2}
+.ya-list b{display:block;font-size:17.5px;line-height:1.55;color:var(--navy)}
+.ya-list span{display:block;margin-top:5px;font-size:15.5px;line-height:1.85;color:var(--muted)}
+.ya-cards{grid-template-columns:1fr 1fr;margin:18px 0 0}
+.ya-cards .sl-card strong{display:block}
+.ya-cards .sl-card em{display:block;margin-top:6px;font-size:14.5px;line-height:1.65;font-style:normal;color:var(--muted)}
+.ya-note{margin:16px 0 0;padding:14px 16px;border-radius:10px;background:var(--cream);
+  font-size:16px;line-height:1.85;color:var(--ink)}
+.ya-note b{color:var(--navy)}
+@media (max-width:760px){
+  .ya-cards{grid-template-columns:1fr}
+  .ya-list li{padding:13px 2px 13px 12px}
+  .ya-list b{font-size:16.5px} .ya-list span{font-size:14.5px}
+}
