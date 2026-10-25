@@ -379,7 +379,7 @@
     var sold=res.comps.slice(0,12);
     var tbl='<div class="v-table-wrap"><table class="v-table"><thead><tr><th>成交</th><th>位置</th><th>樓層</th><th>坪數</th><th>原始單價</th><th>校正後</th></tr></thead><tbody>'+
       sold.map(function(c){
-        return '<tr'+(c.mx?' class="d-mx" title="'+esc(c.note)+'"':'')+'><td>'+c.y+' 年 Q'+c.q+'</td><td>'+esc(c.road+(c.lane?c.lane+'巷':''))+'</td><td>'+(c.f?c.f+(c.tf?'/'+c.tf:''):'—')+'</td><td>'+c.a.toFixed(1)+'</td><td>'+c.raw.toFixed(1)+(c.mx?'*':'')+'</td><td><b>'+c.u.toFixed(1)+'</b></td></tr>';
+        return '<tr'+(c.mx?' class="d-mx" title="'+esc(c.note)+'"':'')+'><td>'+c.y+' 年 Q'+c.q+'</td><td>'+esc(c.road+(c.lane?c.lane+'巷':''))+'</td><td>'+(c.f?c.f+(c.tf?'/'+c.tf:''):'—')+'</td><td>'+c.a.toFixed(1)+'</td><td>'+c.raw.toFixed(1)+'</td><td><b>'+c.u.toFixed(1)+'</b></td></tr>';
       }).join('')+'</tbody></table></div>';
 
     var pitch=pitchText();

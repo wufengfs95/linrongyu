@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=a8356c4e">
+<link rel="stylesheet" href="../assets/site.css?v=a231c86d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "繼承與遺囑", "url": "https://wufengfs95.github.io/linrongyu/legacy/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "沒有遺囑的話法律會怎麼分、特留分最少要留多少，想自己決定的話遺囑要怎麼寫，兩件事接在一起看", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -231,9 +231,9 @@
   // 分頁鈕，以及任何指向同一組其他工具的連結，都改成切分頁，不要整頁跳走。
   // 建置時就在 HTML 裡的連結已經改成 data-pt，這裡再接住工具執行期才產生的 ../xxx/ 連結。
   document.addEventListener("click",function(e){
-    var t=e.target.closest?e.target.closest("[data-pt]"):null;
+    var t=e.target.closest?e.target.closest("button[data-pt],a[data-pt]"):null;
     if(!t){
-      var a=e.target.closest?e.target.closest("a[href]"):null;
+      var a=e.target.closest?e.target.closest(".ppane a[href]"):null;
       if(!a) return;
       var m=(a.getAttribute("href")||"").match(/^\.\.\/([a-z0-9]+)\/$/);
       if(!m||KEYS.indexOf(m[1])<0) return;

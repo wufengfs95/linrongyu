@@ -416,7 +416,7 @@ function resetAll() {
   });
   document.getElementById('slForm').querySelectorAll('input.linked').forEach(el => el.classList.remove('linked'));
   selfUse = false;
-  document.getElementById('selfUseSwitch').classList.remove('on');
+  document.getElementById('selfUseChk').checked = false;
   document.getElementById('reverseOut').style.display = 'none';
   document.getElementById('svcManual').value = '';
   document.getElementById('moveManual').value = '';

@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=a8356c4e">
+<link rel="stylesheet" href="../assets/site.css?v=a231c86d">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "我要買房", "url": "https://wufengfs95.github.io/linrongyu/buy/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "出價多少、雜費要準備多少、貸款符不符合資格、寬限期到期月付跳多少，買房會用到的都在這一頁", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -257,7 +257,7 @@
         不一定會住 → 別急著付轉貸成本，看下一題</p></li>
     <li><b>你知道房子「現在」實際值多少嗎？</b>
       <p>知道 → 增值的部分是選擇權，換屋或調整都可以先算，
-        不知道 → 先做<a href="../price/">免費房屋估價</a>，知道市值才有資格做上面任何決定</p></li>
+        不知道 → 先做<a href="../sell/#value">免費房屋估價</a>，知道市值才有資格做上面任何決定</p></li>
   </ol>
   <h2 class="v-h2">打給銀行前，先把這五件事查清楚</h2>
   <ul class="g-check">
@@ -360,9 +360,9 @@
   // 分頁鈕，以及任何指向同一組其他工具的連結，都改成切分頁，不要整頁跳走。
   // 建置時就在 HTML 裡的連結已經改成 data-pt，這裡再接住工具執行期才產生的 ../xxx/ 連結。
   document.addEventListener("click",function(e){
-    var t=e.target.closest?e.target.closest("[data-pt]"):null;
+    var t=e.target.closest?e.target.closest("button[data-pt],a[data-pt]"):null;
     if(!t){
-      var a=e.target.closest?e.target.closest("a[href]"):null;
+      var a=e.target.closest?e.target.closest(".ppane a[href]"):null;
       if(!a) return;
       var m=(a.getAttribute("href")||"").match(/^\.\.\/([a-z0-9]+)\/$/);
       if(!m||KEYS.indexOf(m[1])<0) return;

@@ -5,7 +5,7 @@
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
   var KN={a:'住宅大樓',b:'華廈',c:'公寓',d:'透天厝'};
-  var me=document.currentScript||document.querySelector('script[data-v]')||{getAttribute:function(){return ''},src:''};
+  var me=document.currentScript||document.querySelector('script[src*="value/app.js"]')||{getAttribute:function(){return ''},src:''};
   var ver=me.getAttribute('data-v')||'';
   var base=(me.src||'').replace(/[?#].*$/,'');
   var DATA=base.replace(/app\.js$/,'data/')||'data/';
