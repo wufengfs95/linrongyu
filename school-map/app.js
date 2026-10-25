@@ -85,9 +85,9 @@
     var msg='容瑜你好，我想了解'+v.t+v.v+'附近的房子（學區：'+(assignOf(v.id,'es').map(function(r){return data.schools[r[0]].n}).filter(function(x,i,a){return a.indexOf(x)===i}).join('、')||'—')+'）';
     var pt=opts.pt||centroidOf(v), exact=!!opts.pt, groups=NEAR?nearbyGroups(v,pt[0],pt[1]):null;
     $('smResult').innerHTML='<div class="sm-r-head"><b>'+esc(v.t)+' '+esc(v.v)+'</b>'+(opts.label?'<span>'+esc(opts.label)+'</span>':'')+'</div>'+
-      '<h3>國小學區</h3>'+schoolList(v,'es')+'<h3>國中學區</h3>'+schoolList(v,'jh')+tip+
-      (rm.length?'<div class="sm-remarks"><b>官方備註</b>'+rm.map(function(t){return '<p>'+esc(t)+'</p>'}).join('')+'</div>':'')+
-      (groups?nearbyHtml(groups,exact):'')+
+      '<div data-msec="school"><h3>國小學區</h3>'+schoolList(v,'es')+'<h3>國中學區</h3>'+schoolList(v,'jh')+tip+
+      (rm.length?'<div class="sm-remarks"><b>官方備註</b>'+rm.map(function(t){return '<p>'+esc(t)+'</p>'}).join('')+'</div>':'')+'</div>'+
+      (groups?'<div data-msec="poi">'+nearbyHtml(groups,exact)+'</div>':'')+
       '<a class="btn btn-line sm-line" href="'+LINE_URL+'" target="_blank" rel="noopener" data-line-msg="'+esc(msg)+'" data-toast="smToast">LINE 問我這一區的房子</a>'+
       '<p class="toast" id="smToast" role="status"></p>';
     if(groups) drawNearby(groups,pt,exact);
@@ -96,7 +96,13 @@
     try{ history.replaceState(null,'','?v='+encodeURIComponent(v.t+v.v)); }catch(e){}
     if(mode==='trash'){ loadTrash().then(function(){ renderTrash(v,opts.label||$('smQ').value); }); }
     applyMode();
-    if(window.innerWidth<900) $('smResult').scrollIntoView({behavior:'smooth',block:'start'});
+    // 查完把結果帶到畫面上方，不然桌機要自己往下捲才看得到
+    // （地圖是 sticky 的，捲下去它會跟著停在旁邊）
+    var top = mode==='trash' ? $('smTrash') : $('smResult');
+    if(top && !top.hidden){
+      var y = top.getBoundingClientRect().top + window.pageYOffset - (window.innerWidth<900 ? 70 : 86);
+      window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+    }
   }
 
   // ---- 地圖圖示（24×24 白色圖案）：國小＝有旗子的校舍、國中＝學士帽、台鐵、捷運、機場 ----
@@ -441,19 +447,28 @@
       return;
     }
     var on=rows.filter(function(h){return runsToday(h.r.d)}).length;
+    // 今天有收的排前面，同組再按時間排，最要緊的資訊才會在第一眼就看到
+    rows = rows.slice().sort(function(a,b){
+      var ta=runsToday(a.r.d)?0:1, tb=runsToday(b.r.d)?0:1;
+      return ta-tb || String(a.p[1]||'').localeCompare(String(b.p[1]||''));
+    });
+    var card=function(h){
+      var rc=h.p[2]==='同'?h.p[1]:h.p[2];
+      return '<li class="'+(runsToday(h.r.d)?'on':'off')+'">'
+        + '<div class="tm-top"><b>'+esc(h.p[0])+'</b>'
+        + '<b class="tm-hh">'+esc(h.p[1]||'—')+'</b></div>'
+        + '<div class="tm-sub"><span>'+esc(h.r.n)+'｜'+esc(h.r.d||'—')
+        + (rc&&rc!==h.p[1]?'｜回收 '+esc(rc):'')
+        + (h.byRoad?'｜依路名比對':'')+'</span>'
+        + '<em class="tm-day">'+(runsToday(h.r.d)?'今天有收':'今天停收')+'</em></div></li>';
+    };
+    var SHOW=6, head=rows.slice(0,SHOW), rest=rows.slice(SHOW,40);
     box.innerHTML='<div class="sm-near sm-trash"><h3>這個里的垃圾車 <small>今天星期'+WEEK[TODAY]
       + '，'+on+' 個點有收</small></h3><ul class="tq-mini">'
-      + rows.slice(0,40).map(function(h){
-          var rc=h.p[2]==='同'?h.p[1]:h.p[2];
-          return '<li class="'+(runsToday(h.r.d)?'on':'off')+'">'
-            + '<div class="tm-top"><b>'+esc(h.p[0])+'</b>'
-            + '<span class="tm-day">'+(runsToday(h.r.d)?'今天有收':'今天停收')+'</span></div>'
-            + '<div class="tm-time">垃圾車 <b>'+esc(h.p[1]||'—')+'</b>'
-            + (rc&&rc!==h.p[1]?'　資源回收 <b>'+esc(rc)+'</b>':'')+'</div>'
-            + '<div class="tm-sub">'+esc(h.r.n)+'｜收運日 '+esc(h.r.d||'—')
-            + (h.byRoad?'｜<i>依路名比對</i>':'')+'</div></li>';
-        }).join('')
-      + '</ul>'+(rows.length>40?'<p class="sm-empty">還有 '+(rows.length-40)+' 個點，可以到<a href="../trash/">垃圾車時間查詢</a>看完整班表</p>':'')
+      + head.map(card).join('') + '</ul>'
+      + (rest.length?'<details class="tq-more"><summary>這個里還有 '+rest.length+' 個收運點</summary>'
+         + '<ul class="tq-mini">'+rest.map(card).join('')+'</ul></details>':'')
+      + (rows.length>40?'<p class="sm-empty">超過 40 個點，完整班表請看<a href="../trash/">垃圾車時間查詢</a></p>':'')
       + '<p class="sm-empty">班表以桃園市環境管理處公告為準，遇國定假日會調整</p></div>';
   }
 

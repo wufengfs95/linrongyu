@@ -352,9 +352,11 @@ section.sm-top{padding-block:22px 10px}
 .sm-top h1{font-family:var(--serif);font-size:clamp(26px,3.6vw,34px);color:var(--navy);letter-spacing:.04em;margin:4px 0}
 .sm-sub{margin:0;color:var(--muted)}
 section.sm{padding-block:8px 48px}
-.sm-grid{display:grid;grid-template-columns:380px minmax(0,1fr);max-width:1440px;margin:0 auto;padding-inline:20px;height:calc(100vh - 150px);min-height:600px}
-.sm-panel{overflow-y:auto;padding:4px 18px 16px 0;display:grid;gap:12px;align-content:start}
-.sm-map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:420px;background:var(--sky-soft)}
+/* 左欄不設固定高度、也不自己捲：整頁一起捲，地圖用 sticky 停在畫面上，
+   這樣查完結果就在眼前，不會變成「框框裡面還要再拉一次」 */
+.sm-grid{display:grid;grid-template-columns:380px minmax(0,1fr);max-width:1440px;margin:0 auto;padding-inline:20px;align-items:start;gap:0 4px}
+.sm-panel{padding:4px 18px 16px 0;display:grid;gap:12px;align-content:start}
+.sm-map{position:sticky;top:81px;height:calc(100vh - 100px);min-height:420px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--sky-soft)}
 .sm-tabs{display:flex;background:var(--sky-soft);border-radius:999px;padding:4px}
 .sm-tabs button{flex:1;font:inherit;font-weight:700;border:0;background:none;padding:8px;border-radius:999px;cursor:pointer;color:var(--navy)}
 .sm-tabs button[aria-pressed="true"]{background:var(--brick);color:#fff}
@@ -395,6 +397,7 @@ section.sm{padding-block:8px 48px}
 .lg.split{border:1.5px dashed var(--navy);background:hsla(95,58%,52%,.28)}
 .sm-toggles{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:18px}
 .sm-note{font-size:16.5px;color:var(--muted);margin:0}
+.sm-foot{max-width:1440px;margin:18px auto 0;padding-inline:20px}
 .sm-note a{color:var(--brick)}
 .sm-label{font-family:var(--sans);font-size:16px}
 .sm-st-label,.sm-air-label{font-weight:700}
@@ -417,7 +420,9 @@ section.sm{padding-block:8px 48px}
 .sm-near{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
 .sm-near h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;font-size:19px;color:var(--navy);margin:0 0 8px}
 .sm-near h3 small{font-size:16px;font-weight:400;color:var(--muted)}
-.sm-near section{margin-bottom:10px}
+/* 全域的 section{padding-block:88px} 是給整頁的大區塊用的，
+   生活機能這裡的 <section> 只是小分段，會平白多出 176px 的空白 */
+.sm-near section{padding-block:0;margin-bottom:10px}
 .sm-near section>b{font-size:17.5px;color:var(--brown)}
 .sm-near ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:2px}
 .sm-go{display:flex;align-items:baseline;gap:6px;width:100%;font:inherit;font-size:18px;text-align:left;background:none;border:0;border-radius:8px;padding:4px 8px;cursor:pointer;color:var(--ink)}
@@ -428,7 +433,8 @@ section.sm{padding-block:8px 48px}
 @media (max-width:900px){
   .sm-grid{grid-template-columns:1fr;height:auto;min-height:0;padding-inline:16px}
   .sm-map{order:-1;height:62vh}
-  .sm-panel{overflow:visible;padding:14px 0 0}
+  .sm-panel{padding:14px 0 0}
+  .sm-map{position:static;height:auto;min-height:360px}
 }
 
 @media (max-width:900px){
@@ -1287,7 +1293,7 @@ section.tq-wrap{padding-block:16px 72px}
 
 /* 三合一地圖：模式切換與機能分類 */
 [data-msec][hidden]{display:none !important}
-.sm-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.sm-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}
 .sm-modes button{font:inherit;font-size:17px;font-weight:700;padding:11px 6px;border-radius:10px;
   border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;white-space:nowrap}
 .sm-modes button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -1296,19 +1302,28 @@ section.tq-wrap{padding-block:16px 72px}
 .sm-cats>span{font-weight:700;color:var(--navy)}
 .sm-cats label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
 .sm-poi-hint{flex:1 0 100%;margin:4px 0 0;font-size:14.5px;color:var(--muted)}
-.tq-mini{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.tq-mini li{border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff}
+.tq-mini{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.tq-mini li{border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff}
 .tq-mini li.on{border-left-color:#2E7D5B}
 .tq-mini li.off{opacity:.72}
-.tm-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tm-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .tm-top b{font-size:16.5px;color:var(--navy);line-height:1.45}
 .tm-day{flex:none;font-size:13px;font-weight:700;color:#2E7D5B}
 .tq-mini li.off .tm-day{color:var(--muted)}
-.tm-time{margin-top:4px;font-size:15.5px;color:var(--ink)}
-.tm-time b{color:var(--brick);font-size:1.05em}
-.tm-sub{margin-top:3px;font-size:13.5px;color:var(--muted)}
+.tq-mini li.on .tm-day{color:#2E7D5B;font-weight:700}
+.tm-hh{flex:none;color:var(--brick);font-size:17.5px;font-variant-numeric:tabular-nums}
+.tm-sub{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:2px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.tm-sub em{flex:none;font-style:normal}
+/* 收運點很多的時候，前幾個先露出來，其餘收進摺疊，不要一次倒一整頁 */
+.tq-more{margin:8px 0 0;border:1px solid var(--cream-line);border-radius:10px;background:var(--cream)}
+.tq-more>summary{padding:9px 13px;font-size:16px;font-weight:700;color:var(--navy);cursor:pointer;list-style:none}
+.tq-more>summary::-webkit-details-marker{display:none}
+.tq-more>summary::before{content:"▸ ";color:var(--brick)}
+.tq-more[open]>summary::before{content:"▾ "}
+.tq-more .tq-mini{padding:0 10px 10px}
 .sm-trash h3 small{font-weight:500;color:var(--muted)}
 @media (max-width:900px){ .sm-modes button{font-size:15.5px;padding:10px 4px} }
+.sm-modes button{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* 預售屋換約速算 */
 .ps-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;font-size:16px;color:var(--muted)}
