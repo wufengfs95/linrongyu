@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>重購退稅試算：土增稅與房地合一稅換屋退稅一次算｜林容瑜</title>
-<meta name="description" content="換屋重購退稅試算：依土地稅法第 35 條算土地增值稅可退多少、依所得稅法第 14 條之 8 算房地合一稅可退多少，含 2 年期限與 5 年列管的要件檢核">
+<title>重購退稅試算：土增稅、房地合一與舊制財交稅三種分開算｜林容瑜</title>
+<meta name="description" content="換屋重購退稅試算：土地增值稅（土地稅法 35 條）、房地合一稅（所得稅法 14-8）、舊制財產交易所得（所得稅法 17-2）三種分開算，附各自的適用條件、2 年期限與 5 年列管檢核">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://wufengfs95.github.io/linrongyu/repur/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:title" content="重購退稅試算：土增稅與房地合一稅換屋退稅一次算｜林容瑜">
-<meta property="og:description" content="換屋重購退稅試算：依土地稅法第 35 條算土地增值稅可退多少、依所得稅法第 14 條之 8 算房地合一稅可退多少，含 2 年期限與 5 年列管的要件檢核">
+<meta property="og:title" content="重購退稅試算：土增稅、房地合一與舊制財交稅三種分開算｜林容瑜">
+<meta property="og:description" content="換屋重購退稅試算：土地增值稅（土地稅法 35 條）、房地合一稅（所得稅法 14-8）、舊制財產交易所得（所得稅法 17-2）三種分開算，附各自的適用條件、2 年期限與 5 年列管檢核">
 <meta property="og:url" content="https://wufengfs95.github.io/linrongyu/repur/">
 <meta property="og:image" content="https://wufengfs95.github.io/linrongyu/images/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=792f3677">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "換屋可以退多少稅？", "url": "https://wufengfs95.github.io/linrongyu/repur/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "換屋重購退稅試算：依土地稅法第 35 條算土地增值稅可退多少、依所得稅法第 14 條之 8 算房地合一稅可退多少，含 2 年期限與 5 年列管的要件檢核", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
+<link rel="stylesheet" href="../assets/site.css?v=f52c6dc1">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "換屋可以退多少稅？", "url": "https://wufengfs95.github.io/linrongyu/repur/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "換屋重購退稅試算：土地增值稅（土地稅法 35 條）、房地合一稅（所得稅法 14-8）、舊制財產交易所得（所得稅法 17-2）三種分開算，附各自的適用條件、2 年期限與 5 年列管檢核", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
 <div class="topinfo">
@@ -48,13 +48,16 @@
   <p class="crumbs"><a href="../">首頁</a> › <a href="../tools/">免費工具</a> › 重購退稅</p>
   <p class="ts-back">← 這個試算也在 <a href="../sell/#repur">〈我要賣房〉</a> 裡，那一頁還有其他的</p>
   <h1>換屋可以退多少稅？</h1>
-  <p class="sm-sub">賣掉舊的、兩年內買新的，土地增值稅和房地合一稅都可以申請退還，兩套制度算法不一樣，這裡各算各的</p>
+  <p class="sm-sub">賣掉舊的、兩年內買新的，土地增值稅和所得稅都可以申請退還，土增稅、房地合一、舊制財交稅三套的條件和算法都不一樣，這裡分開算</p>
 </div>
 </section>
 <section class="v-wrap">
 <div class="wrap">
   <div class="v-grid ya-grid">
     <form id="rpForm" class="v-form" novalidate>
+      <h2>賣掉的那戶是什麼時候買的</h2>
+      <div class="field"><label for="rpEra">取得日期<small class="lt-where">決定所得稅走哪一套，土地增值稅兩種情況都一樣要算</small></label><select id="rpEra"><option value="new">民國 105 年 1 月 1 日以後取得（房地合一新制）</option><option value="old">民國 105 年 1 月 1 日以前取得（舊制財產交易所得）</option></select></div>
+
       <h2>兩次過戶的時間</h2>
       <div class="row2">
         <div class="field"><label for="rpSellDate">賣掉那戶，完成移轉登記日<small class="lt-where">謄本登記日期，不是簽約日也不是交屋日</small></label><input type="date" id="rpSellDate"></div>
@@ -73,11 +76,17 @@
         <label class="rt-check"><input type="checkbox" id="rpHadSelf"><span class="ya-ck">先買後賣：買新地的時候，名下已經有自用住宅的土地<small>不能是空手先買一塊地、之後才去找房子賣</small></span></label>
       </div>
 
-      <h2>房地合一的要件</h2>
-      <label class="rt-check"><input type="checkbox" id="rpSetHouse"><span class="ya-ck">兩戶都有本人、配偶或未成年子女設籍並實際居住<small>成年子女不算，而且只設籍沒住也不行，國稅局會調水電度數</small></span></label>
-      <label class="rt-check"><input type="checkbox" id="rpSpouseOk"><span class="ya-ck">重購是用本人或配偶的名義<small>房地合一可以掛配偶，但成年子女、父母不行</small></span></label>
-      <label class="rt-check"><input type="checkbox" id="rpHeldFirst"><span class="ya-ck">賣掉的那戶，是買新戶之前就持有的<small>先買一間新的、再把另一間剛買的賣掉（買新賣新），國稅局認定不適用</small></span></label>
-      <label class="rt-check"><input type="checkbox" id="rpPresale"><span class="ya-ck">買的是預售屋，還沒交屋過戶<small>勾了就表示還不能辦，要等交屋拿到所有權之後</small></span></label>
+      <div data-era="new">
+        <h2>房地合一的要件</h2>
+        <label class="rt-check"><input type="checkbox" id="rpSetHouse"><span class="ya-ck">兩戶都有本人、配偶或未成年子女設籍並實際居住<small>成年子女不算，而且只設籍沒住也不行，國稅局會調水電度數</small></span></label>
+        <label class="rt-check"><input type="checkbox" id="rpSpouseOk"><span class="ya-ck">重購是用本人或配偶的名義<small>房地合一可以掛配偶，但成年子女、父母不行</small></span></label>
+        <label class="rt-check"><input type="checkbox" id="rpHeldFirst"><span class="ya-ck">賣掉的那戶，是買新戶之前就持有的<small>先買一間新的、再把另一間剛買的賣掉（買新賣新），國稅局認定不適用</small></span></label>
+        <label class="rt-check"><input type="checkbox" id="rpPresale"><span class="ya-ck">買的是預售屋，還沒交屋過戶<small>勾了就表示還不能辦，要等交屋拿到所有權之後</small></span></label>
+      </div>
+      <div data-era="old">
+        <h2>舊制的要件</h2>
+        <label class="rt-check"><input type="checkbox" id="rpOldSelf"><span class="ya-ck">出售與重購的都是自用住宅，本人、配偶或直系親屬設籍居住<small>舊制退的是綜合所得稅裡的財產交易所得</small></span></label>
+      </div>
 
       <h2>土地增值稅這一邊<small class="rt-small">沒繳過土增稅就跳過</small></h2>
       <div class="row2">
@@ -90,32 +99,68 @@
       </div>
       <div class="field"><label for="rpZone">買進的土地屬於<small class="lt-where">上限只卡新買的這一筆，賣掉那筆的面積不受限制</small></label><select id="rpZone"><option value="u">都市土地（上限 3 公畝，約 90.75 坪）</option><option value="n">非都市土地（上限 7 公畝，約 211.75 坪）</option></select></div>
 
-      <h2>房地合一稅這一邊<small class="rt-small">105 年以後買的房子才有</small></h2>
-      <div class="row2">
-        <div class="field"><label for="rpHouseOld">賣掉的房地・成交總價（萬元）<small class="lt-where">買賣契約上的總價，房子加土地一起算</small></label><input type="number" id="rpHouseOld" inputmode="decimal" step="0.01" min="0" placeholder="例：1500"></div>
-        <div class="field"><label for="rpHouseNew">買進的房地・成交總價（萬元）<small class="lt-where">買貴買便宜都可以退，只是比率不同</small></label><input type="number" id="rpHouseNew" inputmode="decimal" step="0.01" min="0" placeholder="例：1200"></div>
+      <div data-era="new">
+        <h2>房地合一稅這一邊<small class="rt-small">用房地成交總價算</small></h2>
+        <div class="row2">
+          <div class="field"><label for="rpHouseOld">賣掉的房地・成交總價（萬元）<small class="lt-where">買賣契約上的總價，房子加土地一起算</small></label><input type="number" id="rpHouseOld" inputmode="decimal" step="0.01" min="0" placeholder="例：1500"></div>
+          <div class="field"><label for="rpHouseNew">買進的房地・成交總價（萬元）<small class="lt-where">買貴買便宜都可以退，只是比率不同</small></label><input type="number" id="rpHouseNew" inputmode="decimal" step="0.01" min="0" placeholder="例：1200"></div>
+        </div>
+        <div class="field"><label for="rpHousePaid">賣掉時已經繳的房地合一稅（萬元）<small class="lt-where">房地合一稅申報書上的實繳稅額</small></label><input type="number" id="rpHousePaid" inputmode="decimal" step="0.01" min="0" placeholder="例：30"></div>
       </div>
-      <div class="field"><label for="rpHousePaid">賣掉時已經繳的房地合一稅（萬元）<small class="lt-where">房地合一稅申報書上的實繳稅額</small></label><input type="number" id="rpHousePaid" inputmode="decimal" step="0.01" min="0" placeholder="例：30"></div>
+      <div data-era="old">
+        <h2>舊制財產交易所得這一邊<small class="rt-small">只看房屋，不含土地</small></h2>
+        <div class="row2">
+          <div class="field"><label for="rpOldSold">賣掉的・房屋部分價額（萬元）<small class="lt-where">契約有分列就用房屋那一欄；沒分列按房屋評定現值 ÷（房屋評定現值＋土地公告現值）拆</small></label><input type="number" id="rpOldSold" inputmode="decimal" step="0.01" min="0" placeholder="例：300"></div>
+          <div class="field"><label for="rpOldBuy">買進的・房屋部分價額（萬元）<small class="lt-where">舊制一定要買更貴才退得到，買便宜是一毛都沒有</small></label><input type="number" id="rpOldBuy" inputmode="decimal" step="0.01" min="0" placeholder="例：380"></div>
+        </div>
+        <div class="field"><label for="rpOldTax">那一年因為這筆所得多繳的綜合所得稅（萬元）<small class="lt-where">把這筆財產交易所得算進去、跟不算進去的應納稅額相減，退的就是這個差額</small></label><input type="number" id="rpOldTax" inputmode="decimal" step="0.01" min="0" placeholder="例：12"></div>
+      </div>
     </form>
     <div id="rpResult" class="v-result"></div>
   </div>
 
-  <h2 class="v-h2">兩套制度差在哪<small>最容易搞混的地方</small></h2>
+  <h2 class="v-h2">三種重購退稅的條件<small>看你的情況對到哪一種，條件完全不一樣</small></h2>
+
+  <h3 class="rp-h3">① 土地增值稅重購退稅<small>土地稅法 35、36、37 條・不分新舊制都適用</small></h3>
   <div class="v-quick rt-facts"><table class="v-table"><tbody>
-    <tr><td>退的是什麼稅</td><td><b>土增稅</b>退土地增值稅，找土地所在地的地方稅務局／<b>房地合一</b>退房屋土地交易所得稅，找戶籍地國稅局，兩套分屬不同法律與機關，實務上各自認定、各自申請</td></tr>
-    <tr><td>金額用什麼算</td><td><b>土增稅</b>用土地的「申報移轉現值」（土地稅法 36 條明文），一般就是公告土地現值／<b>房地合一</b>用房地的「成交總價」，<b>兩個數字差很多，不要互相代入</b></td></tr>
-    <tr><td>怎麼算</td><td><b>土增稅</b>：A ＝ 新購現值 −（出售現值 − 已繳土增稅），可退 A，上限是已繳的金額，A 是負的就不能退<br><b>房地合一</b>：已繳稅額 × 重購價 ÷ 出售價，比率最高 100%</td></tr>
-    <tr><td>買便宜一點可以嗎</td><td><b>土增稅</b>要新購現值大於「出售現值減已繳土增稅」才退得到／<b>房地合一</b>買貴買便宜都能退，只是按比率</td></tr>
-    <tr><td>時間</td><td>兩套都是兩次<b>完成移轉登記日</b>相隔 2 年內，先賣後買、先買後賣都可以</td></tr>
-    <tr><td>誰設籍才算</td><td><b>土增稅</b>本人、配偶或<b>直系親屬</b>（成年子女、父母都算）／<b>房地合一</b>本人、配偶或<b>未成年子女</b>，而且要實際居住，成年子女不算</td></tr>
-    <tr><td>名字掛誰</td><td><b>土增稅</b>出售與新購必須<b>同一人</b>，掛配偶就不符合／<b>房地合一</b>可以本人<b>或配偶</b>，這兩條剛好相反，最常被講混</td></tr>
-    <tr><td>額外要件</td><td><b>土增稅</b>出售前一年內不得出租或供營業，新購地面積上限都市 3 公畝、非都市 7 公畝（<b>只卡新買的，賣掉那筆不受限</b>）／<b>房地合一</b>預售屋不適用，買新賣新也不適用</td></tr>
-    <tr><td>退完的限制</td><td>兩套都一樣：重購後 <b>5 年內改作其他用途或再轉手要追繳</b>，戶籍遷出也算，土增稅連夫妻間贈與都算再移轉</td></tr>
-    <tr><td>三個期限別搞混</td><td><b>土增稅</b>退稅請求權時效 10 年／<b>房地合一</b>先賣後買的申請時效是重購完成移轉登記<b>次日</b>起 5 年／兩套的<b>列管</b>都是重購後 5 年</td></tr>
+    <tr><td>退什麼</td><td>賣掉土地時繳的<b>土地增值稅</b>，找<b>土地所在地的地方稅務局</b>辦</td></tr>
+    <tr><td>誰可以用</td><td>出售與新購的土地必須是<b>同一個人</b>的名字，掛到配偶名下就整個不符合</td></tr>
+    <tr><td>設籍</td><td>出售地與新購地<b>都要</b>有本人、配偶或<b>直系親屬</b>設籍，成年子女、父母都算</td></tr>
+    <tr><td>金額用什麼算</td><td>土地的<b>申報移轉現值</b>，不是成交價，一般就是當期公告土地現值乘面積乘持分</td></tr>
+    <tr><td>怎麼算</td><td>A ＝ 新購現值 −（出售現值 − 已繳土增稅）<br>A 是負的就不能退，A 大於已繳就全退，否則退 A</td></tr>
+    <tr><td>時間</td><td>兩次<b>完成移轉登記日</b>相隔 2 年內，先賣後買、先買後賣都可以<br>後發生的那一筆，訂約起 30 日內申報看訂約日，逾期看申報日</td></tr>
+    <tr><td>面積上限</td><td>新購地都市 3 公畝（約 90.75 坪）、非都市 7 公畝（約 211.75 坪）<br><b>只卡新買的，賣掉那筆不受限制</b></td></tr>
+    <tr><td>額外要件</td><td>賣掉那戶<b>出售前一年內</b>不得出租或供營業使用<br>先買後賣的，買地當下名下就要已經有自用住宅的土地</td></tr>
+    <tr><td>次數</td><td><b>不限次數</b>，這跟自用住宅優惠稅率的「一生一次、一生一屋」是兩回事，用過 10% 優惠稅率一樣可以退</td></tr>
+    <tr><td>時效與列管</td><td>退稅請求權時效 <b>10 年</b>；重購後 <b>5 年</b>內改用途或再移轉要追繳，戶籍遷出、夫妻間贈與都算</td></tr>
+  </tbody></table></div>
+
+  <h3 class="rp-h3">② 房地合一稅重購退稅<small>所得稅法 14 條之 8・105 年 1 月 1 日以後取得的房地</small></h3>
+  <div class="v-quick rt-facts"><table class="v-table"><tbody>
+    <tr><td>退什麼</td><td>賣掉時繳的<b>房屋土地交易所得稅</b>，找<b>戶籍地國稅局</b>辦</td></tr>
+    <tr><td>誰可以用</td><td>重購可以用<b>本人或配偶</b>的名義，成年子女、父母不行，這點跟土增稅相反</td></tr>
+    <tr><td>設籍</td><td>兩戶都要本人、配偶或<b>未成年子女</b>設籍<b>並實際居住</b><br>成年子女不算，只設籍沒住也不算，國稅局會調水電度數</td></tr>
+    <tr><td>金額用什麼算</td><td>房地的<b>成交總價</b>，房子加土地一起，不是只算房屋</td></tr>
+    <tr><td>怎麼算</td><td>已繳稅額 × 重購價 ÷ 出售價，比率最高 100%<br><b>買貴買便宜都能退</b>，買更貴就是全額退</td></tr>
+    <tr><td>時間</td><td>兩次<b>完成移轉登記日</b>相隔 2 年內，先後不限</td></tr>
+    <tr><td>怎麼拿到</td><td><b>先賣後買</b>是先繳再申請退還現金<br><b>先買後賣</b>是申報時直接<b>扣抵</b>應納稅額，不退現金，申報書上就要填</td></tr>
+    <tr><td>不適用的情形</td><td><b>預售屋</b>還沒交屋過戶不算<br><b>買新賣新</b>（先買新的再把另一間剛買的賣掉）不算</td></tr>
+    <tr><td>時效與列管</td><td>先賣後買的申請時效是重購完成移轉登記<b>次日</b>起 5 年；重購後 <b>5 年</b>內改用途或再移轉要追繳</td></tr>
+  </tbody></table></div>
+
+  <h3 class="rp-h3">③ 舊制財產交易所得重購退稅<small>所得稅法 17 條之 2・105 年 1 月 1 日以前取得的房子</small></h3>
+  <div class="v-quick rt-facts"><table class="v-table"><tbody>
+    <tr><td>退什麼</td><td>賣掉那一年因為這筆<b>財產交易所得</b>而多繳的<b>綜合所得稅</b>，在結算申報時扣抵或退還</td></tr>
+    <tr><td>算哪一部分</td><td><b>只算房屋，不含土地</b>（土地那邊是走土增稅）<br>契約沒分列房地價格的，按房屋評定現值 ÷（房屋評定現值 ＋ 土地公告現值）拆算</td></tr>
+    <tr><td>怎麼算</td><td><b>一定要買更貴</b>：重購房屋價額要超過原出售房屋價額才退得到<br>退的金額 ＝ 那一年把這筆所得算進去、跟不算進去的應納稅額<b>差額</b>，不是按比率</td></tr>
+    <tr><td>買便宜呢</td><td><b>一毛都沒有</b>，舊制沒有按比例退這回事，這跟房地合一最大的差別</td></tr>
+    <tr><td>時間</td><td>兩次<b>完成移轉登記日</b>相隔 2 年內，先賣後買、先買後賣都適用</td></tr>
+    <tr><td>自己蓋的房子</td><td>委託建造取得的，以<b>建物總登記日</b>所屬年度當作重購完成的年度</td></tr>
+    <tr><td>列管</td><td>官方沒有明文的追繳規定，這一欄我不替它填數字，要確認請直接問國稅局</td></tr>
   </tbody></table></div>
 
   <h2 class="v-h2">常見問題</h2>
-  <div class="v-faq"><details open><summary>我賣 1,800 萬、買 1,600 萬，土增稅退得到嗎？</summary><p>這兩個數字沒辦法判斷，土增稅看的不是成交價，是土地的<b>申報移轉現值</b>（土地稅法 36 條），一般就是公告土地現值乘面積乘持分，通常比成交價低很多，要拿土增稅繳款書出來看才算得出來</p></details><details><summary>大屋換小屋，房地合一還能退嗎？</summary><p>可以，<b>買貴買便宜都能退</b>，只是按比率，比率是重購價除以出售價，最高 100%，例如賣 1,500 萬繳了 30 萬，買 1,200 萬，比率 80%，可以退 24 萬，很多人以為一定要買更貴才能退，那是舊制的規定</p></details><details><summary>兩套可以同時退嗎？</summary><p>可以，土增稅跟房地合一是兩種不同的稅、兩個不同的機關，條件各自認定，一筆換屋同時符合就兩邊都申請，土增稅找地方稅務局，房地合一找國稅局</p></details><details><summary>先買後賣跟先賣後買有差嗎？</summary><p>期限的算法一樣，差在怎麼拿到錢，<b>先賣後買</b>是稅先繳掉，之後再申請退還；<b>先買後賣</b>的房地合一是在申報的時候直接扣抵應納稅額，不是退現金給你，所以申報書上就要填，漏填要再走更正</p></details><details><summary>預售屋算不算？</summary><p>不算，預售屋還沒取得所有權、沒辦法自住，不適用重購退稅，要等交屋完成所有權移轉登記之後，才開始算那 2 年</p></details><details><summary>退完以後有什麼要注意的？</summary><p>最重要的是 <b>5 年</b>：重購的房地在 5 年內改作其他用途或再轉手，退掉的稅會被追回來，<b>把戶籍遷出去也會被追繳</b>，這是實務上最常見的案例，工作調職這種非自願因素一樣會被追，只有子女就學、公務派駐國外、所有權人死亡等特定原因，經查明實際仍自住才可能免追</p></details><details><summary>105 年以前買的房子呢？</summary><p>那是舊制，賣掉是課綜合所得稅的財產交易所得，重購退稅走所得稅法 17 條之 2，規則不一樣：<b>只看房屋部分、而且一定要買更貴才能退</b>，退的是當年度因為這筆所得多繳的綜所稅，不是按比率，這個工具沒有把舊制做進去，有這種案子直接 LINE 我，我幫你找代書算</p></details></div>
+  <div class="v-faq"><details open><summary>我賣 1,800 萬、買 1,600 萬，土增稅退得到嗎？</summary><p>這兩個數字沒辦法判斷，土增稅看的不是成交價，是土地的<b>申報移轉現值</b>（土地稅法 36 條），一般就是公告土地現值乘面積乘持分，通常比成交價低很多，要拿土增稅繳款書出來看才算得出來</p></details><details><summary>大屋換小屋，房地合一還能退嗎？</summary><p>可以，<b>買貴買便宜都能退</b>，只是按比率，比率是重購價除以出售價，最高 100%，例如賣 1,500 萬繳了 30 萬，買 1,200 萬，比率 80%，可以退 24 萬，很多人以為一定要買更貴才能退，那是舊制的規定</p></details><details><summary>兩套可以同時退嗎？</summary><p>可以，土增稅跟房地合一是兩種不同的稅、兩個不同的機關，條件各自認定，一筆換屋同時符合就兩邊都申請，土增稅找地方稅務局，房地合一找國稅局</p></details><details><summary>先買後賣跟先賣後買有差嗎？</summary><p>期限的算法一樣，差在怎麼拿到錢，<b>先賣後買</b>是稅先繳掉，之後再申請退還；<b>先買後賣</b>的房地合一是在申報的時候直接扣抵應納稅額，不是退現金給你，所以申報書上就要填，漏填要再走更正</p></details><details><summary>預售屋算不算？</summary><p>不算，預售屋還沒取得所有權、沒辦法自住，不適用重購退稅，要等交屋完成所有權移轉登記之後，才開始算那 2 年</p></details><details><summary>退完以後有什麼要注意的？</summary><p>最重要的是 <b>5 年</b>：重購的房地在 5 年內改作其他用途或再轉手，退掉的稅會被追回來，<b>把戶籍遷出去也會被追繳</b>，這是實務上最常見的案例，工作調職這種非自願因素一樣會被追，只有子女就學、公務派駐國外、所有權人死亡等特定原因，經查明實際仍自住才可能免追</p></details><details><summary>105 年以前買的房子呢？</summary><p>那是舊制，上面「賣掉的那戶是什麼時候買的」選第二個就會切過去，賣掉是課綜合所得稅的財產交易所得，重購退稅走所得稅法 17 條之 2，規則差很多：<b>只看房屋部分不含土地、而且一定要買更貴才能退</b>，退的是那一年因為這筆所得多繳的綜所稅，不是按比率，買便宜是一毛都沒有</p></details></div>
   <p class="sm-note">土地增值稅重購退稅依<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340096&amp;flno=35" target="_blank" rel="noopener">土地稅法第 35 條</a>、
     <a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0340096&amp;flno=36" target="_blank" rel="noopener">第 36 條</a>（地價以計徵土地增值稅之地價即申報移轉現值為準）與第 37 條，
     算式對照<a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-saving-manual/local/land-value-increment-tax/VGE8YNL" target="_blank" rel="noopener">財政部稅務入口網地方稅節稅手冊</a>；
@@ -141,6 +186,6 @@
 
 <script src="../assets/site.js?v=79234c66" defer></script>
 <script src="../assets/tools.js?v=a4191526" data-v=""></script>
-<script src="app.js?v=d8236c31" data-v="" defer></script>
+<script src="app.js?v=db649e70" data-v="" defer></script>
 </body>
 </html>

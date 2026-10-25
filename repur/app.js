@@ -58,6 +58,16 @@
              refund: paid * rate, full: raw >= 1 };
   }
 
+  // ── 舊制財產交易所得（所得稅法 17-2）：全有全無，買更貴才退 ──
+  function oldTax() {
+    var bNew = num('rpOldBuy'), bOld = num('rpOldSold'), tax = num('rpOldTax');
+    if (!bOld || !tax) return { has: false };
+    var up = bNew > bOld;
+    return { has: true, up: up, bNew: bNew, bOld: bOld, tax: tax, refund: up ? tax : 0 };
+  }
+
+  function era() { return $('rpEra').value; }
+
   // ── 要件：每一條註明會卡到哪一套稅 ──────────────
   // who: 'land' 只影響土增稅、'house' 只影響房地合一、'both' 兩套都卡
   function checks(g) {
@@ -71,24 +81,30 @@
       g.sellFirst ? '在 ' + YEARS + ' 年內，兩套都是稅先繳、之後再申請退還'
                   : '在 ' + YEARS + ' 年內，房地合一是申報時直接扣抵應納稅額、不是退現金；土增稅還是事後退');
 
-    add('both', on('rpNoRent') ? 'ok' : 'no',
-      on('rpNoRent') ? '兩戶都沒有出租或營業' : '有出租或營業',
+    add('both', on('rpNoRent') ? 'ok' : 'ask',
+      on('rpNoRent') ? '兩戶都沒有出租或營業' : '出租或營業：還沒確認',
       '兩戶都不能出租、供營業或執行業務使用，公益出租、社宅包租代管也算出租');
 
     // 設籍：兩套認的人不一樣
-    add('land', on('rpSetLand') ? 'ok' : 'no',
-      on('rpSetLand') ? '土增稅的設籍 OK' : '土增稅：設籍不符',
+    add('land', on('rpSetLand') ? 'ok' : 'ask',
+      on('rpSetLand') ? '土增稅的設籍 OK' : '土增稅的設籍：還沒確認',
       '出售地與新購地都要有本人、配偶或直系親屬設籍（土地稅法 9 條），成年子女、父母都算');
-    add('house', on('rpSetHouse') ? 'ok' : 'no',
-      on('rpSetHouse') ? '房地合一的設籍與居住 OK' : '房地合一：設籍或居住不符',
+    if (era() === 'old') {
+      add('old', on('rpOldSelf') ? 'ok' : 'ask',
+        on('rpOldSelf') ? '舊制：自用住宅 OK' : '舊制的自用住宅：還沒確認',
+        '出售與重購的都要是自用住宅，本人、配偶或直系親屬設籍居住');
+      return r;
+    }
+    add('house', on('rpSetHouse') ? 'ok' : 'ask',
+      on('rpSetHouse') ? '房地合一的設籍與居住 OK' : '房地合一的設籍與居住：還沒確認',
       '兩戶都要本人、配偶或未成年子女設籍「並實際居住」，成年子女不算，'
       + '國稅局會查水電度數，設了戶籍沒住一樣不准');
 
-    add('land', on('rpSameOwner') ? 'ok' : 'no',
-      on('rpSameOwner') ? '土增稅：所有權人同一人' : '土增稅：所有權人不同人',
+    add('land', on('rpSameOwner') ? 'ok' : 'ask',
+      on('rpSameOwner') ? '土增稅：所有權人同一人' : '土增稅的所有權人：還沒確認',
       '土增稅的出售地與新購地必須是同一個人的名字，掛到配偶名下就整個不符合，這點跟房地合一相反');
-    add('house', on('rpSpouseOk') ? 'ok' : 'no',
-      on('rpSpouseOk') ? '房地合一：用本人或配偶名義' : '房地合一：名義不符',
+    add('house', on('rpSpouseOk') ? 'ok' : 'ask',
+      on('rpSpouseOk') ? '房地合一：用本人或配偶名義' : '房地合一的名義：還沒確認',
       '房地合一可以用本人或配偶的名義重購，但成年子女、父母不行');
 
     add('land', on('rpYear1') ? 'ok' : 'ask',
@@ -98,8 +114,8 @@
     add('house', on('rpPresale') ? 'no' : 'ok',
       on('rpPresale') ? '買的是預售屋' : '買的不是預售屋',
       '預售屋還沒取得所有權、沒辦法自住，不適用，要等交屋完成移轉登記之後才開始算那 2 年');
-    add('house', on('rpHeldFirst') ? 'ok' : 'no',
-      on('rpHeldFirst') ? '不是買新賣新' : '可能是買新賣新',
+    add('house', on('rpHeldFirst') ? 'ok' : 'ask',
+      on('rpHeldFirst') ? '不是買新賣新' : '是不是買新賣新：還沒確認',
       '賣掉的那戶要是買新戶之前就持有的，先買一間新的、再把另一間剛買的賣掉（買新賣新）不適用');
 
     if (g && !g.sellFirst) add('land', on('rpHadSelf') ? 'ok' : 'ask',
@@ -116,21 +132,31 @@
     var blocks = function (who) {
       return rows.filter(function (x) { return (x.who === 'both' || x.who === who) && x.s === 'no'; });
     };
-    var landBad = blocks('land'), houseBad = blocks('house');
+    var old = era() === 'old', ot = oldTax();
+    var landBad = blocks('land'), incBad = blocks(old ? 'old' : 'house');
+    var inc = old ? ot : ht;                      // 所得稅這一邊：舊制或房地合一
     var landR = (!landBad.length && lt.has && !lt.bad) ? lt.refund : 0;
-    var houseR = (!houseBad.length && ht.has) ? ht.refund : 0;
-    var total = landR + houseR;
+    var incR = (!incBad.length && inc.has) ? inc.refund : 0;
+    var total = landR + incR;
 
-    var anyBad = landBad.length && houseBad.length;
-    var state = anyBad ? 'no' : (rows.some(function (x) { return x.s === 'ask'; }) ? 'ask' : 'ok');
+    var anyBad = landBad.length && incBad.length;
+    var asks = rows.filter(function (x) { return x.s === 'ask'; }).length;
+    var state = anyBad ? 'no' : (asks ? 'ask' : 'ok');
+    var incName = old ? '舊制財交稅' : '房地合一';
     var head, sub;
-    if (anyBad) { head = '兩套都不符合'; sub = '下面標 ❌ 的就是卡住的地方'; }
-    else if (!lt.has && !ht.has) { head = '填金額就會算'; sub = '兩套稅各填各的，有填哪一套就算哪一套'; }
-    else { head = '最多可以退 ' + wan(total); sub = '土增稅與房地合一是兩套稅、兩個機關，要分開申請'; }
+    if (anyBad) { head = '兩邊都不符合'; sub = '下面標 ❌ 的就是卡住的地方'; }
+    else if (!lt.has && !inc.has) {
+      head = '填金額就會算';
+      sub = '土增稅和' + incName + '各填各的，有填哪一套就算哪一套';
+    } else {
+      head = (asks ? '要件確認後最多可退 ' : '最多可以退 ') + wan(total);
+      sub = asks ? '還有 ' + asks + ' 項要確認，下面標 ⚠️ 的勾一勾才算數'
+                 : '土增稅和' + incName + '是不同的稅、不同的機關，要分開申請';
+    }
 
     var html = '<div class="v-big rp-' + state + '"><span>' + esc(sub) + '</span><strong>' + esc(head) + '</strong></div>';
 
-    if (lt.has || ht.has) {
+    if (lt.has || inc.has) {
       html += '<div class="sl-cards rp-cards">';
       if (lt.has) html += card('土地增值稅',
         landBad.length ? '不符合' : (lt.bad ? '要問稅務局' : (lt.none ? '不能退' : wan(lt.refund))),
@@ -141,14 +167,22 @@
                 + '」的 ' + wan(lt.vOld - lt.paid) + '，還差 ' + wan(Math.abs(lt.a))
               : (lt.full ? '不足支付新地價的部分 ' + wan(lt.a) + ' 已經大於已繳的 ' + wan(lt.paid) + '，所以全退'
                  : '不足支付新地價的部分只有 ' + wan(lt.a) + '，退稅以這個為限，不是已繳的 ' + wan(lt.paid)))));
-      if (ht.has) html += card('房地合一稅',
-        houseBad.length ? '不符合' : wan(ht.refund),
-        houseBad.length ? '卡在：' + houseBad[0].t
+      if (!old && ht.has) html += card('房地合一稅',
+        incBad.length ? '不符合' : wan(ht.refund),
+        incBad.length ? '卡在：' + incBad[0].t
           : (ht.full
             ? '重購 ' + wan(ht.pNew) + ' 不低於出售 ' + wan(ht.pOld) + '，比率 100%，已繳的全部退'
             : '比率 ' + (ht.rate * 100).toFixed(1) + '%（重購 ' + wan(ht.pNew) + ' ÷ 出售 ' + wan(ht.pOld)
               + '），' + wan(ht.paid) + ' × ' + (ht.rate * 100).toFixed(1) + '% = ' + wan(ht.refund))
           + (g && !g.sellFirst ? '　先買後賣是在申報時扣抵，不是退現金' : ''));
+      if (old && ot.has) html += card('舊制・財產交易所得',
+        incBad.length ? '不符合' : (ot.up ? wan(ot.refund) : '不能退'),
+        incBad.length ? '卡在：' + incBad[0].t
+          : (ot.up
+            ? '重購房屋 ' + wan(ot.bNew) + ' 超過原出售 ' + wan(ot.bOld)
+              + '，那一年因這筆所得多繳的 ' + wan(ot.tax) + ' 可以扣抵或退還'
+            : '重購房屋 ' + wan(ot.bNew) + ' 沒有超過原出售 ' + wan(ot.bOld)
+              + '，舊制一定要買更貴才退得到，沒有按比率這回事'));
       html += '</div>';
     }
 
@@ -170,7 +204,7 @@
       + '<a class="btn btn-line v-cta" href="' + RT.LINE_URL + '" target="_blank" rel="noopener"'
       + ' data-rt-line="' + esc('容瑜你好，我想問重購退稅：'
         + (lt.has ? '土增稅算出來 ' + (landBad.length ? '不符合' : wan(landR)) + '、' : '')
-        + (ht.has ? '房地合一算出來 ' + (houseBad.length ? '不符合' : wan(houseR)) + '，' : '')
+        + (inc.has ? (old ? '舊制財交稅算出來 ' : '房地合一算出來 ') + (incBad.length ? '不符合' : wan(incR)) + '，' : '')
         + '想請你幫我確認') + '" data-toast="rpToast">把這筆試算傳給容瑜</a>'
       + '<p class="toast" id="rpToast" role="status"></p>';
 
@@ -178,6 +212,10 @@
 
     // 先買後賣才需要問「買地時名下已有自用住宅」
     $('rpHadSelfWrap').hidden = !(g && !g.sellFirst);
+    // 新制與舊制只會用到其中一套所得稅，另一套整區收起來
+    document.querySelectorAll('[data-era]').forEach(function (el) {
+      el.hidden = el.getAttribute('data-era') !== era();
+    });
   }
 
   function card(t, big, why) {

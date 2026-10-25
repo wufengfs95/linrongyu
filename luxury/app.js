@@ -1,6 +1,8 @@
 /* 豪宅稅 —— 計算邏輯原封不動沿用舊計算機（calculator/index.html），只換掉版面。
    稅務算式沒有重寫，避免改出錯誤， */
-const FIXED = {
+// 名字一律加 lx 前綴：賣方實拿 seller/app.js 也有 FIXED／v／fmt／fmt0，
+// 兩支都沒包 IIFE，同一頁載入會 const 重複宣告而整份掛掉
+const LX_FIXED = {
   run: 0.2,              // 代書費（潤筆）
   reg: 0.2,              // 實價登錄費
   clr: 0.6,              // 塗銷費＋稅籍資料
@@ -8,17 +10,17 @@ const FIXED = {
   serviceRate: 0.04,     // 服務費 4%
 };
 
-function v(id) {
+function lxV(id) {
   const el = document.getElementById(id);
   if (!el) return 0;
   const n = parseFloat(el.value);
   return isNaN(n) ? 0 : n;
 }
-function fmt(n, d=2) {
+function lxFmt(n, d=2) {
   if (n === null || n === undefined || isNaN(n)) return '—';
   return n.toLocaleString('zh-TW', { maximumFractionDigits: d, minimumFractionDigits: d });
 }
-function fmt0(n) {
+function lxFmt0(n) {
   if (n === null || n === undefined || isNaN(n)) return '—';
   return n.toLocaleString('zh-TW', { maximumFractionDigits: 0 });
 }
@@ -54,23 +56,23 @@ function parseShare(str) {
 
 // 房地比（回傳 {ok, ratio, landVal(元)}）
 function lxRatio() {
-  const landArea = v('lx_landArea');
-  const landUnit = v('lx_landUnit');
+  const landArea = lxV('lx_landArea');
+  const landUnit = lxV('lx_landUnit');
   const share = parseShare(document.getElementById('lx_landShare').value);
-  const houseVal = v('lx_houseVal');
+  const houseVal = lxV('lx_houseVal');
   const landVal = landArea * landUnit * share.val; // 元
   if (houseVal <= 0 || landVal <= 0) return { ok: false, ratio: 0, landVal };
   return { ok: true, ratio: houseVal / (houseVal + landVal), landVal };
 }
 
 function calcLuxury() {
-  const price = v('lx_price'); // 萬
+  const price = lxV('lx_price'); // 萬
   const rr = lxRatio();
 
   // 土地公告現值說明
   const landInfo = document.getElementById('lx_landInfo');
   if (rr.landVal > 0) {
-    landInfo.innerHTML = `土地公告現值 = <b>${fmt(v('lx_landArea'))}</b> m² × <b>${fmt0(v('lx_landUnit'))}</b> 元 × 權利範圍 = <b style="color:var(--gold-deep)">${fmt0(rr.landVal)}</b> 元`;
+    landInfo.innerHTML = `土地公告現值 = <b>${lxFmt(lxV('lx_landArea'))}</b> m² × <b>${lxFmt0(lxV('lx_landUnit'))}</b> 元 × 權利範圍 = <b style="color:var(--gold-deep)">${lxFmt0(rr.landVal)}</b> 元`;
   } else {
     landInfo.textContent = '土地公告現值 = 面積 × 每m²現值 × 權利範圍';
   }
@@ -78,20 +80,20 @@ function calcLuxury() {
   // 房地比說明
   const ratioInfo = document.getElementById('lx_ratioInfo');
   if (rr.ok) {
-    ratioInfo.innerHTML = `房地比 = 房屋 <b>${fmt0(v('lx_houseVal'))}</b> ÷（房屋 + 土地 <b>${fmt0(rr.landVal)}</b>）= <b style="color:var(--gold-deep)">${(rr.ratio*100).toFixed(2)}%</b>`;
+    ratioInfo.innerHTML = `房地比 = 房屋 <b>${lxFmt0(lxV('lx_houseVal'))}</b> ÷（房屋 + 土地 <b>${lxFmt0(rr.landVal)}</b>）= <b style="color:var(--gold-deep)">${(rr.ratio*100).toFixed(2)}%</b>`;
   } else {
     ratioInfo.textContent = '房地比 = 房屋評定現值 ÷（房屋評定現值 + 土地公告現值）';
   }
 
   // 服務費
-  const service = lxSvc === 'manual' ? v('lx_svcManual') : price * 0.04;
+  const service = lxSvc === 'manual' ? lxV('lx_svcManual') : price * 0.04;
   const svcInfo = document.getElementById('lx_svcInfo');
   if (lxSvc === 'p4') {
     svcInfo.innerHTML = price > 0
-      ? `服務費 = 出售價 <b>${fmt(price)}</b> 萬 × 4% = <b style="color:var(--gold-deep)">${fmt(service)}</b> 萬`
+      ? `服務費 = 出售價 <b>${lxFmt(price)}</b> 萬 × 4% = <b style="color:var(--gold-deep)">${lxFmt(service)}</b> 萬`
       : '服務費 = 出售價格 × 4%';
   } else {
-    svcInfo.innerHTML = `服務費 = 手動輸入 <b style="color:var(--gold-deep)">${fmt(service)}</b> 萬`;
+    svcInfo.innerHTML = `服務費 = 手動輸入 <b style="color:var(--gold-deep)">${lxFmt(service)}</b> 萬`;
   }
 
   // 價格或房地比不齊 → 清結果
@@ -103,32 +105,32 @@ function calcLuxury() {
   }
 
   const luxTax = price * rr.ratio * 0.20; // 萬
-  const landTax = v('lx_landTax');
-  const run = FIXED.run, reg = FIXED.reg, clr = FIXED.clr;
-  const escrow = price * FIXED.escrowRate; // 履保 售價×萬分之三
+  const landTax = lxV('lx_landTax');
+  const run = LX_FIXED.run, reg = LX_FIXED.reg, clr = LX_FIXED.clr;
+  const escrow = price * LX_FIXED.escrowRate; // 履保 售價×萬分之三
   const sumDeduct = luxTax + service + landTax + run + reg + escrow + clr;
   const net = price - sumDeduct;
 
   document.getElementById('lx_r_ratio').textContent = (rr.ratio*100).toFixed(2);
-  document.getElementById('lx_r_tax').textContent = fmt(luxTax);
-  document.getElementById('lx_r_net').textContent = fmt(net);
+  document.getElementById('lx_r_tax').textContent = lxFmt(luxTax);
+  document.getElementById('lx_r_net').textContent = lxFmt(net);
 
-  document.getElementById('lx_d_price').textContent = fmt(price);
-  document.getElementById('lx_d_tax').textContent = fmt(luxTax);
-  document.getElementById('lx_d_svc').textContent = fmt(service);
+  document.getElementById('lx_d_price').textContent = lxFmt(price);
+  document.getElementById('lx_d_tax').textContent = lxFmt(luxTax);
+  document.getElementById('lx_d_svc').textContent = lxFmt(service);
   document.getElementById('lx_d_svc_label').textContent = lxSvc === 'p4' ? '服務費（售價 × 4%）' : '服務費（手動輸入）';
-  document.getElementById('lx_d_landTax').textContent = fmt(landTax);
-  document.getElementById('lx_d_run').textContent = fmt(run);
-  document.getElementById('lx_d_reg').textContent = fmt(reg);
-  document.getElementById('lx_d_esc').textContent = fmt(escrow);
-  document.getElementById('lx_d_clr').textContent = fmt(clr);
-  document.getElementById('lx_d_sum').textContent = fmt(sumDeduct);
+  document.getElementById('lx_d_landTax').textContent = lxFmt(landTax);
+  document.getElementById('lx_d_run').textContent = lxFmt(run);
+  document.getElementById('lx_d_reg').textContent = lxFmt(reg);
+  document.getElementById('lx_d_esc').textContent = lxFmt(escrow);
+  document.getElementById('lx_d_clr').textContent = lxFmt(clr);
+  document.getElementById('lx_d_sum').textContent = lxFmt(sumDeduct);
 }
 
 // 反推：net = X − X·R·0.2 − 服務費 − 土增 − 潤筆 − 實登 − X·履保率 − 塗銷
 function reverseLuxury() {
   const out = document.getElementById('lx_reverseOut');
-  const target = v('lx_targetNet');
+  const target = lxV('lx_targetNet');
   if (target <= 0) { out.style.display = 'none'; return; }
   const rr = lxRatio();
   out.style.display = 'block';
@@ -137,15 +139,15 @@ function reverseLuxury() {
     document.getElementById('lx_rv_note').textContent = '⚠ 請先填土地公告現值三格與房屋評定現值（算房地比）';
     return;
   }
-  const landTax = v('lx_landTax');
-  const e = FIXED.escrowRate;
-  const fixedSum = FIXED.run + FIXED.reg + FIXED.clr; // 潤筆+實登+塗銷（固定）
+  const landTax = lxV('lx_landTax');
+  const e = LX_FIXED.escrowRate;
+  const fixedSum = LX_FIXED.run + LX_FIXED.reg + LX_FIXED.clr; // 潤筆+實登+塗銷（固定）
   const k = rr.ratio * 0.20; // 豪宅稅係數
   let X, note = '';
   if (lxSvc === 'manual') {
-    const F = v('lx_svcManual');
+    const F = lxV('lx_svcManual');
     X = (target + landTax + F + fixedSum) / (1 - k - e);
-    note = `＊房地比 ${(rr.ratio*100).toFixed(2)}%、服務費固定 ${fmt(F)} 萬`;
+    note = `＊房地比 ${(rr.ratio*100).toFixed(2)}%、服務費固定 ${lxFmt(F)} 萬`;
   } else {
     const denom = 1 - k - 0.04 - e;
     if (denom <= 0) {
@@ -156,7 +158,7 @@ function reverseLuxury() {
     X = (target + landTax + fixedSum) / denom;
     note = `＊房地比 ${(rr.ratio*100).toFixed(2)}%、服務費 4%`;
   }
-  document.getElementById('lx_rv_total').textContent = fmt(X);
+  document.getElementById('lx_rv_total').textContent = lxFmt(X);
   document.getElementById('lx_rv_note').textContent = note;
 }
 
