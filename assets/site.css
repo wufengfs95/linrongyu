@@ -2073,6 +2073,10 @@ small.lt-where{display:block;margin-top:5px;font-size:14.5px;font-weight:400;lin
 .rp-cards .sl-card em{display:block;margin-top:6px;font-size:14.5px;line-height:1.7;font-style:normal;color:var(--muted)}
 .rp-list{margin-top:18px}
 .rp-warn{border-left:4px solid var(--brick)}
+/* 左邊表單比右邊結果高很多，右下會空一大塊；把長長的檢核清單與警語移到格線下方整排，
+   右欄只留結論與金額，短到可以固定跟著畫面捲，就不會有空白 */
+.rp-detail{margin:22px 0 0}
+@media (min-width:901px){ #rpResult{position:sticky;top:84px} }
 .rp-h3{margin:26px 0 10px;font-size:21px;color:var(--navy)}
 .rp-h3 small{display:block;margin-top:3px;font-size:15.5px;font-weight:400;color:var(--muted)}
 [data-era][hidden]{display:none !important}

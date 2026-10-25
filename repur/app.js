@@ -186,29 +186,32 @@
       html += '</div>';
     }
 
-    html += '<ul class="ya-list rp-list">' + rows.map(function (x) {
-      return '<li class="ya-' + x.s + '"><b>' + MARK[x.s] + ' ' + esc(x.t)
-        + (x.who !== 'both' ? '<em class="rp-tag">' + (x.who === 'land' ? '土增稅' : '房地合一') + '</em>' : '')
-        + '</b><span>' + esc(x.w) + '</span></li>';
-    }).join('') + '</ul>';
-
-    html += '<div class="ya-note rp-warn"><b>退完還沒結束，' + HOLD + ' 年內會被追回來：</b>'
-      + '重購的房地在 ' + HOLD + ' 年內改作其他用途或再轉手，退掉的稅要追繳，'
-      + '<b>戶籍遷出也算</b>，土增稅連夫妻之間贈與都算再移轉<br>'
-      + '<b>三個期限不要搞混：</b>土增稅的退稅請求權時效 10 年（稅捐稽徵法 28 條）；'
-      + '房地合一先賣後買的申請時效是重購完成移轉登記<b>次日</b>起 5 年；重購後列管也是 5 年，是三件事</div>';
-
-    html += '<p class="v-note">這是依法條算的參考值，不是核定結果<b>土增稅找土地所在地的地方稅務局、'
-      + '房地合一找戶籍地國稅局，兩邊要分開申請</b>，差幾天、面積剛好卡線、含車位、繼承取得這種案子，'
-      + '報數字給客戶之前請先打 0800-000-321 問過</p>'
-      + '<a class="btn btn-line v-cta" href="' + RT.LINE_URL + '" target="_blank" rel="noopener"'
+    html += '<a class="btn btn-line v-cta" href="' + RT.LINE_URL + '" target="_blank" rel="noopener"'
       + ' data-rt-line="' + esc('容瑜你好，我想問重購退稅：'
         + (lt.has ? '土增稅算出來 ' + (landBad.length ? '不符合' : wan(landR)) + '、' : '')
         + (inc.has ? (old ? '舊制財交稅算出來 ' : '房地合一算出來 ') + (incBad.length ? '不符合' : wan(incR)) + '，' : '')
         + '想請你幫我確認') + '" data-toast="rpToast">把這筆試算傳給容瑜</a>'
       + '<p class="toast" id="rpToast" role="status"></p>';
-
     $('rpResult').innerHTML = html;
+
+    // 檢核清單與警語很長，放在格線下面整排顯示，右欄才短得夠固定跟著捲
+    var det = '<ul class="ya-list rp-list">' + rows.map(function (x) {
+      return '<li class="ya-' + x.s + '"><b>' + MARK[x.s] + ' ' + esc(x.t)
+        + (x.who !== 'both' ? '<em class="rp-tag">' + (x.who === 'land' ? '土增稅' : '房地合一') + '</em>' : '')
+        + '</b><span>' + esc(x.w) + '</span></li>';
+    }).join('') + '</ul>';
+
+    det += '<div class="ya-note rp-warn"><b>退完還沒結束，' + HOLD + ' 年內會被追回來：</b>'
+      + '重購的房地在 ' + HOLD + ' 年內改作其他用途或再轉手，退掉的稅要追繳，'
+      + '<b>戶籍遷出也算</b>，土增稅連夫妻之間贈與都算再移轉<br>'
+      + '<b>三個期限不要搞混：</b>土增稅的退稅請求權時效 10 年（稅捐稽徵法 28 條）；'
+      + '房地合一先賣後買的申請時效是重購完成移轉登記<b>次日</b>起 5 年；重購後列管也是 5 年，是三件事</div>';
+
+    det += '<p class="v-note">這是依法條算的參考值，不是核定結果<b>土增稅找土地所在地的地方稅務局、'
+      + '房地合一找戶籍地國稅局，兩邊要分開申請</b>，差幾天、面積剛好卡線、含車位、繼承取得這種案子，'
+      + '報數字給客戶之前請先打 0800-000-321 問過</p>';
+
+    $('rpDetail').innerHTML = det;
 
     // 先買後賣才需要問「買地時名下已有自用住宅」
     $('rpHadSelfWrap').hidden = !(g && !g.sellFirst);
