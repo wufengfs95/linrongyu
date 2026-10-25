@@ -355,7 +355,7 @@ section.sm{padding-block:8px 48px}
 /* 左欄不設固定高度、也不自己捲：整頁一起捲，地圖用 sticky 停在畫面上，
    這樣查完結果就在眼前，不會變成「框框裡面還要再拉一次」 */
 .sm-grid{display:grid;grid-template-columns:380px minmax(0,1fr);max-width:1440px;margin:0 auto;padding-inline:20px;align-items:start;gap:0 4px}
-.sm-panel{padding:4px 18px 16px 0;display:grid;gap:12px;align-content:start}
+.sm-panel{min-width:0;padding:4px 18px 16px 0;display:grid;gap:12px;align-content:start}
 .sm-map{position:sticky;top:81px;height:calc(100vh - 100px);min-height:420px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--sky-soft)}
 .sm-tabs{display:flex;background:var(--sky-soft);border-radius:999px;padding:4px}
 .sm-tabs button{flex:1;font:inherit;font-weight:700;border:0;background:none;padding:8px;border-radius:999px;cursor:pointer;color:var(--navy)}
@@ -366,7 +366,9 @@ section.sm{padding-block:8px 48px}
 .sm-search .btn{padding:10px 18px}
 .sm-locate{font:inherit;font-weight:700;color:var(--brick);background:#fff;border:1.5px dashed var(--brick-soft);border-radius:999px;padding:9px;cursor:pointer}
 .sm-locate:hover{background:var(--sky-soft)}
-.sm-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sm-pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.sm-pick select{min-width:0}
+.sm-search input{min-width:0;width:0}
 .sm-pick select{font:inherit;padding:9px 10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .sm-status{margin:0;font-size:18px;color:var(--brown);min-height:1.2em}
 .sm-status:empty{display:none}
@@ -424,17 +426,21 @@ section.sm{padding-block:8px 48px}
    生活機能這裡的 <section> 只是小分段，會平白多出 176px 的空白 */
 .sm-near section{padding-block:0;margin-bottom:10px}
 .sm-near section>b{font-size:17.5px;color:var(--brown)}
-.sm-near ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:2px}
+/* 生活機能每一列裡的「標籤」和「距離」是不換行的，整列的最小寬度因此比手機畫面還寬，
+   會把整個左欄（連同分頁鈕、查詢鈕、里的下拉）一起推出畫面；讓它們可以縮 */
+.sm-near ul{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:2px}
+.sm-near section,.sm-near li,.sm-go{min-width:0}
 .sm-go{display:flex;align-items:baseline;gap:6px;width:100%;font:inherit;font-size:18px;text-align:left;background:none;border:0;border-radius:8px;padding:4px 8px;cursor:pointer;color:var(--ink)}
 .sm-go:hover{background:var(--sky-soft)}
-.sm-go .nm{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sm-go .nm{flex:1 1 auto;min-width:0;width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sm-go em{flex:none;font-style:normal;font-size:15.5px;color:#fff;background:var(--brick-soft);border-radius:999px;padding:1px 7px;white-space:nowrap}
 .sm-go .dt{flex:none;font-size:17px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
 @media (max-width:900px){
-  .sm-grid{grid-template-columns:1fr;height:auto;min-height:0;padding-inline:16px}
-  .sm-map{order:-1;height:62vh}
-  .sm-panel{padding:14px 0 0}
-  .sm-map{position:static;height:auto;min-height:360px}
+  /* 1fr 的軌道最小寬度是內容寬度，生活機能那排分類勾選把它撐到比畫面還寬，
+     整個左欄連同分頁鈕、查詢鈕、里的下拉都被推出去，所以要用 minmax(0,1fr) */
+  .sm-grid{grid-template-columns:minmax(0,1fr);height:auto;min-height:0;padding-inline:16px}
+  .sm-panel{min-width:0;padding:14px 0 0}
+  .sm-map{order:-1;position:static;height:62vh;min-height:320px}
 }
 
 @media (max-width:900px){
