@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=e964d617">
+<link rel="stylesheet" href="../assets/site.css?v=edb83dd9">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "線上預約諮詢", "url": "https://wufengfs95.github.io/linrongyu/book/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "線上預約林容瑜：選時段、留需求，買房賣房、免費估價、看屋、房貸試算都可以談，中壢平鎮在地服務，諮詢全程免費", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page">
@@ -56,7 +56,15 @@
     <input type="text" id="bkHp" name="bkHp" tabindex="-1" autocomplete="off" aria-hidden="true"
            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <section class="bk-sec"><h2><i>1</i>選個方便的時段</h2>
-      <div id="bkDays" class="bk-days"></div>
+      <div class="bk-cal">
+        <div class="bk-calhd">
+          <button type="button" id="bkPrev" class="bk-nav" aria-label="上個月">‹</button>
+          <b id="bkMon">—</b>
+          <button type="button" id="bkNext" class="bk-nav" aria-label="下個月">›</button>
+        </div>
+        <div class="bk-wk"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+        <div id="bkDays" class="bk-grid"></div>
+      </div>
       <div id="bkTimes" class="bk-slots"></div>
     </section>
 
@@ -72,6 +80,12 @@
           <input type="text" id="bkTel" inputmode="tel" placeholder="09xx-xxx-xxx" autocomplete="tel"></div>
       </div>
       <div class="bk-chips"><label class="bk-chip"><input type="radio" name="bkTitle" value="先生"><span>先生</span></label><label class="bk-chip"><input type="radio" name="bkTitle" value="小姐"><span>小姐</span></label></div>
+      <div class="row2">
+        <div class="field"><label for="bkMail">Email<span class="rt-small">選填</span></label>
+          <input type="email" id="bkMail" placeholder="要寄資料給您再填" autocomplete="email"></div>
+        <div class="field"><label for="bkLid">LINE ID<span class="rt-small">選填</span></label>
+          <input type="text" id="bkLid" placeholder="方便我直接加您"></div>
+      </div>
     </section>
 
     <section class="bk-sec"><h2><i>4</i>想聊什麼<small>選填，但講越多我越好準備</small></h2>
@@ -99,6 +113,12 @@
       <p class="bk-priv">送出後只會進到我的行事曆和 LINE，不會給第三方</p>
     </section>
   </form>
+  <div class="bk-bar" id="bkBar">
+    <div class="bk-barin">
+      <span id="bkBarSum" class="bk-barsum">先選時段，再留資料</span>
+      <button type="button" id="bkBarGo" class="btn btn-main">確認預約</button>
+    </div>
+  </div>
   <div class="bk-note">
     <b>送出之後會怎樣</b>
     <p>我收到訊息會盡快回你確認時間<b>這是預約請求，不是系統自動確認</b>——
@@ -126,6 +146,6 @@
 
 <script src="../assets/site.js?v=79234c66" defer></script>
 <script src="../assets/tools.js?v=a4191526" data-v=""></script>
-<script src="app.js?v=d5ab6b5f" data-v="" defer></script>
+<script src="app.js?v=45c89cdb" data-v="" defer></script>
 </body>
 </html>
