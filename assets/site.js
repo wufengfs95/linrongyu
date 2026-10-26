@@ -1,6 +1,31 @@
 (function(){
   var LINE_URL='https://line.me/R/ti/p/@259hoovo';
 
+  /* 頁尾人次：數字存在容瑜自己的 Apps Script，不靠第三方計數服務。
+     同一台裝置同一天只送一次 hit=1，之後重新整理都只是讀數字。
+     用 <script> 取（JSONP）而不是 fetch，因為 Apps Script 的 GET 會轉址，fetch 會被 CORS 擋。*/
+  (function(){
+    var box=document.getElementById('footHits');
+    var api=box&&box.dataset.api;
+    if(!api||api.indexOf('http')!==0) return;
+    var today=new Date().toLocaleDateString('sv-SE'), first='1';
+    try{ if(localStorage.getItem('rt-hit')===today) first='0'; else localStorage.setItem('rt-hit',today); }catch(e){}
+    var cb='rtHits'+Math.floor(performance.now()*1000);
+    var s=document.createElement('script');
+    var done=function(){ if(s.parentNode) s.parentNode.removeChild(s); try{ delete window[cb]; }catch(e){ window[cb]=void 0; } };
+    window[cb]=function(d){
+      if(d&&typeof d.total==='number'){
+        document.getElementById('hitDay').textContent=d.day.toLocaleString('en-US');
+        document.getElementById('hitAll').textContent=d.total.toLocaleString('en-US');
+        box.hidden=false;                       // 拿不到數字就整段不顯示，不要掛著「—」
+      }
+      done();
+    };
+    s.src=api+'?hit='+first+'&callback='+cb;
+    s.onerror=done;
+    document.head.appendChild(s);
+  })();
+
   // 數字欄位不跟著滑鼠滾輪變動（使用者要求：只能手動輸入，免得滾動頁面時誤改數字）
   document.addEventListener('wheel',function(e){
     var t=e.target;

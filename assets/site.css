@@ -335,6 +335,13 @@ footer{background:var(--navy-deep);color:#BCC8D8;font-size:17px;line-height:1.9;
 footer .wrap{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:14px}
 footer b{color:#fff}
 
+.foot-hits b{color:#fff;font-variant-numeric:tabular-nums}
+.foot-hits[hidden]{display:none}
+@media (max-width:620px){
+  .foot-bottom .foot-hits{display:block;margin-top:4px}
+  .foot-bottom .foot-hits::before{content:none}
+}
+
 /* 手機浮動 LINE */
 .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;background:#06C755;color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none}
 
