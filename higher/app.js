@@ -79,7 +79,7 @@
     $('hiHead').innerHTML='連對 <b>'+streak+'</b> 題'+
       '<small>'+(streak>=10?'太強了，你對桃園房價比很多人都熟！':streak>=5?'很有眼光！再挑戰看看能不能破 10 題':'房價真的很難猜，多玩幾次就有感覺了')+
       (mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';
-    $('hiCta').innerHTML='想知道你家每坪值多少？<a href="../value/">房屋估價 →</a> 30 秒算出行情區間，<br>想拿同社區的成交比一比，<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>幫你查';
+    $('hiCta').innerHTML='想知道你家每坪值多少？<a href="../value/">房屋估價 →</a> 30 秒算出行情區間，<br>想拿同社區的成交比一比，<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">LINE 容瑜</a>幫你查';
     $('hiResult').hidden=false;
     setTimeout(function(){ $('hiResult').scrollIntoView({behavior:'smooth',block:'center'}); },100);
   }

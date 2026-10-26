@@ -1,6 +1,6 @@
 /* 桃園房屋估價：用內政部實價登錄的成交資料，找條件相近的鄰居比價 */
 (function(){
-  var LINE_URL='https://line.me/ti/p/~0973263569';
+  var LINE_URL='https://line.me/R/ti/p/@259hoovo';
   var meta=null, towns={}, kind='a', chosen=null;
   var $=function(id){return document.getElementById(id)};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};

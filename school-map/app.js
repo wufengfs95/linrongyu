@@ -1,5 +1,5 @@
 (function(){
-  var LINE_URL='https://line.me/ti/p/~0973263569';
+  var LINE_URL='https://line.me/R/ti/p/@259hoovo';
   var lv='es', data=null, map, layers={}, schoolLayer, stationLayer, selected=null, marker=null;
   var mode='school', poiLayer=null, trash=null, trashLoading=false;
   var CATS=['su','hm','dp','mk','ho','pk'];

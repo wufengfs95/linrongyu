@@ -1,7 +1,7 @@
 /* 謄本估價：上傳建物謄本 PDF → 在瀏覽器裡判讀 → 用實價登錄找同社區／同路段成交 → 估價與建議開價
    謄本不會上傳到任何地方：PDF 用 pdf.js 在本機解析，行情資料跟「房屋估價」共用 ../value/data/ */
 (function(){
-  var LINE_URL='https://line.me/ti/p/~0973263569';
+  var LINE_URL='https://line.me/R/ti/p/@259hoovo';
   var PING=3.305785;
   var meta=null, towns={}, parsed=null, last=null;
   var $=function(id){return document.getElementById(id)};

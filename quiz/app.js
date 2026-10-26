@@ -84,7 +84,7 @@
       (mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';
     $('qzExtra').innerHTML=wrong.length?'<div class="gm-review">'+wrong.map(function(q){
       return '<div><b>'+esc(q[0])+'　答案：'+(q[1]?'對':'錯')+'</b>'+esc(q[2])+'</div>'}).join('')+'</div>':'';
-    $('qzCta').innerHTML='買房、賣房還有其他問題？<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 問容瑜</a>，一對一幫你看';
+    $('qzCta').innerHTML='買房、賣房還有其他問題？<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">LINE 問容瑜</a>，一對一幫你看';
     $('qzResult').hidden=false;
     setTimeout(function(){ $('qzResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }

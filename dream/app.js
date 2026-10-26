@@ -77,7 +77,7 @@
     $('drExtra').innerHTML=fit.length?'<p class="dr-sub">我正在賣、預算 '+RT.comma(budget)+' 萬以內的房子：</p><div class="dr-list">'+fit.map(function(L){
       return '<a href="../listings/'+esc(L.s)+'/"><img src="../'+esc(L.img)+'" alt="" loading="lazy"><span><b>'+esc(L.t)+'</b>'+esc(L.area)+'・'+esc(L.lay||L.k)+'・<em>'+RT.comma(L.p)+' 萬</em></span></a>'}).join('')+'</div>':'';
     var h={hi:budget,a:pick.t,k:kname,rm:pick.r,pk:pick.p&&pick.p!=='門口'?1:''};
-    $('drCta').innerHTML='想找真的符合條件的房子？<a href="'+esc('../match/'+RT.hashUrl(h).replace(/^[^#]*/,''))+'">用買方配案存下這組條件 →</a><br>或 <a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>，我幫你找實價登錄以外、還沒上網的物件';
+    $('drCta').innerHTML='想找真的符合條件的房子？<a href="'+esc('../match/'+RT.hashUrl(h).replace(/^[^#]*/,''))+'">用買方配案存下這組條件 →</a><br>或 <a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">LINE 容瑜</a>，我幫你找實價登錄以外、還沒上網的物件';
     $('drResult').hidden=false;
     setTimeout(function(){ $('drResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }

@@ -72,7 +72,7 @@
       (mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';
     $('geExtra').innerHTML='<ul class="gm-rounds">'+log.map(function(x){
       return '<li><span>'+esc(x.q[0])+'</span><span>差 '+dist(x.d)+'・<b>'+x.p+'</b> 分</span></li>'}).join('')+'</ul>';
-    $('geCta').innerHTML='想知道某個地址的學區、附近車站和生活機能？<a href="../school-map/">學區・機能地圖 →</a><br>在中壢、平鎮找房子，<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>帶你實地看';
+    $('geCta').innerHTML='想知道某個地址的學區、附近車站和生活機能？<a href="../school-map/">學區・機能地圖 →</a><br>在中壢、平鎮找房子，<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">LINE 容瑜</a>帶你實地看';
     $('geResult').hidden=false;
     setTimeout(function(){ $('geResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }

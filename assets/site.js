@@ -1,5 +1,5 @@
 (function(){
-  var LINE_URL='https://line.me/ti/p/~0973263569';
+  var LINE_URL='https://line.me/R/ti/p/@259hoovo';
 
   // 數字欄位不跟著滑鼠滾輪變動（使用者要求：只能手動輸入，免得滾動頁面時誤改數字）
   document.addEventListener('wheel',function(e){

@@ -1,6 +1,6 @@
 /* 新工具共用：格式化、房貸公式、實價登錄資料、LINE 複製、分享網址（window.RT） */
 (function(){
-  var LINE_URL='https://line.me/ti/p/~0973263569';
+  var LINE_URL='https://line.me/R/ti/p/@259hoovo';
   var RT={LINE_URL:LINE_URL};
   RT.$=function(id){return document.getElementById(id)};
   RT.esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};

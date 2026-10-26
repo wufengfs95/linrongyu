@@ -59,7 +59,7 @@
       (mine.better&&mine.n>1?'・刷新你的本週最佳':'')+'</small>';
     $('guExtra').innerHTML='<ul class="gm-rounds">'+log.map(function(x){
       return '<li><span>'+esc(x.d.town)+' '+esc(x.d.road)+'・'+KIND[x.d.k]+'</span><span>猜 '+RT.comma(x.g)+'／實際 <b>'+RT.comma(x.d.p)+'</b> 萬</span></li>'}).join('')+'</ul>';
-    $('guCta').innerHTML='想知道<b>你家</b>現在值多少？<a href="../value/">房屋估價 →</a> 或上傳謄本用 <a href="../deed/">謄本估價 →</a><br>要更準的，<a href="https://line.me/ti/p/~0973263569" target="_blank" rel="noopener">LINE 容瑜</a>幫你拉同社區成交';
+    $('guCta').innerHTML='想知道<b>你家</b>現在值多少？<a href="../value/">房屋估價 →</a> 或上傳謄本用 <a href="../deed/">謄本估價 →</a><br>要更準的，<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">LINE 容瑜</a>幫你拉同社區成交';
     $('guResult').hidden=false;
     setTimeout(function(){ $('guResult').scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }
