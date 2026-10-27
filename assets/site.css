@@ -1550,21 +1550,6 @@ section.tq-wrap{padding-block:16px 72px}
 .bk-grid .bk-day.on .bk-dot{background:#fff}
 .bk-slothd{margin:18px 0 10px;flex:1 0 100%;font-size:21px;font-weight:700;color:var(--navy)}
 
-/* 底部固定的確認列 */
-.bk-bar{position:sticky;bottom:0;z-index:40;margin:18px 0 0;padding:12px 14px;
-  border-top:1.5px solid var(--cream-line);border-radius:14px 14px 0 0;
-  background:rgba(250,250,248,.97);backdrop-filter:blur(8px);
-  box-shadow:0 -6px 18px rgba(31,58,95,.07)}
-.bk-barin{display:flex;align-items:center;gap:12px;max-width:760px;margin:0 auto}
-.bk-barsum{flex:1 1 auto;min-width:0;font-size:18px;color:var(--muted)}
-.bk-barin .btn{flex:none}
-.bk-bar[hidden]{display:none !important}
-@media (max-width:560px){
-  .bk-barin{flex-direction:column;align-items:stretch;gap:6px}
-  .bk-barsum{text-align:center}
-  .bk-barin .btn{width:100%}
-}
-
 .bk-days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .bk-day{font:inherit;display:grid;gap:2px;padding:9px 2px;border-radius:10px;border:1.5px solid var(--line);
   background:#fff;color:var(--ink);cursor:pointer;line-height:1.25}
@@ -1578,6 +1563,7 @@ section.tq-wrap{padding-block:16px 72px}
   background:#fff;color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
 .bk-time.on{background:var(--brick);border-color:var(--brick);color:#fff}
 .bk-time:disabled{opacity:.38;cursor:default}
+.bk-time.bk-full{opacity:1;background:var(--cream);color:#B0A99F;border-color:var(--cream-line);text-decoration:line-through;text-decoration-thickness:1.5px}
 .bk-hint{flex:1 0 100%;margin:8px 0 0;font-size:18px;line-height:1.8;color:var(--muted)}
 .bk-chips{display:flex;flex-wrap:wrap;gap:9px}
 .bk-chip{cursor:pointer}

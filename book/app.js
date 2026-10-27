@@ -7,8 +7,28 @@
     we: ['10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00']
   };
   var picked = { date: null, time: null };
+  var BUSY = null;                    // 行事曆上已經有事的時段，[[開始, 結束], ...]
   var AHEAD = 60;                     // 最多可以約到 60 天後
   var view = null;                    // 月曆現在顯示的月份
+
+  // 'YYYY-MM-DD HH:mm' 這種格式直接字串比大小就是時間先後，不用轉 Date
+  function slotEnd(date, time) {
+    return date + ' ' + ('0' + (parseInt(time, 10) + 1)).slice(-2) + time.slice(2);
+  }
+  function taken(date, time) {
+    if (!BUSY) return false;
+    var s = date + ' ' + time, e = slotEnd(date, time);
+    return BUSY.some(function (b) { return s < b[1] && e > b[0]; });
+  }
+  // 這一天還有沒有約得到的時段
+  function dayOpen(date) {
+    var d = new Date(date + 'T00:00:00'), w = d.getDay();
+    var list = (w === 0 || w === 6) ? SLOTS.we : SLOTS.wd;
+    var today = ymd(new Date()) === date, nowH = new Date().getHours();
+    return list.some(function (t) {
+      return !(today && parseInt(t, 10) <= nowH) && !taken(date, t);
+    });
+  }
 
   function ymd(d) {
     return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
@@ -35,7 +55,8 @@
     for (var i = 0; i < lead; i++) html += '<span class="bk-pad"></span>';
     for (var n = 1; n <= days; n++) {
       var d = new Date(view.getFullYear(), view.getMonth(), n);
-      var key = ymd(d), ok = bookable(d), w = d.getDay();
+      var key = ymd(d), w = d.getDay();
+      var ok = bookable(d) && dayOpen(key);
       html += '<button type="button" class="bk-day' + (picked.date === key ? ' on' : '')
         + (w === 0 || w === 6 ? ' we' : '') + (ymd(t0) === key ? ' today' : '') + '"'
         + (ok ? '' : ' disabled') + ' data-d="' + key + '">' + n
@@ -67,10 +88,14 @@
       + '（週' + WEEK[w] + '）可約時段</p>'
       + list.map(function (t) {
       var past = today && parseInt(t, 10) <= nowH;
-      return '<button type="button" class="bk-time' + (picked.time === t ? ' on' : '') + '"'
-        + (past ? ' disabled' : '') + ' data-t="' + t + '">' + t + '</button>';
+      var full = taken(picked.date, t);
+      return '<button type="button" class="bk-time' + (picked.time === t ? ' on' : '')
+        + (full ? ' bk-full' : '') + '"'
+        + (past || full ? ' disabled' : '')
+        + (full ? ' title="這個時段已經有約了"' : '') + ' data-t="' + t + '">' + t + '</button>';
       }).join('')
-      + '<p class="bk-hint">時段是我平常方便的時間，送出後我會回覆確認'
+      + '<p class="bk-hint">' + (BUSY ? '灰掉的是我已經有約的時段，' : '')
+      + '送出後我會回覆確認'
       + '想約表上沒有的時間，直接在備註寫，我盡量配合</p>';
   }
 
@@ -106,20 +131,19 @@
     $('bkGo').disabled = !need;
     if (!API) $('bkGo').textContent = '複製並開啟 LINE 送出';
     $('bkPre').textContent = message();
-    $('bkWhy').textContent = need ? '' : '姓名和電話填了才能送出';
     bar(need);
   }
 
-  // 底部那條固定的確認列：寫出現在選到哪裡，按下去就等於按送出
+  // 還差什麼才能送出，寫在送出鈕下面
   function bar(ready) {
-    var sum;
-    if (!picked.date) sum = '先選一個方便的日期';
-    else if (!picked.time) sum = picked.date.slice(5).replace('-', '/') + '　再選一個時段';
-    else if (!ready) sum = picked.date.slice(5).replace('-', '/') + ' ' + picked.time + '　還差姓名和電話';
-    else sum = picked.date.slice(5).replace('-', '/') + ' ' + picked.time + '　可以送出了';
-    $('bkBarSum').textContent = sum;
-    $('bkBarGo').disabled = !ready;
-    $('bkBarGo').textContent = API ? '確認預約' : '複製並開啟 LINE';
+    var why;
+    if (!picked.date) why = '先選一個方便的日期';
+    else if (!picked.time) why = '再選一個時段';
+    else if (!ready) why = '還差姓名和電話';
+    else why = '';
+    $('bkWhy').textContent = why;
+    $('bkGo').disabled = !ready;
+    $('bkGo').textContent = API ? '送出預約' : '複製並開啟 LINE 送出';
   }
 
   $('bkPrev').addEventListener('click', function () { moveMonth(-1); });
@@ -163,7 +187,6 @@
   }
 
   function sent() {
-    $('bkBar').hidden = true;
     $('bkGo').hidden = true;
     $('bkLine').hidden = true;
     $('bkToast').textContent = '';
@@ -190,10 +213,6 @@
       });
   }
 
-  $('bkBarGo').addEventListener('click', function () {
-    if ($('bkBarGo').disabled) return;
-    $('bkForm').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-  });
   $('bkLine').addEventListener('click', function () {
     RT.line(message(), $('bkToast'));
   });
@@ -203,6 +222,30 @@
     if ($('bkGo').disabled) return;
     if (API) send(); else RT.line(message(), $('bkToast'));
   });
+
+  // 向後端要「已經有事」的時段，拿到之後把月曆和時段重畫一次。
+  // 用 <script> 取（JSONP）而不是 fetch，因為 Apps Script 的 GET 會轉址，fetch 會被 CORS 擋。
+  (function loadBusy() {
+    if (!API) return;
+    var cb = 'bkBusy' + Math.floor(performance.now() * 1000);
+    var s = document.createElement('script');
+    var done = function () {
+      if (s.parentNode) s.parentNode.removeChild(s);
+      try { delete window[cb]; } catch (e) { window[cb] = void 0; }
+    };
+    window[cb] = function (d) {
+      if (d && d.busy) {
+        BUSY = d.busy;
+        if (picked.date && !dayOpen(picked.date)) { picked.date = null; picked.time = null; }
+        else if (picked.time && taken(picked.date, picked.time)) { picked.time = null; }
+        drawDays(); drawTimes(); preview();
+      }
+      done();
+    };
+    s.src = API + '?busy=1&days=' + (AHEAD + 2) + '&callback=' + cb;
+    s.onerror = done;
+    document.head.appendChild(s);
+  })();
 
   drawDays(); drawTimes(); preview();
 })();
