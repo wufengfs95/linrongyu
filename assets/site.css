@@ -1672,6 +1672,33 @@ section.tq-wrap{padding-block:16px 72px}
   .pt-sub{font-size:19px;margin-bottom:18px}
 }
 
+/* 線上預約：服務卡片（第 1 步先讓客戶知道能找容瑜做什麼，再問時間） */
+.bk-hours{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 0 18px;
+  font-size:19px;color:var(--muted)}
+.bk-hours b{color:var(--navy)}
+.bk-svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.bk-svc{cursor:pointer}
+.bk-svc input{position:absolute;opacity:0;pointer-events:none}
+.bk-svc-in{display:grid;align-content:start;gap:6px;height:100%;padding:17px 19px;
+  border:1.5px solid var(--line);border-radius:14px;background:#fff;transition:all .15s}
+.bk-svc:hover .bk-svc-in{border-color:var(--brick-soft)}
+.bk-svc input:checked+.bk-svc-in{border-color:var(--brick);background:#FFF8F3;
+  box-shadow:0 4px 14px rgba(184,92,56,.13)}
+.bk-svc input:focus-visible+.bk-svc-in{outline:3px solid var(--brick-soft);outline-offset:2px}
+.bk-svc-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.bk-svc-hd b{font-size:22px;color:var(--navy)}
+.bk-svc input:checked+.bk-svc-in .bk-svc-hd b::before{content:"✔ ";color:var(--brick)}
+.bk-svc-hd em{font-style:normal;font-size:16px;font-weight:700;color:var(--brick-deep);
+  background:#FBE7DC;border-radius:999px;padding:2px 11px}
+.bk-svc-meta{font-size:17px;color:var(--muted)}
+.bk-svc-d{font-size:18px;line-height:1.75;color:var(--ink)}
+@media (max-width:760px){
+  .bk-hours{font-size:17px}
+  .bk-svc-in{padding:15px 16px}
+  .bk-svc-hd b{font-size:20px}
+  .bk-svc-d{font-size:17px}
+}
+
 /* 線上預約：送出結果 */
 .bk-done{margin:16px 0 0;padding:20px 22px;border-radius:14px;
   background:var(--cream);border:1.5px solid var(--cream-line)}
