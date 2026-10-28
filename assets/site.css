@@ -1674,6 +1674,12 @@ section.tq-wrap{padding-block:16px 72px}
   .pt-sub{font-size:19px;margin-bottom:18px}
 }
 
+/* 房屋估價：建築完成日期（民國年月）＋右邊自動推算的屋齡 */
+.v-ymd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:center}
+.v-ymd input{min-width:0}
+.v-ymd-out{font-size:19px;font-weight:700;color:var(--navy);white-space:nowrap}
+.v-ymd-out.none{color:var(--muted);font-weight:400}
+
 /* 線上預約：服務卡片（第 1 步先讓客戶知道能找容瑜做什麼，再問時間） */
 .bk-hours{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 0 18px;
   font-size:19px;color:var(--muted)}

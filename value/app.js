@@ -45,6 +45,50 @@
     $('vRoadList').innerHTML=d.roads.map(function(r){return '<option value="'+esc(r)+'">'}).join('');
     $('vRoad').placeholder='例：'+d.roads.slice(0,2).join('、')+'（可不填）';
   }
+  // 建築完成日期（民國年月）→ 屋齡。月份還沒到就不算滿一年
+  function ageFromBuilt(){
+    var y=parseInt($('vBuiltY').value,10), m=parseInt($('vBuiltM').value,10)||1;
+    if(!y||y<40||y>140) return null;
+    var now=new Date(), ny=now.getFullYear()-1911, nm=now.getMonth()+1;
+    var a=ny-y-((nm<m)?1:0);
+    return (a>=0&&a<=120)?a:null;
+  }
+  function showAge(){
+    var a=ageFromBuilt(), el=$('vAgeOut');
+    if(a==null){ el.textContent='—'; el.className='v-ymd-out none'; }
+    else { el.textContent='約 '+a+' 年'; el.className='v-ymd-out'; }
+  }
+
+  // 社區（建案）名稱 → 路段、巷。資料由 community_data.py 從預售屋實價登錄建出來
+  var comms=null;
+  function loadComms(){
+    if(comms) return Promise.resolve(comms);
+    return fetch(DATA+'communities.json'+qs(ver)).then(function(r){return r.json()})
+      .then(function(d){ comms=d; return d; }).catch(function(){ comms={}; return comms; });
+  }
+  function fillComms(t){
+    loadComms().then(function(d){
+      var list=d[t]||[];
+      $('vCommList').innerHTML=list.map(function(c){return '<option value="'+esc(c[0])+'">'}).join('');
+      $('vComm').placeholder=list.length?('例：'+list[0][0]):'這一區沒有建案資料';
+    });
+  }
+  // 選到社區就把路段、巷填好，省得她自己去記哪個社區在哪條路
+  function pickComm(){
+    var t=$('vTown').value, name=($('vComm').value||'').trim(), hit=$('vCommHit');
+    if(!t||!name||!comms||!comms[t]){ hit.hidden=true; return; }
+    var m=null, list=comms[t];
+    for(var i=0;i<list.length;i++){ if(list[i][0]===name){ m=list[i]; break; } }
+    if(!m) for(var j=0;j<list.length;j++){ if(list[j][0].indexOf(name)===0){ m=list[j]; break; } }
+    if(!m){ hit.hidden=true; return; }
+    $('vRoad').value=m[1];
+    if(m[2]) $('vLane').value=m[2];
+    hit.hidden=false;
+    hit.textContent=m[2]
+      ? '已帶入 '+m[1]+m[2]+'巷，會優先比同社區的成交'
+      : '已帶入 '+m[1]+'：這個社區的資料只查得到路段，會比同路段（知道巷號可以自己補，比較準）';
+  }
+
   function roadIndex(t,text){
     text=(text||'').trim().replace(/^桃園市|區$/g,'');
     if(!text) return -1;
@@ -54,8 +98,9 @@
     return -2;  // 有填但對不到
   }
 
-  // 逐步放寬條件找比價樣本：先同路段、近期、屋齡坪數相近，不夠再放寬
+  // 逐步放寬條件找比價樣本：先同社區、再同路段、近期、屋齡坪數相近，不夠再放寬
   var LEVELS=[
+    {lane:1,road:1,age:25,area:.5,seasons:12,label:'同社區近 3 年'},
     {road:1,age:6,area:.3,seasons:6,label:'近 1.5 年・屋齡坪數相近'},
     {road:1,age:10,area:.45,seasons:10,label:'近 2.5 年'},
     {road:0,age:6,area:.3,seasons:6,label:'近 1.5 年・屋齡坪數相近'},
@@ -72,6 +117,8 @@
       for(var i=0;i<d.rows.length;i++){
         var r=d.rows[i];                     // [路段, 型態, 年, 季, 單價, 坪數, 樓層, 總樓層, 屋齡]
         if(r[1]!==inp.kind || r[13]) continue;   // r[13]=1：車位未拆價，只給謄本估價用
+        if(L.lane && !(inp.lane>0)) continue;                 // 沒填巷就跳過「同社區」這一層
+        if(L.lane && r[9]!==inp.lane) continue;
         if(L.road && inp.road>=0 && r[0]!==inp.road) continue;
         var age=(ly-r[2])*4+(lq-r[3]);       // 距今幾季
         if(age>L.seasons) continue;
@@ -81,13 +128,14 @@
         comps.push({u:r[4]*f*(mine/floorFactor(r[6],r[7])), raw:r[4], y:r[2], q:r[3],
                     road:r[0]>=0?d.roads[r[0]]:'', a:r[5], f:r[6], tf:r[7], age:r[8]});
       }
-      if(comps.length>=(L.road?8:12) || li===LEVELS.length-1){
+      if(comps.length>=(L.lane?5:L.road?8:12) || li===LEVELS.length-1){
         if(comps.length<5) continue;
         var us=comps.map(function(c){return c.u}).sort(function(x,y){return x-y});
         if(us.length>=12){ var cut=Math.floor(us.length*.1); us=us.slice(cut,us.length-cut); }  // 去掉最高最低各 10%
         var mid=median(us), lo=Math.max(quantile(us,.25),mid*.86), hi=Math.min(quantile(us,.75),mid*1.14);
         comps.sort(function(a,b){return (b.y*4+b.q)-(a.y*4+a.q)});
-        var scope=(L.road&&inp.road>=0)?(inp.roadName+'一帶')
+        var scope=L.lane?((inp.commName||inp.roadName+inp.lane+'巷')+'・同社區')
+          :(L.road&&inp.road>=0)?(inp.roadName+'一帶')
           :(inp.town+'全區'+(inp.road>=0?'（'+inp.roadName+'相近成交太少，已擴大範圍）':''));
         return {mid:mid,lo:lo,hi:hi,n:comps.length,level:L,scope:scope,comps:comps,
                 conf:comps.length>=25?'高':comps.length>=12?'中':'低'};
@@ -154,7 +202,7 @@
 
   function submit(e){
     e.preventDefault();
-    var town=$('vTown').value, area=parseFloat($('vArea').value), age=$('vAge').value===''?null:parseInt($('vAge').value,10);
+    var town=$('vTown').value, area=parseFloat($('vArea').value), age=ageFromBuilt();
     var floor=parseInt($('vFloor').value,10)||0, tops=parseInt($('vTops').value,10)||0;
     var roadText=$('vRoad').value;
     var park=$('vPark').value, paid=parseFloat($('vPaid').value)||0;
@@ -165,6 +213,7 @@
       var road=roadIndex(town,roadText), noRoad=road===-2;
       if(noRoad) road=-1;
       var inp={town:town,kind:kind,area:area,age:age,floor:floor,tops:tops,road:road,park:park,paid:paid,
+               lane:parseInt($('vLane').value,10)||0, commName:($('vComm').value||'').trim(),
                roadName:road>=0?towns[town].roads[road]:''};
       var res=estimate(inp);
       if(!res){
@@ -186,10 +235,14 @@
   });
   $('vTown').addEventListener('change',function(){
     var t=this.value;
-    if(!t){ $('vRoad').innerHTML='<option value="-1">先選行政區</option>'; return; }
-    $('vRoad').innerHTML='<option value="-1">載入中…</option>';
+    $('vComm').value=''; $('vCommHit').hidden=true;
+    if(!t){ $('vRoadList').innerHTML=''; $('vCommList').innerHTML=''; return; }
     loadTown(t).then(function(){ fillRoads(t); });
+    fillComms(t);
   });
+  ['input','change'].forEach(function(ev){ $('vComm').addEventListener(ev,pickComm); });
+  ['vBuiltY','vBuiltM'].forEach(function(id){ $(id).addEventListener('input',showAge); });
+  showAge();
   $('vForm').addEventListener('submit',submit);
   $('vResult').addEventListener('click',function(e){
     var ln=e.target.closest('[data-line-msg]'); if(!ln) return;

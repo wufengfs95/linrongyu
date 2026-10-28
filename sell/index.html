@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=05245588">
+<link rel="stylesheet" href="../assets/site.css?v=a2134c5e">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "我要賣房", "url": "https://wufengfs95.github.io/linrongyu/sell/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "先看行情值多少、開價開多少，再算扣完稅費貸款實際進口袋多少，雜費逐項看，換屋的話還能算退多少稅", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -69,11 +69,22 @@
       </div>
       <div class="row2">
         <div class="field"><label for="vTown">行政區</label><select id="vTown"><option value="">載入中…</option></select></div>
-        <div class="field"><label for="vRoad">路段（選填，填了比較準）</label><input type="text" id="vRoad" list="vRoadList" autocomplete="off" placeholder="先選行政區"><datalist id="vRoadList"></datalist></div>
+        <div class="field"><label for="vComm">社區名稱<span class="rt-small">選填・打幾個字會跳建議</span></label>
+          <input type="text" id="vComm" list="vCommList" autocomplete="off" placeholder="例：麗江星漾"><datalist id="vCommList"></datalist></div>
+      </div>
+      <p class="v-hint" id="vCommHit" hidden></p>
+      <div class="row2">
+        <div class="field"><label for="vRoad">路段<span class="rt-small">選填・填了比較準</span></label><input type="text" id="vRoad" list="vRoadList" autocomplete="off" placeholder="先選行政區"><datalist id="vRoadList"></datalist></div>
+        <div class="field"><label for="vLane">巷<span class="rt-small">選填・填了就只比同一個社區</span></label><input type="number" id="vLane" inputmode="numeric" step="1" min="0" placeholder="例：288"></div>
       </div>
       <div class="row2">
         <div class="field"><label for="vArea">權狀坪數<span class="rt-small">坪・不含車位</span></label><input type="number" id="vArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
-        <div class="field"><label for="vAge">屋齡（年）</label><input type="number" id="vAge" inputmode="numeric" step="1" placeholder="例：12"></div>
+        <div class="field"><label for="vBuiltY">建築完成日期<span class="rt-small">民國年月・謄本或權狀上有</span></label>
+          <div class="v-ymd">
+            <input type="number" id="vBuiltY" inputmode="numeric" step="1" min="40" max="130" placeholder="年" aria-label="建築完成：民國年">
+            <input type="number" id="vBuiltM" inputmode="numeric" step="1" min="1" max="12" placeholder="月" aria-label="建築完成：月">
+            <span class="v-ymd-out" id="vAgeOut">—</span>
+          </div></div>
       </div>
       <div class="row2">
         <div class="field"><label for="vFloor">所在樓層<span class="rt-small">樓</span></label><input type="number" id="vFloor" inputmode="numeric" step="1" placeholder="例：7"></div>
@@ -527,7 +538,7 @@
 <script>
 /* 分頁切換：點開哪一個才載入那個工具的程式，沒點到的不會白白下載 */
 (function(){
-  var SRC={"value": ["../value/app.js?v=72465a03"], "seller": ["../seller/app.js?v=3c24cfe6"], "fees": ["../fees/app.js?v=7f380975"], "repur": ["../repur/app.js?v=3c8f8920"]}, V="61cb4491";
+  var SRC={"value": ["../value/app.js?v=3fba35f3"], "seller": ["../seller/app.js?v=3c24cfe6"], "fees": ["../fees/app.js?v=7f380975"], "repur": ["../repur/app.js?v=3c8f8920"]}, V="61cb4491";
   var done={}, panes=[].slice.call(document.querySelectorAll(".ppane"));
   var KEYS=panes.map(function(p){return p.dataset.p});
   var tabs=[].slice.call(document.querySelectorAll(".ptb"));
