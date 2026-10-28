@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap">
-<link rel="stylesheet" href="../assets/site.css?v=2906875f">
+<link rel="stylesheet" href="../assets/site.css?v=e131fbaf">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "我要賣房", "url": "https://wufengfs95.github.io/linrongyu/sell/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "inLanguage": "zh-Hant", "description": "先看行情值多少、開價開多少，再算扣完稅費貸款實際進口袋多少，雜費逐項看，換屋的話還能算退多少稅", "author": {"@type": "RealEstateAgent", "name": "林容瑜", "url": "https://wufengfs95.github.io/linrongyu/", "telephone": "+886-973-263-569"}}</script>
 </head>
 <body class="rt-page toolpage">
@@ -72,16 +72,16 @@
         <div class="field"><label for="vRoad">路段（選填，填了比較準）</label><input type="text" id="vRoad" list="vRoadList" autocomplete="off" placeholder="先選行政區"><datalist id="vRoadList"></datalist></div>
       </div>
       <div class="row2">
-        <div class="field"><label for="vArea">權狀坪數（不含車位）</label><input type="number" id="vArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
+        <div class="field"><label for="vArea">權狀坪數<span class="rt-small">坪・不含車位</span></label><input type="number" id="vArea" inputmode="decimal" step="0.1" placeholder="例：32.5"></div>
         <div class="field"><label for="vAge">屋齡（年）</label><input type="number" id="vAge" inputmode="numeric" step="1" placeholder="例：12"></div>
       </div>
       <div class="row2">
-        <div class="field"><label for="vFloor">所在樓層</label><input type="number" id="vFloor" inputmode="numeric" step="1" placeholder="例：7"></div>
-        <div class="field"><label for="vTops">總樓層（選填）</label><input type="number" id="vTops" inputmode="numeric" step="1" placeholder="例：14"></div>
+        <div class="field"><label for="vFloor">所在樓層<span class="rt-small">樓</span></label><input type="number" id="vFloor" inputmode="numeric" step="1" placeholder="例：7"></div>
+        <div class="field"><label for="vTops">總樓層<span class="rt-small">樓・選填</span></label><input type="number" id="vTops" inputmode="numeric" step="1" placeholder="例：14"></div>
       </div>
       <div class="row2">
         <div class="field"><label for="vPark">車位</label><select id="vPark"><option value="">無</option><option value="平面">平面</option><option value="機械">機械</option></select></div>
-        <div class="field"><label for="vPaid">已經買了？填成交價（萬）</label><input type="number" id="vPaid" inputmode="numeric" step="1" placeholder="選填，可驗有沒有買貴"></div>
+        <div class="field"><label for="vPaid">已經買了？填成交價<span class="rt-small">萬・可驗有沒有買貴</span></label><input type="number" id="vPaid" inputmode="numeric" step="1" placeholder="選填，可驗有沒有買貴"></div>
       </div>
       <button type="submit" class="btn btn-main v-submit">立即免費估價</button>
       <p id="vStatus" class="v-status" role="status"></p>
@@ -118,9 +118,9 @@
     <form id="slForm" class="v-form" novalidate>
       <h2>基礎資訊</h2>
       <div class="row3">
-        <div class="field"><label for="totalArea">總坪數<span class="rt-small">含車位</span></label>
+        <div class="field"><label for="totalArea">總坪數<span class="rt-small">坪・含車位</span></label>
           <input type="number" id="totalArea" inputmode="decimal" step="0.01" placeholder="例：50.23" oninput="recalc()"></div>
-        <div class="field"><label for="parkArea">車位坪數</label>
+        <div class="field"><label for="parkArea">車位坪數<span class="rt-small">坪</span></label>
           <input type="number" id="parkArea" inputmode="decimal" step="0.01" placeholder="例：22.16" oninput="recalc()"></div>
         <div class="field"><label for="parkPrice">車位價格<span class="rt-small">萬</span></label>
           <input type="number" id="parkPrice" inputmode="decimal" step="0.01" placeholder="例：180" oninput="recalc()"></div>
@@ -133,30 +133,26 @@
         <div class="field"><label for="buyCost">取得相關成本<span class="rt-small">萬・仲介、契稅、印花、代書</span></label>
           <input type="number" id="buyCost" inputmode="decimal" step="0.01" placeholder="例：13" oninput="recalc()"></div>
       </div>
-      <div class="row2">
-        <div class="field"><label for="prevY">前次移轉日期<span class="rt-small">民國年</span></label>
-          <div class="sl-date">
-            <select id="prevY" onchange="onDateChange('prev')"><option value="">年</option></select>
-            <select id="prevM" onchange="onDateChange('prev')"><option value="">月</option></select>
-            <select id="prevD" onchange="recalc()"><option value="">日</option></select>
-          </div></div>
-        <div class="field"><label for="currY">本次預計交易日期<span class="rt-small">民國年</span></label>
-          <div class="sl-date">
-            <select id="currY" onchange="onDateChange('curr')"><option value="">年</option></select>
-            <select id="currM" onchange="onDateChange('curr')"><option value="">月</option></select>
-            <select id="currD" onchange="recalc()"><option value="">日</option></select>
-          </div></div>
-      </div>
+      <div class="field sl-dline"><label for="prevY">前次移轉日期<span class="rt-small">民國年・當初買進的日期</span></label>
+        <div class="sl-date">
+          <select id="prevY" onchange="onDateChange('prev')" aria-label="前次移轉：年"><option value="">年</option></select>
+          <select id="prevM" onchange="onDateChange('prev')" aria-label="前次移轉：月"><option value="">月</option></select>
+          <select id="prevD" onchange="recalc()" aria-label="前次移轉：日"><option value="">日</option></select>
+        </div></div>
+      <div class="field sl-dline"><label for="currY">本次預計交易日期<span class="rt-small">民國年・這次打算賣掉的日期</span></label>
+        <div class="sl-date">
+          <select id="currY" onchange="onDateChange('curr')" aria-label="本次交易：年"><option value="">年</option></select>
+          <select id="currM" onchange="onDateChange('curr')" aria-label="本次交易：月"><option value="">月</option></select>
+          <select id="currD" onchange="recalc()" aria-label="本次交易：日"><option value="">日</option></select>
+        </div></div>
       <label class="rt-check"><input type="checkbox" id="selfUseChk" onchange="toggleSelfUse()">
         <span>自用住宅滿 6 年優惠<small class="rt-small">免稅額 400 萬、超過部分 10% 稅率</small></span></label>
       <p class="sl-info" id="holdInfo">填好兩個日期，就會自動判定持有期間與稅率</p>
 
       <h2>查稅單後填入</h2>
-      <div class="row3">
+      <div class="row2">
         <div class="field"><label for="landTax">土增稅<span class="rt-small">萬・依稅單</span></label>
           <input type="number" id="landTax" inputmode="decimal" step="0.01" placeholder="例：1.6" oninput="recalc()"></div>
-        <div class="field"><label for="landGain">土地漲價總數額<span class="rt-small">萬・土增稅單上有，可抵房地合一稅</span></label>
-          <input type="number" id="landGain" inputmode="decimal" step="0.01" placeholder="例：8" oninput="recalc()"></div>
         <div class="field"><label for="loan">剩餘貸款餘額<span class="rt-small">萬・要還銀行的</span></label>
           <input type="number" id="loan" inputmode="decimal" step="0.01" placeholder="例：840" oninput="recalc()"></div>
       </div>
@@ -183,6 +179,20 @@
           <input type="number" id="moveManual" inputmode="decimal" step="0.01" placeholder="直接輸入可認列金額" oninput="recalc()"></div>
       </div>
       <p class="sl-info" id="moveInfo">可認列移轉費用 ＝ 同服務費金額</p>
+      <details class="sl-note"><summary>可以認列哪些？點開看</summary>
+        <p>賣這間房子<b>實際付出去</b>、而且<b>拿得到單據</b>的錢才能認列：</p>
+        <ul>
+          <li><b>仲介服務費</b>　最大一筆，例如 1,585 萬 × 4% ＝ 63.4 萬</li>
+          <li><b>廣告費、清潔費、搬運費</b>　為了賣這間花的，例如刊登 1 萬、清潔 8,000</li>
+          <li><b>地政士（代書）費</b>　賣方這邊的，例如 1 萬</li>
+          <li><b>印花稅、公證費、規費</b>　賣方負擔的部分</li>
+          <li><b>土地增值稅以外的規費</b>　例如塗銷抵押 2,000～5,000</li>
+        </ul>
+        <p><b>不能認列</b>：土地增值稅本身、房屋稅與地價稅、管理費、水電瓦斯、
+          貸款利息、搬家費、裝潢費（裝潢要併到「取得成本」那一欄，而且同樣要有單據）</p>
+        <p>單據掉了也不用慌，稅法給一個保底：<b>沒有證明文件時，可以用成交價 3% 認列，最多 30 萬</b>
+          （上面那顆「3%・上限 30 萬」按鈕就是這個）。有單據而且加起來超過 3%，就用實際金額申報比較划算</p>
+      </details>
 
       <h2>想賣的價格<small class="rt-small">填總價或單價，另一欄自動算</small></h2>
       <div class="row2">
@@ -315,7 +325,7 @@
   </div>
 </div>
 <h2 class="v-h2">常見問題</h2>
-  <div class="v-faq"><details open><summary>房地合一稅怎麼算出來的？</summary><p>課稅所得＝賣出價 −取得成本 −取得費用 −可認列移轉費用 −土地漲價總數額，再乘上持有期間對應的稅率（2 年內 45%、2～5 年 35%、5～10 年 20%、超過 10 年 15%），自用住宅滿 6 年可以先扣 400 萬免稅額，超過的部分只課 10%，填好兩個日期，持有期間與稅率會自動判定</p></details><details><summary>「可認列移轉費用」跟服務費差在哪？</summary><p>服務費是你真的要付出去的錢，會從實拿扣掉；可認列移轉費用是算稅時可以從稅基扣掉的金額，抵稅用，不是真的支出，兩個金額常常一樣，但性質不同，所以分開填，沒有單據的話，可以用法定上限「成交價 3%、最多 30 萬」</p></details><details><summary>土地漲價總數額去哪裡找？</summary><p>土地增值稅單上面就有，它可以從房地合一稅的稅基扣掉，金額不小，不填會把稅算得太高，還沒拿到稅單就先留空，拿到再補</p></details><details><summary>反推實拿是做什麼的？</summary><p>屋主常常直接說「我要拿到 600 萬」，填進去就會反推總價和單價要掛多少才拿得到，不用自己一直試數字</p></details></div>  <p class="sm-note">本試算為參考值，稅額以國稅局核定為準；代書費、規費依各地政士事務所收費標準；土地增值稅與土地漲價總數額請以稅單金額填入</p>
+  <div class="v-faq"><details open><summary>房地合一稅怎麼算出來的？</summary><p>課稅所得＝賣出價 −取得成本 −取得費用 −可認列移轉費用，再乘上持有期間對應的稅率（2 年內 45%、2～5 年 35%、5～10 年 20%、超過 10 年 15%），自用住宅滿 6 年可以先扣 400 萬免稅額，超過的部分只課 10%，填好兩個日期，持有期間與稅率會自動判定</p></details><details><summary>「可認列移轉費用」跟服務費差在哪？</summary><p>服務費是你真的要付出去的錢，會從實拿扣掉；可認列移轉費用是算稅時可以從稅基扣掉的金額，抵稅用，不是真的支出，兩個金額常常一樣，但性質不同，所以分開填，沒有單據的話，可以用法定上限「成交價 3%、最多 30 萬」</p></details><details><summary>這裡算的稅會不會太高？</summary><p>這張表沒有扣「土地漲價總數額」，所以算出來的房地合一稅會比實際多一些，實拿是偏保守的估計，那個數字要拿到土地增值稅單才會知道，屋主在談價的時候通常還沒有，與其填個猜的不如不填，真的要精算，把土增稅單給我，我幫你把那一項扣掉重算</p></details><details><summary>反推實拿是做什麼的？</summary><p>屋主常常直接說「我要拿到 600 萬」，填進去就會反推總價和單價要掛多少才拿得到，不用自己一直試數字</p></details></div>  <p class="sm-note">本試算為參考值，稅額以國稅局核定為準；代書費、規費依各地政士事務所收費標準；土增稅請以稅單金額填入　本表未扣除土地漲價總數額，實際房地合一稅會比這裡算的低一些</p>
   </div>
   <div class="ppane" data-p="fees" hidden>
   <div class="v-grid fe-grid">
@@ -324,7 +334,7 @@
       <div class="field"><label for="feTotal">成交總價<span class="rt-small">萬</span></label>
         <input type="number" id="feTotal" inputmode="decimal" step="0.01" placeholder="例：1300"></div>
 
-      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）</label>
+      <div class="field" id="feDeedWrap"><label for="feDeed">房屋評定現值（契價）<span class="rt-small">萬</span></label>
         <input type="number" id="feDeed" inputmode="decimal" step="0.01" placeholder="例：120 萬，不知道可以不填"></div>
       <div class="field" id="feEraWrap" hidden><label for="feEra">房子是什麼時候買的？</label>
         <select id="feEra">
@@ -503,8 +513,7 @@
   <div class="wrap">
     <img class="foot-logo" src="../images/brands/u.png" width="44" height="44" alt="有巢氏房屋">
     <div class="foot-lines">
-      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號</div>
-      <div>營業員：林容瑜（110）登字第396419號　|　手機：<a href="tel:+886973263569">0973-263-569</a>　|　LINE：<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">@259hoovo</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
+      <div>有巢氏房屋　中壢環中加盟店　|　經紀業：智信房屋仲介有限公司　|　經紀人：石銘輝（90）桃縣字第00298號　|　營業員：林容瑜（110）登字第396419號　|　手機：<a href="tel:+886973263569">0973-263-569</a>　|　LINE：<a href="https://line.me/R/ti/p/@259hoovo" target="_blank" rel="noopener">@259hoovo</a>　|　服務區域：桃園市（中壢、平鎮為主）</div>
     </div>
   </div>
   <div class="wrap foot-bottom">© <span id="footYear">2026</span> 中壢誠實房仲容瑜 All Rights Reserved.<span class="foot-hits" id="footHits" data-api="https://script.google.com/macros/s/AKfycbwGhxt6Wa-bSGAxdqBNJ40EK3WmIJ2FwWj3xW_C1emx5_KOE17mESukhvZDL4bRm_WDvw/exec" hidden>　|　本日人次 <b id="hitDay">—</b>　總計人次 <b id="hitAll">—</b></span><span class="foot-crm">　|　<a href="../crm/" rel="nofollow">客戶追蹤</a></span></div>

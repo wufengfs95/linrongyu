@@ -1811,7 +1811,14 @@ section.tq-wrap{padding-block:16px 72px}
 
 /* 賣方實拿 */
 
-.sl-date{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+/* 年月日三個下拉：原本擠在一起看不清楚，給足寬度與間距，各自標上年月日 */
+.sl-date{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sl-date select{padding:12px 10px;font-size:20px;text-align:center;text-align-last:center}
+.sl-dline{margin-bottom:4px}
+@media (max-width:760px){
+  .sl-date{gap:8px}
+  .sl-date select{padding:11px 6px;font-size:17px}
+}
 .sl-info{margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--cream);
   font-size:16.5px;line-height:1.65;color:var(--muted)}
 .sl-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
